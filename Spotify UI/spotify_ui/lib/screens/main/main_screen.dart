@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,
             icon: const Icon(Icons.home),
-            label: 'Categories',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             backgroundColor: Theme.of(context).primaryColor,

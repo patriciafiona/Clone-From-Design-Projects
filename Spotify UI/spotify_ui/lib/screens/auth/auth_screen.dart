@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:spotify_ui/screens/main/main_screen.dart';
+
+import '../../authentication/auth.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -8,6 +12,28 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
+  bool _isSigningIn = false;
+
+  void _onGoogleSignInBtnClicked() async {
+    setState(() {
+      _isSigningIn = true;
+    });
+
+    User? user = await Authentication.signInWithGoogle(context: context);
+
+    setState(() {
+      _isSigningIn = false;
+    });
+
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => MainScreen(),
+        ),
+      );
+    }
+  }
+
   Widget textTemplate(String text){
     return Text(text, style: const TextStyle(
       fontFamily: 'Gotham',
@@ -39,7 +65,9 @@ class _AuthScreenState extends State<AuthScreen> {
               ],
             )
         ),
-        child: SingleChildScrollView(
+        child: _isSigningIn ? Center(
+          child: CircularProgressIndicator(),
+        ):SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(20),
             width: double.infinity,
@@ -75,7 +103,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 SizedBox(height: 15,),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _onGoogleSignInBtnClicked,
                   child: const Text('CONTINUE WITH GOOGLE'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.transparent,
