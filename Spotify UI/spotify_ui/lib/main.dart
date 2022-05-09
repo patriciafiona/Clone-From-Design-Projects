@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spotify_ui/screens/auth/auth_screen.dart';
 import 'package:spotify_ui/screens/main/main_screen.dart';
+import 'package:spotify_ui/screens/settings/settings_screen.dart';
 import 'package:spotify_ui/screens/splash/splash_screen.dart';
 
 void main() {
@@ -23,6 +24,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
+    const int _blackPrimaryValue = 0xFF2f2f2f;
+    const MaterialColor primaryBlack = MaterialColor(
+      _blackPrimaryValue,
+      <int, Color>{
+        50: Color(0xFF979797),
+        100: Color(0xFF828282),
+        200: Color(0xFF6d6d6d),
+        300: Color(0xFF595959),
+        400: Color(0xFF444444),
+        500: Color(_blackPrimaryValue),
+        600: Color(0xFF2a2a2a),
+        700: Color(0xFF262626),
+        800: Color(0xFF212121),
+        900: Color(0xFF1c1c1c),
+      },
+    );
+
     return FutureBuilder(
         // Initialize FlutterFire:
         future: _initialization,
@@ -30,13 +48,14 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Spotify',
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              primarySwatch: primaryBlack,
               fontFamily: 'Gotham',
               textTheme: ThemeData.light().textTheme.copyWith(
               headline6: const TextStyle(
                 fontFamily: 'Gotham',
                 fontWeight: FontWeight.bold,
-                fontSize: 18),
+                fontSize: 20,
+                color: Colors.white),
               )
             ),
             home: appSnapshot.connectionState != ConnectionState.done ? const SplashScreen() :
@@ -49,6 +68,9 @@ class MyApp extends StatelessWidget {
               }
               return const AuthScreen();
             }),
+            routes: {
+              SettingsScreen.routeName: (ctx) => SettingsScreen()
+            },
           );
         });
   }

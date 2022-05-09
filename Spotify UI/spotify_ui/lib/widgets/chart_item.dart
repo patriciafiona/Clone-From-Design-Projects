@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class PlaylistItem extends StatelessWidget {
-  final Map<String, dynamic> playlist;
+class ChartItem extends StatelessWidget {
+  final Map<String, dynamic> chart;
 
-  const PlaylistItem({required this.playlist});
+  const ChartItem({required this.chart});
 
   @override
   Widget build(BuildContext context) {
-    final String description = playlist['description'] as String;
-    final String imageUrl = playlist['imageUrl'] as String;
-    final int likes = playlist['likes'] as int;
-    final String name = playlist['name'] as String;
-    final String singer = playlist['singer'] as String;
+    final String description = chart['description'] as String;
+    final String imageUrl = chart['imageUrl'] as String;
+    final int likes = chart['likes'] as int;
+    final String name = chart['name'] as String;
+    final String type = chart['type'] as String;
 
     return Container(
-      width: 150,
+      width: 200,
       padding: EdgeInsets.only(right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

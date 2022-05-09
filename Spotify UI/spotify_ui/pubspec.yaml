@@ -34,6 +34,7 @@ dependencies:
   firebase_core: ^1.16.0
   firebase_auth: ^3.3.17
   google_sign_in: ^5.3.0
+  cached_network_image: ^3.2.0
 
 
 
@@ -79,6 +80,9 @@ flutter:
     - assets/images/spotify_logo_v3.png
     - assets/images/spotify_logo_v4.png
     - assets/images/spotify_logo_v5.png
+    - assets/images/placeholder.png
+    - assets/images/indienesia_album.jpeg
+    - assets/images/placeholder_avatar.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

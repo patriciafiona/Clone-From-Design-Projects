@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
-class PlaylistItem extends StatelessWidget {
-  final Map<String, dynamic> playlist;
+class RadioItem extends StatelessWidget {
+  final Map<String, dynamic> radio;
 
-  const PlaylistItem({required this.playlist});
+  const RadioItem({required this.radio});
 
   @override
   Widget build(BuildContext context) {
-    final String description = playlist['description'] as String;
-    final String imageUrl = playlist['imageUrl'] as String;
-    final int likes = playlist['likes'] as int;
-    final String name = playlist['name'] as String;
-    final String singer = playlist['singer'] as String;
+    final String imageUrl = radio['imageUrl'] as String;
+    final String name = radio['name'] as String;
 
     return Container(
-      width: 150,
+      width: 200,
       padding: EdgeInsets.only(right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +35,7 @@ class PlaylistItem extends StatelessWidget {
             ),
           ),
           Text(
-            description,
+            'By Spotify',
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 fontFamily: 'Gotham',
