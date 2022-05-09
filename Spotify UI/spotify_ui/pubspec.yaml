@@ -82,7 +82,7 @@ flutter:
     - assets/images/spotify_logo_v5.png
     - assets/images/placeholder.png
     - assets/images/indienesia_album.jpeg
-    - assets/images/placeholder_avatar.jpeg
+    - assets/images/placeholder_avatar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

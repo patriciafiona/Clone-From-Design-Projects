@@ -5,6 +5,8 @@ import 'package:spotify_ui/screens/main/main_screen.dart';
 import '../../authentication/auth.dart';
 
 class AuthScreen extends StatefulWidget {
+  static const routeName = '/authentication';
+
   const AuthScreen({Key? key}) : super(key: key);
 
   @override

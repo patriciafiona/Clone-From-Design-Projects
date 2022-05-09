@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               headline6: const TextStyle(
                 fontFamily: 'Gotham',
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 22,
                 color: Colors.white),
               )
             ),
@@ -69,7 +69,8 @@ class MyApp extends StatelessWidget {
               return const AuthScreen();
             }),
             routes: {
-              SettingsScreen.routeName: (ctx) => SettingsScreen()
+              SettingsScreen.routeName: (ctx) => SettingsScreen(),
+              AuthScreen.routeName: (ctx) => AuthScreen(),
             },
           );
         });
