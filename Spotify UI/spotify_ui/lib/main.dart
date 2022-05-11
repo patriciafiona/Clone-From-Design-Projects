@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spotify_ui/screens/auth/auth_screen.dart';
 import 'package:spotify_ui/screens/main/main_screen.dart';
+import 'package:spotify_ui/screens/playlist_screen/playlist_screen.dart';
 import 'package:spotify_ui/screens/settings/settings_screen.dart';
 import 'package:spotify_ui/screens/splash/splash_screen.dart';
 

@@ -5,7 +5,7 @@ import 'package:spotify_ui/screens/auth/auth_screen.dart';
 import '../../authentication/auth.dart';
 
 class SettingsScreen extends StatefulWidget {
-  static const routeName = '/settings';
+  static const routeName = '/settings_screen';
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -453,7 +453,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               style: TextStyle(
                                   fontFamily: 'Gotham',
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Colors.grey
                               ),
                             )

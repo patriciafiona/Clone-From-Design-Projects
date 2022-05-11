@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class YourLibraryScreen extends StatefulWidget {
+  static const routeName = '/your_library_screen';
+
   const YourLibraryScreen({Key? key}) : super(key: key);
 
   @override
