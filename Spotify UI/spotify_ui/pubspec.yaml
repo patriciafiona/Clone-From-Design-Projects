@@ -35,7 +35,9 @@ dependencies:
   firebase_auth: ^3.3.17
   google_sign_in: ^5.3.0
   cached_network_image: ^3.2.0
-
+  animated_text_kit: ^4.2.1
+  just_audio: ^0.9.21
+  should_rebuild: 1.0.1
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:should_rebuild/should_rebuild.dart';
+import 'package:spotify_ui/widgets/song_list_item.dart';
 
 class PlaylistScreen extends StatefulWidget {
   static const routeName = '/playlist_screen';
@@ -8,13 +11,15 @@ class PlaylistScreen extends StatefulWidget {
   final String name;
   final String description;
   final int likes;
+  final int followers;
   final String singer;
 
-  PlaylistScreen({
+  const PlaylistScreen({
     required this.backgroundUrl,
     required this.name,
     required this.description,
     required this.likes,
+    required this.followers,
     required this.singer
   });
 
@@ -22,11 +27,60 @@ class PlaylistScreen extends StatefulWidget {
   State<PlaylistScreen> createState() => _PlaylistScreenState();
 }
 
-class _PlaylistScreenState extends State<PlaylistScreen> {
+class _PlaylistScreenState extends State<PlaylistScreen> with TickerProviderStateMixin{
   var top = 0.0;
   var myOpacity;
 
+  final number_format = NumberFormat("#,##0");
   bool _isDownload = false;
+  late final AnimationController _controller;
+
+  ScrollController scrollController = ScrollController();
+  double _scrollPosition = 0.0;
+  double _appBarTextOpacity = 0.0;
+  double _detailTextOpacity = 1.0;
+  double _fontTitle = 46.0;
+  double _fontSubTitle = 16.0;
+
+  @override
+  void initState() {
+    scrollController.addListener(() { //listener
+      _scrollPosition = scrollController.offset;
+
+      if(_scrollPosition >= 0.0 && _scrollPosition <180.0){
+        _appBarTextOpacity = _scrollPosition / 180;
+      }
+
+      if(_scrollPosition >= 0.0 && _scrollPosition <200.0){
+        _detailTextOpacity = 1 - (_scrollPosition / 200);
+        if(_detailTextOpacity >0 && _detailTextOpacity <= 0.25){
+          _detailTextOpacity = 0;
+        }
+      }
+
+      if(_scrollPosition >= 0.0 && _scrollPosition < 140.0){
+        _fontTitle = 30 - (_scrollPosition - 140.0);
+        if(_fontTitle <= 0 ) {
+          _fontTitle = 0.0;
+        }else if (_fontTitle >= 46){
+          _fontTitle = 46.0;
+        }
+
+        _fontSubTitle = _fontTitle - 20;
+        print('_fontSubTitle: $_fontSubTitle');
+        if(_fontSubTitle <= 0 ) {
+          _fontSubTitle = 0.0;
+        }else if (_fontSubTitle >= 16){
+          _fontSubTitle = 16.0;
+        }
+      }
+
+      setState(() {
+        //update data
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +91,10 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        title: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            top = constraints.biggest.height;
-            myOpacity = (top - MediaQuery
-                .of(context)
-                .padding
-                .top + kToolbarHeight) / 1000;
-            return AnimatedOpacity(
-                duration: Duration(milliseconds: 250),
-                opacity: 1.0,
-                child: Text(widget.name, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,)
-            );
-          },
+        title: AnimatedOpacity(
+            duration: Duration(milliseconds: 250),
+            opacity: _appBarTextOpacity,
+            child: Text(widget.name, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,)
         ),
         backgroundColor: Colors.transparent,
       ),
@@ -78,7 +123,80 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               ),
             ),
           ),
+          AnimatedOpacity(
+            duration: Duration(milliseconds: 250),
+            opacity: _detailTextOpacity,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              alignment: Alignment.center,
+              height: 400,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      widget.name,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.bold,
+                          fontSize: _fontTitle
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 35,),
+                    Text(
+                      widget.description,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.bold,
+                          fontSize: _fontSubTitle
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10,),
+                    Container(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('FOLLOWING'),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 7, horizontal: 10),
+                          primary: Colors.transparent,
+                          textStyle: const TextStyle(
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14
+                          ),
+                          side: const BorderSide(
+                            width: 1,
+                            color: Color.fromRGBO(98, 205, 107, 1),
+                          ),
+                          minimumSize: Size(
+                              (mediaQuery.size.width -
+                                  mediaQuery.padding.horizontal) * 0.25, 20
+                          ),
+                          shape: const StadiumBorder(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      '${number_format.format(widget.followers)} FOLLOWERS',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ]),
+            ),
+          ),
           SingleChildScrollView(
+            controller: scrollController,
             padding: EdgeInsets.only(
                 top: 300),
             child: Container(
@@ -120,7 +238,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -145,83 +263,14 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       ),
                     ]
                   ),
-                  SizedBox(height: 10),
-                  Container(
-                    height: mediaQuery.size.width * 1.5,
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection('songs').where('singer', isEqualTo: widget.singer).snapshots(),
-                      builder: (ctx, AsyncSnapshot<QuerySnapshot> dataSnapshot) {
-                        if (dataSnapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        final songDocs = dataSnapshot.data?.docs;
-                        return ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            itemCount: songDocs?.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              var playlist_data = songDocs?[index].data() as Map<String, dynamic>;
-                              return StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('albums')
-                                      .where(
-                                      'name', isEqualTo: playlist_data['album'])
-                                      .snapshots(),
-                                  builder: (ctx, AsyncSnapshot<
-                                      QuerySnapshot> dataSnapshot) {
-                                    if (dataSnapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return Center(
-                                        child: CircularProgressIndicator(),);
-                                    }
-                                    final albumDocs = dataSnapshot.data?.docs;
-                                    var album_data = albumDocs?[0]
-                                        .data() as Map<String, dynamic>;
-                                    return ListTile(
-                                      leading: Image.network(
-                                        album_data['imageUrl'],
-                                        fit: BoxFit.cover,
-                                      ),
-                                      title: Text(
-                                        playlist_data['title'],
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontFamily: 'Gotham',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                            color: Colors.white
-                                        ),
-                                      ),
-                                      subtitle: Text(
-                                        '${playlist_data['singer']} • ${playlist_data['album']}',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontFamily: 'Gotham',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                            color: Colors.grey
-                                        ),
-                                      ),
-                                      trailing: Container(
-                                        margin: EdgeInsets.only(top: 10),
-                                        child: TextButton(
-                                          child: Icon(Icons.more_vert),
-                                          onPressed: () {},
-                                          style: TextButton.styleFrom(
-                                            primary: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                              );
-                            }
-                        );
-                      }
-                    ),
+                  const SizedBox(height: 10),
+                  ShouldRebuild<SongListItem>(
+                      shouldRebuild: (oldWidget, newWidget) => oldWidget.singer != newWidget.singer,
+                      child: SongListItem(
+                          height: mediaQuery.size.width * 1.5,
+                          singer: widget.singer,
+                          playlistName: widget.name,
+                      )
                   ),
                 ],
               )

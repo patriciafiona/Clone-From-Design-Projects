@@ -13,6 +13,7 @@ class PlaylistItem extends StatelessWidget {
     final String imageUrl = playlist['imageUrl'] as String;
     final String backgroundUrl = playlist['backgroundUrl'] as String;
     final int likes = playlist['likes'] as int;
+    final int followers = playlist['followers'] as int;
     final String name = playlist['name'] as String;
     final String singer = playlist['singer'] as String;
     final String type = playlist['type'] as String;
@@ -31,6 +32,7 @@ class PlaylistItem extends StatelessWidget {
                         name: name,
                         description: description,
                         likes: likes,
+                        followers: followers,
                         singer: singer)
                     )
                 );
