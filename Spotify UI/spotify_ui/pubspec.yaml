@@ -36,8 +36,9 @@ dependencies:
   google_sign_in: ^5.3.0
   cached_network_image: ^3.2.0
   animated_text_kit: ^4.2.1
-  just_audio: ^0.9.21
+  assets_audio_player: ^3.0.4+1
   should_rebuild: 1.0.1
+  marquee: ^2.2.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -85,6 +86,11 @@ flutter:
     - assets/images/placeholder.png
     - assets/images/indienesia_album.jpeg
     - assets/images/placeholder_avatar.png
+    - assets/songs/All_Too_Well_(10_Minute_Version).mp3
+    - assets/songs/I_Knew_You_Were_Trouble.mp3
+    - assets/songs/Taylor-Swift-Blank-Space.mp3
+    - assets/songs/We_Are_Never_Ever_Getting_Back_Together.mp3
+    - assets/songs/Shake_It_Off.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

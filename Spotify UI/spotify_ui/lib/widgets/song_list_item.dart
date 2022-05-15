@@ -47,15 +47,17 @@ class SongListItem extends StatelessWidget {
                             .data() as Map<String, dynamic>;
                         return ListTile(
                           onTap: () {
-                            if(playlist_data['songUrl'] != null){
+                            if(playlist_data['filename'] != null) {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => SongScreen(
-                                    playlistName: playlistName,
-                                    songUrl: playlist_data['songUrl'],
-                                    title: playlist_data['title'],
-                                    albumImg: album_data['imageUrl'],
-                                    singer: singer)
+                                  MaterialPageRoute(builder: (context) =>
+                                      SongScreen(
+                                          fileName: playlist_data['filename'],
+                                          playlistName: playlistName,
+                                          title: playlist_data['title'],
+                                          albumImg: album_data['imageUrl'],
+                                          length: playlist_data['length'],
+                                          singer: singer)
                                   )
                               );
                             }
