@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spotify_ui/screens/auth/auth_screen.dart';
 import 'package:spotify_ui/screens/main/main_screen.dart';
-import 'package:spotify_ui/screens/playlist_screen/playlist_screen.dart';
 import 'package:spotify_ui/screens/settings/settings_screen.dart';
 import 'package:spotify_ui/screens/splash/splash_screen.dart';
 
@@ -43,21 +42,21 @@ class MyApp extends StatelessWidget {
     );
 
     return FutureBuilder(
-        // Initialize FlutterFire:
+      // Initialize FlutterFire:
         future: _initialization,
         builder: (context, appSnapshot) {
           return MaterialApp(
             title: 'Spotify',
             theme: ThemeData(
-              primarySwatch: primaryBlack,
-              fontFamily: 'Gotham',
-              textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: const TextStyle(
+                primarySwatch: primaryBlack,
                 fontFamily: 'Gotham',
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-                color: Colors.white),
-              )
+                textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: const TextStyle(
+                      fontFamily: 'Gotham',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: Colors.white),
+                )
             ),
             home: appSnapshot.connectionState != ConnectionState.done ? const SplashScreen() :
             StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(), builder: (ctx, userSnapshot) {

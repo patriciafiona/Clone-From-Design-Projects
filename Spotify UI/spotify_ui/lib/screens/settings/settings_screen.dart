@@ -76,7 +76,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(
                   fontFamily: 'Gotham',
                   fontWeight: FontWeight.w500,
-                  fontSize: 20,
+                  fontSize: 16,
                   color: Colors.white
               ),
             ),
@@ -85,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(
                   fontFamily: 'Gotham',
                   fontWeight: FontWeight.w300,
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.grey
               ),
             )
@@ -117,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(
                   fontFamily: 'Gotham',
                   fontWeight: FontWeight.w500,
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Colors.white
               ),
             ),
@@ -144,7 +144,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: TextStyle(
               fontFamily: 'Gotham',
               fontWeight: FontWeight.w500,
-              fontSize: 18,
+              fontSize: 14,
               color: Colors.white
           ),
           dropdownColor: Colors.black38,
@@ -265,7 +265,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: TextStyle(
                       fontFamily: 'Gotham',
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 20,
                       color: Colors.white
                   ),
                 ),
@@ -287,7 +287,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(
                           fontFamily: 'Gotham',
                           fontWeight: FontWeight.w500,
-                          fontSize: 18,
+                          fontSize: 16,
                           color: Colors.white
                       ),
                     ),
@@ -410,7 +410,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Colors.white
                   ),
                 ),
-                SizedBox(height: 10,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -419,7 +418,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(
                           fontFamily: 'Gotham',
                           fontWeight: FontWeight.w300,
-                          fontSize: 20,
+                          fontSize: 16,
                           color: Colors.grey
                       ),
                     ),
@@ -428,7 +427,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       style: TextStyle(
                           fontFamily: 'Gotham',
                           fontWeight: FontWeight.w300,
-                          fontSize: 18,
+                          fontSize: 14,
                           color: Colors.grey
                       ),
                     ),
@@ -444,7 +443,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               style: TextStyle(
                                   fontFamily: 'Gotham',
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Colors.white
                               ),
                             ),
@@ -453,7 +452,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               style: TextStyle(
                                   fontFamily: 'Gotham',
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Colors.grey
                               ),
                             )

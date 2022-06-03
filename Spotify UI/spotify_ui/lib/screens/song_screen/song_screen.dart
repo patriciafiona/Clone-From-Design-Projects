@@ -134,32 +134,34 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
           ),
           backgroundColor: Colors.transparent,
         ),
-        body: Container(
+        body: Stack(
+        children: [
+          Container(
             decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color.fromRGBO(153, 87, 3, 1),
-                    Colors.black87,
-                  ],
-                  stops: [
-                    0.1,
-                    0.4
-                  ],
-                )
-            ),
-            child: Container(
-                padding: EdgeInsets.only(top: 100, right: 10, left: 10, bottom: 30),
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromRGBO(153, 87, 3, 1),
+                Colors.black87,
+              ],
+              stops: [
+                0.1,
+                0.4
+              ],
+            )
+          )),
+          Container(
+            padding: EdgeInsets.only(top: 100, right: 10, left: 10, bottom: 30),
+            width: double.infinity,
+            child: SingleChildScrollView(
+                padding: EdgeInsets.all(20),
+                child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: 400,
-                        height: 400,
+                        width: (mediaQuery.size.width - mediaQuery.padding.horizontal) * 0.85,
+                        height: (mediaQuery.size.width - mediaQuery.padding.horizontal) * 0.85,
                         child: Image.network(
                           widget.albumImg,
                           fit: BoxFit.cover,
@@ -187,13 +189,13 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                                     height: 30,
                                     child: LayoutBuilder(builder: (context, size) {
                                       var span = TextSpan(
-                                      text: widget.title,
-                                      style: TextStyle(
-                                        fontFamily: 'Gotham',
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        )
+                                          text: widget.title,
+                                          style: TextStyle(
+                                            fontFamily: 'Gotham',
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                          )
                                       );
 
                                       // Use a textpainter to determine if it will exceed max lines
@@ -217,7 +219,7 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                                             fontFamily: 'Gotham',
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
-                                            fontSize: 20,
+                                            fontSize: 18,
                                           ),
                                           scrollAxis: Axis.horizontal,
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,14 +243,13 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                                       );
                                     }),
                                   ),
-                                  SizedBox(height: 5,),
                                   Text(
                                     widget.singer,
                                     style: TextStyle(
                                       fontFamily: 'Gotham',
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white70,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                     ),
                                   )
                                 ],
@@ -256,12 +257,12 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                           ),
                           Spacer(),
                           Container(
-                            width: (mediaQuery.size.width - mediaQuery.padding.horizontal) * 0.20,
+                            width: (mediaQuery.size.width - mediaQuery.padding.horizontal) * 0.18,
                             margin: EdgeInsets.only(top: 10),
                             child: FittedBox(
                               child: TextButton(
                                 child: isFavorite? Icon(Icons.favorite):
-                                  Icon(Icons.favorite_border_outlined),
+                                Icon(Icons.favorite_border_outlined),
                                 onPressed: () {
                                   setState(() {
                                     isFavorite = !isFavorite;
@@ -276,42 +277,42 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                         ],
                       ),
                       StreamBuilder(
-                        stream: assetsAudioPlayer.currentPosition,
-                        builder: (context, asyncSnapshot) {
-                          final Object? duration = asyncSnapshot.data;
-                          return Column(
-                              children: [
-                                LinearProgressIndicator(
-                                  value: controller.value,
-                                  semanticsLabel: 'Linear progress indicator',
-                                ),
-                                SizedBox(height: 5,),
-                                Row(
-                                  children: [
-                                    Text(
-                                      _printDuration(duration as Duration),
-                                      style: TextStyle(
-                                        fontFamily: 'Gotham',
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.grey,
-                                        fontSize: 14,
+                          stream: assetsAudioPlayer.currentPosition,
+                          builder: (context, asyncSnapshot) {
+                            final Object? duration = asyncSnapshot.data;
+                            return Column(
+                                children: [
+                                  LinearProgressIndicator(
+                                    value: controller.value,
+                                    semanticsLabel: 'Linear progress indicator',
+                                  ),
+                                  SizedBox(height: 5,),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        duration != null ? _printDuration(duration as Duration) : '??:??',
+                                        style: TextStyle(
+                                          fontFamily: 'Gotham',
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                        ),
                                       ),
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                      widget.length,
-                                      style: TextStyle(
-                                        fontFamily: 'Gotham',
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.grey,
-                                        fontSize: 14,
+                                      Spacer(),
+                                      Text(
+                                        widget.length,
+                                        style: TextStyle(
+                                          fontFamily: 'Gotham',
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ]
-                          );
-                        }),
+                                    ],
+                                  )
+                                ]
+                            );
+                          }),
                       SizedBox(height: 20,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -321,14 +322,14 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                             onPressed: () {},
                             padding: const EdgeInsets.only(top: 20.0),
                             color: Colors.white,
-                            icon: const Icon(Icons.shuffle, size: 30.0),
+                            icon: const Icon(Icons.shuffle, size: 25.0),
                           ),
                           Spacer(),
                           IconButton(
                             onPressed: () {},
                             padding: const EdgeInsets.all(0.0),
                             color: Colors.white,
-                            icon: const Icon(Icons.skip_previous_rounded, size: 70.0),
+                            icon: const Icon(Icons.skip_previous_rounded, size: 60.0),
                           ),
                           Spacer(),
                           IconButton(
@@ -346,21 +347,21 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                             },
                             padding: const EdgeInsets.all(0.0),
                             color: Colors.white,
-                            icon: isPause ? Icon(Icons.play_circle, size: 70.0) : Icon(Icons.pause_circle, size: 70.0),
+                            icon: isPause ? Icon(Icons.play_circle, size: 60.0) : Icon(Icons.pause_circle, size: 70.0),
                           ),
                           Spacer(),
                           IconButton(
                             onPressed: () {},
                             padding: const EdgeInsets.all(0.0),
                             color: Colors.white,
-                            icon: const Icon(Icons.skip_next_rounded, size: 70.0),
+                            icon: const Icon(Icons.skip_next_rounded, size: 60.0),
                           ),
                           Spacer(),
                           IconButton(
                             onPressed: () {},
                             padding: const EdgeInsets.only(top: 20.0),
                             color: Colors.white,
-                            icon: const Icon(Icons.loop_rounded, size: 30.0),
+                            icon: const Icon(Icons.loop_rounded, size: 25.0),
                           ),
                         ],
                       ),
@@ -386,10 +387,11 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
                         height: mediaQuery.size.height * 0.05,
                       ),
                     ]
-                  )
                 )
             )
-        ),
+          )
+        ],
+      )
     );
   }
 }

@@ -28,6 +28,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return 'Good Evening';
   }
 
+  Widget setSubtitle(String text){
+    return Text(
+      text,
+      style: TextStyle(
+          fontFamily: 'Gotham',
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+          color: Colors.white
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                     fontFamily: 'Gotham',
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: 24,
                     color: Colors.white
                   ),
                 ),
@@ -101,15 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                 ),
                 SizedBox(height: 10,),
-                Text(
-                  'Jump back in',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.white
-                  ),
-                ),
+                setSubtitle('Jump back in'),
                 SizedBox(height: 10,),
                 Container(
                   height: 180,
@@ -148,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(
                               fontFamily: 'Gotham',
                               fontWeight: FontWeight.bold,
-                              fontSize: 24,
+                              fontSize: 20,
                               color: Colors.white
                           ),
                         )
@@ -156,15 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: 10,),
-                Text(
-                  'Charts',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.white
-                  ),
-                ),
+                setSubtitle('Charts'),
                 SizedBox(height: 10,),
                 Container(
                     height: 230,
@@ -190,15 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                 ),
                 SizedBox(height: 10,),
-                Text(
-                  'Popular Artist',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.white
-                  ),
-                ),
+                setSubtitle('Popular Artist'),
                 SizedBox(height: 10,),
                 Container(
                     height: 230,
@@ -224,15 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                 ),
                 SizedBox(height: 10,),
-                Text(
-                  'Recommended Radio',
-                  style: TextStyle(
-                      fontFamily: 'Gotham',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.white
-                  ),
-                ),
+                setSubtitle('Recommended Radio'),
                 SizedBox(height: 3,),
                 Text(
                   'Non-stop music based on your favorite songs and artists.',

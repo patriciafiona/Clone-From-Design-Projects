@@ -39,8 +39,8 @@ class _PlaylistScreenState extends State<PlaylistScreen> with TickerProviderStat
   double _scrollPosition = 0.0;
   double _appBarTextOpacity = 0.0;
   double _detailTextOpacity = 1.0;
-  double _fontTitle = 46.0;
-  double _fontSubTitle = 16.0;
+  double _fontTitle = 30.0;
+  double _fontSubTitle = 14.0;
 
   @override
   void initState() {
@@ -59,19 +59,19 @@ class _PlaylistScreenState extends State<PlaylistScreen> with TickerProviderStat
       }
 
       if(_scrollPosition >= 0.0 && _scrollPosition < 140.0){
-        _fontTitle = 30 - (_scrollPosition - 140.0);
+        _fontTitle = 30 - (_scrollPosition - 120.0);
         if(_fontTitle <= 0 ) {
           _fontTitle = 0.0;
-        }else if (_fontTitle >= 46){
-          _fontTitle = 46.0;
+        }else if (_fontTitle >= 30){
+          _fontTitle = 30.0;
         }
 
-        _fontSubTitle = _fontTitle - 20;
+        _fontSubTitle = _fontTitle - 10;
         print('_fontSubTitle: $_fontSubTitle');
         if(_fontSubTitle <= 0 ) {
           _fontSubTitle = 0.0;
-        }else if (_fontSubTitle >= 16){
-          _fontSubTitle = 16.0;
+        }else if (_fontSubTitle >= 14){
+          _fontSubTitle = 14.0;
         }
       }
 
@@ -103,7 +103,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> with TickerProviderStat
           Container(
             height: mediaQuery.size.height,
             width: double.infinity,
-            color: Colors.black87,
+            color: Colors.black,
           ),
           ShaderMask(
             shaderCallback: (rect) {
@@ -188,7 +188,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> with TickerProviderStat
                           color: Colors.grey,
                           fontFamily: 'Gotham',
                           fontWeight: FontWeight.w500,
-                          fontSize: 14
+                          fontSize: 12
                       ),
                       textAlign: TextAlign.center,
                     ),
