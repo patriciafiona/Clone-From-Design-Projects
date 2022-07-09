@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plant_app/screen/BottomNavigationScreen.dart';
-import 'package:plant_app/screen/HomeScreen.dart';
+import 'package:plant_app/screen/BottomNavigation/BottomNavigationScreen.dart';
 import 'package:plant_app/widget/IntroSlideWidget.dart';
 
 class WelcomeScreen extends StatelessWidget {

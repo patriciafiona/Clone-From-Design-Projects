@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:plant_app/screen/FavoriteScreen.dart';
-import 'package:plant_app/screen/HomeScreen.dart';
-import 'package:plant_app/screen/ScanScreen.dart';
-import 'package:plant_app/screen/ShoppingBagScreen.dart';
-import 'package:plant_app/screen/UserScreen.dart';
+import 'package:plant_app/screen/BottomNavigation/FavoriteScreen.dart';
+import 'package:plant_app/screen/BottomNavigation/HomeScreen.dart';
+import 'package:plant_app/screen/BottomNavigation/ScanScreen.dart';
+import 'package:plant_app/screen/BottomNavigation/ShoppingBagScreen.dart';
+import 'package:plant_app/screen/BottomNavigation/UserScreen.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   static const routeName = "/bottom_nav_screen";

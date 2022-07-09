@@ -36,30 +36,17 @@ class _IntroSlideWidgetState extends State<IntroSlideWidget> {
     );
     slides.add(
       Slide(
-        title: "Worldwide delivery",
+        title: "Free Delivery",
         description:
-        "Within 10-15 days",
+        "Up to 100%!",
         pathImage: "assets/images/plant_04.png",
       ),
     );
   }
 
-  void onDonePress() {
-    // Back to the first tab
-    goToTab(0);
-  }
-
   void onTabChangeCompleted(index) {
     // Index of current tab is focused
     // log("onTabChangeCompleted, index: $index");
-  }
-
-  ButtonStyle myButtonStyle() {
-    return ButtonStyle(
-      shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
-      backgroundColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-      overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-    );
   }
 
   List<Widget> renderListCustomTabs() {

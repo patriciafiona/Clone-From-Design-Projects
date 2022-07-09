@@ -1,0 +1,4 @@
+enum PlantLocation{
+  Indoor,
+  Outdoor,
+}

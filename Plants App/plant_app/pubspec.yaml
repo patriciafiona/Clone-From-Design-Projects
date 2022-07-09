@@ -35,6 +35,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   intro_slider: ^3.0.9
+  flutter_launcher_icons: ^0.9.3
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.jpeg"
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +77,8 @@ flutter:
    - assets/images/plant_09.png
    - assets/images/plant_10.png
    - assets/images/background.jpg
+   - assets/images/banner_01.png
+   - assets/images/banner_02.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -84,8 +92,8 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: Aller
-       fonts:
+    - family: Aller
+      fonts:
          - asset: assets/fonts/Aller/Aller_Rg.ttf
          - asset: assets/fonts/Aller/Aller_Bd.ttf
            weight: 700
@@ -93,6 +101,19 @@ flutter:
            style: italic
          - asset: assets/fonts/Aller/Aller_Lt.ttf
            weight: 300
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat/Montserrat-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Montserrat/Montserrat-Thin.ttf
+          weight: 100
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
