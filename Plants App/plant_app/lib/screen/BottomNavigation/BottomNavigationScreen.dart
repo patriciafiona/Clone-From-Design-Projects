@@ -32,6 +32,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
+          margin: const EdgeInsets.only(bottom: 120),
           padding: const EdgeInsets.only(top: 60, bottom: 15, left: 20),
           child: Column(
             children: [

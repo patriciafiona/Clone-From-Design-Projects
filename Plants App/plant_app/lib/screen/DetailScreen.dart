@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/model/PlantItem.dart';
 import 'package:readmore/readmore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailScreen extends StatefulWidget {
   static const routeName= "/detail_screen";
+  static const MYFAVORITE = "MYFAVORITE";
   final PlantItem plantData;
 
   const DetailScreen({Key? key, required this.plantData}) : super(key: key);
@@ -13,6 +15,48 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+
+  Future<void> addUpdateFavorite(String selectedId) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    //try to check if fav list already exist or not
+    var prefKeys =  prefs.getKeys();
+    if(prefKeys.contains(DetailScreen.MYFAVORITE)){
+      //already exist
+      var myFav = prefs.getStringList(DetailScreen.MYFAVORITE);
+      if(myFav != null && myFav.contains(selectedId) ){
+        //remove from favorite
+        myFav.remove(selectedId);
+      }else{
+        //add new
+        myFav?.add(selectedId);
+      }
+      prefs.setStringList(DetailScreen.MYFAVORITE, myFav!);
+    }else{
+      //new
+      List<String> myFav = [selectedId];
+      prefs.setStringList(DetailScreen.MYFAVORITE, myFav);
+    }
+
+    //Update the fav btn
+    setState(() {});
+  }
+
+  Future<bool> isFavorite(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    var prefKeys =  prefs.getKeys();
+    if(prefKeys.contains(DetailScreen.MYFAVORITE)){
+      var myFav = prefs.getStringList(DetailScreen.MYFAVORITE);
+      if(myFav != null && myFav.contains(id) ){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -67,21 +111,52 @@ class _DetailScreenState extends State<DetailScreen> {
                                   style: TextStyle(fontSize: 16),
                                   textAlign: TextAlign.center,
                                 )),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Icon(Icons.favorite_outline, color: Colors.black),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 0.0,
-                                    shadowColor: Colors.transparent,
-                                    shape: const CircleBorder(
-                                        side: BorderSide(color: Color.fromRGBO(238, 240, 243, 1.0), width: 3)
-                                    ),
-                                    padding: const EdgeInsets.all(10),
-                                    primary: Colors.transparent,
-                                    onPrimary: Colors.white60,
-                                  ),
+                                FutureBuilder<bool>(
+                                    future: isFavorite(widget.plantData.id.toString()),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          snapshot.data == true) {
+                                        return ElevatedButton(
+                                          onPressed: () {
+                                            addUpdateFavorite(widget.plantData.id.toString());
+                                          },
+                                          child: const Icon(
+                                              Icons.favorite,
+                                              color: Colors.red
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0.0,
+                                            shadowColor: Colors.transparent,
+                                            shape: const CircleBorder(
+                                                side: BorderSide(color: Color.fromRGBO(238, 240, 243, 1.0), width: 3)
+                                            ),
+                                            padding: const EdgeInsets.all(10),
+                                            primary: Colors.transparent,
+                                            onPrimary: Colors.white60,
+                                          ),
+                                        );
+                                      } else {
+                                        return ElevatedButton(
+                                          onPressed: () {
+                                            addUpdateFavorite(widget.plantData.id.toString());
+                                          },
+                                          child: const Icon(
+                                              Icons.favorite_outline,
+                                              color: Colors.black
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0.0,
+                                            shadowColor: Colors.transparent,
+                                            shape: const CircleBorder(
+                                                side: BorderSide(color: Color.fromRGBO(238, 240, 243, 1.0), width: 3)
+                                            ),
+                                            padding: const EdgeInsets.all(10),
+                                            primary: Colors.transparent,
+                                            onPrimary: Colors.white60,
+                                          ),
+                                        );
+                                      }
+                                    }
                                 ),
                               ],
                             ),

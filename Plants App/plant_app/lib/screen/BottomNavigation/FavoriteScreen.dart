@@ -11,12 +11,20 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.only(top: 60, bottom: 15),
-            child: Column(
-              children: [
-                Text("Favorite")
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 120),
+          padding: const EdgeInsets.only(top: 60, bottom: 15, left: 20),
+          child: Column(
+              children: const [
+                Text(
+                  "Favorite",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
               ],
             ),
           ),
