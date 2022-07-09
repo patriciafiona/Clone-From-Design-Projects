@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant_app/screen/BottomNavigation/BottomNavigationScreen.dart';
+import 'package:plant_app/screen/DetailScreen.dart';
 import 'package:plant_app/screen/WelcomeScreen.dart';
 
 void main() {

@@ -31,9 +31,9 @@ class DataDummy{
         id: 2,
         name: 'Strelitzia n.',
         description: "Strelitzia nicolai, commonly known as the wild banana or giant white bird of paradise, is a species of banana-like plants with erect woody stems reaching a height of 7–8 m (23–26 ft), and the clumps formed can spread as far as 3.5 m (11 ft)."
-            "\nThe 1.8 m (5 ft 11 in)-long leaves are grey-green and arranged like a fan at the top of the stems, similar to Ravenala madagascariensis. The inflorescence is composed of a dark blue bract, white sepals and a bluish-purple \"tongue\". The entire flower "
+            "\n\nThe 1.8 m (5 ft 11 in)-long leaves are grey-green and arranged like a fan at the top of the stems, similar to Ravenala madagascariensis. The inflorescence is composed of a dark blue bract, white sepals and a bluish-purple \"tongue\". The entire flower "
             "can be as much as 18 cm (7.1 in) high by 45 cm (18 in) long, and is typically held just above the point where the leaf fan emerges from the stem. Flowers are followed by triangular seed capsules."
-            "\nStrelitzia nicolai is among the few plants which have been verified to contain the pigment bilirubin, which is usually found in animals.",
+            "\n\nStrelitzia nicolai is among the few plants which have been verified to contain the pigment bilirubin, which is usually found in animals.",
         height: 23.9,
         rating: 4.8,
         humidity: 71,
@@ -58,10 +58,10 @@ class DataDummy{
     PlantItem(
         id: 4,
         name: 'Monstera d.',
-        description: "Monstera deliciosa, the Swiss cheese plant[2] or split-leaf philodendron is a species of flowering plant native to tropical forests of southern Mexico, south to Panama."
+        description: "Monstera deliciosa, the Swiss cheese plant or split-leaf philodendron is a species of flowering plant native to tropical forests of southern Mexico, south to Panama."
             " It has been introduced to many tropical areas, and has become a mildly invasive species in Hawaii, Seychelles, Ascension Island and the Society Islands. It is very widely grown in temperate zones as a houseplant."
-            "\nThe common name \"Swiss cheese plant\" is also used for the related species from the same genus, Monstera adansonii.[5] The common name \"split-leaf philodendron\" is also used for the species Thaumatophyllum "
-            "bipinnatifidum, although neither species are in the genus Philodendron.[3]",
+            "\n\nThe common name \"Swiss cheese plant\" is also used for the related species from the same genus, Monstera adansonii. The common name \"split-leaf philodendron\" is also used for the species Thaumatophyllum "
+            "bipinnatifidum, although neither species are in the genus Philodendron.",
         height: 60.8,
         rating: 4.9,
         humidity: 77,
@@ -91,9 +91,9 @@ class DataDummy{
         name: 'Epipremnum a.',
         description: "Epipremnum aureum is a species in the arum family Araceae, native to Mo'orea in the Society Islands of French Polynesia. "
             "The species is a popular houseplant in temperate regions but has also become naturalised in tropical and sub-tropical forests worldwide, "
-            "including northern South Africa,[3] Australia, Southeast Asia, South Asia, the Pacific Islands and the West Indies, where it has caused "
+            "including northern South Africa, Australia, Southeast Asia, South Asia, the Pacific Islands and the West Indies, where it has caused "
             "severe ecological damage in some cases."
-            "\nThe plant has a number of common names including golden pothos, Ceylon creeper, hunter's robe, ivy arum, house plant, money plant, "
+            "\n\nThe plant has a number of common names including golden pothos, Ceylon creeper, hunter's robe, ivy arum, house plant, money plant, "
             "silver vine, Solomon Islands ivy, marble queen, and taro vine. It is also called devil's vine or devil's ivy because it is almost "
             "impossible to kill and it stays green even when kept in the dark. It is sometimes mistakenly labeled as a Philodendron, Pothos or "
             "Scindapsus in plant stores. It is commonly known as a money plant in many parts of the Indian subcontinent. "
@@ -111,9 +111,9 @@ class DataDummy{
         name: 'Epipremnum a.',
         description: "Epipremnum aureum is a species in the arum family Araceae, native to Mo'orea in the Society Islands of French Polynesia. "
             "The species is a popular houseplant in temperate regions but has also become naturalised in tropical and sub-tropical forests worldwide, "
-            "including northern South Africa,[3] Australia, Southeast Asia, South Asia, the Pacific Islands and the West Indies, where it has caused "
+            "including northern South Africa, Australia, Southeast Asia, South Asia, the Pacific Islands and the West Indies, where it has caused "
             "severe ecological damage in some cases."
-            "\nThe plant has a number of common names including golden pothos, Ceylon creeper, hunter's robe, ivy arum, house plant, money plant, "
+            "\n\nThe plant has a number of common names including golden pothos, Ceylon creeper, hunter's robe, ivy arum, house plant, money plant, "
             "silver vine, Solomon Islands ivy, marble queen, and taro vine. It is also called devil's vine or devil's ivy because it is almost "
             "impossible to kill and it stays green even when kept in the dark. It is sometimes mistakenly labeled as a Philodendron, Pothos or "
             "Scindapsus in plant stores. It is commonly known as a money plant in many parts of the Indian subcontinent. "
@@ -131,7 +131,7 @@ class DataDummy{
         name: 'Dieffenbachia s.',
         description: "Dieffenbachia seguine, also known as dumbcane, or tuftroot, is a species of Dieffenbachia "
             "native to the tropical Americas—from southern Mexico, through Central America, to northern South America and "
-            "Brazil. It is also native to several Caribbean islands, including Puerto Rico.[1]",
+            "Brazil. It is also native to several Caribbean islands, including Puerto Rico.",
         height: 13.0,
         rating: 4.3,
         humidity: 59,
@@ -146,8 +146,8 @@ class DataDummy{
         description: "The pineapple (Ananas comosus) is a tropical plant with an edible fruit; it is the most economically significant plant in the family Bromeliaceae."
             " The pineapple is indigenous to South America, where it has been cultivated for many centuries. The introduction of the pineapple to Europe in the 17th "
             "century made it a significant cultural icon of luxury. Since the 1820s, pineapple has been commercially grown in greenhouses and many tropical plantations."
-            "\nPineapples grow as a small shrub; the individual flowers of the unpollinated plant fuse to form a multiple fruit. The plant is normally propagated from "
-            "the offset produced at the top of the fruit,[2][5] or from a side shoot, and typically mature within a year.",
+            "\n\nPineapples grow as a small shrub; the individual flowers of the unpollinated plant fuse to form a multiple fruit. The plant is normally propagated from "
+            "the offset produced at the top of the fruit, or from a side shoot, and typically mature within a year.",
         height: 9.7,
         rating: 4.1,
         humidity: 67,
@@ -161,10 +161,10 @@ class DataDummy{
         name: 'Agave p.',
         description: "Agave parrasana, the cabbage head agave or cabbage head century plant, is a flowering plant in the family Asparagaceae. "
   "A slow-growing evergreen succulent from North East Mexico, it produces a compact rosette of fleshy thorn-tipped grey-green leaves, 60 cm tall "
-  "and wide. The leaves are blue green and the thorns are red. The whole plant may reach 100 centimeters tall and wide.[5] Occasionally mature "
-  "plants produce a spectacular flower head up to 6m tall, opening red and turning yellow.[6] This signals the death of the flowering rosette, "
+  "and wide. The leaves are blue green and the thorns are red. The whole plant may reach 100 centimeters tall and wide. Occasionally mature "
+  "plants produce a spectacular flower head up to 6m tall, opening red and turning yellow. This signals the death of the flowering rosette, "
   "however offsets may form and continue growing."
-            "\nAs it can tolerate temperatures of −12 °C (10 °F) or less, it is a popular plant to grow outdoors in a sheltered cactus garden or "
+            "\n\nAs it can tolerate temperatures of −12 °C (10 °F) or less, it is a popular plant to grow outdoors in a sheltered cactus garden or "
             "similar environment, and has gained the Royal Horticultural Society's Award of Garden Merit. In the US, it may be grown outdoors in USDA "
             "hardiness zones 7–10. It is susceptible to scale and chlorosis resulting from magnesium deficiency.",
         height: 20.1,

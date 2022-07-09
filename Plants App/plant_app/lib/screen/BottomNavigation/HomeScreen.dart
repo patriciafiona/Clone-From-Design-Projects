@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:plant_app/model/DataDummy.dart';
-import 'package:plant_app/model/PlantItem.dart';
 import 'package:plant_app/model/PlantLocation.dart';
 import 'package:plant_app/widget/CardPlantWidget.dart';
 
