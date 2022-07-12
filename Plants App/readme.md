@@ -1,4 +1,4 @@
-# Spotify
+# Planto.App
 
 ## Information
 <p align="center">
