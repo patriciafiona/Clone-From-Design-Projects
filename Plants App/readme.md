@@ -1,4 +1,4 @@
-# Planto.App
+# Planto.Shop
 
 ## Information
 <p align="center">
