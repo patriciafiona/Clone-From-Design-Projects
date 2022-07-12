@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_ui/screens/main/main_screen.dart';
 
-import '../../authentication/auth.dart';
+import '../../models/authentication/auth.dart';
 
 class AuthScreen extends StatefulWidget {
   static const routeName = '/authentication';

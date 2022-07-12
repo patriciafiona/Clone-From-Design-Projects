@@ -83,7 +83,14 @@ flutter:
    - assets/images/banner_02.png
    - assets/images/monstera_bg.jpeg
    - assets/images/scan_icon.png
-   - assets/images/add_favorite.jpeg
+   - assets/images/add_favorite.png
+   - assets/images/avatar_01.png
+   - assets/images/avatar_02.png
+   - assets/images/avatar_03.png
+   - assets/images/google_icon.png
+   - assets/images/fb_icon.png
+   - assets/images/empty_cart.png
+   - assets/images/error.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

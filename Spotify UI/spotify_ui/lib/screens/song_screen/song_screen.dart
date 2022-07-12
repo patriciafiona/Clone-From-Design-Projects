@@ -65,9 +65,17 @@ class _SongScreenState extends State<SongScreen> with TickerProviderStateMixin {
   void initState() {
     assetsAudioPlayer = AssetsAudioPlayer();
     assetsAudioPlayer.open(
-      Audio("assets/songs/${widget.fileName}"),
+      Audio(
+        "assets/songs/${widget.fileName}",
+        metas: Metas(
+          title:  widget.title,
+          artist: widget.singer,
+          album: widget.playlistName,
+          image: MetasImage.network(widget.albumImg), //can be MetasImage.network
+        ),
+      ),
       autoStart: true,
-      showNotification: false
+      showNotification: true,
     );
 
     controller = AnimationController(

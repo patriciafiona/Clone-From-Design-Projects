@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_ui/screens/auth/auth_screen.dart';
 
-import '../../authentication/auth.dart';
+import '../../models/authentication/auth.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings_screen';
@@ -219,7 +219,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ):
                     CircleAvatar(
                       radius: 15,
-                      child: Image.asset('assets/images/placeholder_avatar.jpeg'),
+                      child: Image.asset('assets/images/placeholder_avatar.png'),
                     ),
                     SizedBox(
                       width: 10,

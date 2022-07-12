@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               Stack(
                 children: [
                   Container(
-                    height: 110,
+                    height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.15,
                     margin: const EdgeInsets.only(top: 50, bottom: 15, left: 15, right: 35),
                     padding: const EdgeInsets.all(20),
                     width: double.infinity,

@@ -40,7 +40,6 @@ dependencies:
   should_rebuild: 1.0.1
   marquee: ^2.2.1
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -86,6 +85,47 @@ flutter:
     - assets/images/placeholder.png
     - assets/images/indienesia_album.jpeg
     - assets/images/placeholder_avatar.png
+    - assets/images/under_construction.png
+
+    - assets/images/anime.jpeg
+    - assets/images/arab.jpeg
+    - assets/images/at_home.jpeg
+    - assets/images/blues.jpeg
+    - assets/images/bollywood.jpeg
+    - assets/images/chill.jpeg
+    - assets/images/classical.jpeg
+    - assets/images/country.jpeg
+    - assets/images/dance_or_electronic.jpeg
+    - assets/images/discover.jpeg
+    - assets/images/EQUAL.jpeg
+    - assets/images/gaming.jpeg
+    - assets/images/hip_hop.jpeg
+    - assets/images/indie.jpeg
+    - assets/images/j_track.jpeg
+    - assets/images/jazz.jpeg
+    - assets/images/k_pop.jpeg
+    - assets/images/karaoke.jpeg
+    - assets/images/latin.jpeg
+    - assets/images/live_event.jpeg
+    - assets/images/made_for_you.png
+    - assets/images/metal.jpeg
+    - assets/images/mood.jpeg
+    - assets/images/new_release.jpeg
+    - assets/images/podcast.jpeg
+    - assets/images/pop.jpeg
+    - assets/images/punk.jpeg
+    - assets/images/r&b.jpeg
+    - assets/images/radar.png
+    - assets/images/ramadan.jpeg
+    - assets/images/rock.jpeg
+    - assets/images/romance.jpeg
+    - assets/images/sleep.jpeg
+    - assets/images/soul.jpeg
+    - assets/images/top_charts.jpeg
+    - assets/images/travel.png
+    - assets/images/wellness.jpeg
+    - assets/images/workout.jpeg
+
     - assets/songs/All_Too_Well_(10_Minute_Version).mp3
     - assets/songs/I_Knew_You_Were_Trouble.mp3
     - assets/songs/Taylor-Swift-Blank-Space.mp3
@@ -106,14 +146,14 @@ flutter:
 fonts:
   - family: Gotham
     fonts:
-        - assets: assets/fonts/Gotham-Black.ttf
-          weight: 900
-        - assets: assets/fonts/Gotham-Bold.ttf
-          weight: 700
-        - assets: assets/fonts/Gotham-Light.ttf
-          weight: 300
-        - assets: assets/fonts/Gotham-Thin.ttf
-          weight: 100
+      - assets: assets/fonts/Gotham-Black.ttf
+        weight: 900
+      - assets: assets/fonts/Gotham-Bold.ttf
+        weight: 700
+      - assets: assets/fonts/Gotham-Light.ttf
+        weight: 300
+      - assets: assets/fonts/Gotham-Thin.ttf
+        weight: 100
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

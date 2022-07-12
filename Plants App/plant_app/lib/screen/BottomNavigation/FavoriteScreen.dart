@@ -37,7 +37,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 top: top,
                 bottom: 30),
             width: width,
-            child: Image.asset("assets/images/add_favorite.jpeg"),
+            child: Image.asset("assets/images/add_favorite.png"),
           ),
           const Text(
             "No Favorite Yet",

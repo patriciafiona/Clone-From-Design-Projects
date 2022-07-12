@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:plant_app/model/PlantItem.dart';
 import 'package:readmore/readmore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,6 +62,11 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Scaffold(
         body: Container(
           padding: const EdgeInsets.only(top: 60),
@@ -81,7 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   SizedBox(
                     width: double.infinity,
-                    height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.85,
+                    height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.8,
                     child: SingleChildScrollView(
                       child: Container(
                         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 10),
@@ -283,7 +289,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     width: double.infinity,
-                    height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.15,
+                    height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.14,
                     child: Row(
                       children: [
                         SizedBox(

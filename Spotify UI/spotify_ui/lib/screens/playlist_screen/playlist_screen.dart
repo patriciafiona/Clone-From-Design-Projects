@@ -33,7 +33,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> with TickerProviderStat
 
   final number_format = NumberFormat("#,##0");
   bool _isDownload = false;
-  late final AnimationController _controller;
 
   ScrollController scrollController = ScrollController();
   double _scrollPosition = 0.0;

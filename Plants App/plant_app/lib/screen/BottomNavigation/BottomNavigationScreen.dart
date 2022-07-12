@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:plant_app/screen/BottomNavigation/FavoriteScreen.dart';
 import 'package:plant_app/screen/BottomNavigation/HomeScreen.dart';
 import 'package:plant_app/screen/BottomNavigation/ScanScreen.dart';
@@ -31,6 +32,11 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Scaffold(
       extendBody: true,
       body: Center(
@@ -83,7 +89,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
               ),
             ],
             currentIndex: _selectedIndex,
-            selectedItemColor: const Color.fromRGBO(105, 171, 154, 1),
+            selectedItemColor: Color.fromRGBO(70, 131, 104, 1.0),
             unselectedItemColor: Colors.grey,
             onTap: _onItemTapped,
             type: BottomNavigationBarType.fixed,

@@ -12,7 +12,41 @@ class CardPlantWidget extends StatefulWidget {
   State<CardPlantWidget> createState() => _CardPlantWidget();
 }
 
-class _CardPlantWidget extends State<CardPlantWidget> {
+class _CardPlantWidget extends State<CardPlantWidget> with TickerProviderStateMixin{
+  late AnimationController _animationController;
+  bool stillAnimate = true;
+
+  late final Animation<double> _animation = CurvedAnimation(
+    parent: _animationController,
+    curve: Curves.fastOutSlowIn,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    );
+
+    _animationController.addListener(() => setState(() {}));
+    TickerFuture tickerFuture = _animationController.repeat();
+    tickerFuture.timeout(const Duration(seconds:  3), onTimeout:  () {
+      _animationController.forward(from: 0);
+      _animationController.stop(canceled: true);
+
+      setState(() {
+        stillAnimate = false;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   Future<void> addUpdateFavorite(String selectedId) async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -66,7 +100,7 @@ class _CardPlantWidget extends State<CardPlantWidget> {
             onTap: (){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DetailScreen(plantData: data) )
-              );
+              ).then((_) => setState(() {}));
             },
             child: Container(
               width: 220,
@@ -84,7 +118,15 @@ class _CardPlantWidget extends State<CardPlantWidget> {
                           padding: const EdgeInsets.only(top: 10),
                           width: double.infinity,
                           height: 260,
-                          child: Image.asset(data.imagePath)
+                          child: stillAnimate ? ScaleTransition(
+                            scale: _animation,
+                            child: Image.asset(
+                              data.imagePath,
+                            )
+                          ):
+                          Image.asset(
+                            data.imagePath,
+                          ),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 17),
