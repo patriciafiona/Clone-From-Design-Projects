@@ -34,4 +34,5 @@ Hello everyone! This time I try to learn create UI on Flutter by using design fr
 - Plant data in this app are not 100% correct (Exp. name, humidity, size, etc.), just for display only!
 
 ## Results
-[Comming Soon]
+[![Watch the video](https://user-images.githubusercontent.com/32255348/178657536-340198ba-3553-4bcc-b245-e6c6e3c8d150.png)](https://youtu.be/fhv5sJDJPqQ)
+<p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link</i></p>
