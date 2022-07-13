@@ -30,4 +30,5 @@ Connected with personal Firebase account for sign in, get data from firestore da
 - This design used for study purpose only! Design create by Spotify v.08.5.25.894.
 
 ## Results
-[Comming Soon]
+[![Watch the video](https://user-images.githubusercontent.com/32255348/178654903-a9462f27-24a8-42ab-bb50-cfba621dc67f.png)](https://youtu.be/0tGT5fGfhs4)
+<p align="center"><i><b>Figure 2</b> Youtube Video | Clickable image link</i></p>
