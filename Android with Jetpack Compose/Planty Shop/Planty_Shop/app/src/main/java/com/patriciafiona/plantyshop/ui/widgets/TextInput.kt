@@ -21,10 +21,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.patriciafiona.plantyshop.ui.theme.lightGray01
-import com.patriciafiona.plantyshop.ui.theme.lightGray02
-import com.patriciafiona.plantyshop.ui.theme.lightGray03
-import com.patriciafiona.plantyshop.ui.theme.lightGreen02
+import com.patriciafiona.plantyshop.ui.theme.*
 import java.time.format.TextStyle
 
 @Composable
@@ -49,7 +46,8 @@ fun TextInput(
                         text = placeholder,
                         style = androidx.compose.ui.text.TextStyle(
                             color = Color.Gray,
-                            fontSize = 14.sp
+                            fontSize = 14.sp,
+                            fontFamily = Montserrat
                         )
                     )
                 }

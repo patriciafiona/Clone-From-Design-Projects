@@ -14,6 +14,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.patriciafiona.plantyshop.ui.theme.Montserrat
 
 @Composable
 fun Title(title: String){
@@ -28,7 +29,8 @@ fun Title(title: String){
             text = title,
             style = TextStyle(
                 color = Color.Black,
-                fontSize = 22.sp
+                fontSize = 22.sp,
+                fontFamily = Montserrat
             )
         )
         Divider(

@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.plantyshop.R
+import com.patriciafiona.plantyshop.ui.theme.Montserrat
 import com.patriciafiona.plantyshop.ui.theme.lightGray01
 import com.patriciafiona.plantyshop.ui.theme.lightGray02
 import com.patriciafiona.plantyshop.ui.theme.lightGreen02
@@ -76,7 +77,7 @@ fun MainScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                 ) {
                     items(viewModel.getRecommendationShop()) { plant ->
-                        PlantItem(plant)
+                        PlantItem(plant, viewModel.getColors())
                     }
                 }
 
@@ -122,7 +123,8 @@ private fun TopSection(
                 "Hello",
                 style = TextStyle(
                     fontSize = 12.sp,
-                    color = Color.Gray
+                    color = Color.Gray,
+                    fontFamily = Montserrat
                 )
             )
             Text(
@@ -130,7 +132,8 @@ private fun TopSection(
                 style = TextStyle(
                     fontSize = 16.sp,
                     color = lightGreen02,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = Montserrat
                 )
             )
         }
