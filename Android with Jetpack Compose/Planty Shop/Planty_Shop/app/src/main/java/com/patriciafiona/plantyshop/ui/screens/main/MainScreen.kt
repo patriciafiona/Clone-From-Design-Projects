@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -65,25 +66,90 @@ fun MainScreen(
         ) {
             TopSection(searchInput)
 
+            MainSection(viewModel)
+        }
+    }
+}
+
+@Composable
+fun HomeBanner() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .height(150.dp)
+                .clip(RoundedCornerShape(20.dp))
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.home_banner_bg),
+                contentDescription = "Home banner",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.White)
+                    .align(Alignment.CenterStart)
+                    .width(200.dp)
+                    .padding(16.dp)
             ) {
-                Title(title = "Shop")
-
-                LazyRow (
-                    contentPadding = PaddingValues(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    items(viewModel.getRecommendationShop()) { plant ->
-                        PlantItem(plant, viewModel.getColors())
-                    }
-                }
-
-                Title(title = "Explore")
+                Text(
+                    text = "Get 50% Discount Today",
+                     style = TextStyle(
+                         fontSize = 30.sp,
+                          fontFamily = Montserrat,
+                          color = Color.DarkGray,
+                     )
+                )
             }
         }
+
+        Box(
+            modifier = Modifier
+                .height(200.dp)
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 16.dp, end = 8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.home_banner_plant),
+                contentDescription = "Banner plant",
+                modifier = Modifier
+                    .width(200.dp)
+                    .height(200.dp)
+                    .offset(y = 15.dp, x = 40.dp)
+                    .clipToBounds(),
+                contentScale = ContentScale.Crop
+            )
+        }
+    }
+}
+
+@Composable
+private fun MainSection(viewModel: MainViewModel) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White)
+    ) {
+        Title(title = "Shop")
+
+        LazyRow(
+            contentPadding = PaddingValues(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            items(viewModel.getRecommendationShop()) { plant ->
+                PlantItem(plant, viewModel.getColors())
+            }
+        }
+
+        HomeBanner()
+
+        Title(title = "Explore")
     }
 }
 

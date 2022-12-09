@@ -38,7 +38,7 @@ fun PlantItem(
     Column(
         modifier = Modifier
             .width(200.dp)
-            .height(280.dp)
+            .height(270.dp)
     ) {
         Box(
             modifier = Modifier
