@@ -23,4 +23,8 @@ class MainViewModel: ViewModel() {
         return DataResource.exploreBlogs()
     }
 
+    fun getAllPlants(): ArrayList<Plant>{
+        return plants
+    }
+
 }
