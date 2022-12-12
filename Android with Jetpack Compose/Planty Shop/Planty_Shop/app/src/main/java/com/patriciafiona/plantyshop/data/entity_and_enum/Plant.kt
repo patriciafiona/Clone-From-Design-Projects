@@ -1,8 +1,10 @@
 package com.patriciafiona.plantyshop.data.entity_and_enum
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
-
+@Parcelize
 data class Plant(
     val id: UUID = UUID.randomUUID(),
     val name: String,
@@ -16,4 +18,4 @@ data class Plant(
     val size: Double,
     val image: Int,
     val rating: Double
-)
+): Parcelable

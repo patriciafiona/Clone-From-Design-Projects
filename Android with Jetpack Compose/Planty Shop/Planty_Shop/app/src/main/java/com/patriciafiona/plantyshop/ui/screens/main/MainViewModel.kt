@@ -16,7 +16,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun getColors(): ArrayList<Color> {
-        return DataResource.colors()
+        return DataResource.colors().take(5) as ArrayList<Color>
     }
 
     fun getExplore(): ArrayList<Explore> {

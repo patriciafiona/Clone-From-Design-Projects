@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.patriciafiona.plantyshop.data.entity_and_enum.Plant
 import com.patriciafiona.plantyshop.ui.screens.detail.DetailScreen
 import com.patriciafiona.plantyshop.ui.screens.main.MainScreen
 
@@ -14,8 +15,14 @@ fun NavigationBuilder() {
         composable(route = PlantScreen.MainScreen.route){
             MainScreen(navController = navigationController)
         }
-        composable(route = PlantScreen.DetailScreen.route){
-            DetailScreen(navController = navigationController)
+        composable(route = PlantScreen.DetailScreen.route){ previousBackStackEntry ->
+            val plant = previousBackStackEntry.arguments?.getParcelable<Plant>("plant")
+            if (plant != null) {
+                DetailScreen(
+                    navController = navigationController,
+                    plant = plant
+                )
+            }
         }
     }
 }

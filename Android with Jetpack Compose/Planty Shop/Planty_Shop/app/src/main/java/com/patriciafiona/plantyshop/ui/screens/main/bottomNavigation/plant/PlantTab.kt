@@ -41,7 +41,11 @@ fun PlantTab(
                 .testTag("PlantsList")
         ) {
             items(viewModel.getAllPlants()) { plant ->
-                PlantItem(plant, viewModel.getColors())
+                PlantItem(
+                    navController = navController,
+                    plant = plant,
+                    colors = viewModel.getColors()
+                )
             }
         }
     }

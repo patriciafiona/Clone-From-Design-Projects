@@ -14,6 +14,9 @@ object DataResource {
         Color(255, 255, 217, 255),
         Color(250, 250, 250),
         Color(0, 77, 64),
+        Color(255, 87, 34, 255),
+        Color(103, 58, 183, 255),
+        Color(81, 164, 255, 255),
     )
 
     fun plants(): ArrayList<Plant> = arrayListOf(
@@ -102,7 +105,11 @@ object DataResource {
         ),
         Plant(
             name = "Tulipa agenensis",
-            description = "",
+            description = "Tulipa agenensis is a Middle Eastern species of flowering plant in the family Liliaceae. It is native to Turkey, Iran, Cyprus, " +
+                    "the Aegean Islands, Syria, Lebanon, Israel, Jordan, and Palestine, and naturalized in the central and western Mediterranean " +
+                    "(Italy, Tunisia, France, Portugal, Moldova etc.). Tulipa agenensis is a bulb-forming perennial. The flowers are brick red or " +
+                    "deep red with black and yellow markings toward the center with a green stem. The petals are oval, tapered with curled tips and it " +
+                    "has green and lanceolate foliage.",
             family = "Liliaceae",
             genus = "Tulipa",
             price = 0.0,
@@ -115,7 +122,16 @@ object DataResource {
         ),
         Plant(
             name = "Aloe aristata",
-            description = "",
+            description = "Aristaloe is a genus of evergreen flowering perennial plants in the family Asphodelaceae from Southern Africa. " +
+                    "Its sole species is Aristaloe aristata, known as guinea-fowl aloe or lace aloe. This species is known locally as \"serelei\" " +
+                    "(Sesotho for \"slippery one\") or \"langnaaldaalwyn\" (Afrikaans for \"lacey aloe\"). In English it is usually known as the " +
+                    "\"lace aloe\" or \"guinea-fowl aloe\"." +
+                    "\n\n" +
+                    "The species was described by Adrian Hardy Haworth. Its species name \"aristata\" comes from the Latin for \"bristly\" or \"awned\", " +
+                    "and refers to the lacy edges of the leaves. Its generic name has the same etymology. Recent phylogenetic studies have demonstrated " +
+                    "that the genus Aloe is polyphyletic and that this unusual species is not in fact an aloe, but is more closely related to Astroloba " +
+                    "and to the four \"Robustipedunculares\" species of Haworthia. It has therefore been moved to its own genus, Aristaloe, to account " +
+                    "for its separate ancestry and genetic uniqueness.",
             family = "Xanthorrhoeaceae",
             genus = "Aloe",
             price = 1.13,

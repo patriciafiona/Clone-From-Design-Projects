@@ -49,13 +49,14 @@ fun HomeTab(
             .verticalScroll(rememberScrollState())
             .background(lightGray02)
     ) {
-        MainSection(viewModel, bottomNavController)
+        MainSection(viewModel, navController, bottomNavController)
     }
 }
 
 @Composable
 private fun MainSection(
     viewModel: MainViewModel,
+    navController: NavController,
     bottomNavController: NavController
 ) {
     Column(
@@ -64,7 +65,7 @@ private fun MainSection(
             .background(Color.White)
     ) {
         Title(title = "Shop")
-        ShopList(viewModel, bottomNavController)
+        ShopList(viewModel, navController = navController, bottomNavController = bottomNavController)
 
         HomeBanner()
 
@@ -90,6 +91,7 @@ private fun ExploreList(viewModel: MainViewModel) {
 @Composable
 private fun ShopList(
     viewModel: MainViewModel,
+    navController: NavController,
     bottomNavController: NavController
 ) {
     LazyRow(
@@ -97,7 +99,7 @@ private fun ShopList(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         items(viewModel.getRecommendationShop()) { plant ->
-            PlantItem(plant, viewModel.getColors())
+            PlantItem(navController, plant, viewModel.getColors())
         }
 
         item {

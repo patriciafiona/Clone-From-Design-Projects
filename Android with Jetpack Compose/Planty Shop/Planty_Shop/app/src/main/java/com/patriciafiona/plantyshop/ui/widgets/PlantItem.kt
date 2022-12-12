@@ -3,6 +3,7 @@ package com.patriciafiona.plantyshop.ui.widgets
 import android.R.attr.maxLines
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -24,7 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.patriciafiona.plantyshop.data.entity_and_enum.Plant
+import com.patriciafiona.plantyshop.navigation.PlantScreen
 import com.patriciafiona.plantyshop.ui.theme.Montserrat
 import com.patriciafiona.plantyshop.ui.theme.eerieBlack
 import com.patriciafiona.plantyshop.ui.theme.lightGray02
@@ -32,6 +35,7 @@ import com.patriciafiona.plantyshop.ui.theme.lightGray02
 
 @Composable
 fun PlantItem(
+    navController: NavController,
     plant: Plant,
     colors: ArrayList<Color>
 ) {
@@ -39,6 +43,10 @@ fun PlantItem(
         modifier = Modifier
             .width(200.dp)
             .height(270.dp)
+            .clickable {
+                navController.navigate(PlantScreen.DetailScreen.route)
+                navController.currentBackStackEntry?.arguments?.putParcelable("plant", plant)
+            }
     ) {
         Box(
             modifier = Modifier
