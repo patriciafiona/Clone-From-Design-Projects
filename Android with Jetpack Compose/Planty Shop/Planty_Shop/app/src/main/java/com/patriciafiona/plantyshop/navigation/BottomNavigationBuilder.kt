@@ -11,10 +11,15 @@ import com.patriciafiona.plantyshop.ui.screens.main.bottomNavigation.home.HomeTa
 import com.patriciafiona.plantyshop.ui.screens.main.bottomNavigation.plant.PlantTab
 import com.patriciafiona.plantyshop.ui.screens.main.bottomNavigation.scan.ScanTab
 import com.patriciafiona.plantyshop.ui.screens.main.bottomNavigation.setting.SettingTab
+import java.io.File
 
 
 @Composable
-fun BottomNavigationBuilder(bottomNavigationController: NavHostController, navController: NavController) {
+fun BottomNavigationBuilder(
+    bottomNavigationController: NavHostController,
+    navController: NavController,
+    getDirectory: File
+) {
 
     NavHost(navController = bottomNavigationController, startDestination = BottomNavigationItem.Home.route) {
         composable(BottomNavigationItem.Home.route) {
@@ -24,7 +29,7 @@ fun BottomNavigationBuilder(bottomNavigationController: NavHostController, navCo
             PlantTab(navController)
         }
         composable(BottomNavigationItem.Scan.route) {
-            ScanTab(navController)
+            ScanTab(navController, getDirectory = getDirectory)
         }
         composable(BottomNavigationItem.Cart.route) {
             CartTab(navController)

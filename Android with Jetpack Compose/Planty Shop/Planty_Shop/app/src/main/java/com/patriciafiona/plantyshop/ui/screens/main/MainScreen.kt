@@ -11,16 +11,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,21 +47,27 @@ import com.patriciafiona.plantyshop.R
 import com.patriciafiona.plantyshop.data.entity_and_enum.Explore
 import com.patriciafiona.plantyshop.navigation.BottomNavigationBuilder
 import com.patriciafiona.plantyshop.navigation.BottomNavigationItem
+import com.patriciafiona.plantyshop.navigation.PlantScreen
 import com.patriciafiona.plantyshop.ui.theme.Montserrat
 import com.patriciafiona.plantyshop.ui.theme.lightGray01
 import com.patriciafiona.plantyshop.ui.theme.lightGray02
 import com.patriciafiona.plantyshop.ui.theme.lightGreen02
 import com.patriciafiona.plantyshop.ui.widgets.*
+import java.io.File
 
 @Composable
 fun MainScreen(
-    navController: NavController
+    navController: NavController,
+    getDirectory: File
 ){
     val searchInput = remember{ mutableStateOf("") }
     val bottomNavController = rememberNavController()
 
+    val navBackStackEntry by bottomNavController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
-        topBar = { TopBar(searchInput) },
+        topBar = { if(currentRoute != BottomNavigationItem.Scan.route) { TopBar(searchInput) } },
         bottomBar = { BottomNavigationBar(navController = bottomNavController )},
         content = { padding ->
             Column(modifier = Modifier
@@ -71,18 +75,12 @@ fun MainScreen(
             ) {
                 BottomNavigationBuilder(
                     bottomNavigationController = bottomNavController,
-                    navController = navController
+                    navController = navController,
+                    getDirectory = getDirectory
                 )
             }
         },
         backgroundColor = Color.White
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview(){
-    val navController = rememberNavController()
-    MainScreen(navController = navController)
 }
 
