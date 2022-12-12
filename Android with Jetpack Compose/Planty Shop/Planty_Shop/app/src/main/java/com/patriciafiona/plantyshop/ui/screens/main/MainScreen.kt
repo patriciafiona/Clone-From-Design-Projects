@@ -1,7 +1,10 @@
 package com.patriciafiona.plantyshop.ui.screens.main
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -29,16 +32,20 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.plantyshop.R
+import com.patriciafiona.plantyshop.data.entity_and_enum.Explore
 import com.patriciafiona.plantyshop.ui.theme.Montserrat
 import com.patriciafiona.plantyshop.ui.theme.lightGray01
 import com.patriciafiona.plantyshop.ui.theme.lightGray02
@@ -150,6 +157,74 @@ private fun MainSection(viewModel: MainViewModel) {
         HomeBanner()
 
         Title(title = "Explore")
+
+        LazyColumn(
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier = Modifier
+                .height(500.dp)
+        ) {
+            items(viewModel.getExplore()) { explore ->
+                ExploreItem(explore)
+            }
+        }
+    }
+}
+
+@Composable
+fun ExploreItem(explore: Explore) {
+    val context = LocalContext.current
+    val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(explore.url)) }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable {
+                context.startActivity(intent)
+            },
+        shape = RoundedCornerShape(20.dp),
+        elevation = 5.dp,
+        backgroundColor = Color.White,
+    ) {
+       Column(
+           modifier = Modifier
+               .fillMaxWidth()
+       ) {
+           Image(
+               painterResource(id = explore.image),
+               contentDescription = "Explore image",
+               contentScale = ContentScale.Crop,
+               modifier = Modifier
+                   .fillMaxWidth()
+                   .height(200.dp)
+                   .clipToBounds()
+           )
+
+           Text(
+               text = explore.title,
+               style = TextStyle(
+                   fontSize = 16.sp,
+                   fontFamily = Montserrat,
+                   color = Color.DarkGray
+               ),
+                modifier = Modifier
+                    .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+           )
+
+           Text(
+               text = explore.description,
+               style = TextStyle(
+                   fontSize = 12.sp,
+                   fontFamily = Montserrat,
+                   color = Color.Gray
+               ),
+               maxLines = 2,
+               overflow = TextOverflow.Ellipsis,
+               modifier = Modifier
+                   .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp)
+           )
+       }
     }
 }
 

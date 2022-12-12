@@ -152,7 +152,7 @@ fun PlantItem(
              ),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-             modifier = Modifier
+            modifier = Modifier
                  .padding(start = 8.dp, top = 12.dp, end = 8.dp)
         )
 
