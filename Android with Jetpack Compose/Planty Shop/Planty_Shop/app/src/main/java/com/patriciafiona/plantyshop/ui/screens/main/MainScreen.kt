@@ -67,7 +67,11 @@ fun MainScreen(
     val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
-        topBar = { if(currentRoute != BottomNavigationItem.Scan.route) { TopBar(searchInput) } },
+        topBar = {
+            if(currentRoute == BottomNavigationItem.Home.route || currentRoute == BottomNavigationItem.Plant.route) {
+                TopBar(searchInput)
+            }
+        },
         bottomBar = { if(currentRoute != BottomNavigationItem.Scan.route) { BottomNavigationBar(navController = bottomNavController )} },
         content = { padding ->
             Column(modifier = Modifier
