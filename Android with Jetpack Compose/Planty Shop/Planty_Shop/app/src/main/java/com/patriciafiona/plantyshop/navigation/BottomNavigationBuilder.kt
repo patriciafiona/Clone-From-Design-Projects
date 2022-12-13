@@ -29,7 +29,7 @@ fun BottomNavigationBuilder(
             PlantTab(navController)
         }
         composable(BottomNavigationItem.Scan.route) {
-            ScanTab(navController, getDirectory = getDirectory)
+            ScanTab(navController, bottomNavController = bottomNavigationController, getDirectory = getDirectory)
         }
         composable(BottomNavigationItem.Cart.route) {
             CartTab(navController)

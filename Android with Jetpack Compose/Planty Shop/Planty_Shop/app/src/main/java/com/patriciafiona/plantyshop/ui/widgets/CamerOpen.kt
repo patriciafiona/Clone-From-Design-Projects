@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavController
 import com.patriciafiona.plantyshop.R
 import com.patriciafiona.plantyshop.ui.theme.lightGreen02
 import com.patriciafiona.plantyshop.ui.theme.lightGreen03
@@ -40,11 +43,15 @@ import java.util.*
 Link tutorial: https://loveandroid.medium.com/how-to-implement-camera-capture-and-save-image-using-jetpack-compose-956684b488a6
  */
 @Composable
-fun CameraOpen(directory: File) {
+fun CameraOpen(
+    directory: File,
+    bottomNavController: NavController
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
     SimpleCameraPreview(
+        bottomNavController = bottomNavController,
         context = context,
         lifecycleOwner = lifecycleOwner,
         outputDirectory = directory,
@@ -54,6 +61,7 @@ fun CameraOpen(directory: File) {
 
 @Composable
 fun SimpleCameraPreview(
+    bottomNavController: NavController,
     context: Context,
     lifecycleOwner: LifecycleOwner,
     outputDirectory: File,
@@ -154,6 +162,26 @@ fun SimpleCameraPreview(
         }
 
         Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(15.dp)
+                .align(Alignment.TopStart)
+        ) {
+            IconButton(
+                onClick = {
+                    bottomNavController.popBackStack()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "back arrow",
+                    tint = MaterialTheme.colors.surface
+                )
+            }
+        }
+
+        Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -251,6 +279,10 @@ fun SimpleCameraPreview(
                         imageCapture,
                         preview
                     )
+
+                    //Turn off flashlight of facing front
+                    flashEnabled = false
+                    flashRes = R.drawable.ic_baseline_flash_off
                 }
             ) {
                 Icon(

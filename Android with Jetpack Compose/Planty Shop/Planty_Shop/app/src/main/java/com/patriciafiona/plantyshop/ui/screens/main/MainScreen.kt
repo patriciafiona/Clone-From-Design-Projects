@@ -68,7 +68,7 @@ fun MainScreen(
 
     Scaffold(
         topBar = { if(currentRoute != BottomNavigationItem.Scan.route) { TopBar(searchInput) } },
-        bottomBar = { BottomNavigationBar(navController = bottomNavController )},
+        bottomBar = { if(currentRoute != BottomNavigationItem.Scan.route) { BottomNavigationBar(navController = bottomNavController )} },
         content = { padding ->
             Column(modifier = Modifier
                 .padding(padding)

@@ -20,6 +20,7 @@ import java.io.File
 @Composable
 fun ScanTab(
     navController: NavController,
+    bottomNavController: NavController,
     getDirectory: File
 ){
     val cameraPermissionState = rememberPermissionState(
@@ -27,7 +28,7 @@ fun ScanTab(
     )
 
     if (cameraPermissionState.hasPermission) {
-        CameraOpen(getDirectory)
+        CameraOpen(getDirectory, bottomNavController = bottomNavController)
     } else {
         Column(
             modifier = Modifier
