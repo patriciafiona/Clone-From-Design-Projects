@@ -4,7 +4,9 @@
 ## List of Android with Jetpack Compose Apps
 The list of the projects:
 
-[Comming Soon]
+| Name      | Description  | Project Link  |
+| :-: | :-: | :-: | 
+| Planty Shop | Learn how to clone UI in Jetpack Compose using dribbble case & designs! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Android%20with%20Jetpack%20Compose/Planty%20ShopI) | 
 
 ## List of Flutter Apps
 The list of the projects:
