@@ -180,11 +180,10 @@ fun SimpleCameraPreview(
                         )
 
                         camera?.let {
-                            Log.e("TORCH", "MASUK SINI")
                             if (it.cameraInfo.hasFlashUnit()) {
                                 flashEnabled = !flashEnabled
-                                flashRes = if (flashEnabled) R.drawable.ic_baseline_flash_off else
-                                    R.drawable.ic_baseline_flash_on
+                                flashRes = if (flashEnabled) R.drawable.ic_baseline_flash_on else
+                                    R.drawable.ic_baseline_flash_off
                                 it.cameraControl.enableTorch(flashEnabled)
                             }
                         }
