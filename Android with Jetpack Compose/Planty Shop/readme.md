@@ -1,6 +1,7 @@
 # Planty Shop
 <p align="center"><img src="https://user-images.githubusercontent.com/32255348/207212433-add92287-a6bd-491d-9fc1-8656138614cd.png" width="300"/></p>
 <p align="center"><i><b>Figure 1</b> Planty Shop Home Screen</i></p>
+
 ## Information
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" width="200"/>
