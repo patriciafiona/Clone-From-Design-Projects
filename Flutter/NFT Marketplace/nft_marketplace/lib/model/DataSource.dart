@@ -256,16 +256,6 @@ class DataSource {
     NFT(
         creatorId: "cr_00002_102021",
         collectionId: "co_00002_102021_02",
-        name: "Gutter Rat #1136",
-        price: 0.48,
-        lastSale: 0.359 ,
-        totalViews: 274,
-        totalFavorites: 6,
-        imagePath: "Gutter_Rat_#1136.png"
-    ),
-    NFT(
-        creatorId: "cr_00002_102021",
-        collectionId: "co_00002_102021_02",
         name: "Gutter Rat #475",
         price: 0.5,
         lastSale: 0.34 ,

@@ -29,11 +29,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  uuid: ^3.0.6
   flutter:
     sdk: flutter
-
-
+  uuid: ^3.0.6
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,9 +60,48 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/NFT_Poster.png
+    - assets/images/NFT_Poster_Cropped.png
+
+    - assets/images/Gutter_Cat_#620.png
+    - assets/images/Gutter_Cat_#660.png
+    - assets/images/Gutter_Cat_#962.png
+    - assets/images/Gutter_Cat_#987.png
+    - assets/images/Gutter_Cat_#1486.png
+    - assets/images/Gutter_Cat_#2578.png
+
+    - assets/images/Gutter_Dog_#209.png
+    - assets/images/Gutter_Dog_#2573.png
+    - assets/images/Gutter_Dog_#2934.png
+
+    - assets/images/Gutter_Rat_#214.png
+    - assets/images/Gutter_Rat_#475.png
+    - assets/images/Gutter_Rat_#1135.png
+    - assets/images/Gutter_Rat_#1136.png
+    - assets/images/Gutter_Rat_#2651.png
+
+    - assets/images/YuGiYn_#228.png
+    - assets/images/YuGiYn_#305.png
+    - assets/images/YuGiYn_#344.png
+    - assets/images/YuGiYn_#698.png
+    - assets/images/YuGiYn_#930.png
+    - assets/images/YuGiYn_#965.png
+    - assets/images/YuGiYn_#1101.png
+    - assets/images/YuGiYn_#4477.png
+    - assets/images/YuGiYn_#4554.png
+    - assets/images/YuGiYn_#4612.png
+    - assets/images/YuGiYn_#4997.png
+    - assets/images/YuGiYn_#5164.png
+    - assets/images/YuGiYn_#5533.png
+    - assets/images/YuGiYn_#5745.png
+    - assets/images/YuGiYn_#6009.png
+    - assets/images/YuGiYn_#6678.png
+    - assets/images/YuGiYn_#7436.png
+    - assets/images/YuGiYn_#8271.png
+    - assets/images/YuGiYn_#8311.png
+    - assets/images/YuGiYn_#8616.png
+    - assets/images/YuGiYn_#8704.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
