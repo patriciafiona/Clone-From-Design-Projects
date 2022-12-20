@@ -41,28 +41,19 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/background.png
+    - assets/images/logo.png
     - assets/images/NFT_Poster.png
     - assets/images/NFT_Poster_Cropped.png
+    -
+    - assets/images/google_logo.png
+    - assets/images/apple_logo.png
 
     - assets/images/Gutter_Cat_#620.png
     - assets/images/Gutter_Cat_#660.png
@@ -114,6 +105,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+fonts:
+  - family: FredokaOne
+    fonts:
+      - assets: assets/fonts/FredokaOne-Regular.ttf
+        weight: 500
   # fonts:
   #   - family: Schyler
   #     fonts:
