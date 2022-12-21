@@ -79,6 +79,28 @@ class DataSource {
                   "unique levels of community led access and perks."
           ),
         ]
+    ),
+    Creator(
+        id: "cr_00003_112021",
+        name: "EliteApeCEO",
+        isVerified: false,
+        joinDate: "November 2021",
+        description: "Founder of Elite Ape Billionaire Community.",
+        collections: [
+          Collection(
+              id: "co_00003_112021_01",
+              name: "Elite Ape Billionaire Community",
+              totalItems: 40384,
+              created: 'October 2021',
+              creatorFee: 5.0,
+              category: "PFPs",
+              description: "The Elite Ape Billionaire Community is more than a project, "
+                  "it’s the way you see the reality. The real transformation of yourself. "
+                  "The Elite Ape NFTs can be your transformational access to utilities and "
+                  "perks through a community of like-minded people with the same primary "
+                  "goal: to the moon. Visit our website for more details on the project."
+          )
+        ]
     )
   ];
 
@@ -114,6 +136,16 @@ class DataSource {
         imagePath: "YuGiYn_#6678.png"
     ),
     NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10003",
+        price: 0.009,
+        lastSale: 0.0034 ,
+        totalViews: 12,
+        totalFavorites: 0,
+        imagePath: "EliteApe_#10003.png"
+    ),
+    NFT(
         creatorId: "cr_00002_102021",
         collectionId: "co_00002_102021_02",
         name: "Gutter Rat #214",
@@ -142,6 +174,16 @@ class DataSource {
         totalViews: 695,
         totalFavorites: 5,
         imagePath: "Gutter_Dog_#2934.png"
+    ),
+    NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10006",
+        price: 0.009,
+        lastSale: 0.0021 ,
+        totalViews: 12,
+        totalFavorites: 0,
+        imagePath: "EliteApe_#10006.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",
@@ -184,6 +226,16 @@ class DataSource {
         imagePath: "Gutter_Cat_#660.png"
     ),
     NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10019",
+        price: 0.009,
+        lastSale: 0.0019 ,
+        totalViews: 9,
+        totalFavorites: 2,
+        imagePath: "EliteApe_#10019.png"
+    ),
+    NFT(
         creatorId: "cr_00001_102022",
         collectionId: "co_00001_102022_01",
         name: "YuGiYn #5745",
@@ -224,6 +276,16 @@ class DataSource {
         imagePath: "Gutter_Cat_#962.png"
     ),
     NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10018",
+        price: 0.009,
+        lastSale: 0.0019 ,
+        totalViews: 5,
+        totalFavorites: 0,
+        imagePath: "EliteApe_#10018.png"
+    ),
+    NFT(
         creatorId: "cr_00001_102022",
         collectionId: "co_00001_102022_01",
         name: "YuGiYn #4612",
@@ -242,6 +304,16 @@ class DataSource {
         totalViews: 274,
         totalFavorites: 6,
         imagePath: "Gutter_Rat_#1135.png"
+    ),
+    NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10026",
+        price: 0.009,
+        lastSale: 0.0019 ,
+        totalViews: 3,
+        totalFavorites: 1,
+        imagePath: "EliteApe_#10026.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",
@@ -354,6 +426,16 @@ class DataSource {
         imagePath: "YuGiYn_#5164.png"
     ),
     NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10035",
+        price: 0.009,
+        lastSale: 0.0019 ,
+        totalViews: 2,
+        totalFavorites: 0,
+        imagePath: "EliteApe_#10035.png"
+    ),
+    NFT(
         creatorId: "cr_00001_102022",
         collectionId: "co_00001_102022_01",
         name: "YuGiYn #8271",
@@ -362,6 +444,16 @@ class DataSource {
         totalViews: 289,
         totalFavorites: 9,
         imagePath: "YuGiYn_#8271.png"
+    ),
+    NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10017",
+        price: 0.009,
+        lastSale: 0.0019 ,
+        totalViews: 8,
+        totalFavorites: 0,
+        imagePath: "EliteApe_#10017.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",
@@ -394,6 +486,16 @@ class DataSource {
         imagePath: "YuGiYn_#8311.png"
     ),
     NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #1001",
+        price: 0.009,
+        lastSale: 0.0019 ,
+        totalViews: 5,
+        totalFavorites: 0,
+        imagePath: "EliteApe_#1001.png"
+    ),
+    NFT(
         creatorId: "cr_00001_102022",
         collectionId: "co_00001_102022_01",
         name: "YuGiYn #698",
@@ -402,6 +504,16 @@ class DataSource {
         totalViews: 584,
         totalFavorites: 11,
         imagePath: "YuGiYn_#698.png"
+    ),
+    NFT(
+        creatorId: "cr_00003_112021",
+        collectionId: "co_00003_112021_01",
+        name: "Elite Ape #10002",
+        price: 0.009,
+        lastSale: 0.007 ,
+        totalViews: 16,
+        totalFavorites: 1,
+        imagePath: "EliteApe_#10002.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",

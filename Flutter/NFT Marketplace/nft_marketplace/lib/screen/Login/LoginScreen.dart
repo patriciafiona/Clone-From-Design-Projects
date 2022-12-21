@@ -100,13 +100,22 @@ class LoginScreen extends StatelessWidget {
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                             ),
                             onPressed: () { },
-                            child: const Text(
-                              'Sign in',
-                              style: TextStyle(
-                                fontFamily: 'FredokaOne',
-                                color: Colors.black,
-                                fontSize: 14,
-                              ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                Expanded(child: Text(
+                                  'Sign in',
+                                    style: TextStyle(
+                                      fontFamily: 'FredokaOne',
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward
+                                )
+                              ],
                             ),
                           ),
                         )

@@ -94,6 +94,16 @@ flutter:
     - assets/images/YuGiYn_#8616.png
     - assets/images/YuGiYn_#8704.png
 
+    - assets/images/EliteApe_#1001.png
+    - assets/images/EliteApe_#10002.png
+    - assets/images/EliteApe_#10003.png
+    - assets/images/EliteApe_#10006.png
+    - assets/images/EliteApe_#10017.png
+    - assets/images/EliteApe_#10018.png
+    - assets/images/EliteApe_#10019.png
+    - assets/images/EliteApe_#10026.png
+    - assets/images/EliteApe_#10035.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
