@@ -50,6 +50,7 @@ flutter:
   assets:
     - assets/images/background.png
     - assets/images/logo.png
+    - assets/images/ethereum-eth-logo.png
     - assets/images/NFT_Poster.png
     - assets/images/NFT_Poster_Cropped.png
     -
