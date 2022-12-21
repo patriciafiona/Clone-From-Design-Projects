@@ -113,7 +113,7 @@ class DataSource {
         lastSale: 0.1401 ,
         totalViews: 417,
         totalFavorites: 7,
-        imagePath: "YuGiYn #4477.png"
+        imagePath: "YuGiYn_#4477.png"
     ),
     NFT(
         creatorId: "cr_00002_102021",
@@ -413,7 +413,7 @@ class DataSource {
         lastSale: 3.46 ,
         totalViews: 122,
         totalFavorites: 2,
-        imagePath: "Gutter Cat #987.png"
+        imagePath: "Gutter_Cat_#987.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",

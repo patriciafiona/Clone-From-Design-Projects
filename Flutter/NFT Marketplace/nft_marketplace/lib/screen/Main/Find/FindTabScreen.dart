@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nft_marketplace/model/DataSource.dart';
+import 'package:nft_marketplace/widget/NFTBigItem.dart';
 
 class FindTabScreen extends StatefulWidget {
   const FindTabScreen({Key? key}) : super(key: key);
@@ -20,6 +22,11 @@ class _FindTabScreenState extends State<FindTabScreen> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
+    final dataSource = DataSource();
+
+    const List<int> trendingDataPosition = [
+      2, 8, 9, 14, 17, 18, 21, 22
+    ];
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -113,39 +120,63 @@ class _FindTabScreenState extends State<FindTabScreen> with TickerProviderStateM
             ),
           ],
         ),
-        Container(
+        SizedBox(
           width: double.infinity,
-          height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.65,
+          height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.75,
           child: TabBarView(
             controller: _tabController,
-            children: const <Widget>[
-              Center(
-                child: Text(
-                  "It's cloudy here",
-                  style: TextStyle(color: Colors.white)
-                ),
+            children: <Widget>[
+              ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dataSource.allNft.length,
+                itemBuilder: (_, index) {
+                  return NFTBigItem(
+                    data: dataSource.allNft[index],
+                  );
+                },
               ),
-              Center(
-                child: Text(
-                    "It's rainy here",
-                    style: TextStyle(color: Colors.white)
-                ),
+              ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dataSource.allNft.length,
+                itemBuilder: (_, index) {
+                  if(trendingDataPosition.contains(index)) {
+                    return NFTBigItem(
+                      data: dataSource.allNft[index],
+                    );
+                  }else{
+                    return const SizedBox();
+                  }
+                },
               ),
-              Center(
-                child: Text(
-                    "It's sunny here",
-                    style: TextStyle(color: Colors.white)
-                ),
+              ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dataSource.allNft.length,
+                itemBuilder: (_, index) {
+                  if(dataSource.allNft[index].creatorId == "cr_00002_102021") {
+                    return NFTBigItem(
+                      data: dataSource.allNft[index],
+                    );
+                  }else{
+                    return const SizedBox();
+                  }
+                },
               ),
-              Center(
-                child: Text(
-                    "It's rainy here",
-                    style: TextStyle(color: Colors.white)
-                ),
+              ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dataSource.allNft.length,
+                itemBuilder: (_, index) {
+                  if(dataSource.allNft[index].creatorId == "cr_00001_102022" || dataSource.allNft[index].creatorId == "cr_00003_112021") {
+                    return NFTBigItem(
+                      data: dataSource.allNft[index],
+                    );
+                  }else{
+                    return const SizedBox();
+                  }
+                },
               ),
-              Center(
+              const Center(
                 child: Text(
-                    "It's sunny here",
+                    "It's sports here",
                     style: TextStyle(color: Colors.white)
                 ),
               ),

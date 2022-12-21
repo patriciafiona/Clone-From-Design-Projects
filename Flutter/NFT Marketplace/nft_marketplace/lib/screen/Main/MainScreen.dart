@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 100),
+        padding: const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 10),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/background.png"),
