@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nft_marketplace/screen/Main/MainScreen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -20,7 +21,6 @@ class LoginScreen extends StatelessWidget {
         width: double.infinity,
         child:
         SingleChildScrollView(
-            padding: const EdgeInsets.only(bottom: 20),
             child: Column(
               children: [
                 Container(
@@ -59,68 +59,83 @@ class LoginScreen extends StatelessWidget {
                       ),
                     )
                 ),
-                Row(
-                  children: [
-                    Flexible(
-                        flex: 1,
-                        child: Container(
-                          margin: const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 10),
-                          decoration: const BoxDecoration(
-                            color: Color.fromRGBO(61, 61, 61, 1)
-                          ),
-                          child: IconButton(
-                            icon: Image.asset('assets/images/apple_logo.png'),
-                            iconSize: 40,
-                            onPressed: () {},
-                          ),
-                        )
-                    ),
-                    Flexible(
-                        flex: 1,
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black
+                  ),
+                  width: double.infinity,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Flexible(
+                          flex: 1,
+                          child: Container(
+                            margin: const EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 10),
+                            decoration: const BoxDecoration(
                               color: Color.fromRGBO(61, 61, 61, 1)
-                          ),
-                          child: IconButton(
-                            icon: Image.asset('assets/images/google_logo.png'),
-                            iconSize: 40,
-                            onPressed: () {},
-                          ),
-                        )
-                    ),
-                    Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 20, bottom: 20, left: 10),
-                          decoration: const BoxDecoration(
-                              color: Color.fromRGBO(83, 242, 109, 1)
-                          ),
-                          child: TextButton(
-                            style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
                             ),
-                            onPressed: () { },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Expanded(child: Text(
-                                  'Sign in',
+                            child: IconButton(
+                              icon: Image.asset('assets/images/apple_logo.png'),
+                              iconSize: 40,
+                              onPressed: () {},
+                            ),
+                          )
+                      ),
+                      Flexible(
+                          flex: 1,
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
+                            decoration: const BoxDecoration(
+                                color: Color.fromRGBO(61, 61, 61, 1)
+                            ),
+                            child: IconButton(
+                              icon: Image.asset('assets/images/google_logo.png'),
+                              iconSize: 40,
+                              onPressed: () {},
+                            ),
+                          )
+                      ),
+                      Flexible(
+                        flex: 3,
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 20, bottom: 20, left: 10),
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                                color: Color.fromRGBO(83, 242, 109, 1)
+                            ),
+                            child: TextButton(
+                              style: ButtonStyle(
+                                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const MainScreen()),
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Text(
+                                    'Sign in',
                                     style: TextStyle(
                                       fontFamily: 'FredokaOne',
                                       color: Colors.black,
                                       fontSize: 14,
                                     ),
                                   ),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward
-                                )
-                              ],
+                                  Icon(
+                                    Icons.arrow_forward
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                    )
-                  ],
+                          )
+                      )
+                    ],
+                  ),
                 )
               ],
             )

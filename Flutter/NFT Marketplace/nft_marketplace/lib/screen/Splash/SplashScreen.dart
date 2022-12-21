@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../widget/ScaleAnimationImage.dart';
 import '../Login/LoginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -42,10 +43,12 @@ class _SplashScreenState extends State<SplashScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Image.asset(
-              "assets/images/logo.png",
-              fit: BoxFit.cover
+        child: const Center(
+          child: ScaleAnimationImageWidget(
+            duration: 1,
+            width: 200.0,
+            height: 200.0,
+            imagePath: "assets/images/logo.png",
           ),
         ),
       ),

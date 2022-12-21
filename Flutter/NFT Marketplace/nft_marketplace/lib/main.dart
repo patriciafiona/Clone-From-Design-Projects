@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nft_marketplace/screen/Login/LoginScreen.dart';
+import 'package:nft_marketplace/screen/Main/MainScreen.dart';
 import 'package:nft_marketplace/screen/Splash/SplashScreen.dart';
 
 void main() {
@@ -12,6 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent
+        )
+    );
+
     const int blackPrimaryValue = 0xFF2f2f2f;
     const MaterialColor primaryBlack = MaterialColor(
       blackPrimaryValue,
@@ -45,6 +53,7 @@ class MyApp extends StatelessWidget {
       home: const SplashScreen(),
       routes: {
         LoginScreen.routeName: (ctx) => const LoginScreen(),
+        MainScreen.routeName: (ctx) => const MainScreen(),
       },
     );
   }
