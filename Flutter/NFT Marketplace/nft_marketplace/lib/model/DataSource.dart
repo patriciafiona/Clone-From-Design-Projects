@@ -101,7 +101,31 @@ class DataSource {
                   "goal: to the moon. Visit our website for more details on the project."
           )
         ]
-    )
+    ),
+    Creator(
+        id: "cr_00004_062021",
+        name: "THENFTSTAR",
+        isVerified: true,
+        joinDate: "October 2022",
+        description: "NFTSTAR is a Metaverse with fan community and premium NFT "
+            "marketplace featuring global stars and their stories.",
+        collections: [
+          Collection(
+              id: "co_00004_062021",
+              name: "BMM x Neymar Jr. Episode 01- HUMAN",
+              totalItems: 268,
+              created: 'October 2022',
+              creatorFee: 5.0,
+              category: "Sports collectibles",
+              description: "Beastmode x Neymar Jr. \n"
+                  "Authorized by Brazilian superstar "
+                  "Neymar Jr., the Beastmode Metaverse (BMM) opens with a limited "
+                  "number of algorithmically generated Neymar Jr. NFTs on the "
+                  "Ethereum blockchain. Hold and earn through collecting, playing, "
+                  "and trading unique Neymar Jr. collectibles."
+          )
+        ]
+    ),
   ];
 
   var allNft = [
@@ -114,6 +138,16 @@ class DataSource {
         totalViews: 417,
         totalFavorites: 7,
         imagePath: "YuGiYn_#4477.png"
+    ),
+    NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #149",
+        price: 0.2,
+        lastSale: 0.17 ,
+        totalViews: 4,
+        totalFavorites: 1,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#149.png"
     ),
     NFT(
         creatorId: "cr_00002_102021",
@@ -136,6 +170,16 @@ class DataSource {
         imagePath: "YuGiYn_#6678.png"
     ),
     NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #1357",
+        price: 0.209,
+        lastSale: 0.192 ,
+        totalViews: 23,
+        totalFavorites: 0,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#1357.png"
+    ),
+    NFT(
         creatorId: "cr_00003_112021",
         collectionId: "co_00003_112021_01",
         name: "Elite Ape #10003",
@@ -154,6 +198,16 @@ class DataSource {
         totalViews: 1100,
         totalFavorites: 16,
         imagePath: "Gutter_Rat_#214.png"
+    ),
+    NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #230",
+        price: 0.248,
+        lastSale: 0.17 ,
+        totalViews: 34,
+        totalFavorites: 0,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#230.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",
@@ -176,6 +230,16 @@ class DataSource {
         imagePath: "Gutter_Dog_#2934.png"
     ),
     NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #1687",
+        price: 0.2498,
+        lastSale: 0.15 ,
+        totalViews: 197,
+        totalFavorites: 2,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#1687.png"
+    ),
+    NFT(
         creatorId: "cr_00003_112021",
         collectionId: "co_00003_112021_01",
         name: "Elite Ape #10006",
@@ -196,6 +260,16 @@ class DataSource {
         imagePath: "YuGiYn_#930.png"
     ),
     NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #723",
+        price: 0.25,
+        lastSale: 0.16 ,
+        totalViews: 118,
+        totalFavorites: 3,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#723.png"
+    ),
+    NFT(
         creatorId: "cr_00002_102021",
         collectionId: "co_00002_102021_03",
         name: "Gutter Cat #1486",
@@ -214,6 +288,16 @@ class DataSource {
         totalViews: 267,
         totalFavorites: 10,
         imagePath: "YuGiYn_#6009.png"
+    ),
+    NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #331",
+        price: 0.27,
+        lastSale: 0.197 ,
+        totalViews: 118,
+        totalFavorites: 3,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#331.png"
     ),
     NFT(
         creatorId: "cr_00002_102021",
@@ -254,6 +338,16 @@ class DataSource {
         totalViews: 87,
         totalFavorites: 4,
         imagePath: "Gutter_Dog_#2573.png"
+    ),
+    NFT(
+        creatorId: "cr_00004_062021",
+        collectionId: "co_00004_062021",
+        name: "BMM x Neymar Jr. Episode 01- HUMAN #1029",
+        price: 0.28,
+        lastSale: 0.164 ,
+        totalViews: 54,
+        totalFavorites: 1,
+        imagePath: "BMM-x-Neymar-Jr.-Episode-01-HUMAN-#1029.png"
     ),
     NFT(
         creatorId: "cr_00001_102022",

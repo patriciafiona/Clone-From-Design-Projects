@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft_marketplace/model/DataSource.dart';
+import 'package:nft_marketplace/screen/Detail/DetailScreen.dart';
 
 import '../model/entities/NFT.dart';
 
@@ -13,13 +14,26 @@ class NFTBigItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
 
     var creator = DataSource().creators.where(
             (c) => c.id == data.creatorId
     ).toList();
 
-    const double width = 270;
-    const double height = 400;
+    double width = (mediaQuery.size.width - mediaQuery.padding.horizontal) * 0.8;
+    double height = (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.65;
+
+    Widget checkVerified(){
+      if(creator[0].isVerified){
+        return const Icon(
+          Icons.verified,
+          color: Colors.blue,
+          size: 10,
+        );
+      }else{
+        return const SizedBox();
+      }
+    }
 
     return Container(
       width: width,
@@ -41,7 +55,6 @@ class NFTBigItem extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                transform: Matrix4.translationValues(0.0, -95.0, 0.0),
                 height: 90,
                 margin: const EdgeInsets.only(top:0, left: 15, right: 15, bottom: 15),
                 padding: const EdgeInsets.all(10.0),
@@ -66,14 +79,20 @@ class NFTBigItem extends StatelessWidget {
                                     fontFamily: 'FredokaOne'
                                 ),
                               ),
-                              Text(
-                                creator[0].name,
-                                style: const TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'FredokaOne'
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    creator[0].name,
+                                    style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'FredokaOne'
+                                    ),
+                                  ),
+                                  const SizedBox(width: 5),
+                                  checkVerified()
+                                ],
                               ),
                             ],
                           ),
@@ -91,7 +110,14 @@ class NFTBigItem extends StatelessWidget {
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
                             ),
-                            onPressed: () { },
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => DetailScreen(
+                                    data: data
+                                )),
+                              );
+                            },
                             child: const Text(
                               'Bidding',
                               style: TextStyle(

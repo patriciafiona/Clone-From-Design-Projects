@@ -47,7 +47,8 @@ class LoginScreen extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: Colors.black
                   ),
-                  width: double.infinity,
+                  width: (mediaQuery.size.width - mediaQuery.padding.horizontal),
+                  height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.25,
                   child: 
                     const Text(
                       "Create your \nown NFTs \ndream gallery",
@@ -64,6 +65,7 @@ class LoginScreen extends StatelessWidget {
                     color: Colors.black
                   ),
                   width: double.infinity,
+                  height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.15,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,

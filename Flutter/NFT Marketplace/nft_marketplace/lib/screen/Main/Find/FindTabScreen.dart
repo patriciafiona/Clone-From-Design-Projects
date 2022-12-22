@@ -120,9 +120,10 @@ class _FindTabScreenState extends State<FindTabScreen> with TickerProviderStateM
             ),
           ],
         ),
-        SizedBox(
+        Container(
+          margin: const EdgeInsets.only(bottom: 100),
           width: double.infinity,
-          height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.75,
+          height: (mediaQuery.size.height - mediaQuery.padding.vertical) * 0.65,
           child: TabBarView(
             controller: _tabController,
             children: <Widget>[
@@ -174,11 +175,18 @@ class _FindTabScreenState extends State<FindTabScreen> with TickerProviderStateM
                   }
                 },
               ),
-              const Center(
-                child: Text(
-                    "It's sports here",
-                    style: TextStyle(color: Colors.white)
-                ),
+              ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: dataSource.allNft.length,
+                itemBuilder: (_, index) {
+                  if(dataSource.allNft[index].creatorId == "cr_00004_062021") {
+                    return NFTBigItem(
+                      data: dataSource.allNft[index],
+                    );
+                  }else{
+                    return const SizedBox();
+                  }
+                },
               ),
             ],
           ),

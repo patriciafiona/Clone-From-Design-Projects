@@ -106,6 +106,14 @@ flutter:
     - assets/images/EliteApe_#10026.png
     - assets/images/EliteApe_#10035.png
 
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#149.png
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#230.png
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#331.png
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#723.png
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#1029.png
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#1357.png
+    - assets/images/BMM-x-Neymar-Jr.-Episode-01-HUMAN-#1687.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
