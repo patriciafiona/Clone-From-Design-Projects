@@ -1,5 +1,6 @@
 package com.patriciafiona.plantyshop.ui.screens.detail
 
+import android.content.pm.ActivityInfo
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.patriciafiona.plantyshop.data.entity_and_enum.Plant
 import com.patriciafiona.plantyshop.ui.theme.*
+import com.patriciafiona.plantyshop.ui.widgets.LockScreenOrientation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -46,6 +48,9 @@ fun DetailScreen(
     plant: Plant,
     viewModel: DetailViewModel = DetailViewModel()
 ){
+    //Lock in portrait
+    LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed)
     )
@@ -148,15 +153,16 @@ fun DetailScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
             ) {
                 TopSection(navController, plant)
 
                 NameAndDetailSection(plant, coroutineScope, bottomSheetScaffoldState)
-                
+
                 Spacer(modifier = Modifier.height(50.dp))
 
                 DetailCardsInfoSection(plant)
+
+                Spacer(modifier = Modifier.weight(1.0f))
 
                 ColorsSection(viewModel)
 
@@ -334,6 +340,7 @@ private fun DetailCardsInfoSection(plant: Plant) {
         Card(
             modifier = Modifier
                 .width(150.dp)
+                .height(80.dp)
                 .padding(8.dp),
             shape = RoundedCornerShape(15.dp),
             elevation = 5.dp
