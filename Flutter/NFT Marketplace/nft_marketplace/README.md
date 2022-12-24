@@ -50,6 +50,6 @@ Hello everyone! This time I try to learn create UI on Flutter by using design fr
 - All data in this app are not 100% correct, just for display only! Source from OpenSea.io
 
 ## Results
-[![Watch the video](https://user-images.githubusercontent.com/32255348/209103380-e9bba689-9e5c-40fe-adee-a81c4abf778e.png)](https://youtu.be/fhv5sJDJPqQ)
-<p align="center"><i><b>Figure 4</b> Youtube Video | Clickable image link [VIDEO COMING SOON]</i></p>
+[![Watch the video](https://user-images.githubusercontent.com/32255348/209103380-e9bba689-9e5c-40fe-adee-a81c4abf778e.png)](https://youtu.be/zvc-0KvlQZA)
+<p align="center"><i><b>Figure 4</b> Youtube Video | Clickable image link</i></p>
 
