@@ -36,7 +36,7 @@ Hello everyone! This time I try to learn create UI on Jetpack Compose by using d
 - Plant data in this app are not 100% correct, just for display only!
 
 ## Results video
-[![Watch the video](https://user-images.githubusercontent.com/32255348/208061240-9999ad8a-0c62-488d-a6f4-3b597fc19ae3.png)](https://youtu.be/fhv5sJDJPqQ)
+[![Watch the video](https://user-images.githubusercontent.com/32255348/208061240-9999ad8a-0c62-488d-a6f4-3b597fc19ae3.png)](https://youtu.be/0unFr40CrOc)
 <p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link</i></p>
 
 [Fixed Video Coming Soon]
