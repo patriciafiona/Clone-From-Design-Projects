@@ -42,16 +42,16 @@ class _MainScreenState extends State<MainScreen> {
         child: _pageTabOption.elementAt(_selectedIndex)
       ),
       bottomNavigationBar: Container(
-        color: const Color.fromRGBO(22, 24, 35, 1),
+        color: Colors.black,
         child: BottomNavigationBar(
           backgroundColor: Colors.transparent,
           items: <BottomNavigationBarItem>[
             const BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
+              icon: Icon(Icons.home_outlined, size: 30),
               label: 'Home'
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.search_outlined),
+              icon: Icon(Icons.search_outlined, size: 30),
               label: 'Discover'
             ),
             BottomNavigationBarItem(
@@ -59,11 +59,11 @@ class _MainScreenState extends State<MainScreen> {
               label: ''
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.inbox_outlined),
+              icon: Icon(Icons.inbox_outlined, size: 30),
               label: 'Inbox'
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
+              icon: Icon(Icons.person_outline, size: 30),
               label: 'Profile'
             ),
           ],
@@ -72,6 +72,8 @@ class _MainScreenState extends State<MainScreen> {
           currentIndex: _selectedIndex,
           unselectedItemColor: Colors.white38,
           selectedItemColor: Colors.white,
+          selectedFontSize: 10,
+          unselectedFontSize: 10,
           onTap: _onItemTapped,
         ),
       ),

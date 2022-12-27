@@ -13,6 +13,7 @@ dependencies:
   flutter_launcher_icons: ^0.11.0
   lottie: ^2.1.0
   uuid: ^3.0.6
+  video_player: ^2.4.10
 
   cupertino_icons: ^1.0.2
 
@@ -37,6 +38,13 @@ flutter:
      - assets/images/tiktok_logo_black.png
      - assets/images/tiktok_logo_transparent.png
      - assets/images/add_button.png
+
+     - assets/videos/ssstik.io_1672128291462.mp4
+     - assets/videos/ssstik.io_1672128442058.mp4
+     - assets/videos/ssstik.io_1672128494400.mp4
+     - assets/videos/ssstik.io_1672128535310.mp4
+
+     - assets/lotties/tiktok-loader.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
