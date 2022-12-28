@@ -8,6 +8,7 @@ import 'package:tiktok_clone/data/entity/VideoData.dart';
 import 'package:tiktoklikescroller/tiktoklikescroller.dart';
 import 'package:video_player/video_player.dart';
 import 'package:marquee/marquee.dart';
+import 'dart:math' as math;
 import 'package:assets_audio_player/assets_audio_player.dart';
 
 import '../../../utils/Utils.dart';
@@ -45,14 +46,19 @@ class HomeWidget extends StatefulWidget {
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _HomeWidgetState extends State<HomeWidget> with SingleTickerProviderStateMixin {
   late Controller controller;
   late VideoPlayerController _videoController;
   var textController = TextEditingController();
 
   AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
+  late final AnimationController _vinylController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5)
+  )..repeat();
 
   var isLoading = false;
+  var isFavorite = false;
 
   @override
   initState() {
@@ -135,8 +141,8 @@ class _HomeWidgetState extends State<HomeWidget> {
           child:
           TikTokStyleFullPageScroller(
             contentSize: widget.videos.length - widget.index,
-            swipePositionThreshold: 0.2,
-            swipeVelocityThreshold: 2000,
+            swipePositionThreshold: 0.3,
+            swipeVelocityThreshold: 3000,
             animationDuration: const Duration(milliseconds: 50),
             controller: controller,
             builder: (BuildContext context, int index) {
@@ -246,9 +252,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   blankSpace: 20.0,
                                                   velocity: 100.0,
-                                                  accelerationDuration: const Duration(milliseconds: 2500),
+                                                  accelerationDuration: const Duration(milliseconds: 1500),
                                                   accelerationCurve: Curves.linear,
-                                                  decelerationDuration: const Duration(milliseconds: 2300),
+                                                  decelerationDuration: const Duration(milliseconds: 1300),
                                                   decelerationCurve: Curves.easeOut,
                                                 );
                                               }
@@ -283,7 +289,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               decoration: BoxDecoration(
                                                 color: Colors.black,
                                                 image: DecorationImage(
-                                                  image: AssetImage("assets/images/${widget.videos[widget.index].profileSource}"),
+                                                  image: AssetImage("assets/images/${widget.videos[widget.index].profileSource == '' ? 'default_profile.jpeg' : widget.videos[widget.index].profileSource}"),
                                                   fit: BoxFit.cover,
                                                 ),
                                                 borderRadius: const BorderRadius.all( Radius.circular(50.0)),
@@ -320,9 +326,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     const SizedBox(height: 15),
                                     IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        setState(() {
+                                          isFavorite = !isFavorite;
+                                        });
+                                      },
                                       icon: const Icon(Icons.favorite),
-                                      color: Colors.white,
+                                      color: isFavorite ? Colors.red : Colors.white,
                                       iconSize: 40,
                                     ),
                                     Text(
@@ -333,7 +343,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         fontWeight: FontWeight.bold
                                       ),
                                     ),
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 5),
                                     IconButton(
                                       onPressed: () {},
                                       icon: const Icon(Icons.comment),
@@ -348,7 +358,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           fontWeight: FontWeight.bold
                                       ),
                                     ),
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 5),
                                     IconButton(
                                       onPressed: () {},
                                       icon: const Icon(Icons.bookmark),
@@ -363,7 +373,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           fontWeight: FontWeight.bold
                                       ),
                                     ),
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 5),
                                     IconButton(
                                       onPressed: () {},
                                       icon: const Icon(Icons.reply),
@@ -378,7 +388,30 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           fontWeight: FontWeight.bold
                                       ),
                                     ),
-                                    const SizedBox(height: 10),
+                                    const SizedBox(height: 20),
+                                    SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: AnimatedBuilder(
+                                        animation: _vinylController,
+                                        builder: (_, child) {
+                                          return Transform.rotate(
+                                            angle: _vinylController.value * 2 * math.pi,
+                                            child: child,
+                                          );
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            image: DecorationImage(
+                                              image: AssetImage("assets/images/${widget.videos[widget.index].musicImage}"),
+                                              fit: BoxFit.cover,
+                                            ),
+                                            borderRadius: const BorderRadius.all( Radius.circular(50.0)),
+                                          ),
+                                        ),
+                                        ),
+                                      )
                                   ],
                                 )
                               ],
@@ -396,38 +429,35 @@ class _HomeWidgetState extends State<HomeWidget> {
   }
 
   void _handleCallbackEvent(ScrollDirection direction, ScrollSuccess success, {int? currentIndex}) {
+    if(success == ScrollSuccess.SUCCESS){
+      if(widget.index >= 0 && widget.index < widget.videos.length - 1) {
+        setState(() {
+          isLoading = true;
+        });
+      }
 
-    if(widget.index >= 0 && widget.index < widget.videos.length - 1) {
-      setState(() {
-        isLoading = true;
+      Timer(const Duration(seconds: 1), () {
+        setState(() {
+          if(direction == ScrollDirection.BACKWARDS){
+            if(widget.index > 0){
+              widget.index = widget.index - 1;
+            }
+          }else if(direction == ScrollDirection.FORWARD){
+            if(widget.index < widget.videos.length  ){
+              widget.index = widget.index + 1;
+            }
+          }
+          _videoController = VideoPlayerController.asset("assets/videos/${widget.videos[widget.index].videoSource}")
+            ..initialize().then((_) {
+              setState(() {
+                _videoController.setLooping(true);
+                _videoController.play();
+              });
+            });
+
+          isLoading = false;
+        });
       });
     }
-
-    Timer(const Duration(seconds: 1), () {
-      setState(() {
-
-        if(direction == ScrollDirection.BACKWARDS){
-          if(widget.index > 0){
-            widget.index = widget.index - 1;
-          }
-        }else if(direction == ScrollDirection.FORWARD){
-          if(widget.index < widget.videos.length  ){
-            widget.index = widget.index + 1;
-          }
-        }
-
-        print("INDEX: ${widget.index}");
-
-        _videoController = VideoPlayerController.asset("assets/videos/${widget.videos[widget.index].videoSource}")
-          ..initialize().then((_) {
-            setState(() {
-              _videoController.setLooping(true);
-              _videoController.play();
-            });
-          });
-
-        isLoading = false;
-      });
-    });
   }
 }

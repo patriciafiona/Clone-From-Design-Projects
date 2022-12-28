@@ -68,8 +68,8 @@ class DataSource {
           "kreatif", "kreasi", "tas", "unik", "kerajinan-tangan"
         ],
         videoSource: "ssstik.io_1672128494400.mp4",
-        musicSource: "Howl's Moving Castle - Merry Go Round of Life - Vitamin String Quartet.mp3",
-        musicImage: "03991fc207114d15a86f98c31e3b9c22.jpeg",
+        musicSource: "Made You Look - Meghan Trainor.mp3",
+        musicImage: "d61e0e00c8434b90befe9f28da7cef0d.jpeg",
         profileSource: ""
     ),
     VideoData(
@@ -85,8 +85,8 @@ class DataSource {
           "food", "Japan", "Japanese-Food"
         ],
         videoSource: "ssstik.io_1672128535310.mp4",
-        musicSource: "Howl's Moving Castle - Merry Go Round of Life - Vitamin String Quartet.mp3",
-        musicImage: "03991fc207114d15a86f98c31e3b9c22.jpeg",
+        musicSource: "可愛くてごめん (feat. かぴ) - HoneyWorks.mp3",
+        musicImage: "51fa11c7b7dd4c6abb72536ec0fa817c.jpeg",
         profileSource: ""
     ),
     VideoData(

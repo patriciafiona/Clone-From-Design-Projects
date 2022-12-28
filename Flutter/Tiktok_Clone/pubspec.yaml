@@ -50,6 +50,11 @@ flutter:
     - assets/images/roses_are_rosie.jpeg
 
     - assets/images/03991fc207114d15a86f98c31e3b9c22.jpeg
+    - assets/images/0b6eec16befac5d1d48e7933be4e2acd_c5_720x720.jpeg
+    - assets/images/4ad263acc49a4423b51450cccfe6ca2d.jpeg
+    - assets/images/6fa15a8f74a94379a32a202eab734808.jpeg
+    - assets/images/51fa11c7b7dd4c6abb72536ec0fa817c.jpeg
+    - assets/images/d61e0e00c8434b90befe9f28da7cef0d.jpeg
 
     - assets/videos/ssstik.io_1672191531490.mp4
     - assets/videos/ssstik.io_1672192295505.mp4
@@ -62,6 +67,8 @@ flutter:
     - assets/musics/Jiggle Jiggle - Duke & Jones & Louis Theroux.mp3
     - assets/musics/original sound - Barry ALLEN (THA BRADAZ)PH - Barry ALLENPH TBPH CLO.mp3
     - assets/musics/Parado no Bailão - MC L da Vinte & MC Gury.mp3
+    - assets/musics/可愛くてごめん (feat. かぴ) - HoneyWorks.mp3
+    - assets/musics/Made You Look - Meghan Trainor.mp3
 
     - assets/lotties/tiktok-loader.json
 
