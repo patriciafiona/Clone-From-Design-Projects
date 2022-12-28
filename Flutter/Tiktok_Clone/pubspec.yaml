@@ -14,6 +14,10 @@ dependencies:
   lottie: ^2.1.0
   uuid: ^3.0.6
   video_player: ^2.4.10
+  readmore: ^2.1.0
+  animated_text_kit: ^4.2.1
+  assets_audio_player: ^3.0.4+1
+  marquee: ^2.2.1
 
   cupertino_icons: ^1.0.2
 
@@ -34,17 +38,32 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/images/tiktok_logo_animation.gif
-     - assets/images/tiktok_logo_black.png
-     - assets/images/tiktok_logo_transparent.png
-     - assets/images/add_button.png
+    - assets/images/tiktok_logo_animation.gif
+    - assets/images/tiktok_logo_black.png
+    - assets/images/tiktok_logo_transparent.png
+    - assets/images/add_button.png
+    - assets/images/song_icon.png
 
-     - assets/videos/ssstik.io_1672128291462.mp4
-     - assets/videos/ssstik.io_1672128442058.mp4
-     - assets/videos/ssstik.io_1672128494400.mp4
-     - assets/videos/ssstik.io_1672128535310.mp4
+    - assets/images/attahalilintar.jpeg
+    - assets/images/billieeilish.jpeg
+    - assets/images/default_profile.jpeg
+    - assets/images/roses_are_rosie.jpeg
 
-     - assets/lotties/tiktok-loader.json
+    - assets/images/03991fc207114d15a86f98c31e3b9c22.jpeg
+
+    - assets/videos/ssstik.io_1672191531490.mp4
+    - assets/videos/ssstik.io_1672192295505.mp4
+    - assets/videos/ssstik.io_1672128291462.mp4
+    - assets/videos/ssstik.io_1672128442058.mp4
+    - assets/videos/ssstik.io_1672128494400.mp4
+    - assets/videos/ssstik.io_1672128535310.mp4
+
+    - assets/musics/Howl's Moving Castle - Merry Go Round of Life - Vitamin String Quartet.mp3
+    - assets/musics/Jiggle Jiggle - Duke & Jones & Louis Theroux.mp3
+    - assets/musics/original sound - Barry ALLEN (THA BRADAZ)PH - Barry ALLENPH TBPH CLO.mp3
+    - assets/musics/Parado no Bailão - MC L da Vinte & MC Gury.mp3
+
+    - assets/lotties/tiktok-loader.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
