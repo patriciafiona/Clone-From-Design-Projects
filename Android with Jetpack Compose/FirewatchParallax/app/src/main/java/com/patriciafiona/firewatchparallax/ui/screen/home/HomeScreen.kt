@@ -1,15 +1,8 @@
 package com.patriciafiona.firewatchparallax.ui.screen.home
 
 import android.annotation.SuppressLint
-import android.graphics.Paint.Align
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorManager
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -17,10 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -31,17 +22,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.patriciafiona.firewatchparallax.R
-import com.patriciafiona.firewatchparallax.ui.theme.AmericanBronze
 import com.patriciafiona.firewatchparallax.ui.theme.RusticRed
 import com.patriciafiona.firewatchparallax.ui.theme.VividOrange
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.util.stream.Collectors
 
 @SuppressLint("RememberReturnType")
 @Composable
@@ -289,6 +276,24 @@ fun HomeScreen(navController: NavController) {
                 .offset {
                     IntOffset(0, -300)
                 }
-        )
+        ){
+            Text(
+                stringResource(id = R.string.scroll_to_continue),
+                style = TextStyle(
+                    color = VividOrange,
+                    fontSize = 12.sp
+                ),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .alpha(
+                        if (scrollPos < 100) {
+                            (100 - (scrollPos * 100 / 100f)) / 100f
+                        } else {
+                            0f
+                        }
+                    )
+            )
+        }
+
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Firewatch</string>
+    <string name="scroll_to_continue">Scroll to Continue</string>
 </resources>
