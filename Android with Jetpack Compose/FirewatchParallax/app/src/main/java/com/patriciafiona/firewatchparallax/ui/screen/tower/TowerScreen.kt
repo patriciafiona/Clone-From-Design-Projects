@@ -1,35 +1,40 @@
 package com.patriciafiona.firewatchparallax.ui.screen.tower
 
-import androidx.compose.animation.*
+import android.media.MediaPlayer
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.patriciafiona.firewatchparallax.R
-import com.patriciafiona.firewatchparallax.navigation.FirewatchScreen
-import com.patriciafiona.firewatchparallax.ui.theme.*
+import com.patriciafiona.firewatchparallax.ui.theme.Negroni
+import com.patriciafiona.firewatchparallax.ui.theme.VividOrange
+import com.patriciafiona.firewatchparallax.utils.OnLifecycleEvent
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -45,6 +50,19 @@ fun TowerScreen(navController: NavController){
     val screenWidth = configuration.screenWidthDp.dp + 20.dp
     val scale = 1.1f
     val parallaxLimit = 330
+
+    //Music section
+    val mMediaPlayerCamera = MediaPlayer.create(context, R.raw.camera_shutter)
+    val mMediaPlayerWind = MediaPlayer.create(context, R.raw.windy_forest_with_woodpeckers)
+    val mMediaPlayerPaper = MediaPlayer.create(context, R.raw.paper_slide)
+    mMediaPlayerCamera.isLooping = false
+    mMediaPlayerPaper.isLooping = false
+    mMediaPlayerWind.isLooping = true
+
+    OnLifecycle(
+        mMediaPlayerCamera = mMediaPlayerCamera,
+        mMediaPlayerWind = mMediaPlayerWind
+    )
 
     //Sensor for x position
     var data by remember { mutableStateOf<SensorData?>(null) }
@@ -305,6 +323,81 @@ fun TowerScreen(navController: NavController){
                         )
                     }
             )
+
+            IconButton(onClick = {
+                scope.launch {
+                    mMediaPlayerPaper.start()
+
+                    delay(500)
+
+                    mMediaPlayerCamera.stop()
+                    mMediaPlayerWind.stop()
+                    mMediaPlayerPaper.stop()
+
+                    delay(100)
+
+                    navController.navigateUp()
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back button",
+                    tint = Color.White
+                )
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(150.dp)
+                .offset {
+                    IntOffset(0, -500)
+                }
+        ){
+            Text(
+                stringResource(id = R.string.interact_by_scrolling_or_rotating),
+                style = TextStyle(
+                    color = VividOrange,
+                    fontSize = 12.sp
+                ),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .alpha(
+                        if (scrollPos <= 100) {
+                            (100 - (scrollPos * 100 / 100f)) / 100f
+                        } else {
+                            0f
+                        }
+                    )
+            )
+        }
+    }
+}
+
+@Composable
+private fun OnLifecycle(
+    mMediaPlayerCamera: MediaPlayer,
+    mMediaPlayerWind: MediaPlayer,
+) {
+    OnLifecycleEvent { _, event ->
+        // do stuff on event
+        when (event) {
+            Lifecycle.Event.ON_CREATE -> {
+                mMediaPlayerCamera.start()
+            }
+            Lifecycle.Event.ON_RESUME -> {
+                mMediaPlayerWind.start()
+            }
+            Lifecycle.Event.ON_PAUSE -> {
+                mMediaPlayerCamera.pause()
+                mMediaPlayerWind.pause()
+            }
+            Lifecycle.Event.ON_DESTROY -> {
+                mMediaPlayerCamera.stop()
+                mMediaPlayerWind.stop()
+            }
+            else -> {}
         }
     }
 }

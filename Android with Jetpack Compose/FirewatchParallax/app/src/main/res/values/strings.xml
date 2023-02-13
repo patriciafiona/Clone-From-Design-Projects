@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Firewatch</string>
     <string name="scroll_to_continue">Scroll to Continue</string>
+    <string name="interact_by_scrolling_or_rotating">Interact by Scrolling or Rotating</string>
 </resources>

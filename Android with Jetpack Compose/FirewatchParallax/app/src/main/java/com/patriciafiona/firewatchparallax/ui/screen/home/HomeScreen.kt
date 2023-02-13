@@ -1,12 +1,11 @@
 package com.patriciafiona.firewatchparallax.ui.screen.home
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -22,15 +21,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.R
 import com.patriciafiona.firewatchparallax.navigation.FirewatchScreen
 import com.patriciafiona.firewatchparallax.ui.theme.*
+import com.patriciafiona.firewatchparallax.utils.OnLifecycleEvent
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
 import kotlinx.coroutines.flow.onEach
@@ -53,6 +52,14 @@ fun HomeScreen(navController: NavController) {
 
     val buttonVisible = remember{ mutableStateOf(false) }
     buttonVisible.value = scrollPos >= 300
+
+    //Music section
+    val mMediaPlayer = MediaPlayer.create(context, R.raw.main_theme_soundtrack_official)
+    mMediaPlayer.isLooping = true
+
+    OnLifecycle(
+        mMediaPlayer = mMediaPlayer
+    )
 
     //Sensor for x position
     var data by remember { mutableStateOf<SensorData?>(null) }
@@ -305,6 +312,8 @@ fun HomeScreen(navController: NavController) {
                         enabled = scrollPos >= 300,
                         onClick = {
                             if (scrollPos >= 300) {
+                                mMediaPlayer.stop()
+
                                 navController.navigate(FirewatchScreen.TowerScreen.route) {
                                     popUpTo(FirewatchScreen.HomeScreen.route)
                                 }
@@ -353,5 +362,26 @@ fun HomeScreen(navController: NavController) {
             )
         }
 
+    }
+}
+
+@Composable
+private fun OnLifecycle(
+    mMediaPlayer: MediaPlayer
+) {
+    OnLifecycleEvent { _, event ->
+        // do stuff on event
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                mMediaPlayer.start()
+            }
+            Lifecycle.Event.ON_PAUSE -> {
+                mMediaPlayer.pause()
+            }
+            Lifecycle.Event.ON_DESTROY -> {
+                mMediaPlayer.stop()
+            }
+            else -> {}
+        }
     }
 }
