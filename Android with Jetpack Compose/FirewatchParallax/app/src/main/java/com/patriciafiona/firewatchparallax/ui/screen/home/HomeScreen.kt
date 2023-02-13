@@ -1,35 +1,43 @@
 package com.patriciafiona.firewatchparallax.ui.screen.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.R
-import com.patriciafiona.firewatchparallax.ui.theme.RusticRed
-import com.patriciafiona.firewatchparallax.ui.theme.VividOrange
+import com.patriciafiona.firewatchparallax.navigation.FirewatchScreen
+import com.patriciafiona.firewatchparallax.ui.theme.*
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("RememberReturnType")
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -42,6 +50,9 @@ fun HomeScreen(navController: NavController) {
     val screenWidth = configuration.screenWidthDp.dp + 20.dp
     val scale = 1.3f
     val parallaxLimit = 350
+
+    val buttonVisible = remember{ mutableStateOf(false) }
+    buttonVisible.value = scrollPos >= 300
 
     //Sensor for x position
     var data by remember { mutableStateOf<SensorData?>(null) }
@@ -266,6 +277,53 @@ fun HomeScreen(navController: NavController) {
                         }
                 )
             }
+
+            Column(
+                modifier = Modifier
+                    .padding(top = 100.dp)
+                    .align(Alignment.Center)
+                    .offset {
+                        IntOffset(
+                            (pitch * 1.08).dp.roundToPx(),
+                            if (scrollPos < parallaxLimit) {
+                                (scrollPos * 1.08).toInt() + (roll * 0.3).dp.roundToPx()
+                            } else {
+                                (parallaxLimit * 1.08).toInt() + (roll * 0.3).dp.roundToPx()
+                            }
+                        )
+                    },
+            ) {
+                AnimatedVisibility(
+                    visible = buttonVisible.value,
+                    enter = scaleIn(transformOrigin = TransformOrigin(0f, 0f)) +
+                            fadeIn() + expandIn(expandFrom = Alignment.TopStart),
+                    exit = scaleOut(transformOrigin = TransformOrigin(0f, 0f)) +
+                            fadeOut() + shrinkOut(shrinkTowards = Alignment.TopStart)
+                ) {
+                    Button(
+                        shape = RoundedCornerShape(50),
+                        enabled = scrollPos >= 300,
+                        onClick = {
+                            if (scrollPos >= 300) {
+                                navController.navigate(FirewatchScreen.TowerScreen.route) {
+                                    popUpTo(FirewatchScreen.HomeScreen.route)
+                                }
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(Chocolate),
+                    ) {
+                        Text(
+                            modifier = Modifier,
+                            text = "Start Exploring",
+                            style = TextStyle(
+                                color = DragonFire,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        )
+                    }
+                }
+            }
         }
 
         //Background
@@ -286,7 +344,7 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier
                     .align(Alignment.Center)
                     .alpha(
-                        if (scrollPos < 100) {
+                        if (scrollPos <= 100) {
                             (100 - (scrollPos * 100 / 100f)) / 100f
                         } else {
                             0f

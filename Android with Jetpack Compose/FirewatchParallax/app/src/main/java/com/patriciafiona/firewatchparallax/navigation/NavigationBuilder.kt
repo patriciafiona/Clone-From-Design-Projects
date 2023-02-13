@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.ui.screen.home.HomeScreen
 import com.patriciafiona.firewatchparallax.ui.screen.splash.SplashScreen
+import com.patriciafiona.firewatchparallax.ui.screen.tower.TowerScreen
 
 @Composable
 fun NavigationBuilder() {
@@ -25,6 +26,12 @@ fun NavigationBuilder() {
             route = FirewatchScreen.HomeScreen.route
         ) {
             HomeScreen(navController = navigationController)
+        }
+
+        composable(
+            route = FirewatchScreen.TowerScreen.route
+        ) {
+            TowerScreen(navController = navigationController)
         }
     }
 }
