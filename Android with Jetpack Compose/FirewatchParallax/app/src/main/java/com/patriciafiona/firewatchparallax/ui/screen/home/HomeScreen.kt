@@ -51,7 +51,7 @@ fun HomeScreen(navController: NavController) {
     val parallaxLimit = 350
 
     val buttonVisible = remember{ mutableStateOf(false) }
-    buttonVisible.value = scrollPos >= 300
+    buttonVisible.value = scrollPos >= 200
 
     //Music section
     val mMediaPlayer = remember { MediaPlayer.create(context, R.raw.main_theme_soundtrack_official) }
@@ -308,9 +308,9 @@ fun HomeScreen(navController: NavController) {
                 ) {
                     Button(
                         shape = RoundedCornerShape(50),
-                        enabled = scrollPos >= 300,
+                        enabled = scrollPos >= 200,
                         onClick = {
-                            if (scrollPos >= 300) {
+                            if (scrollPos >= 200) {
                                 mMediaPlayer.stop()
 
                                 navController.navigate(FirewatchScreen.TowerScreen.route) {
