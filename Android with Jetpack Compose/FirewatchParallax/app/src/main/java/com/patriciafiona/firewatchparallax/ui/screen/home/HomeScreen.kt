@@ -54,8 +54,7 @@ fun HomeScreen(navController: NavController) {
     buttonVisible.value = scrollPos >= 300
 
     //Music section
-    val mMediaPlayer = MediaPlayer.create(context, R.raw.main_theme_soundtrack_official)
-    mMediaPlayer.isLooping = true
+    val mMediaPlayer = remember { MediaPlayer.create(context, R.raw.main_theme_soundtrack_official) }
 
     OnLifecycle(
         mMediaPlayer = mMediaPlayer
@@ -372,6 +371,9 @@ private fun OnLifecycle(
     OnLifecycleEvent { _, event ->
         // do stuff on event
         when (event) {
+            Lifecycle.Event.ON_CREATE -> {
+                mMediaPlayer.isLooping = true
+            }
             Lifecycle.Event.ON_RESUME -> {
                 mMediaPlayer.start()
             }

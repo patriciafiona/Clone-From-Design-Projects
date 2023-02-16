@@ -52,16 +52,14 @@ fun TowerScreen(navController: NavController){
     val parallaxLimit = 330
 
     //Music section
-    val mMediaPlayerCamera = MediaPlayer.create(context, R.raw.camera_shutter)
-    val mMediaPlayerWind = MediaPlayer.create(context, R.raw.windy_forest_with_woodpeckers)
-    val mMediaPlayerPaper = MediaPlayer.create(context, R.raw.paper_slide)
-    mMediaPlayerCamera.isLooping = false
-    mMediaPlayerPaper.isLooping = false
-    mMediaPlayerWind.isLooping = true
+    val mMediaPlayerCamera = remember{ MediaPlayer.create(context, R.raw.camera_shutter) }
+    val mMediaPlayerWind = remember{ MediaPlayer.create(context, R.raw.windy_forest_with_woodpeckers) }
+    val mMediaPlayerPaper = remember{ MediaPlayer.create(context, R.raw.paper_slide) }
 
     OnLifecycle(
         mMediaPlayerCamera = mMediaPlayerCamera,
-        mMediaPlayerWind = mMediaPlayerWind
+        mMediaPlayerWind = mMediaPlayerWind,
+        mMediaPlayerPaper = mMediaPlayerPaper
     )
 
     //Sensor for x position
@@ -379,11 +377,23 @@ fun TowerScreen(navController: NavController){
 private fun OnLifecycle(
     mMediaPlayerCamera: MediaPlayer,
     mMediaPlayerWind: MediaPlayer,
+    mMediaPlayerPaper: MediaPlayer
 ) {
     OnLifecycleEvent { _, event ->
         // do stuff on event
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
+                //Init only once
+                if(mMediaPlayerCamera != null){
+                    mMediaPlayerCamera.isLooping = false
+                }
+                if(mMediaPlayerPaper != null) {
+                    mMediaPlayerPaper.isLooping = false
+                }
+                if(mMediaPlayerWind != null) {
+                    mMediaPlayerWind.isLooping = true
+                }
+
                 mMediaPlayerCamera.start()
             }
             Lifecycle.Event.ON_RESUME -> {
