@@ -2,6 +2,8 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/32255348/219397739-2a53d642-c8a6-46f5-b875-dc68b7517a98.png" width="800"/></p>
 <p align="center"><i><b>Figure 1</b> Firewatch Parallax Home Screen</i></p>
 
+Inside this project you will see several core implementation: scroll logic, motion sensor, image resizing & posiitoning, and so much more. This project developed by [Patricia fiona](https://github.com/patriciafiona) using Jetpack Compose. If you like the result, please give the star to this repository.
+
 ## Information
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" width="200"/>
