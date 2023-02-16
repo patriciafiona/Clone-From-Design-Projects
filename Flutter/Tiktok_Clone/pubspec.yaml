@@ -1,0 +1,99 @@
+name: tiktok_clone
+description: Result of cloning Tiktok interface.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tiktoklikescroller: ^0.2.3
+  flutter_launcher_icons: ^0.11.0
+  lottie: ^2.1.0
+  uuid: ^3.0.6
+  video_player: ^2.4.10
+  readmore: ^2.1.0
+  animated_text_kit: ^4.2.1
+  assets_audio_player: ^3.0.4+1
+  marquee: ^2.2.1
+
+  cupertino_icons: ^1.0.2
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/tiktok_logo_black.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/tiktok_logo_animation.gif
+    - assets/images/tiktok_logo_black.png
+    - assets/images/tiktok_logo_transparent.png
+    - assets/images/add_button.png
+    - assets/images/song_icon.png
+
+    - assets/images/attahalilintar.jpeg
+    - assets/images/billieeilish.jpeg
+    - assets/images/default_profile.jpeg
+    - assets/images/roses_are_rosie.jpeg
+
+    - assets/images/03991fc207114d15a86f98c31e3b9c22.jpeg
+    - assets/images/0b6eec16befac5d1d48e7933be4e2acd_c5_720x720.jpeg
+    - assets/images/4ad263acc49a4423b51450cccfe6ca2d.jpeg
+    - assets/images/6fa15a8f74a94379a32a202eab734808.jpeg
+    - assets/images/51fa11c7b7dd4c6abb72536ec0fa817c.jpeg
+    - assets/images/d61e0e00c8434b90befe9f28da7cef0d.jpeg
+
+    - assets/videos/ssstik.io_1672191531490.mp4
+    - assets/videos/ssstik.io_1672192295505.mp4
+    - assets/videos/ssstik.io_1672128291462.mp4
+    - assets/videos/ssstik.io_1672128442058.mp4
+    - assets/videos/ssstik.io_1672128494400.mp4
+    - assets/videos/ssstik.io_1672128535310.mp4
+
+    - assets/musics/Howl's Moving Castle - Merry Go Round of Life - Vitamin String Quartet.mp3
+    - assets/musics/Jiggle Jiggle - Duke & Jones & Louis Theroux.mp3
+    - assets/musics/original sound - Barry ALLEN (THA BRADAZ)PH - Barry ALLENPH TBPH CLO.mp3
+    - assets/musics/Parado no Bailão - MC L da Vinte & MC Gury.mp3
+    - assets/musics/可愛くてごめん (feat. かぴ) - HoneyWorks.mp3
+    - assets/musics/Made You Look - Meghan Trainor.mp3
+
+    - assets/lotties/tiktok-loader.json
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
