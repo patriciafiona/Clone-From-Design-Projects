@@ -2,9 +2,15 @@ package com.patriciafiona.marioworld.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.patriciafiona.marioworld.R
+
+val SuperMarioFont = FontFamily(
+    Font(R.font.super_mario_256, FontWeight.Normal)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(

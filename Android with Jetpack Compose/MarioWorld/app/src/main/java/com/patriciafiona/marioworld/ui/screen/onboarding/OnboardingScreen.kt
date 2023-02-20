@@ -75,6 +75,7 @@ fun OnboardingScreen(navController: NavController) {
 
     val buttonSize = 70
     val buttonBgWidth = remember { Animatable(70f) }
+    val isMoveScreen = remember{ mutableStateOf(false) }
 
     //Sensor for x position
     var data by remember { mutableStateOf<SensorData?>(null) }
@@ -251,6 +252,8 @@ fun OnboardingScreen(navController: NavController) {
                                     if (offsetX.value in 0.0..650.0) {
                                         if(offsetX.value >= 600) {
                                             coroutineScope.launch {
+                                                isMoveScreen.value = true
+
                                                 launch {
                                                     mMediaPlayer.start()
                                                 }
@@ -267,7 +270,7 @@ fun OnboardingScreen(navController: NavController) {
                                             }
                                         }
                                         coroutineScope.launch {
-                                            buttonBgWidth.snapTo(buttonBgWidth.value + dragAmount.x * 0.29f)
+                                            buttonBgWidth.snapTo(buttonBgWidth.value + dragAmount.x * 0.3f)
                                             offsetX.snapTo(offsetX.value + dragAmount.x.toInt())
                                         }
                                     } else {
@@ -286,24 +289,26 @@ fun OnboardingScreen(navController: NavController) {
                                 },
                                 onDragEnd = {
                                     coroutineScope.launch {
-                                        launch {
-                                            offsetX.animateTo(
-                                                targetValue = 0f,
-                                                animationSpec = tween(
-                                                    durationMillis = 1000,
-                                                    delayMillis = 0
+                                        if(!isMoveScreen.value) {
+                                            launch {
+                                                offsetX.animateTo(
+                                                    targetValue = 0f,
+                                                    animationSpec = tween(
+                                                        durationMillis = 1000,
+                                                        delayMillis = 0
+                                                    )
                                                 )
-                                            )
-                                        }
+                                            }
 
-                                        launch {
-                                            buttonBgWidth.animateTo(
-                                                targetValue = 70f,
-                                                animationSpec = tween(
-                                                    durationMillis = 1000,
-                                                    delayMillis = 0
+                                            launch {
+                                                buttonBgWidth.animateTo(
+                                                    targetValue = 70f,
+                                                    animationSpec = tween(
+                                                        durationMillis = 1000,
+                                                        delayMillis = 0
+                                                    )
                                                 )
-                                            )
+                                            }
                                         }
                                     }
                                 }
