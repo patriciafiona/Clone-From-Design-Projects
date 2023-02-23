@@ -83,7 +83,7 @@ fun MainScreen(navController: NavController) {
     }
     )
     setNavigationBarColor(color =
-        if(scrollPos > 1650){
+        if(scrollPos > 2800){
             MarioRedDark
         }else{
             color02.value
@@ -145,7 +145,7 @@ fun MainScreen(navController: NavController) {
                     .alpha(.5f)
             )
 
-            if(scrollPos > 2200) {
+            if(scrollPos > 3500) {
                 Box(
                     modifier = Modifier
                         .height(200.dp)
@@ -217,11 +217,19 @@ fun MainScreen(navController: NavController) {
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(80.dp))
 
-                    characterCardSlider(viewModel)
+                    CardPattern(
+                        imageDisplay = R.drawable.mario_dice,
+                        headline = "Learn all about Mario’s many adventures through the years.",
+                        buttonColor = Color.Yellow,
+                        buttonText = "See the Timeline",
+                        buttonTextColor = Color.Black
+                    )
 
-                    Spacer(modifier = Modifier.height(200.dp))
+                    CharacterCardSlider(viewModel)
+
+                    Spacer(modifier = Modifier.height(50.dp))
 
                     Box {
                         TrapezoidPatternBackground(
@@ -285,7 +293,7 @@ private fun TopSection(scrollPos: Int, parallaxLimit: Int) {
             contentDescription = "Header Luigi",
             modifier = Modifier
                 .size(200.dp)
-                .align(Alignment.TopStart)
+                .align(Alignment.CenterStart)
                 .offset {
                     IntOffset(
                         -80,
@@ -454,7 +462,7 @@ private fun FooterSection(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun characterCardSlider(viewModel: MainViewModel) {
+fun CharacterCardSlider(viewModel: MainViewModel) {
     Column {
         Text(
             text = stringResource(id = R.string.characters),
@@ -471,7 +479,7 @@ fun characterCardSlider(viewModel: MainViewModel) {
 
         HorizontalPager(
             count = viewModel.getAllCharacters().size,
-            contentPadding = PaddingValues(horizontal = 32.dp),
+            contentPadding = PaddingValues(horizontal = 42.dp),
             modifier = Modifier.fillMaxSize()
         ) { page ->
             ItemCharacterCard(
