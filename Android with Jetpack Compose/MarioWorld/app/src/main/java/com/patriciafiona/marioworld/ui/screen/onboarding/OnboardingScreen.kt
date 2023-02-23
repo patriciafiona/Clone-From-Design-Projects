@@ -51,6 +51,8 @@ import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.MarioRedDark
 import com.patriciafiona.marioworld.ui.widget.CircleRing
 import com.patriciafiona.marioworld.utils.OnLifecycleEvent
+import com.patriciafiona.marioworld.utils.setNavigationBarColor
+import com.patriciafiona.marioworld.utils.setStatusBarColor
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
@@ -66,6 +68,12 @@ fun OnboardingScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
     val scope = rememberCoroutineScope()
     val coroutineScope = rememberCoroutineScope()
+
+    //Set status & Navigation Bar color
+    setStatusBarColor(color = MarioRed)
+    setNavigationBarColor(color = Color.White)
+
+    val isChangeScreen = remember{ mutableStateOf(false) }
 
     val interactionSource = remember { MutableInteractionSource() }
     val offsetX = remember { Animatable(0f) }
@@ -188,7 +196,7 @@ fun OnboardingScreen(navController: NavController) {
         ) {
             Box(
                 modifier = Modifier
-                    .fillMaxWidth(.8f)
+                    .width(300.dp)
                     .height(buttonSize.dp)
                     .align(Alignment.Center)
                     .clip(CircleShape)
@@ -249,8 +257,8 @@ fun OnboardingScreen(navController: NavController) {
                                     }
                                 },
                                 onDrag = { _: PointerInputChange, dragAmount: Offset ->
-                                    if (offsetX.value in 0.0..650.0) {
-                                        if(offsetX.value >= 600) {
+                                    if (offsetX.value in 0.0..670.0) {
+                                        if (offsetX.value >= 620) {
                                             coroutineScope.launch {
                                                 isMoveScreen.value = true
 
@@ -259,11 +267,15 @@ fun OnboardingScreen(navController: NavController) {
                                                 }
 
                                                 launch {
-                                                    delay(1000)
+                                                    if (!isChangeScreen.value) {
+                                                        isChangeScreen.value = true
 
-                                                    navController.navigate(MarioScreen.MainScreen.route) {
-                                                        popUpTo(MarioScreen.OnboardingScreen.route) {
-                                                            inclusive = true
+                                                        delay(1000)
+
+                                                        navController.navigate(MarioScreen.MainScreen.route) {
+                                                            popUpTo(MarioScreen.OnboardingScreen.route) {
+                                                                inclusive = true
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -275,7 +287,7 @@ fun OnboardingScreen(navController: NavController) {
                                         }
                                     } else {
                                         coroutineScope.launch {
-                                            offsetX.snapTo(650F)
+                                            offsetX.snapTo(670F)
                                         }
                                     }
 
@@ -289,7 +301,7 @@ fun OnboardingScreen(navController: NavController) {
                                 },
                                 onDragEnd = {
                                     coroutineScope.launch {
-                                        if(!isMoveScreen.value) {
+                                        if (!isMoveScreen.value) {
                                             launch {
                                                 offsetX.animateTo(
                                                     targetValue = 0f,

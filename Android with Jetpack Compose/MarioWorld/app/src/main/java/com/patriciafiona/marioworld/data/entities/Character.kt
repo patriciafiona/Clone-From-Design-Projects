@@ -11,5 +11,6 @@ data class Character(
     val description: String,
     val imageOpen: Int,
     val imageClose: Int,
-    val backgroundColor: ArrayList<Int> //R, G, B
+    val backgroundColor: ArrayList<Int>, //R, G, B
+    val characterSound: ArrayList<Int>
 ): Parcelable
