@@ -8,4 +8,7 @@
     <string name="characters">Characters</string>
     <string name="mario_in_the_news">"Mario in the news"</string>
     <string name="press_again_to_exit">"Press again to exit"</string>
+    <string name="see_the_timeline">See the Timeline</string>
+    <string name="meet_the_characters">Meet the Characters</string>
+    <string name="lets_play">Let\'s Play</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.patriciafiona.marioworld.ui.widget
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -13,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontVariation.width
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -22,18 +24,25 @@ import com.patriciafiona.marioworld.R
 
 @Composable
 fun CardPattern(
+    modifier: Modifier = Modifier,
+    boxHeight: Int,
+    boxWidth: Int,
     backgroundColor: Color = Color.DarkGray,
     imageDisplay: Int,
+    imgOffsetX: Int,
+    imgOffsetY: Int,
     headline: String,
+    textSize: Int,
     buttonText: String,
     buttonColor: Color,
-    buttonTextColor: Color
+    buttonTextColor: Color,
+    buttonTextSize: Int
 ) {
     Box {
         Box(
-            modifier = Modifier
-                .width(350.dp)
-                .height(480.dp)
+            modifier = modifier
+                .width(boxWidth.dp)
+                .height(boxHeight.dp)
         ) {
             BoxCardPatternBackground(
                 backgroundColor = backgroundColor,
@@ -49,21 +58,21 @@ fun CardPattern(
                 contentScale = ContentScale.FillWidth,
                 contentDescription = "image",
                 modifier = Modifier
-                    .width(280.dp)
+                    .fillMaxWidth(.8f)
                     .align(Alignment.TopCenter)
                     .offset {
-                        IntOffset(30, -150)
+                        IntOffset(imgOffsetX, imgOffsetY)
                     }
             )
 
             Column(
                 modifier = Modifier
-                    .width(300.dp)
-                    .height(180.dp)
+                    .fillMaxWidth(.9f)
+                    .height((boxHeight - boxHeight / 1.8).dp)
                     .padding(10.dp)
                     .align(Alignment.BottomCenter)
                     .offset {
-                        IntOffset(0, -220)
+                        IntOffset(0, -(boxHeight / 3))
                     },
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -72,7 +81,7 @@ fun CardPattern(
                     headline,
                     style = TextStyle (
                         color = Color.White,
-                        fontSize = 18.sp,
+                        fontSize = textSize.sp,
                         fontWeight = Bold,
                         textAlign = TextAlign.Center
                     ),
@@ -89,7 +98,7 @@ fun CardPattern(
                             .fillMaxWidth(0.8f),
                         backgroundColor = buttonColor,
                         textColor = buttonTextColor,
-                        textSize = 16,
+                        textSize = buttonTextSize,
                         text = buttonText,
                         icon = Icons.Default.ArrowForwardIos,
                         clickLogic = { }

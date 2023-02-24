@@ -83,7 +83,7 @@ fun MainScreen(navController: NavController) {
     }
     )
     setNavigationBarColor(color =
-        if(scrollPos > 2800){
+        if(scrollPos > 5200){
             MarioRedDark
         }else{
             color02.value
@@ -91,15 +91,20 @@ fun MainScreen(navController: NavController) {
     )
 
     //Animate color based on scroll position
-    if(scrollPos in 0..200) {
+    if(scrollPos in 0..199) {
         LaunchedEffect(key1 = true) {
             color01.animateTo(BgBlue, animationSpec = tween(1000))
             color02.animateTo(BgPurple, animationSpec = tween(1000))
         }
-    }else if(scrollPos > 200) {
+    }else if(scrollPos in 200..4000) {
         LaunchedEffect(key1 = true) {
             color01.animateTo(BgGreen, animationSpec = tween(1000))
             color02.animateTo(BgTosca, animationSpec = tween(1000))
+        }
+    } else if(scrollPos > 4000) {
+        LaunchedEffect(key1 = true) {
+            color01.animateTo(BgMagenta, animationSpec = tween(1000))
+            color02.animateTo(BgOrange, animationSpec = tween(1000))
         }
     }
 
@@ -145,7 +150,7 @@ fun MainScreen(navController: NavController) {
                     .alpha(.5f)
             )
 
-            if(scrollPos > 3500) {
+            if(scrollPos > 5800) {
                 Box(
                     modifier = Modifier
                         .height(200.dp)
@@ -219,13 +224,73 @@ fun MainScreen(navController: NavController) {
 
                     Spacer(modifier = Modifier.height(80.dp))
 
-                    CardPattern(
-                        imageDisplay = R.drawable.mario_dice,
-                        headline = "Learn all about Mario’s many adventures through the years.",
-                        buttonColor = Color.Yellow,
-                        buttonText = "See the Timeline",
-                        buttonTextColor = Color.Black
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Row{
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            CardPattern(
+                                boxWidth = 350,
+                                boxHeight = 480,
+                                imageDisplay = R.drawable.mario_dice,
+                                imgOffsetX = 30,
+                                imgOffsetY = -150,
+                                headline = "Learn all about Mario’s many adventures through the years.",
+                                textSize = 18,
+                                buttonColor = Color.Yellow,
+                                buttonText = stringResource(id = R.string.see_the_timeline),
+                                buttonTextColor = Color.Black,
+                                buttonTextSize= 16
+                            )
+
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+
+                        Row{
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            CardPattern(
+                                boxWidth = 280,
+                                boxHeight = 420,
+                                imageDisplay = R.drawable.mario_and_friends,
+                                imgOffsetX = 0,
+                                imgOffsetY = -200,
+                                headline = "The Mushroom Kingdom has had its share of memorable characters over the years.",
+                                textSize = 16,
+                                buttonColor = Color.Yellow,
+                                buttonText = stringResource(id = R.string.meet_the_characters),
+                                buttonTextColor = Color.Black,
+                                buttonTextSize= 12
+                            )
+
+                            Spacer(modifier = Modifier.width(20.dp))
+                        }
+
+                        Spacer(modifier = Modifier.height(30.dp))
+
+                        Row{
+                            Spacer(modifier = Modifier.width(20.dp))
+
+                            CardPattern(
+                                boxWidth = 280,
+                                boxHeight = 350,
+                                imageDisplay = R.drawable.play_nintendo,
+                                imgOffsetX = 0,
+                                imgOffsetY = -180,
+                                headline = "Visit Mario's page at Play Nintendo for fun activites!",
+                                textSize = 18,
+                                buttonColor = Color.Yellow,
+                                buttonText = stringResource(id = R.string.lets_play),
+                                buttonTextColor = Color.Black,
+                                buttonTextSize= 12
+                            )
+
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+
+                    }
 
                     CharacterCardSlider(viewModel)
 
