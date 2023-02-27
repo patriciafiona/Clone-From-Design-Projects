@@ -1,6 +1,8 @@
 package com.patriciafiona.marioworld.data.resource
 
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import com.patriciafiona.marioworld.R
+import com.patriciafiona.marioworld.data.entities.Ability
 import com.patriciafiona.marioworld.data.entities.Character
 import com.patriciafiona.marioworld.data.entities.News
 
@@ -17,9 +19,20 @@ object DataSource {
                     "He uses his masterful jumping ability and a variety of power-ups to take on his archrival, Bowser.",
             imageOpen = R.drawable.mario_open,
             imageClose = R.drawable.mario_closed,
+            imageFull = R.drawable.mario_open_2,
             backgroundColor = arrayListOf(224, 18, 15),
             characterSound = arrayListOf(
                 R.raw.sound_mario_0, R.raw.sound_mario_1, R.raw.sound_mario_2
+            ),
+            fullName = "Mario Mario",
+            species = "Human",
+            dialog = "It's-a me, Mario!",
+            ability = Ability(
+                acceleration = 8.0,
+                maxSpeed = 8.0,
+                technique = 8.0,
+                power = 8.0,
+                stamina = 8.0
             )
         ),
         Character(
@@ -31,9 +44,20 @@ object DataSource {
                     "Luigi is taller and can jump higher than Mario. If you look closely, you may also notice that the shape of his moustache is a bit different as well.",
             imageOpen = R.drawable.luigi_open,
             imageClose = R.drawable.luigi_closed,
+            imageFull = R.drawable.luigi_open_02,
             backgroundColor = arrayListOf(8, 169, 54),
             characterSound = arrayListOf(
                 R.raw.sound_luigi_0, R.raw.sound_luigi_1, R.raw.sound_luigi_2
+            ),
+            fullName = "Luigi Mario",
+            species = "Human",
+            dialog = "Eek! No one told me there would be gh-gh-ghosts here! I wish I'd brought my Poltergust 3000 with me.",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 7.0,
+                technique = 6.0,
+                power = 7.0,
+                stamina = 7.0
             )
         ),
         Character(
@@ -45,9 +69,20 @@ object DataSource {
                     "Princess Peach and Mario are good friends and help each other out whenever they can.",
             imageOpen = R.drawable.peach_open,
             imageClose = R.drawable.peach_closed,
+            imageFull = R.drawable.peach_open_02,
             backgroundColor = arrayListOf(240, 150, 190),
             characterSound = arrayListOf(
                 R.raw.sound_peach_0, R.raw.sound_peach_1, R.raw.sound_peach_2
+            ),
+            fullName = "Princess Peach Toadstool",
+            species = "Human",
+            dialog = "I can't believe I'm kidnapped... again.",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 7.5,
+                technique = 8.0,
+                power = 6.0,
+                stamina = 6.0
             )
         ),
         Character(
@@ -60,6 +95,16 @@ object DataSource {
             backgroundColor = arrayListOf(23, 65, 154),
             characterSound = arrayListOf(
                 R.raw.sound_toad_0, R.raw.sound_toad_1, R.raw.sound_toad_2
+            ),
+            fullName = "Toad",
+            species = "Mushroom",
+            dialog = "M-M-M-M-M-M-M-Mario! Help! It's Sh-sh-sh-sh-sh-sh-sh-shocking... Mushroom Castle... RIDED! Prince Peach... STOLEN!",
+            ability = Ability(
+                acceleration = 7.0,
+                maxSpeed = 9.0,
+                technique = 6.0,
+                power = 8.0,
+                stamina = 7.0
             )
         ),
         Character(
@@ -74,6 +119,16 @@ object DataSource {
             backgroundColor = arrayListOf(248, 190, 16),
             characterSound = arrayListOf(
                 R.raw.sound_bowser_0, R.raw.sound_bowser_1, R.raw.sound_bowser_2
+            ),
+            fullName = "King Bowser Koopa",
+            species = "Koopa",
+            dialog = "Hear this! I will kidnap PeachOVER and OVER until I pull it off! And no one can stop me! Losing is not an option! And neither is giving up!",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 8.0,
+                technique = 7.0,
+                power = 9.0,
+                stamina = 8.0
             )
         ),
         Character(
@@ -83,9 +138,20 @@ object DataSource {
                     "Yoshi is kind and carefree. He uses his long tongue to gobble up fruit and enemies, which he can turn into eggs for throwing.",
             imageOpen = R.drawable.yoshi_open,
             imageClose = R.drawable.yoshi_closed,
+            imageFull = R.drawable.yoshi_open_02,
             backgroundColor = arrayListOf(112, 185, 33),
             characterSound = arrayListOf(
                 R.raw.sound_yoshi_0, R.raw.sound_yoshi_1, R.raw.sound_yoshi_2
+            ),
+            fullName = "Yoshi",
+            species = "Yoshi",
+            dialog = "I know! We should team up! Come on! Hop on my back!",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 5.0,
+                technique = 8.0,
+                power = 7.0,
+                stamina = 6.0
             )
         ),
         Character(
@@ -95,9 +161,20 @@ object DataSource {
                     "Daisy is cheerful, energetic, and a bit of a tomboy. She enjoys playing a variety of sports with Mario and friends.",
             imageOpen = R.drawable.daisy_open,
             imageClose = R.drawable.daisy_closed,
+            imageFull = R.drawable.daisy_open_02,
             backgroundColor = arrayListOf(238, 131, 10),
             characterSound = arrayListOf(
                 R.raw.sound_daisy_0, R.raw.sound_daisy_1, R.raw.sound_daisy_2
+            ),
+            fullName = "Princess Daisy",
+            species = "Human",
+            dialog = "Don't underestimate me, people! Just because I'm a princess doesn't mean I won't fight dirty!",
+            ability = Ability(
+                acceleration = 8.0,
+                maxSpeed = 8.0,
+                technique = 7.0,
+                power = 9.0,
+                stamina = 6.0
             )
         ),
         Character(
@@ -110,6 +187,18 @@ object DataSource {
             backgroundColor = arrayListOf(232, 205, 14),
             characterSound = arrayListOf(
                 R.raw.sound_wario_0, R.raw.sound_wario_1, R.raw.sound_wario_2
+            ),
+            fullName = "Wario",
+            species = "Human",
+            dialog = "So admit it... Don't I look cool in the game screens? Those long, muscular legs on my sturdy, toned fame... " +
+                    "I'm the perfect speciment of a man! ...What!?!? You say I look fat and my quadruple chin looks like a waterfall of flab? " +
+                    "Shut up! Taht's just because you have your television set up for widescreen display!",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 5.0,
+                technique = 8.0,
+                power = 7.0,
+                stamina = 9.0
             )
         ),
         Character(
@@ -122,6 +211,16 @@ object DataSource {
             backgroundColor = arrayListOf(93, 46, 142),
             characterSound = arrayListOf(
                 R.raw.sound_waluigi_0, R.raw.sound_waluigi_1, R.raw.sound_waluigi_2
+            ),
+            fullName = "Waluigi",
+            species = "Human",
+            dialog = "Hey! You might be getting better, but nobody cheats better than Waluigi! You got that?!",
+            ability = Ability(
+                acceleration = 4.0,
+                maxSpeed = 6.0,
+                technique = 6.5,
+                power = 7.0,
+                stamina = 6.0
             )
         ),
         Character(
@@ -131,9 +230,20 @@ object DataSource {
                     "Rosalina may seem a bit distant, but she is actually quite kind-hearted. She is the adoptive mother of the Lumas. Though her home is among the stars, she'll sometimes joins Mario and friends on their adventures.",
             imageOpen = R.drawable.rosalina_open,
             imageClose = R.drawable.rosalina_closed,
+            imageFull = R.drawable.rosalina_open_02,
             backgroundColor = arrayListOf(29, 213, 183),
             characterSound = arrayListOf(
                 R.raw.sound_rosalina_0, R.raw.sound_rosalina_1, R.raw.sound_rosalina_2
+            ),
+            fullName = "Princess Rosalina",
+            species = "Human",
+            dialog = "May the starts shine down on you.",
+            ability = Ability(
+                acceleration = 7.0,
+                maxSpeed = 6.0,
+                technique = 8.0,
+                power = 7.0,
+                stamina = 6.0
             )
         ),
         Character(
@@ -148,6 +258,16 @@ object DataSource {
             backgroundColor = arrayListOf(246, 206, 9),
             characterSound = arrayListOf(
                 R.raw.sound_bowser_jr_0, R.raw.sound_bowser_jr_1, R.raw.sound_bowser_jr_2
+            ),
+            fullName = "Bowser Junior",
+            species = "Koopa",
+            dialog = "Someday... when I'm bigger... I wanna fight that Mario again!",
+            ability = Ability(
+                acceleration = 8.0,
+                maxSpeed = 7.0,
+                technique = 8.0,
+                power = 6.5,
+                stamina = 5.0
             )
         ),
         Character(
@@ -160,6 +280,16 @@ object DataSource {
             backgroundColor = arrayListOf(149, 164, 174),
             characterSound = arrayListOf(
                 R.raw.sound_boo_0, R.raw.sound_boo_1, R.raw.sound_boo_2
+            ),
+            fullName = "Boo",
+            species = "Boo",
+            dialog = "This board is a scary little spook house that I cooked up a while back.",
+            ability = Ability(
+                acceleration = 8.0,
+                maxSpeed = 8.0,
+                technique = 5.0,
+                power = 6.0,
+                stamina = 5.0
             )
         ),
         Character(
@@ -171,21 +301,45 @@ object DataSource {
                     "He loves bananas and always keeps a large stash of them in his treehouse.",
             imageOpen = R.drawable.donkey_kong_open,
             imageClose = R.drawable.donkey_kong_closed,
+            imageFull = R.drawable.donkey_kong_open_02,
             backgroundColor = arrayListOf(116, 38, 7),
             characterSound = arrayListOf(
                 R.raw.sound_donkey_kong_0, R.raw.sound_donkey_kong_1, R.raw.sound_donkey_kong_2
+            ),
+            fullName = "Donkey Kong",
+            species = "Kong",
+            dialog = "My bananas and my buddy, Diddy Kong, they are gone! The Kremlings will pay! " +
+                    "I'll hunt them down through every corner of my island, until I have every last banana from my hoard back!",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 8.0,
+                technique = 7.0,
+                power = 6.0,
+                stamina = 6.5
             )
         ),
         Character(
             name = "Diddy Kong",
             description = "Donkey Kong's trusted friend and partner. His trademarks are his red shirt with yellow stars and red cap.\n" +
                     "\n" +
-                    "Though not as strong as DK, Diddy Kong is agile and a great jumper. He's fast as well, and a great ally for helping DK protect his banana stash.",
+                    "Though not as strong as DK, Diddy Kong is agile and a great jumper. He's fast as well, and a great ally for " +
+                    "helping DK protect his banana stash.",
             imageOpen = R.drawable.diddy_kong_open,
             imageClose = R.drawable.diddy_kong_closed,
             backgroundColor = arrayListOf(152, 49, 6),
             characterSound = arrayListOf(
                 R.raw.sound_diddy_kong_0, R.raw.sound_diddy_kong_1, R.raw.sound_diddy_kong_2
+            ),
+            fullName = "Diddy Kong",
+            species = "Kong",
+            dialog = "I am the brave Diddy Kong. Show yourself, if you are friently. If not, " +
+                    "then get ready for the fight of your life!",
+            ability = Ability(
+                acceleration = 6.0,
+                maxSpeed = 8.0,
+                technique = 5.5,
+                power = 8.0,
+                stamina = 7.0
             )
         ),
     )

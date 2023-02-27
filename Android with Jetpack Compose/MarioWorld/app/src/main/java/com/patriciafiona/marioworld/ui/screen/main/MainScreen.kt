@@ -1,6 +1,5 @@
 package com.patriciafiona.marioworld.ui.screen.main
 
-import android.graphics.Paint
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -8,12 +7,10 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -24,7 +21,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
@@ -33,22 +29,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.patriciafiona.marioworld.R
-import com.patriciafiona.marioworld.ui.widget.*
-import com.patriciafiona.marioworld.utils.BackPress
-import com.patriciafiona.marioworld.utils.setStatusBarColor
-import kotlinx.coroutines.delay
 import androidx.compose.ui.util.lerp
+import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
+import com.patriciafiona.marioworld.R
 import com.patriciafiona.marioworld.ui.theme.*
+import com.patriciafiona.marioworld.ui.widget.*
+import com.patriciafiona.marioworld.utils.BackPress
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
+import com.patriciafiona.marioworld.utils.setStatusBarColor
+import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -59,7 +54,11 @@ fun MainScreen(navController: NavController) {
     val uriHandler = LocalUriHandler.current
     val viewModel = MainViewModel()
 
-    val isLoading = remember{ mutableStateOf(false) }
+    val isLoading = remember{ mutableStateOf(true) }
+    LaunchedEffect(key1 = true) {
+        delay((500..2000).random().toLong())
+        isLoading.value = false
+    }
 
     val scrollState = rememberScrollState()
     val scrollPos = scrollState.value
@@ -150,7 +149,7 @@ fun MainScreen(navController: NavController) {
                     .alpha(.5f)
             )
 
-            if(scrollPos > 5800) {
+            if(scrollPos > 5800 && !isLoading.value) {
                 Box(
                     modifier = Modifier
                         .height(200.dp)
@@ -237,7 +236,7 @@ fun MainScreen(navController: NavController) {
                                 imageDisplay = R.drawable.mario_dice,
                                 imgOffsetX = 30,
                                 imgOffsetY = -150,
-                                headline = "Learn all about Mario’s many adventures through the years.",
+                                headline = stringResource(id = R.string.home_banner_h_01),
                                 textSize = 18,
                                 buttonColor = Color.Yellow,
                                 buttonText = stringResource(id = R.string.see_the_timeline),
@@ -257,7 +256,7 @@ fun MainScreen(navController: NavController) {
                                 imageDisplay = R.drawable.mario_and_friends,
                                 imgOffsetX = 0,
                                 imgOffsetY = -200,
-                                headline = "The Mushroom Kingdom has had its share of memorable characters over the years.",
+                                headline = stringResource(id = R.string.home_banner_h_02),
                                 textSize = 16,
                                 buttonColor = Color.Yellow,
                                 buttonText = stringResource(id = R.string.meet_the_characters),
@@ -279,7 +278,7 @@ fun MainScreen(navController: NavController) {
                                 imageDisplay = R.drawable.play_nintendo,
                                 imgOffsetX = 0,
                                 imgOffsetY = -180,
-                                headline = "Visit Mario's page at Play Nintendo for fun activites!",
+                                headline = stringResource(id = R.string.home_banner_h_03),
                                 textSize = 18,
                                 buttonColor = Color.Yellow,
                                 buttonText = stringResource(id = R.string.lets_play),
@@ -292,7 +291,7 @@ fun MainScreen(navController: NavController) {
 
                     }
 
-                    CharacterCardSlider(viewModel)
+                    CharacterCardSlider(viewModel, navController)
 
                     Spacer(modifier = Modifier.height(50.dp))
 
@@ -527,7 +526,10 @@ private fun FooterSection(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CharacterCardSlider(viewModel: MainViewModel) {
+fun CharacterCardSlider(
+    viewModel: MainViewModel,
+    navController: NavController
+) {
     Column {
         Text(
             text = stringResource(id = R.string.characters),
@@ -570,7 +572,8 @@ fun CharacterCardSlider(viewModel: MainViewModel) {
                         )
                     }
                     .fillMaxWidth(),
-                character = viewModel.getAllCharacters()[page]
+                character = viewModel.getAllCharacters()[page],
+                navController = navController
             )
         }
     }

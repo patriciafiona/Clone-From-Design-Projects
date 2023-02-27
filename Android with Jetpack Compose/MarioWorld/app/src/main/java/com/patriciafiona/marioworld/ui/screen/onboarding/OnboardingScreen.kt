@@ -3,7 +3,6 @@ package com.patriciafiona.marioworld.ui.screen.onboarding
 import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.view.animation.OvershootInterpolator
-import android.window.SplashScreen
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -26,12 +25,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -45,16 +45,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
-import com.patriciafiona.marioworld.ui.theme.MarioRed
 import com.patriciafiona.marioworld.R
 import com.patriciafiona.marioworld.navigation.MarioScreen
+import com.patriciafiona.marioworld.ui.theme.MarioRed
 import com.patriciafiona.marioworld.ui.theme.MarioRedDark
 import com.patriciafiona.marioworld.ui.widget.CircleRing
 import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -68,6 +66,9 @@ fun OnboardingScreen(navController: NavController) {
     val configuration = LocalConfiguration.current
     val scope = rememberCoroutineScope()
     val coroutineScope = rememberCoroutineScope()
+
+    //haptic feedback
+    val haptic = LocalHapticFeedback.current
 
     //Set status & Navigation Bar color
     setStatusBarColor(color = MarioRed)
@@ -269,6 +270,9 @@ fun OnboardingScreen(navController: NavController) {
                                                 launch {
                                                     if (!isChangeScreen.value) {
                                                         isChangeScreen.value = true
+
+                                                        haptic.performHapticFeedback(
+                                                            HapticFeedbackType.LongPress)
 
                                                         delay(1000)
 

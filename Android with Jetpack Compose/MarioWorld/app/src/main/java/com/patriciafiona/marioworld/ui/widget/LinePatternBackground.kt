@@ -1,15 +1,13 @@
 package com.patriciafiona.marioworld.ui.widget
 
 import android.os.Build
+import android.widget.Space
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.GenericShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -18,8 +16,6 @@ import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.clipPath
-import androidx.compose.ui.graphics.drawscope.clipRect
-import androidx.compose.ui.graphics.drawscope.inset
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,9 +24,6 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.patriciafiona.marioworld.ui.theme.MarioRedDark
-import com.patriciafiona.marioworld.utils.drawColoredShadow
-import java.util.Collections.rotate
-import java.util.Collections.singleton
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -95,7 +88,7 @@ fun TrapezoidBackground(
             .onGloballyPositioned { coordinates ->
                 canvasSize = coordinates.size
             }
-            .shadow(elevation = (-20).dp, shape = TrapezoidShape(), ambientColor = Color.DarkGray )
+            .shadow(elevation = (-20).dp, shape = TrapezoidShape(), ambientColor = Color.DarkGray)
     ) {
         clipPath(
             path = trianglePath(size = size),
@@ -131,7 +124,7 @@ fun WaveTopBackground(
             .onGloballyPositioned { coordinates ->
                 canvasSize = coordinates.size
             }
-            .shadow(elevation = (-20).dp, shape = TrapezoidShape(), ambientColor = Color.DarkGray )
+            .shadow(elevation = (-20).dp, shape = TrapezoidShape(), ambientColor = Color.DarkGray)
     ) {
         clipPath(
             path = waveTopPath(size = size),
@@ -158,7 +151,7 @@ fun WaveBottomBackground(
             .onGloballyPositioned { coordinates ->
                 canvasSize = coordinates.size
             }
-            .shadow(elevation = (-20).dp, shape = TrapezoidShape(), ambientColor = Color.DarkGray )
+            .shadow(elevation = (-20).dp, shape = TrapezoidShape(), ambientColor = Color.DarkGray)
     ) {
         clipPath(
             path = waveBottomPath(size = size),
@@ -422,6 +415,30 @@ fun BoxCardPatternBackgroundPreview() {
             .height(200.dp)
     )
 }
+@Preview(showBackground = true)
+@Composable
+fun ChatBallonTrianglePreview() {
+    Row(modifier = Modifier.height(IntrinsicSize.Max)) {
+        Column (
+            modifier = Modifier
+                .background(
+                    color = Color.Blue,
+                    shape = RoundedCornerShape(4.dp, 4.dp, 0.dp, 4.dp)
+                )
+                .width(200.dp)
+                .height(100.dp)
+        ) {
+            Spacer(modifier = Modifier.fillMaxSize())
+        }
+        Column(
+            modifier = Modifier.background(
+                color = Color.Green,
+                shape = TriangleEdgeShape(22))
+                .width(20.dp)
+                .fillMaxHeight()
+        ){}
+    }
+}
 
 class TrapezoidShape: Shape {
     override fun createOutline(
@@ -436,4 +453,20 @@ class TrapezoidShape: Shape {
             lineTo(size.width, size.height - 15)
         }
     )
+}
+
+class TriangleEdgeShape(private val offset: Int) : Shape {
+
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
+        val trianglePath = Path().apply {
+            moveTo(x = 0f, y = size.height-offset)
+            lineTo(x = 0f, y = size.height)
+            lineTo(x = 0f + offset, y = size.height)
+        }
+        return Outline.Generic(path = trianglePath)
+    }
 }

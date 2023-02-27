@@ -5,6 +5,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,17 +26,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.patriciafiona.marioworld.data.entities.Character
+import androidx.navigation.NavController
 import com.patriciafiona.marioworld.R
+import com.patriciafiona.marioworld.data.entities.Character
+import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.MarioRed
 import com.patriciafiona.marioworld.ui.theme.SuperMarioFont
-import java.time.format.TextStyle
-import kotlin.math.exp
 
 @Composable
 fun ItemCharacterCard(
     modifier: Modifier = Modifier,
-    character: Character
+    character: Character,
+    navController: NavController
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -115,7 +117,10 @@ fun ItemCharacterCard(
 
                     if(expanded) {
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                navController.navigate(MarioScreen.DetailCharacterScreen.route)
+                                navController.currentBackStackEntry?.arguments?.putParcelable("character", character)
+                            },
                             shape = CircleShape,
                             contentPadding = PaddingValues(horizontal = 5.dp, vertical = 3.dp),
                             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),

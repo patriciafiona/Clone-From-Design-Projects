@@ -31,7 +31,7 @@ fun TitleWithIcon(
         horizontalArrangement = Arrangement.Start
     ) {
         Image(
-            painter = painterResource(id = R.drawable.icon_01),
+            painter = painterResource(id = iconImage),
             contentDescription = "Title Side icon",
             modifier = Modifier
                 .size(45.dp)

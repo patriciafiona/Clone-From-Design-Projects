@@ -2,7 +2,7 @@ package com.patriciafiona.marioworld.data.entities
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.util.UUID
+import java.util.*
 
 
 @Parcelize

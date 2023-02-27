@@ -11,4 +11,14 @@
     <string name="see_the_timeline">See the Timeline</string>
     <string name="meet_the_characters">Meet the Characters</string>
     <string name="lets_play">Let\'s Play</string>
+    <string name="home_banner_h_01">Learn all about Mario’s many adventures through the years.</string>
+    <string name="home_banner_h_02">The Mushroom Kingdom has had its share of memorable characters over the years.</string>
+    <string name="home_banner_h_03">Visit Mario\'s page at Play Nintendo for fun activities!</string>
+    <string name="description">Description</string>
+    <string name="character_statistic">Character Statistic</string>
+    <string name="acceleration">Acceleration</string>
+    <string name="max_speed">Max Speed</string>
+    <string name="technique">Technique</string>
+    <string name="power">Power</string>
+    <string name="stamina">Stamina</string>
 </resources>
