@@ -38,6 +38,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.patriciafiona.marioworld.R
+import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.*
 import com.patriciafiona.marioworld.ui.widget.*
 import com.patriciafiona.marioworld.utils.BackPress
@@ -47,7 +48,7 @@ import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController) {
     val context = LocalContext.current
@@ -215,7 +216,9 @@ fun MainScreen(navController: NavController) {
                                 textSize = 16,
                                 text = stringResource(id = R.string.see_more_news),
                                 icon = Icons.Default.ArrowForwardIos,
-                                clickLogic = { }
+                                clickLogic = {
+                                    uriHandler.openUri("https://mario.nintendo.com/news/")
+                                }
                             )
                             Spacer(modifier = Modifier.weight(1f))
                         }
@@ -241,7 +244,10 @@ fun MainScreen(navController: NavController) {
                                 buttonColor = Color.Yellow,
                                 buttonText = stringResource(id = R.string.see_the_timeline),
                                 buttonTextColor = Color.Black,
-                                buttonTextSize= 16
+                                buttonTextSize= 16,
+                                clickLogic = {
+                                    uriHandler.openUri("https://mario.nintendo.com/history/")
+                                }
                             )
 
                             Spacer(modifier = Modifier.weight(1f))
@@ -261,7 +267,10 @@ fun MainScreen(navController: NavController) {
                                 buttonColor = Color.Yellow,
                                 buttonText = stringResource(id = R.string.meet_the_characters),
                                 buttonTextColor = Color.Black,
-                                buttonTextSize= 12
+                                buttonTextSize= 12,
+                                clickLogic = {
+                                    navController.navigate(MarioScreen.ListCharacterScreen.route)
+                                }
                             )
 
                             Spacer(modifier = Modifier.width(20.dp))
@@ -283,7 +292,10 @@ fun MainScreen(navController: NavController) {
                                 buttonColor = Color.Yellow,
                                 buttonText = stringResource(id = R.string.lets_play),
                                 buttonTextColor = Color.Black,
-                                buttonTextSize= 12
+                                buttonTextSize= 12,
+                                clickLogic = {
+                                    uriHandler.openUri("https://play.nintendo.com/themes/friends/mario/")
+                                }
                             )
 
                             Spacer(modifier = Modifier.weight(1f))
@@ -573,7 +585,8 @@ fun CharacterCardSlider(
                     }
                     .fillMaxWidth(),
                 character = viewModel.getAllCharacters()[page],
-                navController = navController
+                navController = navController,
+                widthCard = 250
             )
         }
     }

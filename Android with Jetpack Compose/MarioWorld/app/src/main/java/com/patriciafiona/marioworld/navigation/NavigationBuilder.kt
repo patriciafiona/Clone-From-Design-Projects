@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.utils.EnterAnimationFadeIn
 import com.patriciafiona.marioworld.ui.screen.characterDetail.CharacterDetail
+import com.patriciafiona.marioworld.ui.screen.listCharacters.ListCharacters
 import com.patriciafiona.marioworld.ui.screen.main.MainScreen
 import com.patriciafiona.marioworld.ui.screen.onboarding.OnboardingScreen
 
@@ -27,7 +28,7 @@ fun NavigationBuilder() {
         }
 
         composable(route = MarioScreen.MainScreen.route) {
-            EnterAnimationFadeIn (durationInMillis = 1550) {
+            EnterAnimationFadeIn (durationInMillis = 550) {
                 MainScreen(navController = navigationController)
             }
         }
@@ -41,6 +42,12 @@ fun NavigationBuilder() {
                         character = data
                     )
                 }
+            }
+        }
+
+        composable(route = MarioScreen.ListCharacterScreen.route) {
+            EnterAnimationFadeIn (durationInMillis = 1550) {
+                ListCharacters(navController = navigationController)
             }
         }
     }

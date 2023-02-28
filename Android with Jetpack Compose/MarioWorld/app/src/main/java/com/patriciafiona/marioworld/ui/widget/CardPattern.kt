@@ -32,7 +32,8 @@ fun CardPattern(
     buttonText: String,
     buttonColor: Color,
     buttonTextColor: Color,
-    buttonTextSize: Int
+    buttonTextSize: Int,
+    clickLogic: () -> Unit
 ) {
     Box {
         Box(
@@ -97,7 +98,7 @@ fun CardPattern(
                         textSize = buttonTextSize,
                         text = buttonText,
                         icon = Icons.Default.ArrowForwardIos,
-                        clickLogic = { }
+                        clickLogic = clickLogic
                     )
                     Spacer(modifier = Modifier.weight(1f))
                 }

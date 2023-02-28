@@ -37,13 +37,14 @@ import com.patriciafiona.marioworld.ui.theme.SuperMarioFont
 fun ItemCharacterCard(
     modifier: Modifier = Modifier,
     character: Character,
-    navController: NavController
+    navController: NavController,
+    widthCard: Int
 ) {
     var expanded by remember { mutableStateOf(false) }
 
     Card(
         modifier = modifier
-            .width(250.dp)
+            .width(widthCard.dp)
             .padding(vertical = 10.dp, horizontal = 5.dp),
         backgroundColor = Color(
             red = character.backgroundColor[0],

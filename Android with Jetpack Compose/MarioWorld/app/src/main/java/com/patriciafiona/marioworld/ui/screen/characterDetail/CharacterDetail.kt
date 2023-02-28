@@ -40,7 +40,6 @@ import com.patriciafiona.marioworld.utils.setStatusBarColor
 import com.smarttoolfactory.ratingbar.RatingBar
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterDetail(
     navController: NavController,
@@ -172,7 +171,7 @@ fun CharacterDetail(
                     Spacer(modifier = Modifier.weight(1f))
                     DialogBalloon(
                         modifier = Modifier.width(300.dp),
-                        text = character.dialog,
+                        text = "\"${character.dialog}\" - ${character.name}",
                         balloonColor = BgGreen,
                         textColor = Color.White
                     )
