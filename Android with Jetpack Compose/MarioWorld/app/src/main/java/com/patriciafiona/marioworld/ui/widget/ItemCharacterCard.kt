@@ -1,11 +1,11 @@
 package com.patriciafiona.marioworld.ui.widget
 
+import android.media.MediaPlayer
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,10 +14,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +34,8 @@ import com.patriciafiona.marioworld.data.entities.Character
 import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.MarioRed
 import com.patriciafiona.marioworld.ui.theme.SuperMarioFont
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun ItemCharacterCard(
@@ -40,7 +44,14 @@ fun ItemCharacterCard(
     navController: NavController,
     widthCard: Int
 ) {
-    var expanded by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    var expanded by rememberSaveable { mutableStateOf(false) }
+
+    val buttonSound = remember { MediaPlayer.create(context, R.raw.pause) }
+    val slideDown = remember { MediaPlayer.create(context, R.raw.slide_down) }
+    val slideUp = remember { MediaPlayer.create(context, R.raw.slide_up) }
 
     Card(
         modifier = modifier
@@ -100,7 +111,7 @@ fun ItemCharacterCard(
                         text = character.name,
                         style = androidx.compose.ui.text.TextStyle(
                             fontFamily = SuperMarioFont,
-                            fontSize = 16.sp,
+                            fontSize = 14.sp,
                             color = Color.White
                         )
                     )
@@ -119,8 +130,15 @@ fun ItemCharacterCard(
                     if(expanded) {
                         Button(
                             onClick = {
-                                navController.navigate(MarioScreen.DetailCharacterScreen.route)
-                                navController.currentBackStackEntry?.arguments?.putParcelable("character", character)
+                                coroutineScope.launch {
+                                    buttonSound.start()
+
+                                    delay(500)
+
+                                    navController.navigate(MarioScreen.DetailCharacterScreen.route)
+                                    navController.currentBackStackEntry?.arguments?.putParcelable("character", character)
+                                }
+
                             },
                             shape = CircleShape,
                             contentPadding = PaddingValues(horizontal = 5.dp, vertical = 3.dp),
@@ -140,7 +158,17 @@ fun ItemCharacterCard(
                 }
                 ItemButton(
                     expanded = expanded,
-                    onClick = { expanded = !expanded },
+                    onClick = {
+                        coroutineScope.launch {
+                            expanded = !expanded
+
+                            if (expanded) {
+                                slideDown.start()
+                            } else {
+                                slideUp.start()
+                            }
+                        }
+                    },
                     modifier = Modifier
                         .offset {
                             IntOffset(-50, 0)

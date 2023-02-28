@@ -17,6 +17,9 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.VolumeMute
+import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,7 +64,7 @@ import kotlin.math.roundToInt
 
 @SuppressLint("RememberReturnType")
 @Composable
-fun OnboardingScreen(navController: NavController) {
+fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val scope = rememberCoroutineScope()
@@ -144,9 +147,12 @@ fun OnboardingScreen(navController: NavController) {
     }
 
     //Music section
-    val mMediaPlayer = remember { MediaPlayer.create(context, R.raw.interface_sound) }
+    val buttonSound = remember { MediaPlayer.create(context, R.raw.continue_sound) }
+    val bgmSound = remember { MediaPlayer.create(context, R.raw.bgm_opening) }
     OnLifecycle(
-        mMediaPlayer = mMediaPlayer
+        buttonSound = buttonSound,
+        bgmSound = bgmSound,
+        isMute = isMute
     )
 
     //MainView
@@ -162,6 +168,28 @@ fun OnboardingScreen(navController: NavController) {
                 .fillMaxSize()
                 .alpha(.5f)
         )
+
+        IconButton(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .scale(scale01.value)
+                .padding(10.dp),
+            onClick = {
+                //mute or unmute sound
+                isMute.value = !isMute.value
+                if(isMute.value) {
+                    bgmSound.setVolume(0.0f, 0.0f)
+                }else{
+                    bgmSound.setVolume(1.0f, 1.0f)
+                }
+            }
+        ) {
+            androidx.compose.material3.Icon(
+                imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
+                contentDescription = "Back button",
+                tint = Color.White
+            )
+        }
 
         Box(
             modifier = Modifier.fillMaxWidth()
@@ -264,15 +292,13 @@ fun OnboardingScreen(navController: NavController) {
                                                 isMoveScreen.value = true
 
                                                 launch {
-                                                    mMediaPlayer.start()
-                                                }
-
-                                                launch {
                                                     if (!isChangeScreen.value) {
                                                         isChangeScreen.value = true
 
                                                         haptic.performHapticFeedback(
                                                             HapticFeedbackType.LongPress)
+
+                                                        buttonSound.start()
 
                                                         delay(1000)
 
@@ -359,19 +385,35 @@ fun OnboardingScreen(navController: NavController) {
 
 @Composable
 private fun OnLifecycle(
-    mMediaPlayer: MediaPlayer
+    buttonSound: MediaPlayer,
+    bgmSound: MediaPlayer,
+    isMute: MutableState<Boolean>
 ) {
     OnLifecycleEvent { _, event ->
         // do stuff on event
         when (event) {
             Lifecycle.Event.ON_CREATE -> {
-                mMediaPlayer.isLooping = false
+                buttonSound.isLooping = false
+                bgmSound.isLooping = true
+                bgmSound.start()
+            }
+            Lifecycle.Event.ON_RESUME -> {
+                if(isMute.value) {
+                    bgmSound.setVolume(0.0f, 0.0f)
+                }else{
+                    bgmSound.setVolume(1.0f, 1.0f)
+                }
             }
             Lifecycle.Event.ON_PAUSE -> {
-                mMediaPlayer.pause()
+                buttonSound.pause()
+                bgmSound.pause()
             }
             Lifecycle.Event.ON_DESTROY -> {
-                mMediaPlayer.stop()
+                buttonSound.stop()
+                buttonSound.release()
+
+                bgmSound.stop()
+                bgmSound.release()
             }
             else -> {}
         }
@@ -382,5 +424,6 @@ private fun OnLifecycle(
 @Composable
 fun OnboardingPreview() {
     val navController = rememberNavController()
-    OnboardingScreen(navController = navController)
+    val isMute = remember { mutableStateOf(true)  }
+    OnboardingScreen(navController = navController, isMute = isMute)
 }

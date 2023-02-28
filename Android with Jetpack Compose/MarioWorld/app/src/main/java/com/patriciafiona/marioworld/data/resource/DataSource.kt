@@ -1,6 +1,5 @@
 package com.patriciafiona.marioworld.data.resource
 
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import com.patriciafiona.marioworld.R
 import com.patriciafiona.marioworld.data.entities.Ability
 import com.patriciafiona.marioworld.data.entities.Character

@@ -1,8 +1,8 @@
 package com.patriciafiona.marioworld.ui.screen.listCharacters
 
+import android.media.MediaPlayer
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.animation.Animatable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,9 +12,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.VolumeMute
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -31,23 +33,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.lerp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.patriciafiona.marioworld.R
-import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.screen.main.MainViewModel
 import com.patriciafiona.marioworld.ui.theme.*
 import com.patriciafiona.marioworld.ui.widget.*
+import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
-import kotlin.math.absoluteValue
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ListCharacters(
-    navController: NavController
+    navController: NavController,
+    isMute: MutableState<Boolean>
 ) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     val uriHandler = LocalUriHandler.current
     val viewModel = MainViewModel()
 
@@ -69,6 +74,19 @@ fun ListCharacters(
     )
 
     setStatusBarColor(color = BgOrange)
+
+    //Music section
+    val currentPos = rememberSaveable{ mutableStateOf(0) }
+    val buttonSound = remember { MediaPlayer.create(context, R.raw.pause) }
+    val buttonBackSound = remember { MediaPlayer.create(context, R.raw.cartoon_jump) }
+    val bgmSound = remember { MediaPlayer.create(context, R.raw.bgm_theme) }
+    OnLifecycle(
+        buttonSound = buttonSound,
+        bgmSound = bgmSound,
+        buttonBackSound = buttonBackSound,
+        currentPos = currentPos,
+        isMute = isMute
+    )
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -98,18 +116,50 @@ fun ListCharacters(
                     .fillMaxWidth()
                     .verticalScroll(scrollState)
             ) {
-                IconButton(
-                    modifier = Modifier
-                        .padding(10.dp),
-                    onClick = {
-                        navController.navigateUp()
-                    }
+                Row(
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Back button",
-                        tint = Color.White
-                    )
+                    IconButton(
+                        modifier = Modifier
+                            .padding(10.dp),
+                        onClick = {
+                            coroutineScope.launch {
+                                launch {
+                                    buttonBackSound.start()
+                                }
+                                delay(500)
+                                navController.navigateUp()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back button",
+                            tint = Color.White
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    IconButton(
+                        modifier = Modifier
+                            .padding(10.dp),
+                        onClick = {
+                            //mute or unmute sound
+                            isMute.value = !isMute.value
+                            if(isMute.value) {
+                                bgmSound.setVolume(0.0f, 0.0f)
+                            }else{
+                                bgmSound.setVolume(1.0f, 1.0f)
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
+                            contentDescription = "Mute button",
+                            tint = Color.White
+                        )
+                    }
                 }
 
                 Row (
@@ -217,7 +267,13 @@ fun ListCharacters(
                         buttonTextColor = Color.Black,
                         buttonTextSize= 12,
                         clickLogic = {
-                            uriHandler.openUri("https://mario.nintendo.com/quiz/")
+                            coroutineScope.launch {
+                                launch {
+                                    buttonSound.start()
+                                }
+                                delay(500)
+                                uriHandler.openUri("https://mario.nintendo.com/quiz/")
+                            }
                         }
                     )
 
@@ -258,6 +314,50 @@ fun ListCharacters(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun OnLifecycle(
+    buttonSound: MediaPlayer,
+    bgmSound: MediaPlayer,
+    buttonBackSound: MediaPlayer,
+    currentPos: MutableState<Int>,
+    isMute: MutableState<Boolean>
+) {
+    OnLifecycleEvent { _, event ->
+        // do stuff on event
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                buttonSound.isLooping = false
+                buttonBackSound.isLooping = false
+                bgmSound.isLooping = true
+
+                if(isMute.value) {
+                    bgmSound.setVolume(0.0f, 0.0f)
+                }else{
+                    bgmSound.setVolume(1.0f, 1.0f)
+                }
+
+                if (currentPos.value != 0) {
+                    bgmSound.seekTo(currentPos.value)
+                }
+                buttonSound.seekTo(0)
+                buttonBackSound.seekTo(0)
+                bgmSound.start()
+            }
+            Lifecycle.Event.ON_PAUSE -> {
+                currentPos.value = buttonSound.currentPosition
+                bgmSound.pause()
+            }
+            Lifecycle.Event.ON_DESTROY -> {
+                currentPos.value = 0
+
+                bgmSound.stop()
+                bgmSound.release()
+            }
+            else -> {}
         }
     }
 }

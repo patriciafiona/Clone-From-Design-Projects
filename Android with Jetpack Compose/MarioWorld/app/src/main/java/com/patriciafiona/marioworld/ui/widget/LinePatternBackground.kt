@@ -1,7 +1,6 @@
 package com.patriciafiona.marioworld.ui.widget
 
 import android.os.Build
-import android.widget.Space
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background

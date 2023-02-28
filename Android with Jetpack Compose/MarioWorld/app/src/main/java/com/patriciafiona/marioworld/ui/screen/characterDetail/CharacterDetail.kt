@@ -9,9 +9,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.VolumeMute
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -29,12 +31,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.patriciafiona.marioworld.R
 import com.patriciafiona.marioworld.data.entities.Character
 import com.patriciafiona.marioworld.ui.theme.BgGreen
 import com.patriciafiona.marioworld.ui.theme.SuperMarioFont
 import com.patriciafiona.marioworld.ui.widget.*
+import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
 import com.smarttoolfactory.ratingbar.RatingBar
@@ -43,7 +47,8 @@ import com.smarttoolfactory.ratingbar.RatingBar
 @Composable
 fun CharacterDetail(
     navController: NavController,
-    character: Character
+    character: Character,
+    isMute: MutableState<Boolean>
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -53,6 +58,17 @@ fun CharacterDetail(
         red = character.backgroundColor[0],
         green = character.backgroundColor[1],
         blue = character.backgroundColor[2]
+    )
+
+    //Sound effect
+    val maxVolume = 0.1f
+    val currentPos = rememberSaveable{ mutableStateOf(0) }
+    val bgmSound = remember { MediaPlayer.create(context, R.raw.bgm_super_mario_bos) }
+    OnLifecycle(
+        bgmSound = bgmSound,
+        currentPos = currentPos,
+        maxVolume = maxVolume,
+        isMute = isMute
     )
 
     setStatusBarColor(color = characterColor)
@@ -73,7 +89,15 @@ fun CharacterDetail(
                 .fillMaxSize()
                 .background(Color.Black)
         ) {
-            TopSection(characterColor, navController, screenWidth, character)
+            TopSection(
+                characterColor,
+                navController,
+                screenWidth,
+                character,
+                isMute,
+                bgmSound,
+                maxVolume
+            )
 
             Column(
                 modifier = Modifier
@@ -220,7 +244,11 @@ private fun TopSection(
     characterColor: Color,
     navController: NavController,
     screenWidth: Int,
-    character: Character
+    character: Character,
+    isMute: MutableState<Boolean>,
+    bgmSound: MediaPlayer,
+    maxVolume: Float
+
 ) {
     Box(
         modifier = Modifier
@@ -234,19 +262,42 @@ private fun TopSection(
                 )
             )
     ) {
-        IconButton(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(10.dp),
-            onClick = {
-                navController.navigateUp()
+        Row{
+            IconButton(
+                modifier = Modifier
+                    .padding(10.dp),
+                onClick = {
+                    navController.navigateUp()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back button",
+                    tint = Color.White
+                )
             }
-        ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back button",
-                tint = Color.White
-            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            IconButton(
+                modifier = Modifier
+                    .padding(10.dp),
+                onClick = {
+                    //mute or unmute sound
+                    isMute.value = !isMute.value
+                    if(isMute.value) {
+                        bgmSound.setVolume(0.0f, 0.0f)
+                    }else{
+                        bgmSound.setVolume(maxVolume, maxVolume)
+                    }
+                }
+            ) {
+                Icon(
+                    imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
+                    contentDescription = "Mute button",
+                    tint = Color.White
+                )
+            }
         }
         Image(
             painter = painterResource(id = R.drawable.pattern_logos_characters),
@@ -375,5 +426,43 @@ private fun SoundSection(
             painter = painterResource(id = R.drawable.pipe_left),
             contentDescription = "pipe image"
         )
+    }
+}
+
+@Composable
+private fun OnLifecycle(
+    bgmSound: MediaPlayer,
+    currentPos: MutableState<Int>,
+    maxVolume: Float,
+    isMute: MutableState<Boolean>
+) {
+    OnLifecycleEvent { _, event ->
+        // do stuff on event
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                if(isMute.value) {
+                    bgmSound.setVolume(0.0f, 0.0f)
+                }else{
+                    bgmSound.setVolume(maxVolume, maxVolume)
+                }
+
+                bgmSound.isLooping = true
+
+                if (currentPos.value != 0) {
+                    bgmSound.seekTo(currentPos.value)
+                }
+                bgmSound.start()
+            }
+            Lifecycle.Event.ON_PAUSE -> {
+                bgmSound.pause()
+            }
+            Lifecycle.Event.ON_DESTROY -> {
+                currentPos.value = 0
+
+                bgmSound.stop()
+                bgmSound.release()
+            }
+            else -> {}
+        }
     }
 }

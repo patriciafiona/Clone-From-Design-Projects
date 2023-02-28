@@ -3,6 +3,8 @@ package com.patriciafiona.marioworld.navigation
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -16,6 +18,7 @@ import com.patriciafiona.marioworld.ui.screen.onboarding.OnboardingScreen
 @Composable
 fun NavigationBuilder() {
     val navigationController = rememberNavController()
+    val isMute = remember{ mutableStateOf(false) }
 
     NavHost(
         navController = navigationController,
@@ -23,13 +26,13 @@ fun NavigationBuilder() {
     ) {
         composable(route = MarioScreen.OnboardingScreen.route) {
             EnterAnimationFadeIn (durationInMillis = 1550) {
-                OnboardingScreen(navController = navigationController)
+                OnboardingScreen(navController = navigationController, isMute = isMute)
             }
         }
 
         composable(route = MarioScreen.MainScreen.route) {
             EnterAnimationFadeIn (durationInMillis = 550) {
-                MainScreen(navController = navigationController)
+                MainScreen(navController = navigationController, isMute = isMute)
             }
         }
 
@@ -39,7 +42,8 @@ fun NavigationBuilder() {
                 EnterAnimationFadeIn (durationInMillis = 1550) {
                     CharacterDetail(
                         navController = navigationController,
-                        character = data
+                        character = data,
+                        isMute = isMute
                     )
                 }
             }
@@ -47,7 +51,7 @@ fun NavigationBuilder() {
 
         composable(route = MarioScreen.ListCharacterScreen.route) {
             EnterAnimationFadeIn (durationInMillis = 1550) {
-                ListCharacters(navController = navigationController)
+                ListCharacters(navController = navigationController, isMute = isMute)
             }
         }
     }

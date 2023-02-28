@@ -1,5 +1,6 @@
 package com.patriciafiona.marioworld.ui.screen.main
 
+import android.media.MediaPlayer
 import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -12,8 +13,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material.icons.filled.VolumeMute
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -33,6 +37,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -42,16 +47,19 @@ import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.*
 import com.patriciafiona.marioworld.ui.widget.*
 import com.patriciafiona.marioworld.utils.BackPress
+import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
     val uriHandler = LocalUriHandler.current
     val viewModel = MainViewModel()
 
@@ -107,6 +115,17 @@ fun MainScreen(navController: NavController) {
             color02.animateTo(BgOrange, animationSpec = tween(1000))
         }
     }
+
+    //Sound effect
+    val currentPos = rememberSaveable{ mutableStateOf(0) }
+    val buttonSound = remember { MediaPlayer.create(context, R.raw.pause) }
+    val bgmSound = remember { MediaPlayer.create(context, R.raw.bgm_overworld) }
+    OnLifecycle(
+        buttonSound = buttonSound,
+        bgmSound = bgmSound,
+        currentPos = currentPos,
+        isMute = isMute
+    )
 
     //Back press exit attributes
     var showToast by remember { mutableStateOf(false) }
@@ -168,7 +187,12 @@ fun MainScreen(navController: NavController) {
                         .fillMaxWidth()
                         .verticalScroll(scrollState)
                 ) {
-                    TopSection(scrollPos, parallaxLimit)
+                    TopSection(
+                        scrollPos,
+                        parallaxLimit,
+                        isMute,
+                        bgmSound
+                    )
 
                     Box {
                         BoxPatternBackground(
@@ -217,7 +241,13 @@ fun MainScreen(navController: NavController) {
                                 text = stringResource(id = R.string.see_more_news),
                                 icon = Icons.Default.ArrowForwardIos,
                                 clickLogic = {
-                                    uriHandler.openUri("https://mario.nintendo.com/news/")
+                                    coroutineScope.launch {
+                                        launch {
+                                            buttonSound.start()
+                                        }
+                                        delay(500)
+                                        uriHandler.openUri("https://mario.nintendo.com/news/")
+                                    }
                                 }
                             )
                             Spacer(modifier = Modifier.weight(1f))
@@ -246,7 +276,13 @@ fun MainScreen(navController: NavController) {
                                 buttonTextColor = Color.Black,
                                 buttonTextSize= 16,
                                 clickLogic = {
-                                    uriHandler.openUri("https://mario.nintendo.com/history/")
+                                    coroutineScope.launch {
+                                        launch {
+                                            buttonSound.start()
+                                        }
+                                        delay(500)
+                                        uriHandler.openUri("https://mario.nintendo.com/history/")
+                                    }
                                 }
                             )
 
@@ -269,7 +305,13 @@ fun MainScreen(navController: NavController) {
                                 buttonTextColor = Color.Black,
                                 buttonTextSize= 12,
                                 clickLogic = {
-                                    navController.navigate(MarioScreen.ListCharacterScreen.route)
+                                    coroutineScope.launch {
+                                        launch {
+                                            buttonSound.start()
+                                        }
+                                        delay(500)
+                                        navController.navigate(MarioScreen.ListCharacterScreen.route)
+                                    }
                                 }
                             )
 
@@ -294,7 +336,13 @@ fun MainScreen(navController: NavController) {
                                 buttonTextColor = Color.Black,
                                 buttonTextSize= 12,
                                 clickLogic = {
-                                    uriHandler.openUri("https://play.nintendo.com/themes/friends/mario/")
+                                    coroutineScope.launch {
+                                        launch {
+                                            buttonSound.start()
+                                        }
+                                        delay(500)
+                                        uriHandler.openUri("https://play.nintendo.com/themes/friends/mario/")
+                                    }
                                 }
                             )
 
@@ -357,7 +405,12 @@ fun MainScreen(navController: NavController) {
 }
 
 @Composable
-private fun TopSection(scrollPos: Int, parallaxLimit: Int) {
+private fun TopSection(
+    scrollPos: Int,
+    parallaxLimit: Int,
+    isMute: MutableState<Boolean>,
+    bgmSound: MediaPlayer
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -398,6 +451,37 @@ private fun TopSection(scrollPos: Int, parallaxLimit: Int) {
                     )
                 }
         )
+
+        IconButton(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(10.dp)
+                .offset {
+                    IntOffset(
+                        -40,
+                        if (scrollPos < parallaxLimit) {
+                            -50 + (scrollPos * 1.3).toInt()
+                        } else {
+                            -50 + (parallaxLimit * 1.3).toInt()
+                        }
+                    )
+                },
+            onClick = {
+                //mute or unmute sound
+                isMute.value = !isMute.value
+                if(isMute.value) {
+                    bgmSound.setVolume(0.0f, 0.0f)
+                }else{
+                    bgmSound.setVolume(1.0f, 1.0f)
+                }
+            }
+        ) {
+            Icon(
+                imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
+                contentDescription = "Back button",
+                tint = Color.White
+            )
+        }
 
         TrapezoidPatternBackground(
             backgroundColor = Color.DarkGray,
@@ -588,6 +672,47 @@ fun CharacterCardSlider(
                 navController = navController,
                 widthCard = 250
             )
+        }
+    }
+}
+
+@Composable
+private fun OnLifecycle(
+    buttonSound: MediaPlayer,
+    bgmSound: MediaPlayer,
+    currentPos: MutableState<Int>,
+    isMute: MutableState<Boolean>
+) {
+    OnLifecycleEvent { _, event ->
+        // do stuff on event
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                buttonSound.isLooping = false
+                bgmSound.isLooping = true
+
+                if(isMute.value) {
+                    bgmSound.setVolume(0.0f, 0.0f)
+                }else{
+                    bgmSound.setVolume(1.0f, 1.0f)
+                }
+
+                if (currentPos.value != 0) {
+                    bgmSound.seekTo(currentPos.value)
+                }
+                buttonSound.seekTo(0)
+                bgmSound.start()
+            }
+            Lifecycle.Event.ON_PAUSE -> {
+                currentPos.value = bgmSound.currentPosition
+                bgmSound.pause()
+            }
+            Lifecycle.Event.ON_DESTROY -> {
+                currentPos.value = 0
+
+                bgmSound.stop()
+                bgmSound.release()
+            }
+            else -> {}
         }
     }
 }

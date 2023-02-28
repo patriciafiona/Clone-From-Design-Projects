@@ -12,7 +12,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.patriciafiona.marioworld.R
 import com.patriciafiona.marioworld.ui.theme.SuperMarioFont
 
 @Composable
