@@ -33,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -606,7 +607,7 @@ private fun FooterSection(
             }
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(100.dp))
 
         Text(
             modifier = Modifier.fillMaxWidth(),
@@ -617,6 +618,8 @@ private fun FooterSection(
                 textAlign = TextAlign.Center
             )
         )
+
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
@@ -715,4 +718,15 @@ private fun OnLifecycle(
             else -> {}
         }
     }
+}
+
+@Preview
+@Composable
+fun Footer_Preview(){
+    val uriHandler = LocalUriHandler.current
+
+    FooterSection(
+        modifier = Modifier,
+        uriHandler = uriHandler
+    )
 }
