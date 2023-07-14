@@ -1,7 +1,16 @@
 package com.patriciafiona.marioworld.ui.widget
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
@@ -33,20 +42,21 @@ fun CardPattern(
     buttonColor: Color,
     buttonTextColor: Color,
     buttonTextSize: Int,
-    clickLogic: () -> Unit
+    clickLogic: () -> Unit,
+    isExpand: Boolean = false
 ) {
     Box {
         Box(
             modifier = modifier
-                .width(boxWidth.dp)
-                .height(boxHeight.dp)
+                .width(if (isExpand) (boxWidth * 2).dp else boxWidth.dp)
+                .height(if (isExpand) (boxHeight * 2).dp else boxHeight.dp)
         ) {
             BoxCardPatternBackground(
                 backgroundColor = backgroundColor,
                 lineColor = Color.Black.copy(.3f),
                 modifier = Modifier
-                    .width(300.dp)
-                    .height(300.dp)
+                    .width(if (isExpand) 600.dp else 300.dp)
+                    .height(if (isExpand) 600.dp else 300.dp)
                     .align(Alignment.Center)
             )
 
@@ -65,11 +75,11 @@ fun CardPattern(
             Column(
                 modifier = Modifier
                     .fillMaxWidth(.9f)
-                    .height((boxHeight - boxHeight / 1.8).dp)
+                    .height(if (isExpand) (boxHeight - boxHeight / 3.6).dp else (boxHeight - boxHeight / 1.8).dp)
                     .padding(10.dp)
                     .align(Alignment.BottomCenter)
                     .offset {
-                        IntOffset(0, -(boxHeight / 3))
+                        IntOffset(0, if (isExpand) -(boxHeight / 2)-50 else -(boxHeight / 3))
                     },
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -78,7 +88,7 @@ fun CardPattern(
                     headline,
                     style = TextStyle (
                         color = Color.White,
-                        fontSize = textSize.sp,
+                        fontSize = if (isExpand) (textSize * 2).sp else textSize.sp,
                         fontWeight = Bold,
                         textAlign = TextAlign.Center
                     ),
@@ -95,7 +105,7 @@ fun CardPattern(
                             .fillMaxWidth(0.8f),
                         backgroundColor = buttonColor,
                         textColor = buttonTextColor,
-                        textSize = buttonTextSize,
+                        textSize = if (isExpand) (buttonTextSize * 2) else buttonTextSize,
                         text = buttonText,
                         icon = Icons.Default.ArrowForwardIos,
                         clickLogic = clickLogic

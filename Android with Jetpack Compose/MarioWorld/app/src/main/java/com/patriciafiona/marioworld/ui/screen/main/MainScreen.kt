@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -33,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,6 +48,7 @@ import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.*
 import com.patriciafiona.marioworld.ui.widget.*
 import com.patriciafiona.marioworld.utils.BackPress
+import com.patriciafiona.marioworld.utils.ContentType
 import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
@@ -58,11 +59,62 @@ import kotlin.math.absoluteValue
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
+fun MainScreen(navController: NavController, isMute: MutableState<Boolean>, windowSize: WindowWidthSizeClass) {
+    //Adaptive view
+    val viewModel = MainViewModel()
+
+    val contentType: ContentType = when (windowSize) {
+        WindowWidthSizeClass.Compact -> {
+            ContentType.NORMAL
+        }
+        WindowWidthSizeClass.Medium -> {
+            ContentType.NORMAL
+        }
+        WindowWidthSizeClass.Expanded -> {
+            ContentType.LIST_AND_DETAIL
+        }
+        else -> {
+            ContentType.NORMAL
+        }
+    }
+
+    if (contentType == ContentType.NORMAL) {
+        CoreSection(
+            navController = navController,
+            isMute = isMute,
+            viewModel = viewModel
+        )
+    }else{
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+            CoreSection(
+                navController = navController,
+                isMute = isMute,
+                viewModel = viewModel,
+                isExpand = true
+            )
+            Spacer(modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+private fun CoreSection(
+    navController: NavController,
+    isMute: MutableState<Boolean>,
+    viewModel: MainViewModel,
+    isExpand: Boolean = false
+) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val uriHandler = LocalUriHandler.current
-    val viewModel = MainViewModel()
 
     val isLoading = remember{ mutableStateOf(true) }
     LaunchedEffect(key1 = true) {
@@ -72,27 +124,27 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
 
     val scrollState = rememberScrollState()
     val scrollPos = scrollState.value
-    val parallaxLimit = 750
+    val parallaxLimit = if(isExpand) 850 else 750
 
     //Set status & Navigation Bar color
     val color01 = remember { Animatable(BgBlue) }
     val color02 = remember { Animatable(BgPurple) }
 
     setStatusBarColor(color =
-    when (scrollPos) {
-        in 0..850 -> {
-            color01.value
+        when (scrollPos) {
+            in 0..850 -> {
+                color01.value
+            }
+            in 850..2100 -> {
+                Color.DarkGray
+            }
+            else -> {
+                color01.value
+            }
         }
-        in 850..2100 -> {
-            Color.DarkGray
-        }
-        else -> {
-            color01.value
-        }
-    }
     )
     setNavigationBarColor(color =
-        if(scrollPos > 5200){
+        if(scrollPos > 5000){
             MarioRedDark
         }else{
             color02.value
@@ -192,7 +244,8 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                         scrollPos,
                         parallaxLimit,
                         isMute,
-                        bgmSound
+                        bgmSound,
+                        isExpand
                     )
 
                     Box {
@@ -201,17 +254,17 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                             lineColor = Color.Black.copy(.3f),
                             stepValue = 20,
                             modifier = Modifier
-                                .height(220.dp)
+                                .height(if (isExpand) 440.dp else 220.dp)
                                 .fillMaxWidth()
                                 .align(Alignment.BottomCenter)
                         )
 
                         LazyRow(
-                            horizontalArrangement = Arrangement.spacedBy(5.dp),
-                            contentPadding = PaddingValues(horizontal = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(if(isExpand) 10.dp else 5.dp),
+                            contentPadding = PaddingValues(horizontal = if(isExpand) 32.dp else 16.dp),
                         ) {
                             items(viewModel.getAllNews()) { news ->
-                                ItemNews(news = news)
+                                ItemNews(news = news, isExpand = isExpand)
                             }
                         }
                     }
@@ -222,7 +275,7 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                             lineColor = Color.Black.copy(.3f),
                             stepValue = 20,
                             modifier = Modifier
-                                .height(140.dp)
+                                .height(if(isExpand) 280.dp else 140.dp)
                                 .fillMaxWidth(),
                             isTop = false
                         )
@@ -238,9 +291,10 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                                     .fillMaxWidth(0.5f),
                                 backgroundColor = Color.White,
                                 textColor = Color.Black,
-                                textSize = 16,
+                                textSize = if(isExpand) 32 else 16,
                                 text = stringResource(id = R.string.see_more_news),
                                 icon = Icons.Default.ArrowForwardIos,
+                                isBigIcon = true,
                                 clickLogic = {
                                     coroutineScope.launch {
                                         launch {
@@ -276,6 +330,7 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                                 buttonText = stringResource(id = R.string.see_the_timeline),
                                 buttonTextColor = Color.Black,
                                 buttonTextSize= 16,
+                                isExpand = isExpand,
                                 clickLogic = {
                                     coroutineScope.launch {
                                         launch {
@@ -305,6 +360,7 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                                 buttonText = stringResource(id = R.string.meet_the_characters),
                                 buttonTextColor = Color.Black,
                                 buttonTextSize= 12,
+                                isExpand = isExpand,
                                 clickLogic = {
                                     coroutineScope.launch {
                                         launch {
@@ -336,6 +392,7 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                                 buttonText = stringResource(id = R.string.lets_play),
                                 buttonTextColor = Color.Black,
                                 buttonTextSize= 12,
+                                isExpand = isExpand,
                                 clickLogic = {
                                     coroutineScope.launch {
                                         launch {
@@ -352,9 +409,9 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
 
                     }
 
-                    CharacterCardSlider(viewModel, navController)
+                    CharacterCardSlider(viewModel, navController, isExpand)
 
-                    Spacer(modifier = Modifier.height(50.dp))
+                    Spacer(modifier = Modifier.height(if (isExpand) 700.dp else 50.dp))
 
                     Box {
                         TrapezoidPatternBackground(
@@ -397,7 +454,8 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>) {
                             .offset {
                                 IntOffset(0, -150)
                             },
-                        uriHandler = uriHandler
+                        uriHandler = uriHandler,
+                        isExpand = isExpand
                     )
                 }
             }
@@ -410,23 +468,24 @@ private fun TopSection(
     scrollPos: Int,
     parallaxLimit: Int,
     isMute: MutableState<Boolean>,
-    bgmSound: MediaPlayer
+    bgmSound: MediaPlayer,
+    isExpand: Boolean
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(350.dp)
+            .height(if (isExpand) 750.dp else 350.dp)
             .padding(top = 30.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.header_luigi),
             contentDescription = "Header Luigi",
             modifier = Modifier
-                .size(200.dp)
+                .size(if (isExpand) 400.dp else 200.dp)
                 .align(Alignment.CenterStart)
                 .offset {
                     IntOffset(
-                        -80,
+                        if (isExpand) -40 else -80,
                         if (scrollPos < parallaxLimit) {
                             (scrollPos * 1.1).toInt()
                         } else {
@@ -439,11 +498,11 @@ private fun TopSection(
             painter = painterResource(id = R.drawable.header_mario),
             contentDescription = "Header Mario",
             modifier = Modifier
-                .size(300.dp)
+                .size(if (isExpand) 900.dp else 300.dp)
                 .align(Alignment.TopCenter)
                 .offset {
                     IntOffset(
-                        -40,
+                        if (isExpand) -20 else -40,
                         if (scrollPos < parallaxLimit) {
                             -50 + (scrollPos * 1.2).toInt()
                         } else {
@@ -489,7 +548,7 @@ private fun TopSection(
             lineColor = Color.Black.copy(.3f),
             stepValue = 20,
             modifier = Modifier
-                .height(100.dp)
+                .height(if (isExpand) 200.dp else 100.dp)
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
         )
@@ -498,7 +557,8 @@ private fun TopSection(
             modifier = Modifier.align(Alignment.BottomCenter),
             text = stringResource(id = R.string.mario_in_the_news),
             textColor = Color.White,
-            iconImage = R.drawable.icon_01
+            iconImage = R.drawable.icon_01,
+            isExpand = isExpand
         )
     }
 }
@@ -506,7 +566,8 @@ private fun TopSection(
 @Composable
 private fun FooterSection(
     modifier: Modifier = Modifier,
-    uriHandler: UriHandler
+    uriHandler: UriHandler,
+    isExpand: Boolean
 ) {
     Column(
         modifier = modifier
@@ -522,14 +583,14 @@ private fun FooterSection(
             horizontalArrangement = Arrangement.Center
         ) {
             Column(
-                modifier = Modifier.weight(0.5f)
+                modifier = Modifier.weight(if(isExpand) 0.7f else 0.5f)
             ) {
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = stringResource(id = R.string.follow_nintendo),
                     style = TextStyle(
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = 20.sp,
+                        fontSize = if(isExpand) 40.sp else 20.sp,
                         color = Color.White,
                         textAlign = TextAlign.Center
                     )
@@ -583,7 +644,7 @@ private fun FooterSection(
             }
 
             Row(
-                modifier = Modifier.weight(0.5f),
+                modifier = Modifier.weight(if(isExpand) 0.7f else 0.5f),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -592,7 +653,7 @@ private fun FooterSection(
                     contentDescription = "Logo everyone to everyone 10+",
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
-                        .weight(0.5f)
+                        .weight(if(isExpand) 0.3f else 0.5f)
                         .padding(10.dp)
                 )
 
@@ -601,25 +662,25 @@ private fun FooterSection(
                     contentDescription = "Logo esrb privacy certified",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
-                        .weight(0.5f)
+                        .weight(if(isExpand) 0.7f else 0.5f)
                         .padding(10.dp)
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(100.dp))
+        Spacer(modifier = Modifier.height(if(isExpand) 200.dp else 100.dp))
 
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.copyright),
             style = TextStyle(
-                fontSize = 10.sp,
+                fontSize = if(isExpand) 20.sp else 10.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center
             )
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(if(isExpand) 20.dp else 10.dp))
     }
 }
 
@@ -627,14 +688,15 @@ private fun FooterSection(
 @Composable
 fun CharacterCardSlider(
     viewModel: MainViewModel,
-    navController: NavController
+    navController: NavController,
+    isExpand: Boolean
 ) {
     Column {
         Text(
             text = stringResource(id = R.string.characters),
             style = TextStyle(
                 fontFamily = SuperMarioFont,
-                fontSize = 36.sp,
+                fontSize = if(isExpand) 72.sp else 36.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center
             ),
@@ -645,7 +707,7 @@ fun CharacterCardSlider(
 
         HorizontalPager(
             count = viewModel.getAllCharacters().size,
-            contentPadding = PaddingValues(horizontal = 42.dp),
+            contentPadding = PaddingValues(horizontal = if(isExpand) 84.dp else 42.dp),
             modifier = Modifier.fillMaxSize()
         ) { page ->
             ItemCharacterCard(
@@ -673,7 +735,8 @@ fun CharacterCardSlider(
                     .fillMaxWidth(),
                 character = viewModel.getAllCharacters()[page],
                 navController = navController,
-                widthCard = 250
+                widthCard = 250,
+                isExpand = isExpand
             )
         }
     }
@@ -718,15 +781,4 @@ private fun OnLifecycle(
             else -> {}
         }
     }
-}
-
-@Preview
-@Composable
-fun Footer_Preview(){
-    val uriHandler = LocalUriHandler.current
-
-    FooterSection(
-        modifier = Modifier,
-        uriHandler = uriHandler
-    )
 }

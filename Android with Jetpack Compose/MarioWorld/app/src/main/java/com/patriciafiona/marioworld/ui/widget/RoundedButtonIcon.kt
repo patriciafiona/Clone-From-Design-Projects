@@ -26,7 +26,8 @@ fun RoundedButtonIcon(
     textSize: Int,
     text: String,
     icon: ImageVector,
-    clickLogic: () -> Unit
+    clickLogic: () -> Unit,
+    isBigIcon: Boolean = false
 ) {
     Button(
         onClick = clickLogic,
@@ -48,7 +49,7 @@ fun RoundedButtonIcon(
             imageVector = icon,
             "Button Icon",
             tint = textColor,
-            modifier = Modifier.size(15.dp)
+            modifier = Modifier.size(if(isBigIcon) 30.dp else 15.dp)
         )
     }
 }

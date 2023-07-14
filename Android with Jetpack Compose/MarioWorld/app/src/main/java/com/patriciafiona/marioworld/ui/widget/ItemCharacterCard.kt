@@ -6,15 +6,35 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,7 +62,8 @@ fun ItemCharacterCard(
     modifier: Modifier = Modifier,
     character: Character,
     navController: NavController,
-    widthCard: Int
+    widthCard: Int,
+    isExpand: Boolean = false
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -55,7 +76,7 @@ fun ItemCharacterCard(
 
     Card(
         modifier = modifier
-            .width(widthCard.dp)
+            .width(if(isExpand) (widthCard*2).dp else widthCard.dp)
             .padding(vertical = 10.dp, horizontal = 5.dp),
         backgroundColor = Color(
             red = character.backgroundColor[0],
@@ -87,7 +108,7 @@ fun ItemCharacterCard(
                             .fillMaxHeight()
                             .padding(end = 10.dp)
                             .offset {
-                                IntOffset(-50, 0)
+                                IntOffset(if(isExpand) -25 else -50, 0)
                             },
                         painter = painterResource(
                             id = if (expanded) {
@@ -104,14 +125,14 @@ fun ItemCharacterCard(
                     modifier = Modifier
                         .fillMaxWidth(.8f)
                         .offset {
-                            IntOffset(-50, 0)
+                            IntOffset(if(isExpand) -25 else -50, 0)
                         }
                 ) {
                     Text(
                         text = character.name,
                         style = androidx.compose.ui.text.TextStyle(
                             fontFamily = SuperMarioFont,
-                            fontSize = 14.sp,
+                            fontSize = if(isExpand) 28.sp else 14.sp,
                             color = Color.White
                         )
                     )
@@ -119,7 +140,7 @@ fun ItemCharacterCard(
                     Text(
                         text = character.description,
                         style = androidx.compose.ui.text.TextStyle(
-                            fontSize = 12.sp,
+                            fontSize = if(isExpand) 24.sp else 12.sp,
                             color = Color.White,
                             textAlign = TextAlign.Justify
                         ),
@@ -149,7 +170,7 @@ fun ItemCharacterCard(
                                 text = "See details",
                                 style = androidx.compose.ui.text.TextStyle(
                                     color = MarioRed,
-                                    fontSize = 12.sp,
+                                    fontSize = if(isExpand) 24.sp else 12.sp,
                                     fontWeight = FontWeight.Bold
                                 )
                             )
@@ -171,7 +192,7 @@ fun ItemCharacterCard(
                     },
                     modifier = Modifier
                         .offset {
-                            IntOffset(-50, 0)
+                            IntOffset(if(isExpand) -25 else -50, 0)
                         }
                 )
 

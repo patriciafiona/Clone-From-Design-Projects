@@ -6,14 +6,14 @@ plugins {
 
 android {
     namespace 'com.patriciafiona.marioworld'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.patriciafiona.marioworld"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -49,13 +49,13 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation 'androidx.activity:activity-compose:1.6.1'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.activity:activity-compose:1.7.2'
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1'
-    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
+    implementation "androidx.navigation:navigation-compose:2.6.0"
     implementation "androidx.compose.ui:ui-util:$compose_ui_version"
 
     //Rating bar
@@ -66,9 +66,16 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:0.29.1-alpha"
 
     //Material
-    implementation 'androidx.compose.material:material:1.3.1'
-    implementation "androidx.compose.material3:material3:1.1.0-alpha06"
-    implementation "androidx.compose.material:material-icons-extended:1.3.1"
+    implementation 'androidx.compose.material:material:1.4.3'
+    implementation "androidx.compose.material3:material3:1.2.0-alpha03"
+    implementation "androidx.compose.material:material-icons-extended:1.4.3"
+
+    //Adaptive layout
+    implementation "androidx.compose.material3:material3-window-size-class:1.2.0-alpha03"
+
+    //Icon
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_ui_version"
 
     //Rating bar
     implementation 'com.github.SmartToolFactory:Compose-RatingBar:1.1.1'

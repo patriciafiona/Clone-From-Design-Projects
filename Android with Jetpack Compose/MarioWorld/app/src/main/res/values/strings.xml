@@ -25,4 +25,7 @@
     <string name="list_of_characters_headline">From ravishing royalty to menacing monsters, the Mushroom Kingdom has had its share of memorable characters over the years…</string>
     <string name="quiz_headline">Are you a Mushroom Kingdom expert? Test your knowledge of all things Mario!</string>
     <string name="take_the_quiz">Take the Quiz</string>
+    <string name="news">News</string>
+    <string name="learn">Learn</string>
+    <string name="navigation_drawer">Navigation drawer</string>
 </resources>

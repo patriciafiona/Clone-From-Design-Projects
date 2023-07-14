@@ -2,6 +2,7 @@ package com.patriciafiona.marioworld.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,7 +17,7 @@ import com.patriciafiona.marioworld.ui.screen.onboarding.OnboardingScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NavigationBuilder() {
+fun NavigationBuilder(windowSize: WindowWidthSizeClass) {
     val navigationController = rememberNavController()
     val isMute = remember{ mutableStateOf(false) }
 
@@ -32,7 +33,7 @@ fun NavigationBuilder() {
 
         composable(route = MarioScreen.MainScreen.route) {
             EnterAnimationFadeIn (durationInMillis = 550) {
-                MainScreen(navController = navigationController, isMute = isMute)
+                MainScreen(navController = navigationController, isMute = isMute, windowSize)
             }
         }
 
@@ -43,7 +44,8 @@ fun NavigationBuilder() {
                     CharacterDetail(
                         navController = navigationController,
                         character = data,
-                        isMute = isMute
+                        isMute = isMute,
+                        windowSize
                     )
                 }
             }

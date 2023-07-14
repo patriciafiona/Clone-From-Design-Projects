@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -48,7 +49,8 @@ import com.smarttoolfactory.ratingbar.RatingBar
 fun CharacterDetail(
     navController: NavController,
     character: Character,
-    isMute: MutableState<Boolean>
+    isMute: MutableState<Boolean>,
+    windowSize: WindowWidthSizeClass
 ) {
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
