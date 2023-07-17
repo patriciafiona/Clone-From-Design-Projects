@@ -1,6 +1,7 @@
 package com.patriciafiona.marioworld.ui.screen.main
 
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Build
 import android.widget.Toast
@@ -27,6 +28,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.UriHandler
@@ -58,7 +60,6 @@ import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController, isMute: MutableState<Boolean>, windowSize: WindowWidthSizeClass) {
     //Adaptive view
@@ -87,7 +88,8 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>, wind
         CoreSection(
             navController = navController,
             isMute = isMute,
-            viewModel = viewModel
+            viewModel = viewModel,
+            contentType = contentType
         )
     }else{
         Row(
@@ -102,7 +104,8 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>, wind
                 navController = navController,
                 isMute = isMute,
                 viewModel = viewModel,
-                isExpand = true
+                isExpand = true,
+                contentType = contentType
             )
             Spacer(modifier = Modifier.weight(1f))
         }
@@ -115,7 +118,8 @@ private fun CoreSection(
     navController: NavController,
     isMute: MutableState<Boolean>,
     viewModel: MainViewModel,
-    isExpand: Boolean = false
+    isExpand: Boolean = false,
+    contentType: ContentType
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -148,10 +152,12 @@ private fun CoreSection(
             }
         }
     )
-    setNavigationBarColor(color =
-        if(scrollPos > 5000){
+
+    setNavigationBarColor(
+        color =
+        if (scrollPos > 5000) {
             MarioRedDark
-        }else{
+        } else {
             color02.value
         }
     )
@@ -175,7 +181,7 @@ private fun CoreSection(
     }
 
     //Sound effect
-    val currentPos = rememberSaveable{ mutableStateOf(0) }
+    val currentPos = rememberSaveable{ mutableIntStateOf(0) }
     val buttonSound = remember { MediaPlayer.create(context, R.raw.pause) }
     val bgmSound = remember { MediaPlayer.create(context, R.raw.bgm_overworld) }
     OnLifecycle(
@@ -227,14 +233,42 @@ private fun CoreSection(
                     .alpha(.5f)
             )
 
-            if(scrollPos > 5800 && !isLoading.value) {
-                Box(
-                    modifier = Modifier
-                        .height(200.dp)
-                        .fillMaxWidth()
-                        .background(MarioRedDark)
-                        .align(Alignment.BottomCenter)
-                )
+            if(contentType == ContentType.LARGE) {
+                val configuration = LocalConfiguration.current
+                when (configuration.orientation) {
+                    Configuration.ORIENTATION_LANDSCAPE -> {
+                        if(scrollPos > 7000 && !isLoading.value) {
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .background(MarioRedDark)
+                                    .align(Alignment.BottomCenter)
+                            )
+                        }
+                    }
+                    else -> {
+                        if(scrollPos > 5800 && !isLoading.value) {
+                            Box(
+                                modifier = Modifier
+                                    .height(200.dp)
+                                    .fillMaxWidth()
+                                    .background(MarioRedDark)
+                                    .align(Alignment.BottomCenter)
+                            )
+                        }
+                    }
+                }
+            }else{
+                if(scrollPos > 5800 && !isLoading.value) {
+                    Box(
+                        modifier = Modifier
+                            .height(200.dp)
+                            .fillMaxWidth()
+                            .background(MarioRedDark)
+                            .align(Alignment.BottomCenter)
+                    )
+                }
             }
 
             if(isLoading.value) {
