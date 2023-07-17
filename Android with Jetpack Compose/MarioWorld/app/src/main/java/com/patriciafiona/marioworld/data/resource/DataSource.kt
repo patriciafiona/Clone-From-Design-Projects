@@ -6,43 +6,6 @@ import com.patriciafiona.marioworld.data.entities.Character
 import com.patriciafiona.marioworld.data.entities.News
 
 object DataSource {
-
-    val defaultCharacter = Character(
-        name = "Mario",
-        description = "The main hero of the Mushroom Kingdom. Mario is always bright and cheerful and instantly recognizable with his blue overalls, red cap, and trademark moustache.\n" +
-                "\n" +
-                "He's a trusted friend of Princess Peach, and he and his brother Luigi are known across the land for their acts of bravery.\n" +
-                "\n" +
-                "Mario excels at sports including tennis, golf, baseball, soccer, and even kart racing. He's good at all of them! He's a plumber by profession but is really a jack of all trades.\n" +
-                "\n" +
-                "He uses his masterful jumping ability and a variety of power-ups to take on his archrival, Bowser.",
-        imageOpen = R.drawable.mario_open,
-        imageClose = R.drawable.mario_closed,
-        imageFull = R.drawable.mario_open_2,
-        backgroundColor = arrayListOf(224, 18, 15),
-        characterSound = arrayListOf(
-            R.raw.sound_mario_0, R.raw.sound_mario_1, R.raw.sound_mario_2
-        ),
-        fullName = "Mario Mario",
-        species = "Human",
-        dialog = "It's-a me, Mario!",
-        ability = Ability(
-            acceleration = 8.0,
-            maxSpeed = 8.0,
-            technique = 8.0,
-            power = 8.0,
-            stamina = 8.0
-        )
-    )
-
-    val defaultNews: News = News(
-        title = "Discover the all-new course Piranha Plant Cove with the Exploration Tour",
-        headline = "Discover a brand-new course in the Mario Kart™ Tour game with the Exploration Tour, the latest limited-time event in the Mario Kart Tour game, happening now.",
-        link = "https://mario.nintendo.com/news/mobilenews-discover-the-all-new-course-piranha-plant-cove-with-the-exploration-tour/",
-        image = R.drawable.news_01,
-        date = "02.10.2023"
-    )
-
     fun characters(): ArrayList<Character> = arrayListOf(
         Character(
             name = "Mario",

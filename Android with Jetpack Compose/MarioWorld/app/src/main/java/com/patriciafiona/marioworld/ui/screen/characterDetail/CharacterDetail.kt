@@ -1,23 +1,30 @@
 package com.patriciafiona.marioworld.ui.screen.characterDetail
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
@@ -30,15 +37,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.marioworld.R
 import com.patriciafiona.marioworld.data.entities.Character
+import com.patriciafiona.marioworld.data.resource.DataSource
 import com.patriciafiona.marioworld.ui.theme.BgGreen
 import com.patriciafiona.marioworld.ui.theme.SuperMarioFont
 import com.patriciafiona.marioworld.ui.widget.*
+import com.patriciafiona.marioworld.utils.ContentType
 import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
@@ -52,6 +63,25 @@ fun CharacterDetail(
     isMute: MutableState<Boolean>,
     windowSize: WindowWidthSizeClass
 ) {
+    val contentType: ContentType = when (windowSize) {
+        WindowWidthSizeClass.Compact -> {
+            ContentType.NORMAL
+        }
+        WindowWidthSizeClass.Medium -> {
+            ContentType.NORMAL
+        }
+        WindowWidthSizeClass.Expanded -> {
+            ContentType.SIDE_BY_SIDE
+        }
+        else -> {
+            ContentType.NORMAL
+        }
+    }
+
+    if(contentType == ContentType.NORMAL) {
+        LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+    }
+
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
@@ -64,7 +94,7 @@ fun CharacterDetail(
 
     //Sound effect
     val maxVolume = 0.1f
-    val currentPos = rememberSaveable{ mutableStateOf(0) }
+    val currentPos = rememberSaveable{ mutableIntStateOf(0) }
     val bgmSound = remember { MediaPlayer.create(context, R.raw.bgm_super_mario_bos) }
     OnLifecycle(
         bgmSound = bgmSound,
@@ -85,122 +115,274 @@ fun CharacterDetail(
     sound02.isLooping = false
     sound03.isLooping = false
 
-    Column {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black)
-        ) {
-            TopSection(
-                characterColor,
-                navController,
-                screenWidth,
-                character,
-                isMute,
-                bgmSound,
-                maxVolume
-            )
-
+    if (contentType == ContentType.NORMAL) {
+        Column {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .verticalScroll(rememberScrollState())
+                    .fillMaxSize()
                     .background(Color.Black)
-                    .padding(top = 20.dp, bottom = 30.dp)
             ) {
-                Text(
-                    text = character.name,
-                    style = TextStyle(
-                        fontFamily = SuperMarioFont,
-                        fontSize = 36.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 2.dp)
-                )
-                Text(
-                    text = "${character.fullName} - ${character.species}",
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        color = Color.Gray,
-                        textAlign = TextAlign.Center,
-                        fontStyle = FontStyle.Italic
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+                TopSectionNormal(
+                    characterColor,
+                    navController,
+                    screenWidth,
+                    character,
+                    isMute,
+                    bgmSound,
+                    maxVolume
                 )
 
-                Spacer(modifier = Modifier.height(10.dp))
-
-                SoundSection(sound01, characterColor, sound02, sound03)
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                TitleWithIcon(
-                    text = stringResource(id = R.string.character_statistic),
-                    textColor = Color.White,
-                    iconImage = R.drawable.icon_01
-                )
-
-                Column(
+                ScrollContentSection(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Black), character, sound01, characterColor, sound02, sound03)
+            }
+        }
+    }else{
+        //SIDE by SIDE VIEW
+        val configuration = LocalConfiguration.current
+        when (configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 20.dp, start = 20.dp, end = 20.dp)
+                        .fillMaxSize()
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    characterColor, Color.Black
+                                )
+                            )
+                        )
                 ) {
-                    StatisticData(
-                        text = stringResource(id = R.string.acceleration),
-                        rating = character.ability.acceleration.toFloat()/2
+                    Row(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .height(50.dp)
+                    ) {
+                        IconButton(
+                            modifier = Modifier
+                                .padding(10.dp),
+                            onClick = {
+                                navController.navigateUp()
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "Back button",
+                                tint = Color.White
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        IconButton(
+                            modifier = Modifier
+                                .padding(10.dp),
+                            onClick = {
+                                //mute or unmute sound
+                                isMute.value = !isMute.value
+                                if (isMute.value) {
+                                    bgmSound.setVolume(0.0f, 0.0f)
+                                } else {
+                                    bgmSound.setVolume(maxVolume, maxVolume)
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = if (isMute.value) {
+                                    Icons.Default.VolumeMute
+                                } else {
+                                    Icons.Default.VolumeUp
+                                },
+                                contentDescription = "Mute button",
+                                tint = Color.White,
+                                modifier = Modifier.size(120.dp),
+                            )
+                        }
+                    }
+                    Image(
+                        painter = painterResource(id = R.drawable.pattern_logos_characters),
+                        contentDescription = "Pattern Background",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .alpha(.5f)
                     )
-                    StatisticData(
-                        text = stringResource(id = R.string.max_speed),
-                        rating = character.ability.maxSpeed.toFloat()/2
-                    )
-                    StatisticData(
-                        text = stringResource(id = R.string.technique),
-                        rating = character.ability.technique.toFloat()/2
-                    )
-                    StatisticData(
-                        text = stringResource(id = R.string.power),
-                        rating = character.ability.power.toFloat()/2
-                    )
-                    StatisticData(
-                        text = stringResource(id = R.string.stamina),
-                        rating = character.ability.stamina.toFloat()/2
-                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight(.97f)
+                            .padding(50.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth(.7f)
+                                    .padding(30.dp)
+                                    .fillMaxHeight(.6f)
+                            ) {
+                                CircleRing(
+                                    modifier = Modifier
+                                        .align(Alignment.Center),
+                                    size = screenWidth - (screenWidth * 0.2).toInt(),
+                                    color = Color.LightGray
+                                )
+
+                                Image(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .padding(20.dp)
+                                        .align(Alignment.Center),
+                                    painter = painterResource(
+                                        id = character.imageFull ?: character.imageOpen
+                                    ),
+                                    contentDescription = "Character image",
+                                    contentScale = ContentScale.FillHeight
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+
+                        ScrollContentSection(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 20.dp)
+                                .clip(RoundedCornerShape(20.dp)),
+                            character,
+                            sound01,
+                            characterColor,
+                            sound02,
+                            sound03,
+                            isLarge = true
+                        )
+                    }
                 }
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                TitleWithIcon(
-                    text = stringResource(id = R.string.description),
-                    textColor = Color.White,
-                    iconImage = R.drawable.icon_02
-                )
-
-                ExpandableText(
-                    text = character.description,
+            }
+            else -> {
+                //Same as Normal but in Bigger Size
+                Box(
                     modifier = Modifier
-                        .padding(horizontal = 20.dp),
-                    minimizedMaxLines = 3,
-                    textStyle = TextStyle(
-                        color = Color.LightGray,
-                        fontSize = 16.sp,
-                    )
-                )
+                        .fillMaxSize()
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    characterColor, Color.Black
+                                )
+                            )
+                        )
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .height(50.dp)
+                    ) {
+                        IconButton(
+                            modifier = Modifier
+                                .padding(10.dp),
+                            onClick = {
+                                navController.navigateUp()
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "Back button",
+                                tint = Color.White
+                            )
+                        }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.weight(1f))
 
-                Row {
-                    Spacer(modifier = Modifier.weight(1f))
-                    DialogBalloon(
-                        modifier = Modifier.width(300.dp),
-                        text = "\"${character.dialog}\" - ${character.name}",
-                        balloonColor = BgGreen,
-                        textColor = Color.White
+                        IconButton(
+                            modifier = Modifier
+                                .padding(10.dp),
+                            onClick = {
+                                //mute or unmute sound
+                                isMute.value = !isMute.value
+                                if (isMute.value) {
+                                    bgmSound.setVolume(0.0f, 0.0f)
+                                } else {
+                                    bgmSound.setVolume(maxVolume, maxVolume)
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = if (isMute.value) {
+                                    Icons.Default.VolumeMute
+                                } else {
+                                    Icons.Default.VolumeUp
+                                },
+                                contentDescription = "Mute button",
+                                tint = Color.White,
+                                modifier = Modifier.size(120.dp),
+                            )
+                        }
+                    }
+                    Image(
+                        painter = painterResource(id = R.drawable.pattern_logos_characters),
+                        contentDescription = "Pattern Background",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .alpha(.5f)
                     )
+
+                    Column(
+                        modifier = Modifier.fillMaxSize(.97f)
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth(.6f)
+                                    .padding(30.dp)
+                                    .fillMaxHeight(.4f)
+                            ) {
+                                CircleRing(
+                                    modifier = Modifier
+                                        .align(Alignment.Center),
+                                    size = screenWidth - (screenWidth * 0.2).toInt(),
+                                    color = Color.LightGray
+                                )
+
+                                Image(
+                                    modifier = Modifier
+                                        .fillMaxHeight()
+                                        .padding(20.dp)
+                                        .align(Alignment.Center),
+                                    painter = painterResource(
+                                        id = character.imageFull ?: character.imageOpen
+                                    ),
+                                    contentDescription = "Character image",
+                                    contentScale = ContentScale.FillHeight
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+
+                        ScrollContentSection(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 20.dp)
+                                .clip(RoundedCornerShape(20.dp)),
+                            character,
+                            sound01,
+                            characterColor,
+                            sound02,
+                            sound03,
+                            isLarge = true
+                        )
+                    }
                 }
             }
         }
@@ -208,9 +390,130 @@ fun CharacterDetail(
 }
 
 @Composable
+private fun ScrollContentSection(
+    modifier: Modifier,
+    character: Character,
+    sound01: MediaPlayer,
+    characterColor: Color,
+    sound02: MediaPlayer,
+    sound03: MediaPlayer,
+    isLarge: Boolean = false
+) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(top = 20.dp, bottom = 30.dp)
+    ) {
+        Text(
+            text = character.name,
+            style = TextStyle(
+                fontFamily = SuperMarioFont,
+                fontSize = if(isLarge) 72.sp else 36.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 2.dp)
+        )
+        Text(
+            text = "${character.fullName} - ${character.species}",
+            style = TextStyle(
+                fontSize = if(isLarge) 24.sp else 12.sp,
+                color = if(isLarge) Color.LightGray else Color.Gray,
+                textAlign = TextAlign.Center,
+                fontStyle = FontStyle.Italic
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        SoundSection(sound01, characterColor, sound02, sound03, isLarge)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        TitleWithIcon(
+            text = stringResource(id = R.string.character_statistic),
+            textColor = Color.White,
+            iconImage = R.drawable.icon_01,
+            textSize = if(isLarge) 40 else 20
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 20.dp, start = 20.dp, end = 20.dp)
+        ) {
+            StatisticData(
+                text = stringResource(id = R.string.acceleration),
+                rating = character.ability.acceleration.toFloat() / 2,
+                isLarge = isLarge
+            )
+            StatisticData(
+                text = stringResource(id = R.string.max_speed),
+                rating = character.ability.maxSpeed.toFloat() / 2,
+                isLarge = isLarge
+            )
+            StatisticData(
+                text = stringResource(id = R.string.technique),
+                rating = character.ability.technique.toFloat() / 2,
+                isLarge = isLarge
+            )
+            StatisticData(
+                text = stringResource(id = R.string.power),
+                rating = character.ability.power.toFloat() / 2,
+                isLarge = isLarge
+            )
+            StatisticData(
+                text = stringResource(id = R.string.stamina),
+                rating = character.ability.stamina.toFloat() / 2,
+                isLarge = isLarge
+            )
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        TitleWithIcon(
+            text = stringResource(id = R.string.description),
+            textColor = Color.White,
+            iconImage = R.drawable.icon_02,
+            textSize = if(isLarge) 40 else 20
+        )
+
+        ExpandableText(
+            text = character.description,
+            modifier = Modifier
+                .padding(horizontal = 20.dp),
+            minimizedMaxLines = if(isLarge) 4 else 3,
+            textStyle = TextStyle(
+                color = Color.LightGray,
+                fontSize = if(isLarge) 32.sp else 16.sp,
+            )
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Row {
+            Spacer(modifier = Modifier.weight(1f))
+            DialogBalloon(
+                modifier = Modifier.width(if(isLarge) 600.dp else 300.dp),
+                text = "\"${character.dialog}\" - ${character.name}",
+                balloonColor = BgGreen,
+                textColor = Color.White,
+                isLarge = isLarge
+            )
+        }
+    }
+}
+
+@Composable
 fun StatisticData(
     text: String,
-    rating: Float
+    rating: Float,
+    isLarge: Boolean
 ) {
     //Star rating
     val imageForeground = ImageBitmap.imageResource(id = R.drawable.star_foreground)
@@ -226,23 +529,23 @@ fun StatisticData(
             text = text,
             style = TextStyle(
                 color = Color.White,
-                fontSize = 14.sp
+                fontSize = if(isLarge) 28.sp else 14.sp
             )
         )
         RatingBar(
             rating = rating,
-            space = 2.dp,
+            space = if(isLarge) 4.dp else 2.dp,
             imageEmpty = imageBackground,
             imageFilled = imageForeground,
             animationEnabled = true,
             gestureEnabled = false,
-            itemSize = 20.dp
+            itemSize = if(isLarge) 40.dp else 20.dp
         )
     }
 }
 
 @Composable
-private fun TopSection(
+private fun TopSectionNormal(
     characterColor: Color,
     navController: NavController,
     screenWidth: Int,
@@ -341,7 +644,8 @@ private fun SoundSection(
     sound01: MediaPlayer,
     characterColor: Color,
     sound02: MediaPlayer,
-    sound03: MediaPlayer
+    sound03: MediaPlayer,
+    isLarge: Boolean
 ) {
     Box(
         modifier = Modifier
@@ -350,7 +654,7 @@ private fun SoundSection(
     ) {
         Image(
             modifier = Modifier
-                .fillMaxWidth(.25f)
+                .fillMaxWidth(if(isLarge) .5f else .25f)
                 .align(Alignment.CenterStart),
             painter = painterResource(id = R.drawable.pipe_right),
             contentDescription = "pipe image",
@@ -423,7 +727,7 @@ private fun SoundSection(
 
         Image(
             modifier = Modifier
-                .fillMaxWidth(.25f)
+                .fillMaxWidth(if(isLarge) .5f else .25f)
                 .align(Alignment.CenterEnd),
             painter = painterResource(id = R.drawable.pipe_left),
             contentDescription = "pipe image"
@@ -467,4 +771,22 @@ private fun OnLifecycle(
             else -> {}
         }
     }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@Preview
+@Composable
+fun CharacterDetailPreview(){
+    val navController: NavController = rememberNavController()
+    val character: Character = DataSource.characters()[0]
+    val isMute: MutableState<Boolean> = remember { mutableStateOf(false) }
+    val windowSize: WindowWidthSizeClass = calculateWindowSizeClass(LocalContext.current as Activity).widthSizeClass
+
+    CharacterDetail(
+        navController = navController,
+        character = character,
+        isMute = isMute,
+        windowSize = windowSize
+    )
 }

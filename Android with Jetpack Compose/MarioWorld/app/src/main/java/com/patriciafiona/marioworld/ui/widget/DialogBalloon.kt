@@ -2,10 +2,21 @@ package com.patriciafiona.marioworld.ui.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -24,15 +35,18 @@ fun DialogBalloon(
     modifier: Modifier = Modifier,
     text: String,
     balloonColor: Color,
-    textColor: Color
+    textColor: Color,
+    isLarge: Boolean
 ) {
     Row(modifier = modifier
         .padding(10.dp)
-        .fillMaxWidth()
+        .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth(.6f)
+                .fillMaxWidth(if(isLarge) .55f else .6f)
                 .height(IntrinsicSize.Max)
         ) {
             Column (
@@ -50,7 +64,7 @@ fun DialogBalloon(
                     text = text,
                     style = TextStyle(
                         color = textColor,
-                        fontSize = 12.sp,
+                        fontSize = if(isLarge) 24.sp  else 12.sp,
                         textAlign = TextAlign.Center,
                         fontStyle = FontStyle.Italic
                     )
@@ -82,7 +96,7 @@ fun DialogBalloon(
 
 @Preview
 @Composable
-fun DialogBalloonPreview() {
+fun DialogBalloonNormalPreview() {
     DialogBalloon(
         modifier = Modifier
             .width(300.dp),
@@ -90,5 +104,20 @@ fun DialogBalloonPreview() {
                 "I'll hunt them down through every corner of my island, until I have every last banana from my hoard back!",
         balloonColor = BgGreen,
         textColor = Color.White,
+        isLarge = false
+    )
+}
+
+@Preview
+@Composable
+fun DialogBalloonLargePreview() {
+    DialogBalloon(
+        modifier = Modifier
+            .width(300.dp),
+        text = "My bananas and my buddy, Diddy Kong, they are gone! The Kremlings will pay! " +
+                "I'll hunt them down through every corner of my island, until I have every last banana from my hoard back!",
+        balloonColor = BgGreen,
+        textColor = Color.White,
+        isLarge = true
     )
 }

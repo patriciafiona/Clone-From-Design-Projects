@@ -1,9 +1,13 @@
 package com.patriciafiona.marioworld.ui.screen.onboarding
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,7 +24,9 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,11 +46,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
 import com.patriciafiona.marioworld.R
@@ -52,6 +60,7 @@ import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.MarioRed
 import com.patriciafiona.marioworld.ui.theme.MarioRedDark
 import com.patriciafiona.marioworld.ui.widget.CircleRing
+import com.patriciafiona.marioworld.ui.widget.LockScreenOrientation
 import com.patriciafiona.marioworld.utils.ContentType
 import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
@@ -83,6 +92,11 @@ fun OnboardingScreen(
             ContentType.NORMAL
         }
     }
+    val isLarge = contentType == ContentType.LARGE
+
+    if(contentType == ContentType.NORMAL) {
+        LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+    }
 
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
@@ -101,11 +115,11 @@ fun OnboardingScreen(
     val interactionSource = remember { MutableInteractionSource() }
     val offsetX = remember { Animatable(0f) }
 
-    val screenWidth = configuration.screenWidthDp + if (contentType == ContentType.LARGE) 40 else 20
-    val screenHeight = configuration.screenHeightDp + if (contentType == ContentType.LARGE) 40 else 20
+    val screenWidth = configuration.screenWidthDp + if (isLarge) 40 else 20
+    val screenHeight = configuration.screenHeightDp + if (isLarge) 40 else 20
 
-    val buttonSize = if (contentType == ContentType.LARGE) 140 else 70
-    val buttonBgWidth = remember { Animatable(if (contentType == ContentType.LARGE) 140f else 70f) }
+    val buttonSize = if (isLarge) 140 else 70
+    val buttonBgWidth = remember { Animatable(if (isLarge) 140f else 70f) }
     val isMoveScreen = remember{ mutableStateOf(false) }
 
     //Sensor for x position
@@ -128,7 +142,7 @@ fun OnboardingScreen(
         }
     }
 
-    val depthMultiplier = if (contentType == ContentType.LARGE) 40 else 20
+    val depthMultiplier = if (isLarge) 40 else 20
     val roll by remember { derivedStateOf { (data?.roll ?: 0f) * depthMultiplier } }
 
     //Scale Animation
@@ -192,7 +206,7 @@ fun OnboardingScreen(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .scale(scale01.value)
-                .padding(if (contentType == ContentType.LARGE) 30.dp else 10.dp),
+                .padding(if (isLarge) 30.dp else 10.dp),
             onClick = {
                 //mute or unmute sound
                 isMute.value = !isMute.value
@@ -204,48 +218,41 @@ fun OnboardingScreen(
             }
         ) {
             androidx.compose.material3.Icon(
-                modifier = Modifier.size(if (contentType == ContentType.LARGE) 120.dp else 20.dp),
+                modifier = Modifier.size(if (isLarge) 120.dp else 20.dp),
                 imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
                 contentDescription = "Back button",
                 tint = Color.White
             )
         }
-
-        Box(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CircleRing(
-                modifier = Modifier.align(Alignment.Center),
-                size = screenWidth - (screenWidth * 0.2).toInt(),
-                color = Color.LightGray
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.mario_run),
-                contentDescription = "Mario",
-                modifier = Modifier
-                    .fillMaxSize(.8f)
-                    .align(Alignment.Center)
-                    .scale(scale01.value)
-                    .offset {
-                        IntOffset(
-                            (roll * 0.5).dp.roundToPx(), 0
-                        )
-                    }
-            )
+        
+        if(isLarge){
+            val configuration = LocalConfiguration.current
+            when (configuration.orientation) {
+                Configuration.ORIENTATION_LANDSCAPE -> {
+                    //LARGE IN BIG SCREEN - LANDSCAPE
+                    MarioImage(screenWidth, scale01, roll, isLarge)
+                }
+                else -> {
+                    //LARGE IN BIG SCREEN - PORTRAIT
+                    MarioImage(screenWidth, scale01, roll)
+                }
+            }
+        }else{
+            //NORMAL VIEW
+            MarioImage(screenWidth, scale01, roll)
         }
 
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(.2f)
+                .fillMaxHeight(.3f)
                 .background(Color.White)
                 .align(Alignment.BottomCenter)
                 .scale(scale03.value)
         ) {
             Box(
                 modifier = Modifier
-                    .width(if (contentType == ContentType.LARGE) 600.dp else 300.dp)
+                    .width(if (isLarge) 600.dp else 300.dp)
                     .height(buttonSize.dp)
                     .align(Alignment.Center)
                     .clip(CircleShape)
@@ -267,7 +274,7 @@ fun OnboardingScreen(
                     style = TextStyle(
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        fontSize = if (contentType == ContentType.LARGE) 32.sp else 16.sp
+                        fontSize = if (isLarge) 32.sp else 16.sp
                     )
                 )
 
@@ -332,7 +339,7 @@ fun OnboardingScreen(
                                             }
                                         }
                                         coroutineScope.launch {
-                                            buttonBgWidth.snapTo(buttonBgWidth.value + if (contentType == ContentType.LARGE) (dragAmount.x * 0.6f) else (dragAmount.x * 0.3f))
+                                            buttonBgWidth.snapTo(buttonBgWidth.value + if (isLarge) (dragAmount.x * 0.6f) else (dragAmount.x * 0.3f))
                                             offsetX.snapTo(offsetX.value + dragAmount.x.toInt())
                                         }
                                     } else {
@@ -389,15 +396,82 @@ fun OnboardingScreen(
             }
         }
 
+        if(isLarge){
+            val configuration = LocalConfiguration.current
+            when (configuration.orientation) {
+                Configuration.ORIENTATION_LANDSCAPE -> {
+                    //LARGE IN BIG SCREEN - LANDSCAPE
+                    Image(
+                        painter = painterResource(id = R.drawable.mario_txt),
+                        contentDescription = "Mario Text",
+                        modifier = Modifier
+                            .fillMaxWidth(.3f)
+                            .align(Alignment.Center)
+                            .scale(scale02.value)
+                            .offset {
+                                IntOffset(0, (screenHeight * 0.25).toInt())
+                            }
+                    )
+                }
+                Configuration.ORIENTATION_PORTRAIT -> {
+                    //LARGE IN BIG SCREEN - PORTRAIT
+                    Image(
+                        painter = painterResource(id = R.drawable.mario_txt),
+                        contentDescription = "Mario Text",
+                        modifier = Modifier
+                            .fillMaxWidth(.8f)
+                            .align(Alignment.Center)
+                            .scale(scale02.value)
+                            .offset {
+                                IntOffset(0, (screenHeight * 0.3).toInt())
+                            }
+                    )
+                }
+            }
+        }else{
+            //NORMAL VIEW
+            Image(
+                painter = painterResource(id = R.drawable.mario_txt),
+                contentDescription = "Mario Text",
+                modifier = Modifier
+                    .fillMaxWidth(.8f)
+                    .align(Alignment.Center)
+                    .scale(scale02.value)
+                    .offset {
+                        IntOffset(0, (screenHeight * 0.55).toInt())
+                    }
+            )
+        }
+    }
+}
+
+@Composable
+private fun MarioImage(
+    screenWidth: Int,
+    scale01: Animatable<Float, AnimationVector1D>,
+    roll: Float,
+    isLarge: Boolean = false
+) {
+    Box(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        CircleRing(
+            modifier = Modifier.align(Alignment.Center),
+            size = if(isLarge) screenWidth - (screenWidth * 0.65).toInt() else screenWidth - (screenWidth * 0.2).toInt(),
+            color = Color.LightGray
+        )
+
         Image(
-            painter = painterResource(id = R.drawable.mario_txt),
-            contentDescription = "Mario Text",
+            painter = painterResource(id = R.drawable.mario_run),
+            contentDescription = "Mario",
             modifier = Modifier
-                .fillMaxWidth(.8f)
+                .fillMaxSize(if(isLarge) .6f else .8f)
                 .align(Alignment.Center)
-                .scale(scale02.value)
+                .scale(scale01.value)
                 .offset {
-                    IntOffset(0, if (contentType == ContentType.LARGE) (screenHeight * 0.38).toInt() else (screenHeight * 0.8).toInt())
+                    IntOffset(
+                        (roll * 0.5).dp.roundToPx(), 0
+                    )
                 }
         )
     }
@@ -438,4 +512,19 @@ private fun OnLifecycle(
             else -> {}
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@Preview
+@Composable
+fun OnboardingScreenPreview(){
+    val navController: NavController = rememberNavController()
+    val isMute: MutableState<Boolean> = remember { mutableStateOf(false) }
+    val windowSize: WindowWidthSizeClass = calculateWindowSizeClass(LocalContext.current as Activity).widthSizeClass
+
+    OnboardingScreen(
+        navController = navController,
+        isMute = isMute,
+        windowSize = windowSize
+    )
 }

@@ -1,5 +1,6 @@
 package com.patriciafiona.marioworld.ui.screen.main
 
+import android.content.pm.ActivityInfo
 import android.media.MediaPlayer
 import android.os.Build
 import android.widget.Toast
@@ -76,6 +77,10 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>, wind
         else -> {
             ContentType.NORMAL
         }
+    }
+
+    if(contentType == ContentType.NORMAL) {
+        LockScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 
     if (contentType == ContentType.NORMAL) {
