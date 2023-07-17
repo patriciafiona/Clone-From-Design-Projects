@@ -71,7 +71,7 @@ fun MainScreen(navController: NavController, isMute: MutableState<Boolean>, wind
             ContentType.NORMAL
         }
         WindowWidthSizeClass.Expanded -> {
-            ContentType.LIST_AND_DETAIL
+            ContentType.LARGE
         }
         else -> {
             ContentType.NORMAL
@@ -475,7 +475,7 @@ private fun TopSection(
         modifier = Modifier
             .fillMaxWidth()
             .height(if (isExpand) 750.dp else 350.dp)
-            .padding(top = 30.dp)
+            .padding(top = if (isExpand) 60.dp else 30.dp)
     ) {
         Image(
             painter = painterResource(id = R.drawable.header_luigi),
@@ -502,7 +502,7 @@ private fun TopSection(
                 .align(Alignment.TopCenter)
                 .offset {
                     IntOffset(
-                        if (isExpand) -20 else -40,
+                        if (isExpand) -300 else -40,
                         if (scrollPos < parallaxLimit) {
                             -50 + (scrollPos * 1.2).toInt()
                         } else {
@@ -537,6 +537,7 @@ private fun TopSection(
             }
         ) {
             Icon(
+                modifier = Modifier.size(if (isExpand) 120.dp else 20.dp),
                 imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
                 contentDescription = "Back button",
                 tint = Color.White

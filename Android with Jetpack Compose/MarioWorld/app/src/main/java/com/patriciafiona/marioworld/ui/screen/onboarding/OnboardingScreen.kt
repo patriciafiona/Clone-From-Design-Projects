@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.VolumeMute
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,13 +40,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.firewatchparallax.utils.SensorData
 import com.patriciafiona.firewatchparallax.utils.SensorDataManager
 import com.patriciafiona.marioworld.R
@@ -53,6 +52,7 @@ import com.patriciafiona.marioworld.navigation.MarioScreen
 import com.patriciafiona.marioworld.ui.theme.MarioRed
 import com.patriciafiona.marioworld.ui.theme.MarioRedDark
 import com.patriciafiona.marioworld.ui.widget.CircleRing
+import com.patriciafiona.marioworld.utils.ContentType
 import com.patriciafiona.marioworld.utils.OnLifecycleEvent
 import com.patriciafiona.marioworld.utils.setNavigationBarColor
 import com.patriciafiona.marioworld.utils.setStatusBarColor
@@ -64,7 +64,26 @@ import kotlin.math.roundToInt
 
 @SuppressLint("RememberReturnType")
 @Composable
-fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>) {
+fun OnboardingScreen(
+    navController: NavController,
+    isMute: MutableState<Boolean>,
+    windowSize: WindowWidthSizeClass
+) {
+    val contentType: ContentType = when (windowSize) {
+        WindowWidthSizeClass.Compact -> {
+            ContentType.NORMAL
+        }
+        WindowWidthSizeClass.Medium -> {
+            ContentType.NORMAL
+        }
+        WindowWidthSizeClass.Expanded -> {
+            ContentType.LARGE
+        }
+        else -> {
+            ContentType.NORMAL
+        }
+    }
+
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val scope = rememberCoroutineScope()
@@ -82,11 +101,11 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
     val interactionSource = remember { MutableInteractionSource() }
     val offsetX = remember { Animatable(0f) }
 
-    val screenWidth = configuration.screenWidthDp + 20
-    val screenHeight = configuration.screenHeightDp + 20
+    val screenWidth = configuration.screenWidthDp + if (contentType == ContentType.LARGE) 40 else 20
+    val screenHeight = configuration.screenHeightDp + if (contentType == ContentType.LARGE) 40 else 20
 
-    val buttonSize = 70
-    val buttonBgWidth = remember { Animatable(70f) }
+    val buttonSize = if (contentType == ContentType.LARGE) 140 else 70
+    val buttonBgWidth = remember { Animatable(if (contentType == ContentType.LARGE) 140f else 70f) }
     val isMoveScreen = remember{ mutableStateOf(false) }
 
     //Sensor for x position
@@ -109,7 +128,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
         }
     }
 
-    val depthMultiplier = 20
+    val depthMultiplier = if (contentType == ContentType.LARGE) 40 else 20
     val roll by remember { derivedStateOf { (data?.roll ?: 0f) * depthMultiplier } }
 
     //Scale Animation
@@ -173,7 +192,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .scale(scale01.value)
-                .padding(10.dp),
+                .padding(if (contentType == ContentType.LARGE) 30.dp else 10.dp),
             onClick = {
                 //mute or unmute sound
                 isMute.value = !isMute.value
@@ -185,6 +204,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
             }
         ) {
             androidx.compose.material3.Icon(
+                modifier = Modifier.size(if (contentType == ContentType.LARGE) 120.dp else 20.dp),
                 imageVector = if(isMute.value) { Icons.Default.VolumeMute } else { Icons.Default.VolumeUp },
                 contentDescription = "Back button",
                 tint = Color.White
@@ -225,7 +245,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
         ) {
             Box(
                 modifier = Modifier
-                    .width(300.dp)
+                    .width(if (contentType == ContentType.LARGE) 600.dp else 300.dp)
                     .height(buttonSize.dp)
                     .align(Alignment.Center)
                     .clip(CircleShape)
@@ -247,7 +267,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
                     style = TextStyle(
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
+                        fontSize = if (contentType == ContentType.LARGE) 32.sp else 16.sp
                     )
                 )
 
@@ -312,7 +332,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
                                             }
                                         }
                                         coroutineScope.launch {
-                                            buttonBgWidth.snapTo(buttonBgWidth.value + dragAmount.x * 0.3f)
+                                            buttonBgWidth.snapTo(buttonBgWidth.value + if (contentType == ContentType.LARGE) (dragAmount.x * 0.6f) else (dragAmount.x * 0.3f))
                                             offsetX.snapTo(offsetX.value + dragAmount.x.toInt())
                                         }
                                     } else {
@@ -377,7 +397,7 @@ fun OnboardingScreen(navController: NavController, isMute: MutableState<Boolean>
                 .align(Alignment.Center)
                 .scale(scale02.value)
                 .offset {
-                    IntOffset(0, (screenHeight * 0.8).toInt())
+                    IntOffset(0, if (contentType == ContentType.LARGE) (screenHeight * 0.38).toInt() else (screenHeight * 0.8).toInt())
                 }
         )
     }
@@ -418,12 +438,4 @@ private fun OnLifecycle(
             else -> {}
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun OnboardingPreview() {
-    val navController = rememberNavController()
-    val isMute = remember { mutableStateOf(true)  }
-    OnboardingScreen(navController = navController, isMute = isMute)
 }

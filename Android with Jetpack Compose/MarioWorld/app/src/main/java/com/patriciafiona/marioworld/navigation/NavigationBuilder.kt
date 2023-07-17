@@ -27,7 +27,7 @@ fun NavigationBuilder(windowSize: WindowWidthSizeClass) {
     ) {
         composable(route = MarioScreen.OnboardingScreen.route) {
             EnterAnimationFadeIn (durationInMillis = 1550) {
-                OnboardingScreen(navController = navigationController, isMute = isMute)
+                OnboardingScreen(navController = navigationController, isMute = isMute, windowSize)
             }
         }
 

@@ -1,5 +1,5 @@
 package com.patriciafiona.marioworld.utils
 
 enum class ContentType {
-    NORMAL, LIST_AND_DETAIL
+    NORMAL, LARGE, LIST_AND_DETAIL
 }
