@@ -8,6 +8,8 @@ The list of the projects:
 | :-: | :-: | :-: | 
 | Planty Shop | Learn how to clone UI in Jetpack Compose using dribbble case & designs! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Android%20with%20Jetpack%20Compose/Planty%20Shop) | 
 | Firewatch Parallax | Learn how to clone Firewatch parallax using Jetpack Compose! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Android%20with%20Jetpack%20Compose/FirewatchParallax) | 
+| Super Mario World | Learn how to clone super mario official website using Jetpack Compose! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/Mario/Android%20with%20Jetpack%20Compose/MarioWorld) | 
+
 
 ## List of Flutter Apps
 The list of the projects:
