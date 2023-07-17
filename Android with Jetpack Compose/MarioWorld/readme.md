@@ -1,4 +1,4 @@
-# Planty Shop
+# Super Mario World
 <p align="center"><img src="https://github.com/patriciafiona/Clone-From-Design-Projects/assets/32255348/e0e76ee9-dca7-4da0-a6f0-8dd709ad5d0d" width="300"/></p>
 <p align="center"><i><b>Figure 1</b> Mario World Main Screen</i></p>
 
