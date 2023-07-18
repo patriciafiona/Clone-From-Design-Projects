@@ -36,8 +36,8 @@ Hello everyone! This time I try to learn create UI on Jetpack Compose by using d
 - The information for character statistics aren't accurate, just for display only!
 
 ## Results video
-[COMING SOON]
-<p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link</i></p>
+[![Watch the video](https://github.com/patriciafiona/Clone-From-Design-Projects/assets/32255348/7f974316-1b7a-4c77-b38f-cf2f731fb4c8)](https://youtu.be/0unFr40CrOc)
+<p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link [Fixed video coming soon]</i></p>
 
 ## Screenshot for App - Smartphone
 | Action      <td colspan=2> <p align="center">Preview</p>
