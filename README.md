@@ -10,7 +10,6 @@ The list of the projects:
 | Firewatch Parallax | Learn how to clone Firewatch parallax using Jetpack Compose! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Android%20with%20Jetpack%20Compose/FirewatchParallax) | 
 | Super Mario World | Learn how to clone super mario official website using Jetpack Compose! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/Mario/Android%20with%20Jetpack%20Compose/MarioWorld) | 
 
-
 ## List of Flutter Apps
 The list of the projects:
 
