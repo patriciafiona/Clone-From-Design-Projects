@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mario_red">#E70112</color>
+    <string name="acceleration">Acceleration</string>
+    <string name="app_name">Mario World</string>
+    <string name="character_statistic">Character Statistic</string>
+    <string name="characters">Characters</string>
+    <string name="copyright">Game trademarks and copyrights are properties of their respective owners. Nintendo properties are trademarks of Nintendo. © 2020 Nintendo.</string>
+    <string name="description">Description</string>
+    <string name="expand_button_content_description">Expand button</string>
+    <string name="follow_nintendo">"Follow Nintendo"</string>
+    <string name="get_started">Get Started</string>
+    <string name="home_banner_h_01">Learn all about Mario’s many adventures through the years.</string>
+    <string name="home_banner_h_02">The Mushroom Kingdom has had its share of memorable characters over the years.</string>
+    <string name="home_banner_h_03">Visit Mario\'s page at Play Nintendo for fun activities!</string>
+    <string name="learn">Learn</string>
+    <string name="lets_play">Let\'s Play</string>
+    <string name="list_of">List of</string>
+    <string name="list_of_characters_headline">From ravishing royalty to menacing monsters, the Mushroom Kingdom has had its share of memorable characters over the years…</string>
+    <string name="mario_in_the_news">"Mario in the news"</string>
+    <string name="max_speed">Max Speed</string>
+    <string name="meet_the_characters">Meet the Characters</string>
+    <string name="navigation_drawer">Navigation drawer</string>
+    <string name="news">News</string>
+    <string name="power">Power</string>
+    <string name="press_again_to_exit">"Press again to exit"</string>
+    <string name="quiz_headline">Are you a Mushroom Kingdom expert? Test your knowledge of all things Mario!</string>
+    <string name="see_more_news">See more news</string>
+    <string name="see_the_timeline">See the Timeline</string>
+    <string name="stamina">Stamina</string>
+    <string name="take_the_quiz">Take the Quiz</string>
+    <string name="technique">Technique</string>
+    <style name="Theme.MarioWorld" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/mario_red</item>
+    </style>
+</resources>

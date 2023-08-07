@@ -1,0 +1,526 @@
+[
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_news_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/news_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_bowser_jr_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_bowser_jr_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_bowser_jr_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/bowser_jr_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_donkey_kong_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/donkey_kong_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_cartoon_jump.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/cartoon_jump.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_yoshi_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_yoshi_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_peach_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_peach_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_bowser_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/bowser_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_boo_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_boo_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_icon_sm_fb.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/icon_sm_fb.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_donkey_kong_open_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/donkey_kong_open_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-xxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-xxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_toad_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_toad_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_bowser_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_bowser_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_diddy_kong_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_diddy_kong_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_mario_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_mario_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_waluigi_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_waluigi_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_donkey_kong_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_donkey_kong_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_peach_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/peach_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_rosalina_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/rosalina_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_wario_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/wario_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_wario_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/wario_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_peach_open_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/peach_open_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-xxxhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-xxxhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_bgm_overworld.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/bgm_overworld.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_toad_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/toad_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_footer_characters.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/footer_characters.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_diddy_kong_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_diddy_kong_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_star_foreground.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/star_foreground.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_mario_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_mario_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_bgm_super_mario_bos.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/bgm_super_mario_bos.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_waluigi_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_waluigi_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_donkey_kong_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_donkey_kong_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_esrb_privacy_certified.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/esrb_privacy_certified.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/font_super_mario_256.ttf.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/font/super_mario_256.ttf"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_and_friends.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_and_friends.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_luigi_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/luigi_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_header_mario.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/header_mario.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_yoshi_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/yoshi_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_question_block.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/question_block.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_toad_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/toad_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_yoshi_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_yoshi_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_daisy_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_daisy_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_waluigi_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/waluigi_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_pipe_left.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/pipe_left.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_bowser_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/bowser_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_star_background.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/star_background.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_rosalina_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_rosalina_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_icon_01.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/icon_01.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_bowser_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_bowser_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_news_03.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/news_03.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_continue_sound.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/continue_sound.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_wario_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_wario_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_bowser_jr_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_bowser_jr_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_play_nintendo.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/play_nintendo.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_icon_sm_yt.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/icon_sm_yt.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_pattern_logos_characters.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/pattern_logos_characters.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_news_01.PNG.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/news_01.PNG"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_luigi_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_luigi_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_diddy_kong_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/diddy_kong_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_daisy_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/daisy_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_daisy_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_daisy_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-xhdpi_ic_launcher_foreground.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-xhdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/xml_backup_rules.xml.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-mdpi_ic_launcher_foreground.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_bowser_jr_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/bowser_jr_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_daisy_open_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/daisy_open_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_open_2.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_open_2.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_bgm_theme.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/bgm_theme.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_luigi_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_luigi_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_en_e_e10.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/en_e_e10.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_pipe_right.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/pipe_right.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_pause.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/pause.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_waluigi_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_waluigi_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_dice.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_dice.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_rosalina_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_rosalina_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_loading_mario.json.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/loading_mario.json"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_wario_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_wario_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/xml_data_extraction_rules.xml.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_toad_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_toad_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_run.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_run.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_boo_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_boo_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_waluigi_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/waluigi_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_txt.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_txt.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_daisy_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_daisy_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_peach_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_peach_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_peach_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/peach_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_icon_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/icon_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_rosalina_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_rosalina_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_bowser_jr_0.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_bowser_jr_0.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_slide_down.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/slide_down.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_luigi_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/luigi_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_yoshi_open_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/yoshi_open_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_luigi_open_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/luigi_open_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_lakitu_tips.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/lakitu_tips.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_wario_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_wario_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_toad_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_toad_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_bowser_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_bowser_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-hdpi_ic_launcher_foreground.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-hdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_donkey_kong_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/donkey_kong_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_boo_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/boo_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_slide_up.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/slide_up.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_diddy_kong_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_diddy_kong_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_diddy_kong_open.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/diddy_kong_open.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_mario_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_mario_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_peach_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_peach_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_rosalina_open_02.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/rosalina_open_02.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_daisy_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/daisy_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_icon_sm_tw.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/icon_sm_tw.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_donkey_kong_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_donkey_kong_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_rosalina_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/rosalina_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_bgm_opening.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/bgm_opening.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_boo_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_boo_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_yoshi_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/yoshi_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_boo_closed.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/boo_closed.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_yoshi_1.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_yoshi_1.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_grass.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/grass.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_header_luigi.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/header_luigi.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_mario_flag.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/mario_flag.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/raw_sound_luigi_2.mp3.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/raw/sound_luigi_2.mp3"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_goomba.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/goomba.png"
+    },
+    {
+        "merged": "com.patriciafiona.marioworld.app-merged_res-60:/drawable_icon_sm_ig.png.flat",
+        "source": "com.patriciafiona.marioworld.app-main-62:/drawable/icon_sm_ig.png"
+    }
+]

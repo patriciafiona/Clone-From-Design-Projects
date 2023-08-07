@@ -1,0 +1,36 @@
+com.patriciafiona.marioworld.test.app-ui-release-0 /Users/administrator/.gradle/caches/transforms-3/023f735dead838354c53d701cef8c264/transformed/ui-release/res
+com.patriciafiona.marioworld.test.app-profileinstaller-1.3.0-1 /Users/administrator/.gradle/caches/transforms-3/0c95a5abecf35d6cf9fabdc723fd3e62/transformed/profileinstaller-1.3.0/res
+com.patriciafiona.marioworld.test.app-lifecycle-runtime-2.6.1-2 /Users/administrator/.gradle/caches/transforms-3/1833f6976db86d50e2a3fd1fbeaf79ad/transformed/lifecycle-runtime-2.6.1/res
+com.patriciafiona.marioworld.test.app-activity-1.7.2-3 /Users/administrator/.gradle/caches/transforms-3/1a595ee780efce2d3c0c382567c8d09d/transformed/activity-1.7.2/res
+com.patriciafiona.marioworld.test.app-ui-util-release-4 /Users/administrator/.gradle/caches/transforms-3/269b935f2759c1abe8fe704f05cbda16/transformed/ui-util-release/res
+com.patriciafiona.marioworld.test.app-startup-runtime-1.1.1-5 /Users/administrator/.gradle/caches/transforms-3/2773a1f3963352a83ea05f1aa5de2745/transformed/startup-runtime-1.1.1/res
+com.patriciafiona.marioworld.test.app-core-1.11.0-beta02-6 /Users/administrator/.gradle/caches/transforms-3/35c073c5d3f6c621b7dac90213780942/transformed/core-1.11.0-beta02/res
+com.patriciafiona.marioworld.test.app-lifecycle-runtime-ktx-2.6.1-7 /Users/administrator/.gradle/caches/transforms-3/45fd603b3592e673d0b646aa9823cd15/transformed/lifecycle-runtime-ktx-2.6.1/res
+com.patriciafiona.marioworld.test.app-lifecycle-livedata-core-2.6.1-8 /Users/administrator/.gradle/caches/transforms-3/47e8d9aeabe663df59d94e0c0539b0d6/transformed/lifecycle-livedata-core-2.6.1/res
+com.patriciafiona.marioworld.test.app-lifecycle-process-2.6.1-9 /Users/administrator/.gradle/caches/transforms-3/5bf1eea8f186f8e27bd640a2463dd25b/transformed/lifecycle-process-2.6.1/res
+com.patriciafiona.marioworld.test.app-ui-text-release-10 /Users/administrator/.gradle/caches/transforms-3/61303ba603b975d47b4fa563dc07cb8f/transformed/ui-text-release/res
+com.patriciafiona.marioworld.test.app-emoji2-1.3.0-11 /Users/administrator/.gradle/caches/transforms-3/64cb6c960eff03bcfc2c7dcd97bc4f52/transformed/emoji2-1.3.0/res
+com.patriciafiona.marioworld.test.app-ui-test-junit4-release-12 /Users/administrator/.gradle/caches/transforms-3/65396d2787249dcb0cbd920edbee1b73/transformed/ui-test-junit4-release/res
+com.patriciafiona.marioworld.test.app-activity-compose-1.7.2-13 /Users/administrator/.gradle/caches/transforms-3/69823061faf103d54ef9dc2661efeaf3/transformed/activity-compose-1.7.2/res
+com.patriciafiona.marioworld.test.app-customview-poolingcontainer-1.0.0-14 /Users/administrator/.gradle/caches/transforms-3/69f6a891fabfb447518a0962e33d0e83/transformed/customview-poolingcontainer-1.0.0/res
+com.patriciafiona.marioworld.test.app-savedstate-ktx-1.2.1-15 /Users/administrator/.gradle/caches/transforms-3/721629c8aa9747b25acd3b7f3697eb87/transformed/savedstate-ktx-1.2.1/res
+com.patriciafiona.marioworld.test.app-lifecycle-viewmodel-ktx-2.6.1-16 /Users/administrator/.gradle/caches/transforms-3/77ba9ed35996b747b1337e47c6473f5d/transformed/lifecycle-viewmodel-ktx-2.6.1/res
+com.patriciafiona.marioworld.test.app-ui-test-release-17 /Users/administrator/.gradle/caches/transforms-3/7c27a5135d51fa582b7d364e04c1cc1b/transformed/ui-test-release/res
+com.patriciafiona.marioworld.test.app-core-runtime-2.2.0-18 /Users/administrator/.gradle/caches/transforms-3/7feb3eaadf90aa8f8196b5264916c1c1/transformed/core-runtime-2.2.0/res
+com.patriciafiona.marioworld.test.app-ui-graphics-release-19 /Users/administrator/.gradle/caches/transforms-3/96742adafb849e06b794708daf8fdd65/transformed/ui-graphics-release/res
+com.patriciafiona.marioworld.test.app-lifecycle-viewmodel-savedstate-2.6.1-20 /Users/administrator/.gradle/caches/transforms-3/9fdce8e3f57a020ee30475821ee7959e/transformed/lifecycle-viewmodel-savedstate-2.6.1/res
+com.patriciafiona.marioworld.test.app-ui-geometry-release-21 /Users/administrator/.gradle/caches/transforms-3/ac1a5dcd09af742dbf72772ac4610e88/transformed/ui-geometry-release/res
+com.patriciafiona.marioworld.test.app-ui-unit-release-22 /Users/administrator/.gradle/caches/transforms-3/b684a733481f5d819b7475540c37c4d2/transformed/ui-unit-release/res
+com.patriciafiona.marioworld.test.app-lifecycle-viewmodel-2.6.1-23 /Users/administrator/.gradle/caches/transforms-3/bec8c95e9291e1e68ffc00ced8a76ebd/transformed/lifecycle-viewmodel-2.6.1/res
+com.patriciafiona.marioworld.test.app-core-1.5.0-24 /Users/administrator/.gradle/caches/transforms-3/d0a110f67fd75382f6f8012b1a43ddc4/transformed/core-1.5.0/res
+com.patriciafiona.marioworld.test.app-savedstate-1.2.1-25 /Users/administrator/.gradle/caches/transforms-3/dcca37a571dacc9c9fe18f412d71f752/transformed/savedstate-1.2.1/res
+com.patriciafiona.marioworld.test.app-annotation-experimental-1.3.0-26 /Users/administrator/.gradle/caches/transforms-3/e409287bb049575d98acab4a0c1012b6/transformed/annotation-experimental-1.3.0/res
+com.patriciafiona.marioworld.test.app-runtime-release-27 /Users/administrator/.gradle/caches/transforms-3/e841f6b6b71600f3f55ecd2667a2448c/transformed/runtime-release/res
+com.patriciafiona.marioworld.test.app-activity-ktx-1.7.2-28 /Users/administrator/.gradle/caches/transforms-3/ec191f872e87b30066789b8f234b5e01/transformed/activity-ktx-1.7.2/res
+com.patriciafiona.marioworld.test.app-runtime-saveable-release-29 /Users/administrator/.gradle/caches/transforms-3/edaa2b72f551e667a9ba4bcf5f797089/transformed/runtime-saveable-release/res
+com.patriciafiona.marioworld.test.app-core-ktx-1.11.0-beta02-30 /Users/administrator/.gradle/caches/transforms-3/fac4fbe39e47a871ee06564ae70c80f7/transformed/core-ktx-1.11.0-beta02/res
+com.patriciafiona.marioworld.test.app-androidTest-31 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/generated/res/resValues/androidTest/debug
+com.patriciafiona.marioworld.test.app-androidTest-32 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/generated/res/rs/androidTest/debug
+com.patriciafiona.marioworld.test.app-mergeDebugAndroidTestResources-33 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.patriciafiona.marioworld.test.app-mergeDebugAndroidTestResources-34 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.patriciafiona.marioworld.test.app-merged_res-35 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/intermediates/merged_res/debugAndroidTest

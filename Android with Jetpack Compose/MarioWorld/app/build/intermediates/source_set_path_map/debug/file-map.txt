@@ -1,0 +1,62 @@
+com.patriciafiona.marioworld.app-material-ripple-release-0 /Users/administrator/.gradle/caches/transforms-3/00d63d43a069e03ac55c0b0dfc38c0d9/transformed/material-ripple-release/res
+com.patriciafiona.marioworld.app-ui-release-1 /Users/administrator/.gradle/caches/transforms-3/023f735dead838354c53d701cef8c264/transformed/ui-release/res
+com.patriciafiona.marioworld.app-navigation-common-2.6.0-2 /Users/administrator/.gradle/caches/transforms-3/0c71e1854182a3697962bcf9e7c1f3f4/transformed/navigation-common-2.6.0/res
+com.patriciafiona.marioworld.app-profileinstaller-1.3.0-3 /Users/administrator/.gradle/caches/transforms-3/0c95a5abecf35d6cf9fabdc723fd3e62/transformed/profileinstaller-1.3.0/res
+com.patriciafiona.marioworld.app-ui-test-manifest-1.6.0-alpha01-4 /Users/administrator/.gradle/caches/transforms-3/0cba5cbb7e1de0165ae8b190ffe624ca/transformed/ui-test-manifest-1.6.0-alpha01/res
+com.patriciafiona.marioworld.app-appcompat-resources-1.4.2-5 /Users/administrator/.gradle/caches/transforms-3/0e1f748b1f3ab704bb21288467da365e/transformed/appcompat-resources-1.4.2/res
+com.patriciafiona.marioworld.app-navigation-runtime-ktx-2.6.0-6 /Users/administrator/.gradle/caches/transforms-3/15ce80a27181ebcca447892032c0d41f/transformed/navigation-runtime-ktx-2.6.0/res
+com.patriciafiona.marioworld.app-animation-release-7 /Users/administrator/.gradle/caches/transforms-3/17ba7988398e2c0a01dd524b8972303d/transformed/animation-release/res
+com.patriciafiona.marioworld.app-lifecycle-runtime-2.6.1-8 /Users/administrator/.gradle/caches/transforms-3/1833f6976db86d50e2a3fd1fbeaf79ad/transformed/lifecycle-runtime-2.6.1/res
+com.patriciafiona.marioworld.app-activity-1.7.2-9 /Users/administrator/.gradle/caches/transforms-3/1a595ee780efce2d3c0c382567c8d09d/transformed/activity-1.7.2/res
+com.patriciafiona.marioworld.app-material-icons-extended-release-10 /Users/administrator/.gradle/caches/transforms-3/1f6ca1305f3e02367218f1847945407a/transformed/material-icons-extended-release/res
+com.patriciafiona.marioworld.app-window-1.0.0-11 /Users/administrator/.gradle/caches/transforms-3/2583efbc42003ff80e01466bf2f32ea1/transformed/window-1.0.0/res
+com.patriciafiona.marioworld.app-ui-util-release-12 /Users/administrator/.gradle/caches/transforms-3/269b935f2759c1abe8fe704f05cbda16/transformed/ui-util-release/res
+com.patriciafiona.marioworld.app-startup-runtime-1.1.1-13 /Users/administrator/.gradle/caches/transforms-3/2773a1f3963352a83ea05f1aa5de2745/transformed/startup-runtime-1.1.1/res
+com.patriciafiona.marioworld.app-core-1.11.0-beta02-14 /Users/administrator/.gradle/caches/transforms-3/35c073c5d3f6c621b7dac90213780942/transformed/core-1.11.0-beta02/res
+com.patriciafiona.marioworld.app-navigation-compose-2.6.0-15 /Users/administrator/.gradle/caches/transforms-3/439b469f5a086e59fb432bf31c3915ab/transformed/navigation-compose-2.6.0/res
+com.patriciafiona.marioworld.app-lifecycle-runtime-ktx-2.6.1-16 /Users/administrator/.gradle/caches/transforms-3/45fd603b3592e673d0b646aa9823cd15/transformed/lifecycle-runtime-ktx-2.6.1/res
+com.patriciafiona.marioworld.app-material3-window-size-class-release-17 /Users/administrator/.gradle/caches/transforms-3/47cea88b57c2ceebf1b55ea8c4f84d59/transformed/material3-window-size-class-release/res
+com.patriciafiona.marioworld.app-lifecycle-livedata-core-2.6.1-18 /Users/administrator/.gradle/caches/transforms-3/47e8d9aeabe663df59d94e0c0539b0d6/transformed/lifecycle-livedata-core-2.6.1/res
+com.patriciafiona.marioworld.app-foundation-layout-release-19 /Users/administrator/.gradle/caches/transforms-3/4db768c364fe7c52b6a2bb139a25ee0e/transformed/foundation-layout-release/res
+com.patriciafiona.marioworld.app-ui-tooling-release-20 /Users/administrator/.gradle/caches/transforms-3/51004256ac8ed12cf9e473a488972ce9/transformed/ui-tooling-release/res
+com.patriciafiona.marioworld.app-lifecycle-process-2.6.1-21 /Users/administrator/.gradle/caches/transforms-3/5bf1eea8f186f8e27bd640a2463dd25b/transformed/lifecycle-process-2.6.1/res
+com.patriciafiona.marioworld.app-ui-text-release-22 /Users/administrator/.gradle/caches/transforms-3/61303ba603b975d47b4fa563dc07cb8f/transformed/ui-text-release/res
+com.patriciafiona.marioworld.app-emoji2-1.3.0-23 /Users/administrator/.gradle/caches/transforms-3/64cb6c960eff03bcfc2c7dcd97bc4f52/transformed/emoji2-1.3.0/res
+com.patriciafiona.marioworld.app-activity-compose-1.7.2-24 /Users/administrator/.gradle/caches/transforms-3/69823061faf103d54ef9dc2661efeaf3/transformed/activity-compose-1.7.2/res
+com.patriciafiona.marioworld.app-customview-poolingcontainer-1.0.0-25 /Users/administrator/.gradle/caches/transforms-3/69f6a891fabfb447518a0962e33d0e83/transformed/customview-poolingcontainer-1.0.0/res
+com.patriciafiona.marioworld.app-savedstate-ktx-1.2.1-26 /Users/administrator/.gradle/caches/transforms-3/721629c8aa9747b25acd3b7f3697eb87/transformed/savedstate-ktx-1.2.1/res
+com.patriciafiona.marioworld.app-material-icons-core-release-27 /Users/administrator/.gradle/caches/transforms-3/755ac4f8a6654ede43770f8144444ab7/transformed/material-icons-core-release/res
+com.patriciafiona.marioworld.app-lifecycle-viewmodel-ktx-2.6.1-28 /Users/administrator/.gradle/caches/transforms-3/77ba9ed35996b747b1337e47c6473f5d/transformed/lifecycle-viewmodel-ktx-2.6.1/res
+com.patriciafiona.marioworld.app-core-runtime-2.2.0-29 /Users/administrator/.gradle/caches/transforms-3/7feb3eaadf90aa8f8196b5264916c1c1/transformed/core-runtime-2.2.0/res
+com.patriciafiona.marioworld.app-navigation-common-ktx-2.6.0-30 /Users/administrator/.gradle/caches/transforms-3/814ccfa920a13ac0c73fa2ebb24efafe/transformed/navigation-common-ktx-2.6.0/res
+com.patriciafiona.marioworld.app-lottie-5.0.3-31 /Users/administrator/.gradle/caches/transforms-3/877124ae885911b98b3da7dee09f8e40/transformed/lottie-5.0.3/res
+com.patriciafiona.marioworld.app-ui-tooling-preview-release-32 /Users/administrator/.gradle/caches/transforms-3/9092d09cdc0c993d4cd1ae036e52ab25/transformed/ui-tooling-preview-release/res
+com.patriciafiona.marioworld.app-ui-graphics-release-33 /Users/administrator/.gradle/caches/transforms-3/96742adafb849e06b794708daf8fdd65/transformed/ui-graphics-release/res
+com.patriciafiona.marioworld.app-appcompat-1.3.1-34 /Users/administrator/.gradle/caches/transforms-3/9f2be167fb5b8ad1187d9a0d3b29ab1b/transformed/appcompat-1.3.1/res
+com.patriciafiona.marioworld.app-lifecycle-viewmodel-savedstate-2.6.1-35 /Users/administrator/.gradle/caches/transforms-3/9fdce8e3f57a020ee30475821ee7959e/transformed/lifecycle-viewmodel-savedstate-2.6.1/res
+com.patriciafiona.marioworld.app-foundation-release-36 /Users/administrator/.gradle/caches/transforms-3/a708c56782bfc7b042a233df675ddeb7/transformed/foundation-release/res
+com.patriciafiona.marioworld.app-ui-geometry-release-37 /Users/administrator/.gradle/caches/transforms-3/ac1a5dcd09af742dbf72772ac4610e88/transformed/ui-geometry-release/res
+com.patriciafiona.marioworld.app-lifecycle-viewmodel-compose-2.6.1-38 /Users/administrator/.gradle/caches/transforms-3/b4e346f15b0f858ee98343415762416a/transformed/lifecycle-viewmodel-compose-2.6.1/res
+com.patriciafiona.marioworld.app-ui-unit-release-39 /Users/administrator/.gradle/caches/transforms-3/b684a733481f5d819b7475540c37c4d2/transformed/ui-unit-release/res
+com.patriciafiona.marioworld.app-fragment-1.3.6-40 /Users/administrator/.gradle/caches/transforms-3/b8e45eae03c068ba2da31600979e8b3e/transformed/fragment-1.3.6/res
+com.patriciafiona.marioworld.app-lifecycle-viewmodel-2.6.1-41 /Users/administrator/.gradle/caches/transforms-3/bec8c95e9291e1e68ffc00ced8a76ebd/transformed/lifecycle-viewmodel-2.6.1/res
+com.patriciafiona.marioworld.app-coil-base-2.2.2-42 /Users/administrator/.gradle/caches/transforms-3/c1283d30151e910eb987a26a3cf2b356/transformed/coil-base-2.2.2/res
+com.patriciafiona.marioworld.app-lifecycle-livedata-2.6.1-43 /Users/administrator/.gradle/caches/transforms-3/c4d243dee916626bb3bac89a9121d6b5/transformed/lifecycle-livedata-2.6.1/res
+com.patriciafiona.marioworld.app-ui-tooling-data-release-44 /Users/administrator/.gradle/caches/transforms-3/c9961d9c469acd7604be3f1caad2a11c/transformed/ui-tooling-data-release/res
+com.patriciafiona.marioworld.app-savedstate-1.2.1-45 /Users/administrator/.gradle/caches/transforms-3/dcca37a571dacc9c9fe18f412d71f752/transformed/savedstate-1.2.1/res
+com.patriciafiona.marioworld.app-material3-release-46 /Users/administrator/.gradle/caches/transforms-3/e35517b175b85aafa6fd419f5bb75ddc/transformed/material3-release/res
+com.patriciafiona.marioworld.app-annotation-experimental-1.3.0-47 /Users/administrator/.gradle/caches/transforms-3/e409287bb049575d98acab4a0c1012b6/transformed/annotation-experimental-1.3.0/res
+com.patriciafiona.marioworld.app-runtime-release-48 /Users/administrator/.gradle/caches/transforms-3/e841f6b6b71600f3f55ecd2667a2448c/transformed/runtime-release/res
+com.patriciafiona.marioworld.app-activity-ktx-1.7.2-49 /Users/administrator/.gradle/caches/transforms-3/ec191f872e87b30066789b8f234b5e01/transformed/activity-ktx-1.7.2/res
+com.patriciafiona.marioworld.app-runtime-saveable-release-50 /Users/administrator/.gradle/caches/transforms-3/edaa2b72f551e667a9ba4bcf5f797089/transformed/runtime-saveable-release/res
+com.patriciafiona.marioworld.app-navigation-runtime-2.6.0-51 /Users/administrator/.gradle/caches/transforms-3/efb47584d6784d8fd766487c7c6fc3cd/transformed/navigation-runtime-2.6.0/res
+com.patriciafiona.marioworld.app-animation-core-release-52 /Users/administrator/.gradle/caches/transforms-3/f66b4ccd2d2f326a77bbeab78cc2f42d/transformed/animation-core-release/res
+com.patriciafiona.marioworld.app-core-ktx-1.11.0-beta02-53 /Users/administrator/.gradle/caches/transforms-3/fac4fbe39e47a871ee06564ae70c80f7/transformed/core-ktx-1.11.0-beta02/res
+com.patriciafiona.marioworld.app-material-release-54 /Users/administrator/.gradle/caches/transforms-3/fcdf21de4478f50715785bf49fafc268/transformed/material-release/res
+com.patriciafiona.marioworld.app-resValues-55 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/generated/res/resValues/debug
+com.patriciafiona.marioworld.app-rs-56 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/generated/res/rs/debug
+com.patriciafiona.marioworld.app-packageDebugResources-57 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.patriciafiona.marioworld.app-packageDebugResources-58 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.patriciafiona.marioworld.app-merged_res-59 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/build/intermediates/merged_res/debug
+com.patriciafiona.marioworld.app-debug-60 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/src/debug/res
+com.patriciafiona.marioworld.app-main-61 /Users/administrator/Documents/Patricia Fiona/Github/Clone-From-Design-Projects/Android with Jetpack Compose/MarioWorld/app/src/main/res
