@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,8 +17,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -28,25 +34,41 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.D
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.patriciafiona.financeapp.R
+import com.patriciafiona.financeapp.data.DataStore.recentSend
+import com.patriciafiona.financeapp.data.DataStore.transactionsHistory
+import com.patriciafiona.financeapp.data.entities.Transaction
+import com.patriciafiona.financeapp.data.entities.TransactionType
 import com.patriciafiona.financeapp.ui.theme.BlackOlive
 import com.patriciafiona.financeapp.ui.theme.DarkGrey
 import com.patriciafiona.financeapp.ui.theme.FinanceAppTheme
+import com.patriciafiona.financeapp.ui.theme.Green
+import com.patriciafiona.financeapp.ui.theme.LightGray
 import com.patriciafiona.financeapp.ui.theme.RoyalBlue
+import com.patriciafiona.financeapp.ui.widget.CircleImage
 import com.patriciafiona.financeapp.ui.widget.CircleImageIcon
 import com.patriciafiona.financeapp.ui.widget.RoundedButtonLeftIcon
 import com.patriciafiona.financeapp.ui.widget.RoundedButtonRightIcon
+import com.patriciafiona.financeapp.utils.DateFormater
 
 @Composable
 fun HomeScreen(){
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(LightGray)
+    ) {
         Box{
             Column {
                 Box(
@@ -144,6 +166,176 @@ fun HomeScreen(){
                 }
             }
         }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(top = 10.dp, bottom = 60.dp, start = 10.dp, end = 10.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(.9f)
+                    .clip(RoundedCornerShape(10.dp)),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White,
+                ),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                ) {
+                    Row {
+                        Text(
+                            text = "Recent Send",
+                            style = TextStyle(
+                                fontSize = 24.sp,
+                            )
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        RoundedButtonRightIcon(
+                            onClickLogic = {},
+                            text = "View All",
+                            icon = R.drawable.ic_arrow_right_alt,
+                            bgColor = RoyalBlue.copy(alpha = .2f),
+                            textColor = RoyalBlue
+                        )
+                    }
+
+                    LazyRow {
+                        items(recentSend) { user ->
+                            Column(
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                CircleImage(
+                                    img = user.profilePicture,
+                                    desc = "avatar",
+                                    size = 50,
+                                    padding = 8
+                                )
+                                Text(
+                                    text = user.firstName,
+                                    style = TextStyle(
+                                        fontWeight = FontWeight.Light,
+                                        fontSize = 12.sp,
+                                        textAlign = TextAlign.Center
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(18.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth(.9f)
+                    .clip(RoundedCornerShape(10.dp)),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White,
+                ),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                ) {
+                    Row {
+                        Text(
+                            text = "Transactions",
+                            style = TextStyle(
+                                fontSize = 24.sp,
+                            )
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        RoundedButtonRightIcon(
+                            onClickLogic = {},
+                            text = "View All",
+                            icon = R.drawable.ic_arrow_right_alt,
+                            bgColor = RoyalBlue.copy(alpha = .2f),
+                            textColor = RoyalBlue
+                        )
+                    }
+
+                    LazyColumn (
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(250.dp)
+                    ) {
+                        items(transactionsHistory) { transaction ->
+                            ItemTransaction(transaction)
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(50.dp))
+        }
+    }
+}
+
+@Composable
+private fun ItemTransaction(transaction: Transaction) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        CircleImage(
+            img = transaction.user.profilePicture,
+            desc = "avatar",
+            size = 50,
+            padding = 8
+        )
+        Column {
+            Text(
+                text = transaction.user.firstName,
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    textAlign = TextAlign.Center
+                )
+            )
+            Text(
+                text = DateFormater(transaction.date),
+                style = TextStyle(
+                    fontWeight = FontWeight.Light,
+                    fontSize = 11.sp,
+                    color = Color.Gray,
+                    textAlign = TextAlign.Center
+                )
+            )
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.End
+        ) {
+            Text(
+                text = "${if(transaction.type == TransactionType.RECEIVED) {"+"} else {"-"} } ${transaction.amount}",
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Medium,
+                    color = if(transaction.type == TransactionType.RECEIVED) { Green } else { Color.Red }
+                )
+            )
+            Text(
+                text = "${transaction.type.toString().lowercase().capitalize()}",
+                style = TextStyle(
+                    fontWeight = FontWeight.Light,
+                    fontSize = 11.sp,
+                    textAlign = TextAlign.Center
+                )
+            )
+        }
     }
 }
 
@@ -153,14 +345,10 @@ private fun TopBar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        Image(
-            painter = painterResource(R.drawable.avatar),
-            contentDescription = "avatar",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .padding(12.dp)
-                .size(64.dp)
-                .clip(CircleShape)
+        CircleImage(
+            img = R.drawable.avatar,
+            desc = "avatar",
+            size = 50
         )
 
         Column(

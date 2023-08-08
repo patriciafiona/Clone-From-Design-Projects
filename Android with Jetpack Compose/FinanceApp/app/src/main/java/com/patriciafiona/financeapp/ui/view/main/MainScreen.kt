@@ -1,6 +1,7 @@
 package com.patriciafiona.financeapp.ui.view.main
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -10,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.patriciafiona.financeapp.navigation.NavigationGraph
 import com.patriciafiona.financeapp.ui.BottomNav
 import com.patriciafiona.financeapp.ui.theme.DarkGrey
+import com.patriciafiona.financeapp.ui.theme.LightGray
 import com.patriciafiona.financeapp.utils.SetNavigationBarColor
 import com.patriciafiona.financeapp.utils.SetStatusBarColor
 import com.patriciafiona.financeapp.utils.SetSystemBarColor
@@ -25,7 +27,8 @@ fun MainScreen(){
     SetNavigationBarColor(color = DarkGrey)
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         bottomBar = { BottomNav(navController = navController) }
     ) {
         NavigationGraph(navController = navController)

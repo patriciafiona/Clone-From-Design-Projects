@@ -67,6 +67,7 @@ fun RoundedButtonRightIcon(
     modifier: Modifier = Modifier,
     onClickLogic: () -> Unit,
     bgColor: Color = BlackOlive,
+    textColor: Color = Color.White,
     text: String,
     icon: Int
 ){
@@ -81,13 +82,12 @@ fun RoundedButtonRightIcon(
         colors = ButtonDefaults.buttonColors(containerColor = bgColor)
     ) {
         Row(
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(8.dp)
         ) {
             Text(
                 text = text,
                 style = TextStyle(
-                    color = Color.White,
-
+                    color = textColor,
                     )
             )
 

@@ -1,5 +1,6 @@
 package com.patriciafiona.financeapp.utils
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.size
@@ -18,6 +19,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
 
 @Composable
 fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) -> Unit) {
@@ -93,4 +100,21 @@ fun Modifier.drawColoredShadow(
             paint
         )
     }
+}
+
+@SuppressLint("SimpleDateFormat")
+fun getCurrentDateTime(): String {
+    val calendar: Calendar = Calendar.getInstance()
+    val sdf = SimpleDateFormat("MM/dd/yyyy")
+    return sdf.format(calendar.time)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun DateFormater(date: String): String {
+    val firstApiFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+    val d = LocalDate.parse(date , firstApiFormat)
+    return SimpleDateFormat("MMM, dd yyyy")
+        .format(
+            Date.from(d.atStartOfDay(ZoneId.of("Asia/Bangkok")).toInstant())
+        )
 }
