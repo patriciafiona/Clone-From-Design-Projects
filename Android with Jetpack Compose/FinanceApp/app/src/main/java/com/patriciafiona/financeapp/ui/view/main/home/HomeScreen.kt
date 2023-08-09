@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -58,18 +59,22 @@ import com.patriciafiona.financeapp.ui.theme.LightGray
 import com.patriciafiona.financeapp.ui.theme.RoyalBlue
 import com.patriciafiona.financeapp.ui.widget.CircleImage
 import com.patriciafiona.financeapp.ui.widget.CircleImageIcon
+import com.patriciafiona.financeapp.ui.widget.FooterText
+import com.patriciafiona.financeapp.ui.widget.ItemTransaction
 import com.patriciafiona.financeapp.ui.widget.RoundedButtonLeftIcon
 import com.patriciafiona.financeapp.ui.widget.RoundedButtonRightIcon
 import com.patriciafiona.financeapp.utils.DateFormater
+import com.patriciafiona.financeapp.utils.getThisYear
+import java.util.Locale
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(LightGray)
     ) {
-        Box{
+        Box {
             Column {
                 Box(
                     modifier = Modifier
@@ -77,6 +82,7 @@ fun HomeScreen(){
                         .height(250.dp)
                         .clip(RoundedCornerShape(bottomStartPercent = 20, bottomEndPercent = 20))
                         .background(DarkGrey)
+                        .safeContentPadding()
                 ) {
                     TopBar()
                 }
@@ -84,7 +90,7 @@ fun HomeScreen(){
             }
             Card(
                 modifier = Modifier
-                    .fillMaxWidth(.85f)
+                    .fillMaxWidth(.9f)
                     .padding(10.dp)
                     .align(Alignment.BottomCenter)
                     .clip(RoundedCornerShape(30.dp)),
@@ -102,7 +108,7 @@ fun HomeScreen(){
                         colors = CardDefaults.cardColors(
                             containerColor = RoyalBlue,
                         ),
-                    ){
+                    ) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -129,7 +135,8 @@ fun HomeScreen(){
                             RoundedButtonRightIcon(
                                 onClickLogic = {},
                                 text = "9123456789012",
-                                icon = R.drawable.ic_copy
+                                icon = R.drawable.ic_copy,
+                                innerPadding = 3
                             )
                         }
                     }
@@ -176,165 +183,120 @@ fun HomeScreen(){
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth(.9f)
-                    .clip(RoundedCornerShape(10.dp)),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White,
-                ),
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp)
-                ) {
-                    Row {
-                        Text(
-                            text = "Recent Send",
-                            style = TextStyle(
-                                fontSize = 24.sp,
-                            )
-                        )
-                        Spacer(modifier = Modifier.weight(1f))
-
-                        RoundedButtonRightIcon(
-                            onClickLogic = {},
-                            text = "View All",
-                            icon = R.drawable.ic_arrow_right_alt,
-                            bgColor = RoyalBlue.copy(alpha = .2f),
-                            textColor = RoyalBlue
-                        )
-                    }
-
-                    LazyRow {
-                        items(recentSend) { user ->
-                            Column(
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                CircleImage(
-                                    img = user.profilePicture,
-                                    desc = "avatar",
-                                    size = 50,
-                                    padding = 8
-                                )
-                                Text(
-                                    text = user.firstName,
-                                    style = TextStyle(
-                                        fontWeight = FontWeight.Light,
-                                        fontSize = 12.sp,
-                                        textAlign = TextAlign.Center
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
+            RecentSend()
             Spacer(modifier = Modifier.height(18.dp))
-
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth(.9f)
-                    .clip(RoundedCornerShape(10.dp)),
-                colors = CardDefaults.cardColors(
-                    containerColor = Color.White,
-                ),
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(10.dp)
-                ) {
-                    Row {
-                        Text(
-                            text = "Transactions",
-                            style = TextStyle(
-                                fontSize = 24.sp,
-                            )
-                        )
-                        Spacer(modifier = Modifier.weight(1f))
-
-                        RoundedButtonRightIcon(
-                            onClickLogic = {},
-                            text = "View All",
-                            icon = R.drawable.ic_arrow_right_alt,
-                            bgColor = RoyalBlue.copy(alpha = .2f),
-                            textColor = RoyalBlue
-                        )
-                    }
-
-                    LazyColumn (
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(250.dp)
-                    ) {
-                        items(transactionsHistory) { transaction ->
-                            ItemTransaction(transaction)
-                        }
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(50.dp))
+            TransactionHistories()
+            Spacer(modifier = Modifier.height(20.dp))
+            FooterText()
+            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 }
 
 @Composable
-private fun ItemTransaction(transaction: Transaction) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
+private fun TransactionHistories() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(.9f)
+            .clip(RoundedCornerShape(10.dp)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+        ),
     ) {
-        CircleImage(
-            img = transaction.user.profilePicture,
-            desc = "avatar",
-            size = 50,
-            padding = 8
-        )
-        Column {
-            Text(
-                text = transaction.user.firstName,
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    textAlign = TextAlign.Center
-                )
-            )
-            Text(
-                text = DateFormater(transaction.date),
-                style = TextStyle(
-                    fontWeight = FontWeight.Light,
-                    fontSize = 11.sp,
-                    color = Color.Gray,
-                    textAlign = TextAlign.Center
-                )
-            )
-        }
-        Spacer(modifier = Modifier.weight(1f))
         Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.End
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
         ) {
-            Text(
-                text = "${if(transaction.type == TransactionType.RECEIVED) {"+"} else {"-"} } ${transaction.amount}",
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Medium,
-                    color = if(transaction.type == TransactionType.RECEIVED) { Green } else { Color.Red }
+            Row {
+                Text(
+                    text = "Transactions",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                    )
                 )
-            )
-            Text(
-                text = "${transaction.type.toString().lowercase().capitalize()}",
-                style = TextStyle(
-                    fontWeight = FontWeight.Light,
-                    fontSize = 11.sp,
-                    textAlign = TextAlign.Center
+                Spacer(modifier = Modifier.weight(1f))
+
+                RoundedButtonRightIcon(
+                    onClickLogic = {},
+                    text = "View All",
+                    icon = R.drawable.ic_arrow_right_alt,
+                    bgColor = RoyalBlue.copy(alpha = .2f),
+                    textColor = RoyalBlue,
+                    innerPadding = 3
                 )
-            )
+            }
+
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(270.dp)
+            ) {
+                items(transactionsHistory) { transaction ->
+                    ItemTransaction(transaction)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun RecentSend() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(.9f)
+            .clip(RoundedCornerShape(10.dp)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+        ),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+        ) {
+            Row {
+                Text(
+                    text = "Recent Send",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                    )
+                )
+                Spacer(modifier = Modifier.weight(1f))
+
+                RoundedButtonRightIcon(
+                    onClickLogic = {},
+                    text = "View All",
+                    icon = R.drawable.ic_arrow_right_alt,
+                    bgColor = RoyalBlue.copy(alpha = .2f),
+                    textColor = RoyalBlue,
+                    innerPadding = 3
+                )
+            }
+
+            LazyRow {
+                items(recentSend) { user ->
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircleImage(
+                            img = user.profilePicture,
+                            desc = "avatar",
+                            size = 50,
+                            padding = 8
+                        )
+                        Text(
+                            text = user.firstName,
+                            style = TextStyle(
+                                fontWeight = FontWeight.Light,
+                                fontSize = 12.sp,
+                                textAlign = TextAlign.Center
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 }
@@ -380,7 +342,7 @@ private fun TopBar() {
             icon = R.drawable.ic_notification
         )
 
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(16.dp))
     }
 }
 

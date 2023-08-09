@@ -34,7 +34,7 @@ fun BottomNav(navController: NavHostController) {
         backgroundColor = DarkGrey,
         contentColor = RoyalBlue,
         modifier = Modifier
-            .padding(bottom = 20.dp, start = 10.dp, end = 10.dp)
+            .padding(bottom = 50.dp, start = 10.dp, end = 10.dp)
             .clip(RoundedCornerShape(100))
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()

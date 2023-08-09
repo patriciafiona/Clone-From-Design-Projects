@@ -60,7 +60,7 @@ object DataStore{
 
     val transactionsHistory: ArrayList<Transaction> = arrayListOf(
         Transaction(
-            user = users[7],
+            user = users[4],
             type = TransactionType.OUTGOING,
             amount = 12.63,
             date = "08-08-2023"
@@ -72,7 +72,7 @@ object DataStore{
             date = "02-07-2023"
         ),
         Transaction(
-            user = users[5],
+            user = users[2],
             type = TransactionType.RECEIVED,
             amount = 5.99,
             date = "24-06-2023"
@@ -82,6 +82,24 @@ object DataStore{
             type = TransactionType.OUTGOING,
             amount = 3.19,
             date = "21-06-2023"
+        ),
+        Transaction(
+            user = users[7],
+            type = TransactionType.RECEIVED,
+            amount = 4.45,
+            date = "15-06-2023"
+        ),
+        Transaction(
+            user = users[6],
+            type = TransactionType.RECEIVED,
+            amount = 1.25,
+            date = "04-06-2023"
+        ),
+        Transaction(
+            user = users[5],
+            type = TransactionType.OUTGOING,
+            amount = 33.33,
+            date = "27-05-2023"
         ),
     )
 }

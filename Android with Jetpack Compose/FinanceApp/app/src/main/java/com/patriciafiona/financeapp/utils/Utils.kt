@@ -3,7 +3,6 @@ package com.patriciafiona.financeapp.utils
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberUpdatedState
@@ -25,6 +24,7 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
+import java.util.TimeZone
 
 @Composable
 fun OnLifecycleEvent(onEvent: (owner: LifecycleOwner, event: Lifecycle.Event) -> Unit) {
@@ -107,6 +107,11 @@ fun getCurrentDateTime(): String {
     val calendar: Calendar = Calendar.getInstance()
     val sdf = SimpleDateFormat("MM/dd/yyyy")
     return sdf.format(calendar.time)
+}
+
+fun getThisYear(): String {
+    val cal: Calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"))
+    return cal[Calendar.YEAR].toString()
 }
 
 @SuppressLint("SimpleDateFormat")
