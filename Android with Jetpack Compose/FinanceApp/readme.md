@@ -36,7 +36,7 @@ Hello everyone! This time I try to learn create UI on Jetpack Compose by using d
 - All data is dummy, just for display only!
 
 ## Results video
-[![Watch the video](https://github.com/patriciafiona/Clone-From-Design-Projects/assets/32255348/2cd06410-3ef9-4728-8d47-c904ee5d88a8)](https://youtu.be/0unFr40CrOc)
+[![Watch the video](https://github.com/patriciafiona/Clone-From-Design-Projects/assets/32255348/2cd06410-3ef9-4728-8d47-c904ee5d88a8)](https://www.youtube.com/watch?v=8BwctjOR8rk)
 <p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link [LINK WILL BE FIXED SOON]</i></p>
 
 ## Screen shoot for App 
