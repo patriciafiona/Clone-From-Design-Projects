@@ -1,0 +1,69 @@
+name: furniture_app
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  simple_shadow: ^0.3.1
+  animated_text_kit: ^4.2.2
+  page_transition: ^2.1.0
+  slidable_button: ^3.0.0+1
+  carousel_slider: ^4.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/gif/app_logo.gif
+
+    - assets/image/get_started_banner_01.png
+    - assets/image/get_started_banner_02.png
+    - assets/image/get_started_banner_03.png
+
+  fonts:
+     - family: Horizon
+       fonts:
+         - asset: assets/font/horizon/horizon.otf
+
+     - family: HorizonOutline
+       fonts:
+         - asset: assets/font/horizon/horizon_outline.otf
+
+     - family: Lufga
+       fonts:
+         - asset: assets/font/lufga/lufga.ttf
+         - asset: assets/font/lufga/lufga_thin.ttf
+           weight: 100
+         - asset: assets/font/lufga/lufga_medium.ttf
+           weight: 500
+         - asset: assets/font/lufga/lufga_semi_bold.ttf
+           weight: 600
+         - asset: assets/font/lufga/lufga_bold.ttf
+           weight: 700
+         - asset: assets/font/lufga/lufga_black.ttf
+           weight: 900
+
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
