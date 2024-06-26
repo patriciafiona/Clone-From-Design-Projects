@@ -15,7 +15,10 @@ dependencies:
   animated_text_kit: ^4.2.2
   page_transition: ^2.1.0
   slidable_button: ^3.0.0+1
-  carousel_slider: ^4.2.1
+  carousel_slider_plus: ^6.0.0
+  fluttertoast: ^8.2.6
+  blur: ^4.0.0
+  curved_navigation_bar: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -29,10 +32,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/gif/app_logo.gif
+    - assets/gif/arrow_right.gif
 
     - assets/image/get_started_banner_01.png
     - assets/image/get_started_banner_02.png
     - assets/image/get_started_banner_03.png
+    - assets/image/background.png
 
   fonts:
      - family: Horizon

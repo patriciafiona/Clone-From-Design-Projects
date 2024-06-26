@@ -1,7 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:furniture_app/screens/HomeScreen.dart';
 import 'package:slidable_button/slidable_button.dart';
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
+
+import '../../utils/Constants.dart';
+import '../Main/MainScreen.dart';
 
 class GetStartedScreen extends StatefulWidget {
   const GetStartedScreen({super.key});
@@ -13,7 +15,7 @@ class GetStartedScreen extends StatefulWidget {
 class _GetStartedScreenState extends State<GetStartedScreen> {
 
   int _current = 0;
-  final CarouselController _controller = CarouselController();
+  final CarouselControllerPlus _controller = CarouselControllerPlus();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +63,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   Expanded(
                     child: CarouselSlider(
                       items: imageSliders,
-                      carouselController: _controller,
+                      controller: _controller,
                       options: CarouselOptions(
                           autoPlay: true,
                           enlargeCenterPage: true,
@@ -105,7 +107,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               children: [
                 RawMaterialButton(
                   onPressed: () {},
-                  fillColor: Colors.white70.withOpacity(0.15),
+                  fillColor: transparentGray,
                   padding: const EdgeInsets.all(24.0),
                   shape: const CircleBorder(),
                   child: const Center(
@@ -120,8 +122,8 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   child: HorizontalSlidableButton(
                     height: 60,
                     buttonWidth: 60.0,
-                    color: Colors.white70.withOpacity(0.15),
-                    buttonColor: const Color.fromRGBO(251, 255, 98, 1),
+                    color: transparentGray,
+                    buttonColor: yellowStabilo,
                     dismissible: false,
                     label: const Center(
                         child: Icon(
@@ -130,21 +132,26 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                           size: 16,
                         )
                     ),
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Spacer(),
-                          Text(
+                          const Spacer(flex: 2,),
+                          const Text(
                               'Start',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
+                              fontWeight: FontWeight.bold
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
+                          Image.asset(
+                            "assets/gif/arrow_right.gif",
+                            width: 50,
+                          ),
                         ],
                       ),
                     ),
@@ -153,7 +160,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                         setState(() {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                            MaterialPageRoute(builder: (context) => MainScreen()),
                           );
                         });
                       }
