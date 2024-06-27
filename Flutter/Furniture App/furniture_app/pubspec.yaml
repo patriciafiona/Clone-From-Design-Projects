@@ -19,6 +19,7 @@ dependencies:
   fluttertoast: ^8.2.6
   blur: ^4.0.0
   curved_navigation_bar: ^1.0.6
+  chip_list: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:slidable_button/slidable_button.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 
@@ -159,8 +160,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                       if (position == SlidableButtonPosition.end) {
                         setState(() {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainScreen()),
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: MainScreen()
+                              )
                           );
                         });
                       }
