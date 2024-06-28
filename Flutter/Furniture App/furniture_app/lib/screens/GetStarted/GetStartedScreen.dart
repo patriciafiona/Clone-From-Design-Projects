@@ -3,6 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:slidable_button/slidable_button.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 
+import '../../model/DataDummy.dart';
 import '../../utils/Constants.dart';
 import '../Main/MainScreen.dart';
 
@@ -23,13 +24,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    final List<String> imgList = [
-      "get_started_banner_01.png",
-      "get_started_banner_02.png",
-      "get_started_banner_03.png",
-    ];
-
-    final List<Widget> imageSliders = imgList
+    final List<Widget> imageSliders = Datadummy().getStartedImgList
         .map((item) => Container(
       child: Container(
         margin: const EdgeInsets.all(3.0),
@@ -80,7 +75,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: imgList.asMap().entries.map((entry) {
+                    children: Datadummy().getStartedImgList.asMap().entries.map((entry) {
                       return GestureDetector(
                         onTap: () => _controller.animateToPage(entry.key),
                         child: Container(

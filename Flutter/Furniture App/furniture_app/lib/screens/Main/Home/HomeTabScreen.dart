@@ -1,7 +1,12 @@
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:chip_list/chip_list.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:furniture_app/model/entity/FurnituesResponse.dart';
+import 'package:furniture_app/model/entity/FurniturItemResponse.dart';
 
+import '../../../model/DataDummy.dart';
+import '../../../model/api/api_helper.dart';
 import '../../../utils/Constants.dart';
 
 class HomeTabScreen extends StatefulWidget {
@@ -14,10 +19,6 @@ class HomeTabScreen extends StatefulWidget {
 class _HomeTabScreenState extends State<HomeTabScreen> {
   //Chips settings
   int chipTag = 0;
-  List<String> chipOptions = [
-    "All", "Armchair", "Sofa", "Stool", "Bed",
-    "Table", "Storage"
-  ];
 
   //Carousel settings
   int _current = 0;
@@ -29,13 +30,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
     double screenHeight = MediaQuery.sizeOf(context).height;
 
     //Banner settings
-    final List<List<String>> imgList = [
-      ["35", "Modway Engage Accent Chair with Ottoman", "1049.0", "321227_01.png"],
-      ["44", "Rooms to Go Ridgewater Chair", "499.0", "531354_01.png"],
-      ["72", "Mitchell Gold + Bob Williams English Roll Arm Club Chair", "2000.0", "527866_01.png"],
-    ];
-
-    final List<Widget> imageSliders = imgList
+    final List<Widget> imageSliders = Datadummy().homeBannerImgList
         .map((item) => Container(
           margin: const EdgeInsets.all(3.0),
           child: ClipRRect(
@@ -169,12 +164,12 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
 
             const SizedBox(height: 16),
 
-            BannerSection(imgList, imageSliders),
+            BannerSection(Datadummy().homeBannerImgList, imageSliders),
 
             const SizedBox(height: 16),
 
             ChipList(
-              listOfChipNames: chipOptions,
+              listOfChipNames: Datadummy().chipOptions,
               activeBgColorList: const [Colors.white70],
               inactiveBgColorList: [transparentDarkBlue],
               activeTextColorList: const [Colors.black],
@@ -190,9 +185,69 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                 });
               },
             ),
+
+            const SizedBox(height: 16),
+
+            const Text(
+              "Featured Product",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: "Lufga"
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            productsList(context)
           ],
         ),
       ),
+    );
+  }
+
+  FutureBuilder<FurnituresResponse> productsList(BuildContext context) {
+    final client = RestClient(Dio(BaseOptions(contentType: "application/json")));
+    return FutureBuilder<FurnituresResponse>(
+
+      future: client.getFurnitures(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final FurnituresResponse? furnitures = snapshot.data;
+          return _buildPosts(context, furnitures!.results!);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  ListView _buildPosts(BuildContext context, List<FurniturItemResponse> furnitures) {
+    return ListView.builder(
+      itemCount: furnitures.length,
+      padding: EdgeInsets.all(8),
+      itemBuilder: (context, index) {
+        return Card(
+          elevation: 4,
+          child: ListTile(
+            title: Text(
+              "${furnitures[index].name}",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(furnitures[index].brand.toString()),
+            leading: Column(
+              children: <Widget>[
+                // Image.network(
+                //   furnitures[index].photos![0], width: 50, height: 50,
+                // ),
+              ],
+
+            ),
+          ),
+        );
+      },
     );
   }
 
