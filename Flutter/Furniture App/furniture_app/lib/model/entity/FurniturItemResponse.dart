@@ -1,11 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'DimensionsResponse.dart';
+
 @JsonSerializable()
 class FurniturItemResponse {
   int? id;
   String? category;
   String? name;
-  int? price;
+  double? price;
   int? discountPercentage;
   String? brand;
   String? color;
@@ -47,44 +49,21 @@ class FurniturItemResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['category'] = this.category;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['discount_percentage'] = this.discountPercentage;
-    data['brand'] = this.brand;
-    data['color'] = this.color;
-    if (this.dimensions != null) {
-      data['dimensions'] = this.dimensions!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['category'] = category;
+    data['name'] = name;
+    data['price'] = price;
+    data['discount_percentage'] = discountPercentage;
+    data['brand'] = brand;
+    data['color'] = color;
+    if (dimensions != null) {
+      data['dimensions'] = dimensions!.toJson();
     }
-    data['seat_height'] = this.seatHeight;
-    data['seat_depth'] = this.seatDepth;
-    data['photos'] = this.photos;
-    data['url'] = this.url;
-    return data;
-  }
-}
-
-@JsonSerializable()
-class Dimensions {
-  int? width;
-  int? height;
-  int? dimension;
-
-  Dimensions({this.width, this.height, this.dimension});
-
-  Dimensions.fromJson(Map<String, dynamic> json) {
-    width = json['width'];
-    height = json['height'];
-    dimension = json['dimension'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['width'] = this.width;
-    data['height'] = this.height;
-    data['dimension'] = this.dimension;
+    data['seat_height'] = seatHeight;
+    data['seat_depth'] = seatDepth;
+    data['photos'] = photos;
+    data['url'] = url;
     return data;
   }
 }

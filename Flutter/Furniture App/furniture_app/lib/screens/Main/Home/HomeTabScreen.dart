@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:chip_list/chip_list.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/model/entity/FurnituesResponse.dart';
 import 'package:furniture_app/model/entity/FurniturItemResponse.dart';
+import 'package:http_status/http_status.dart';
 
 import '../../../model/DataDummy.dart';
-import '../../../model/api/api_helper.dart';
+import '../../../model/api/RestClient.dart';
 import '../../../utils/Constants.dart';
 
 class HomeTabScreen extends StatefulWidget {
@@ -23,6 +25,28 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   //Carousel settings
   int _current = 0;
   final CarouselControllerPlus _controller = CarouselControllerPlus();
+
+  //Furniture data from API
+  List<FurniturItemResponse> furnitureList = [];
+
+  void getFurnituresfromApi() async {
+    RestClient.getFurnitures().then((response) {
+      setState(() {
+        if (response.statusCode == HttpStatusCode.ok) { // res.statusCode == 200
+          Map<String, dynamic> mapOfFurnitures = json.decode(response.body);
+          var furnituresResponse = FurnituresResponse.fromJson(mapOfFurnitures);
+          furnitureList = furnituresResponse.results!;
+          logger.i("SUCCESS GET FURNITURE DATA: $furnitureList");
+        }
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFurnituresfromApi();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -199,57 +223,55 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
 
             const SizedBox(height: 16),
 
-            productsList(context)
+            // productsList(context)
           ],
         ),
       ),
     );
   }
 
-  FutureBuilder<FurnituresResponse> productsList(BuildContext context) {
-    final client = RestClient(Dio(BaseOptions(contentType: "application/json")));
-    return FutureBuilder<FurnituresResponse>(
-
-      future: client.getFurnitures(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final FurnituresResponse? furnitures = snapshot.data;
-          return _buildPosts(context, furnitures!.results!);
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-  }
-
-  ListView _buildPosts(BuildContext context, List<FurniturItemResponse> furnitures) {
-    return ListView.builder(
-      itemCount: furnitures.length,
-      padding: EdgeInsets.all(8),
-      itemBuilder: (context, index) {
-        return Card(
-          elevation: 4,
-          child: ListTile(
-            title: Text(
-              "${furnitures[index].name}",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(furnitures[index].brand.toString()),
-            leading: Column(
-              children: <Widget>[
-                // Image.network(
-                //   furnitures[index].photos![0], width: 50, height: 50,
-                // ),
-              ],
-
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // FutureBuilder<FurnituresResponse> productsList(BuildContext context, List<FurniturItemResponse> furnitures) {
+  //   return FutureBuilder<FurnituresResponse>(
+  //     future: client.getFurnitures(),
+  //     builder: (context, snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.done) {
+  //         final FurnituresResponse? furnitures = snapshot.data;
+  //         return _buildPosts(context, furnitures?.results ?? []);
+  //       } else {
+  //         return const Center(
+  //           child: CircularProgressIndicator(),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
+  //
+  // ListView _buildPosts(BuildContext context, List<FurniturItemResponse> furnitures) {
+  //   return ListView.builder(
+  //     itemCount: furnitures.length,
+  //     padding: EdgeInsets.all(8),
+  //     itemBuilder: (context, index) {
+  //       return Card(
+  //         elevation: 4,
+  //         child: ListTile(
+  //           title: Text(
+  //             "${furnitures[index]?.name ?? "Unknown name"}",
+  //             style: TextStyle(fontWeight: FontWeight.bold),
+  //           ),
+  //           subtitle: Text(furnitures[index]?.brand ?? "Unknown brand"),
+  //           leading: Column(
+  //             children: <Widget>[
+  //               // Image.network(
+  //               //   furnitures[index].photos![0], width: 50, height: 50,
+  //               // ),
+  //             ],
+  //
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   Container BannerSection(List<List<String>> imgList, List<Widget> imageSliders){
     return Container(

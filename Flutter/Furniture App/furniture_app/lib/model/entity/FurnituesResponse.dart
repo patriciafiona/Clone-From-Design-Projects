@@ -22,10 +22,10 @@ class FurnituresResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['status'] = this.status;
-    data['source'] = this.source;
-    if (this.results != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['source'] = source;
+    if (results != null) {
       data['results'] = this.results!.map((v) => v.toJson()).toList();
     }
     return data;
