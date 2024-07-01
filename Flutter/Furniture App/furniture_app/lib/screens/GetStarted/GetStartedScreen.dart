@@ -133,7 +133,11 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Spacer(flex: 2,),
+                          Image.asset(
+                            "assets/gif/arrow_right.gif",
+                            width: 50,
+                          ),
+                          const Spacer(flex: 1),
                           const Text(
                               'Start',
                             textAlign: TextAlign.center,

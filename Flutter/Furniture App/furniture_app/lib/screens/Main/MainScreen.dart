@@ -11,7 +11,7 @@ import 'package:furniture_app/screens/Main/User/UserTabScreen.dart';
 import '../../utils/Constants.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({super.key});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();

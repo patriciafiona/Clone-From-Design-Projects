@@ -184,11 +184,11 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            TopSection(),
+            topSection(),
 
             const SizedBox(height: 16),
 
-            BannerSection(Datadummy().homeBannerImgList, imageSliders),
+            bannerSection(Datadummy().homeBannerImgList, imageSliders),
 
             const SizedBox(height: 16),
 
@@ -223,57 +223,163 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
 
             const SizedBox(height: 16),
 
-            // productsList(context)
+            productsList(context, furnitureList),
+
+            const SizedBox(height: 50),
           ],
         ),
       ),
     );
   }
 
-  // FutureBuilder<FurnituresResponse> productsList(BuildContext context, List<FurniturItemResponse> furnitures) {
-  //   return FutureBuilder<FurnituresResponse>(
-  //     future: client.getFurnitures(),
-  //     builder: (context, snapshot) {
-  //       if (snapshot.connectionState == ConnectionState.done) {
-  //         final FurnituresResponse? furnitures = snapshot.data;
-  //         return _buildPosts(context, furnitures?.results ?? []);
-  //       } else {
-  //         return const Center(
-  //           child: CircularProgressIndicator(),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-  //
-  // ListView _buildPosts(BuildContext context, List<FurniturItemResponse> furnitures) {
-  //   return ListView.builder(
-  //     itemCount: furnitures.length,
-  //     padding: EdgeInsets.all(8),
-  //     itemBuilder: (context, index) {
-  //       return Card(
-  //         elevation: 4,
-  //         child: ListTile(
-  //           title: Text(
-  //             "${furnitures[index]?.name ?? "Unknown name"}",
-  //             style: TextStyle(fontWeight: FontWeight.bold),
-  //           ),
-  //           subtitle: Text(furnitures[index]?.brand ?? "Unknown brand"),
-  //           leading: Column(
-  //             children: <Widget>[
-  //               // Image.network(
-  //               //   furnitures[index].photos![0], width: 50, height: 50,
-  //               // ),
-  //             ],
-  //
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  Widget productsList(BuildContext context, List<FurniturItemResponse> furnitures) {
+    var size = MediaQuery.of(context).size;
 
-  Container BannerSection(List<List<String>> imgList, List<Widget> imageSliders){
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = size.width / 2;
+
+    return SizedBox(
+      height: 500,
+        child: () {
+          if (furnitures.isEmpty) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return GridView.builder(
+            controller: ScrollController(keepScrollOffset: false),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // number of items in each row
+              mainAxisSpacing: 4.0, // spacing between rows
+              crossAxisSpacing: 2.0, // spacing between columns,
+              childAspectRatio: (itemWidth / itemHeight),
+            ),
+            itemCount: furnitures.length, // total number of items
+            itemBuilder: (context, index) {
+              return furnitureGridItem(furnitures[index], itemWidth);
+            },
+          );
+        }
+      ());
+  }
+
+  Card furnitureGridItem(FurniturItemResponse furniture, double itemWidth) {
+      return Card(
+        color: transparentDarkBlue,
+        elevation: 4,
+        child: InkWell(
+          splashColor: Colors.blue.withAlpha(30),
+          onTap: () {
+            debugPrint('Card tapped.');
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Image.network(
+                        "https://raw.githubusercontent.com/patriciafiona/patriciafiona.github.io/main/hosting/resouces/furnitures/${furniture.photos?[0]}",
+                        fit: BoxFit.fill,
+                        width: 150,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                      ),
+                      const Spacer(),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: itemWidth / 2.5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  furniture.name ?? "Unknown name",
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.white,
+                                      fontFamily: "Lufga"
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                                Text(
+                                  "\$${furniture.price}",
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontFamily: "Lufga",
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Spacer(),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              padding: const EdgeInsets.all(8),
+                              backgroundColor: transparentGray, // <-- Button color
+                              foregroundColor: Colors.black, // <-- Splash color
+                            ),
+                            child: Transform.rotate(
+                              angle: -45,
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                size: 18.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(4),
+                      backgroundColor: transparentGray, // <-- Button color
+                      foregroundColor: Colors.black, // <-- Splash color
+                    ),
+                    child: const Icon(
+                      Icons.favorite_border_outlined,
+                      size: 22.0,
+                      color: Colors.white,
+                    )
+                  ),
+                )
+              ],
+            )
+          ),
+        )
+      );
+  }
+
+  Container bannerSection(List<List<String>> imgList, List<Widget> imageSliders){
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -321,7 +427,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
     );
   }
 
-  Row TopSection() {
+  Row topSection() {
     return Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

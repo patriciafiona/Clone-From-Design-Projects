@@ -17,7 +17,6 @@ dependencies:
   slidable_button: ^3.0.0+1
   carousel_slider_plus: ^6.0.0
   fluttertoast: ^8.2.6
-  blur: ^4.0.0
   curved_navigation_bar: ^1.0.6
   chip_list: ^3.0.0
 
