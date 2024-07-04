@@ -48,6 +48,13 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
     getFurnituresfromApi();
   }
 
+  Future<void> _pullRefresh() async {
+    setState(() {
+      furnitureList = [];
+    });
+    getFurnituresfromApi();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
@@ -246,20 +253,23 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
               child: CircularProgressIndicator(),
             );
           }
-          return GridView.builder(
-            controller: ScrollController(keepScrollOffset: false),
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, // number of items in each row
-              mainAxisSpacing: 4.0, // spacing between rows
-              crossAxisSpacing: 2.0, // spacing between columns,
-              childAspectRatio: (itemWidth / itemHeight),
+          return RefreshIndicator(
+            onRefresh: _pullRefresh,
+            child: GridView.builder(
+              controller: ScrollController(keepScrollOffset: false),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // number of items in each row
+                mainAxisSpacing: 4.0, // spacing between rows
+                crossAxisSpacing: 2.0, // spacing between columns,
+                childAspectRatio: (itemWidth / itemHeight),
+              ),
+              itemCount: furnitures.length, // total number of items
+              itemBuilder: (context, index) {
+                return furnitureGridItem(furnitures[index], itemWidth);
+              },
             ),
-            itemCount: furnitures.length, // total number of items
-            itemBuilder: (context, index) {
-              return furnitureGridItem(furnitures[index], itemWidth);
-            },
           );
         }
       ());
