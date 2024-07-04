@@ -21,6 +21,7 @@ class HomeTabScreen extends StatefulWidget {
 class _HomeTabScreenState extends State<HomeTabScreen> {
   //Chips settings
   int chipTag = 0;
+  String selectedCategoryChip = "all";
 
   //Carousel settings
   int _current = 0;
@@ -42,6 +43,20 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
     });
   }
 
+  void getFurnituresfromApiWithFilteredCategory(String category) async {
+    RestClient.getFurnitures().then((response) {
+      setState(() {
+        if (response.statusCode == HttpStatusCode.ok) { // res.statusCode == 200
+          Map<String, dynamic> mapOfFurnitures = json.decode(response.body);
+          var furnituresResponse = FurnituresResponse.fromJson(mapOfFurnitures);
+          var res = furnituresResponse.results!;
+          furnitureList = res.where((i) => i.category?.toLowerCase() == category).toList();
+          logger.i("SUCCESS GET FURNITURE DATA: $furnitureList");
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +67,14 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
     setState(() {
       furnitureList = [];
     });
-    getFurnituresfromApi();
+
+    if(chipTag == 0){
+      //show all
+      getFurnituresfromApi();
+    }else{
+      //show by selected category name
+      getFurnituresfromApiWithFilteredCategory(selectedCategoryChip);
+    }
   }
 
   @override
@@ -213,6 +235,17 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
               extraOnToggle: (val) {
                 setState(() {
                   chipTag = val;
+
+                  //Update the data in gridview
+                  furnitureList = [];
+                  if(chipTag == 0){
+                    //show all
+                    getFurnituresfromApi();
+                  }else{
+                    //show by selected category name
+                    selectedCategoryChip = Datadummy().chipOptions[chipTag].toLowerCase();
+                    getFurnituresfromApiWithFilteredCategory(selectedCategoryChip);
+                  }
                 });
               },
             ),
