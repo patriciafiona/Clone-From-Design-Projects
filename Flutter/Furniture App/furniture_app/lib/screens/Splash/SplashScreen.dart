@@ -21,7 +21,8 @@ class _SplashscreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3, milliseconds: 100),
             () =>
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) => const GetStartedScreen())));
+                builder: (BuildContext context) => const GetStartedScreen()))
+    );
 
     //Text Animation settings
     const colorizeColors = [

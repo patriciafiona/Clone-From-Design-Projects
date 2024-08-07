@@ -5,7 +5,9 @@ import 'package:chip_list/chip_list.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/model/entity/FurnituesResponse.dart';
 import 'package:furniture_app/model/entity/FurniturItemResponse.dart';
+import 'package:furniture_app/screens/ProductDetails/ProductDetailScreen.dart';
 import 'package:http_status/http_status.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../../../model/DataDummy.dart';
 import '../../../model/api/RestClient.dart';
@@ -315,7 +317,15 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
-            debugPrint('Card tapped.');
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.leftToRight,
+                    child: ProductDetailScreen(
+                      productId: furniture.id!,
+                    )
+                )
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -328,6 +338,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                       Image.network(
                         "https://raw.githubusercontent.com/patriciafiona/patriciafiona.github.io/main/hosting/resouces/furnitures/${furniture.photos?[0]}",
                         fit: BoxFit.fill,
+                        height: 150,
                         width: 150,
                         loadingBuilder: (BuildContext context, Widget child,
                             ImageChunkEvent? loadingProgress) {
