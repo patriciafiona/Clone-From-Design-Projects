@@ -318,7 +318,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
             debugPrint('Card tapped.');
           },
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(8.0),
             child: Stack(
               children: [
                 Align(
