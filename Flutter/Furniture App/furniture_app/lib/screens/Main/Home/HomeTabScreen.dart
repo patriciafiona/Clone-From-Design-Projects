@@ -338,8 +338,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                       Image.network(
                         "https://raw.githubusercontent.com/patriciafiona/patriciafiona.github.io/main/hosting/resouces/furnitures/${furniture.photos?[0]}",
                         fit: BoxFit.fill,
-                        height: 150,
-                        width: 150,
+                        height: 120,
+                        width: 120,
                         loadingBuilder: (BuildContext context, Widget child,
                             ImageChunkEvent? loadingProgress) {
                           if (loadingProgress == null) return child;
