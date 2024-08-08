@@ -320,7 +320,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
             Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.leftToRight,
+                  duration: const Duration(milliseconds: 500),
+                    type: PageTransitionType.fade,
                     child: ProductDetailScreen(
                       productId: furniture.id!,
                     )
