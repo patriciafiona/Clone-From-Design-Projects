@@ -5,7 +5,6 @@ import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/utils/extension/HexColor.dart';
 import 'package:http_status/http_status.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:slidable_button/slidable_button.dart';
 
 import '../../model/api/RestClient.dart';
@@ -29,6 +28,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   //Carousel
   int _current = 0;
   final CarouselControllerPlus _controller = CarouselControllerPlus();
+
+  //Quantity logic
+  int quantity = 1;
+
+  void addQuantity(){
+    if (quantity < 100){
+      setState(() {
+        debugPrint("Tambah quantity");
+        quantity++;
+      });
+    }
+  }
+
+  void removeQuantity(){
+    if (quantity > 1){
+      setState(() {
+        debugPrint("Kurang quantity");
+        quantity--;
+      });
+    }
+  }
 
   List<String> photoList = [];
 
@@ -103,51 +123,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(8),
-                    backgroundColor: transparentGray, // <-- Button color
-                    foregroundColor: Colors.black, // <-- Splash color
-                  ),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    size: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-                const Expanded(
-                    child: Text(
-                      "Product Detail",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: "Lufga",
-                      ),
-                      textAlign: TextAlign.center,
-                    )
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(8),
-                    backgroundColor: transparentGray, // <-- Button color
-                    foregroundColor: Colors.black, // <-- Splash color
-                  ),
-                  child: const Icon(
-                    Icons.favorite,
-                    size: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+            topSection(context),
             Builder(
               builder: (context) {
                 if (furnitureData == null){
@@ -209,137 +185,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                             const SizedBox(height: 16),
 
-                            Card(
-                              color: transparentDarkBlue,
-                              elevation: 4,
-                              child: Container(
-                                width: screenWidth,
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      furnitureData!.name ?? "Unknown name",
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.white,
-                                          fontFamily: "Lufga",
-                                        fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 8),
-
-                                    SizedBox(
-                                      width: screenWidth,
-                                      height: 100,
-                                      child: SingleChildScrollView(
-                                        child: Text(
-                                          loremIpsum,
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.white,
-                                            fontFamily: "Lufga",
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 16),
-
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 30,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: HexColor.fromHex(furnitureData!.color!),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Container(
-                                                width: 60,
-                                                height: 60,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                "\$${furnitureData!.price}",
-                                                style: const TextStyle(
-                                                    fontSize: 28,
-                                                    color: Colors.white,
-                                                    fontFamily: "Lufga",
-                                                    fontWeight: FontWeight.bold
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: HorizontalSlidableButton(
-                                                height: 40,
-                                                buttonWidth: 40.0,
-                                                color: yellowStabilo,
-                                                buttonColor: darkBlue,
-                                                dismissible: false,
-                                                label: Center(
-                                                    child: Image.asset(
-                                                      "assets/gif/arrow_right.gif",
-                                                      width: 30,
-                                                    )
-                                                ),
-                                                child: const Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      Spacer(),
-                                                      Text(
-                                                        'Add to cart',
-                                                        textAlign: TextAlign.center,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12,
-                                                            fontWeight: FontWeight.bold
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 16),
-                                                    ],
-                                                  ),
-                                                ),
-                                                onChanged: (position) {
-                                                  if (position == SlidableButtonPosition.end) {
-                                                    setState(() {
-                                                      // Navigator.push(
-                                                      //     context,
-                                                      //     PageTransition(
-                                                      //         type: PageTransitionType.fade,
-                                                      //         child: MainScreen()
-                                                      //     )
-                                                      // );
-                                                    });
-                                                  }
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
+                            productDetailCard(
+                                screenWidth,
+                                quantity,
+                                addQuantity,
+                                removeQuantity
                             )
                           ]
                       )
@@ -352,4 +202,290 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
     );
   }
+
+  Row topSection(BuildContext context) {
+    return Row(
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          style: ElevatedButton.styleFrom(
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(8),
+            backgroundColor: transparentGray, // <-- Button color
+            foregroundColor: Colors.black, // <-- Splash color
+          ),
+          child: const Icon(
+            Icons.arrow_back,
+            size: 20.0,
+            color: Colors.white,
+          ),
+        ),
+        const Expanded(
+            child: Text(
+              "Product Detail",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontFamily: "Lufga",
+              ),
+              textAlign: TextAlign.center,
+            )
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(8),
+            backgroundColor: transparentGray, // <-- Button color
+            foregroundColor: Colors.black, // <-- Splash color
+          ),
+          child: const Icon(
+            Icons.favorite,
+            size: 20.0,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget productDetailCard(
+      double screenWidth,
+      int quantity,
+      Function addQuantity,
+      Function removeQuantity
+  ){
+    return Card(
+      color: transparentDarkBlue,
+      elevation: 4,
+      child: Container(
+        width: screenWidth,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              furnitureData!.name ?? "Unknown name",
+              style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontFamily: "Lufga",
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            SizedBox(
+              width: screenWidth,
+              height: 70,
+              child: SingleChildScrollView(
+                child: Text(
+                  loremIpsum,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    fontFamily: "Lufga",
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Choose Color",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontFamily: "Lufga",
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: HexColor.fromHex(furnitureData!.color!),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Quantity",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                              fontFamily: "Lufga",
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.all(1),
+                            decoration: BoxDecoration(
+                                color: transparentDarkBlue,
+                                borderRadius: const BorderRadius.all(Radius.circular(50))
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: ElevatedButton(
+                                    onPressed: ()  => removeQuantity(),
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(8),
+                                      backgroundColor: transparentGray, // <-- Button color
+                                      foregroundColor: Colors.black, // <-- Splash color
+                                    ),
+                                    child: const Icon(
+                                      Icons.remove,
+                                      size: 14.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: transparentDarkBlue,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        quantity.toString(),
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.white,
+                                          fontFamily: "Lufga",
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: ElevatedButton(
+                                    onPressed: () => addQuantity(),
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(8),
+                                      backgroundColor: transparentGray, // <-- Button color
+                                      foregroundColor: Colors.black, // <-- Splash color
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      size: 14.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "\$${furnitureData!.price}",
+                        style: const TextStyle(
+                            fontSize: 28,
+                            color: Colors.white,
+                            fontFamily: "Lufga",
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: HorizontalSlidableButton(
+                        height: 40,
+                        buttonWidth: 40.0,
+                        color: yellowStabilo,
+                        buttonColor: darkBlue,
+                        dismissible: false,
+                        label: Center(
+                            child: Image.asset(
+                              "assets/gif/arrow_right.gif",
+                              width: 30,
+                            )
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Spacer(),
+                              Text(
+                                'Add to cart',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                            ],
+                          ),
+                        ),
+                        onChanged: (position) {
+                          if (position == SlidableButtonPosition.end) {
+                            setState(() {
+                              // Navigator.push(
+                              //     context,
+                              //     PageTransition(
+                              //         type: PageTransitionType.fade,
+                              //         child: MainScreen()
+                              //     )
+                              // );
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
 }

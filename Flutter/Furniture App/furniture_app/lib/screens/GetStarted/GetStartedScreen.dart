@@ -51,7 +51,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: screenHeight * 0.87,
+            height: screenHeight * 0.8,
             width: screenWidth,
             padding: const EdgeInsets.only(top: 70.0),
             child: Column(
@@ -129,7 +129,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                         )
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -173,6 +173,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               ],
             ),
           ),
+          const SizedBox(height: 16)
         ],
       ),
     );

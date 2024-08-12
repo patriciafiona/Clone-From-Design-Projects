@@ -310,7 +310,10 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
       ());
   }
 
-  Card furnitureGridItem(FurniturItemResponse furniture, double itemWidth) {
+  Card furnitureGridItem(
+      FurniturItemResponse furniture,
+      double itemWidth
+  ) {
       return Card(
         color: transparentDarkBlue,
         elevation: 4,
@@ -329,7 +332,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
             );
           },
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 24, bottom: 0),
             child: Stack(
               children: [
                 Align(
@@ -338,9 +341,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                     children: [
                       Image.network(
                         "https://raw.githubusercontent.com/patriciafiona/patriciafiona.github.io/main/hosting/resouces/furnitures/${furniture.photos?[0]}",
-                        fit: BoxFit.fill,
-                        height: 120,
-                        width: 120,
+                        fit: BoxFit.cover,
+                        height: 130,
+                        width: itemWidth - 20,
                         loadingBuilder: (BuildContext context, Widget child,
                             ImageChunkEvent? loadingProgress) {
                           if (loadingProgress == null) return child;
@@ -484,71 +487,71 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
 
   Row topSection() {
     return Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Elevate Your",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: "Lufga"
+              ),
+            ),
+            Text(
+              "Living Space",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontFamily: "Lufga",
+                fontWeight: FontWeight.w600
+              ),
+            ),
+          ],
+        ),
+        const Spacer(),
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: transparentGray,
+              borderRadius: const BorderRadius.all(Radius.circular(50))
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Elevate Your",
-                    style: TextStyle(
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: IconButton(
+                    onPressed: () => {},
+                    icon: const Icon(
+                      Icons.search,
                       color: Colors.white,
-                      fontSize: 18,
-                      fontFamily: "Lufga"
-                    ),
-                  ),
-                  Text(
-                    "Living Space",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontFamily: "Lufga",
-                      fontWeight: FontWeight.w600
-                    ),
-                  ),
-                ],
+                      size: 24.0,
+                    )
+                ),
               ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: transparentGray,
-                    borderRadius: const BorderRadius.all(Radius.circular(50))
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(15),
+                  backgroundColor: Colors.white.withOpacity(.8), // <-- Button color
+                  foregroundColor: Colors.black, // <-- Splash color
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: IconButton(
-                          onPressed: () => {},
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 24.0,
-                          )
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(15),
-                        backgroundColor: Colors.white.withOpacity(.8), // <-- Button color
-                        foregroundColor: Colors.black, // <-- Splash color
-                      ),
-                      child: const Icon(
-                        Icons.shopping_bag_outlined,
-                        size: 24.0,
-                      ),
-                    ),
-                  ],
+                child: const Icon(
+                  Icons.shopping_bag_outlined,
+                  size: 24.0,
                 ),
-              )
+              ),
             ],
-          );
+          ),
+        )
+      ],
+    );
   }
 }
