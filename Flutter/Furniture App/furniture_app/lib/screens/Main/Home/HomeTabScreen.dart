@@ -381,7 +381,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                 Text(
                                   "\$${furniture.price}",
                                   style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       color: Colors.white,
                                       fontFamily: "Lufga",
                                       fontWeight: FontWeight.bold

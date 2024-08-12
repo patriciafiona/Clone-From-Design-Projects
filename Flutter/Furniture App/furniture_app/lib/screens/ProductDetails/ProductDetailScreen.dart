@@ -281,7 +281,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
             SizedBox(
               width: screenWidth,
-              height: 70,
+              height: 80,
               child: Stack(
                 children: [
                   SingleChildScrollView(
