@@ -282,15 +282,34 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             SizedBox(
               width: screenWidth,
               height: 70,
-              child: SingleChildScrollView(
-                child: Text(
-                  loremIpsum,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontFamily: "Lufga",
+              child: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Text(
+                      loremIpsum,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontFamily: "Lufga",
+                      ),
+                    ),
                   ),
-                ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 20,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [Colors.transparent, transparentDarkBlue],
+                            begin: const FractionalOffset(0.0, 0.0),
+                            end: const FractionalOffset(0.0, 0.5),
+                            stops: const [0.0, 1.0],
+                            tileMode: TileMode.clamp
+                        ),
+                      ),
+                    ),
+                  )
+                ]
               ),
             ),
 
