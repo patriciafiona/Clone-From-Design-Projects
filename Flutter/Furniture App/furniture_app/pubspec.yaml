@@ -19,6 +19,7 @@ dependencies:
   fluttertoast: ^8.2.6
   curved_navigation_bar: ^1.0.6
   chip_list: ^3.0.0
+  url_launcher: ^6.3.0
 
   #For REST API
   http: ^1.2.1
@@ -45,6 +46,8 @@ flutter:
     - assets/image/get_started_banner_02.png
     - assets/image/get_started_banner_03.png
     - assets/image/background.png
+
+    - assets/image/pp_patricia_fiona.jpeg
 
   fonts:
      - family: Horizon
