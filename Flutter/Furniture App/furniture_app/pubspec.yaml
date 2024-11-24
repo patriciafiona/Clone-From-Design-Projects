@@ -16,7 +16,7 @@ dependencies:
   page_transition: ^2.1.0
   slidable_button: ^3.0.0+1
   carousel_slider_plus: ^6.0.0
-  fluttertoast: ^8.2.6
+  fluttertoast: ^8.2.8
   curved_navigation_bar: ^1.0.6
   chip_list: ^3.0.0
   url_launcher: ^6.3.0
