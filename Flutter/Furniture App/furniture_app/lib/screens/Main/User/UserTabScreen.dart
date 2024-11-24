@@ -119,8 +119,57 @@ class _UserTabScreenState extends State<UserTabScreen> {
             child: Builder(
               builder: (context) {
                 if (_selectedSegment.name.toLowerCase() == "general") {
-                  return Column(
-                    children: [],
+                  return const Column(
+                    children: [
+                      Spacer(),
+
+                      Text(
+                        "My Furniture",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: "Lufga"
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "Best Furniture in Town",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontFamily: "Lufga",
+                            fontWeight: FontWeight.w600
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Divider(),
+                      ),
+
+                      Text(
+                        "Plaza Indonesia",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontFamily: "Lufga",
+                            fontWeight: FontWeight.bold
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        "Jl. M.H. Thamrin No.Kav.28-30, Gondangdia, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: "Lufga"
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+
+                      Spacer(),
+                    ],
                   );
                 }else{
                   return SingleChildScrollView(
@@ -131,7 +180,8 @@ class _UserTabScreenState extends State<UserTabScreen> {
                           header: const Text(
                             'About the App',
                             style: TextStyle(
-                                color: Colors.white
+                                color: Colors.white,
+                              fontFamily: "Lufga",
                             ),
                           ),
                           children: <CupertinoListTile>[
@@ -239,7 +289,8 @@ class _UserTabScreenState extends State<UserTabScreen> {
                           header: const Text(
                             'My Social Media',
                             style: TextStyle(
-                                color: Colors.white
+                              color: Colors.white,
+                              fontFamily: "Lufga",
                             ),
                           ),
                           children: <CupertinoListTile>[
