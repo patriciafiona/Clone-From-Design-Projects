@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_icons/simple_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/Constants.dart';
@@ -139,7 +140,14 @@ class _UserTabScreenState extends State<UserTabScreen> {
                               leading: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.activeBlue,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.phone_android_outlined,
+                                  color: Colors.white,
+                                ),
                               ),
                               additionalInfo: const Text("Furniture App"),
                             ),
@@ -148,7 +156,14 @@ class _UserTabScreenState extends State<UserTabScreen> {
                               leading: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.systemRed,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.info_outline,
+                                  color: Colors.white,
+                                ),
                               ),
                               additionalInfo: const Text("Android, iOS"),
                             ),
@@ -157,7 +172,14 @@ class _UserTabScreenState extends State<UserTabScreen> {
                               leading: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.activeOrange,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.build_outlined,
+                                  color: Colors.white,
+                                ),
                               ),
                               additionalInfo: const Text("Flutter"),
                             ),
@@ -166,7 +188,14 @@ class _UserTabScreenState extends State<UserTabScreen> {
                               leading: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.systemPurple,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.settings,
+                                  color: Colors.white,
+                                ),
                               ),
                               additionalInfo: const Text("v1.0.0"),
                             ),
@@ -175,7 +204,14 @@ class _UserTabScreenState extends State<UserTabScreen> {
                               leading: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.systemTeal,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.code,
+                                  color: Colors.white,
+                                ),
                               ),
                               additionalInfo: Text(developerName),
                             ),
@@ -184,7 +220,14 @@ class _UserTabScreenState extends State<UserTabScreen> {
                               leading: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                decoration: BoxDecoration(
+                                  color: CupertinoColors.activeGreen,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(
+                                  Icons.format_paint_outlined,
+                                  color: Colors.white,
+                                ),
                               ),
                               additionalInfo: const Text("Naimujjaman - Dribbble"),
                             ),
@@ -202,20 +245,26 @@ class _UserTabScreenState extends State<UserTabScreen> {
                           children: <CupertinoListTile>[
                             CupertinoListTile.notched(
                               title: const Text('Github'),
-                              leading: Container(
+                              leading: const SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                child: Icon(
+                                    SimpleIcons.github,
+                                    color: SimpleIconColors.github
+                                ),
                               ),
                               trailing: const CupertinoListTileChevron(),
                               onTap: () => _launchURLOnBrowser('https://github.com/patriciafiona')
                             ),
                             CupertinoListTile.notched(
                               title: const Text('Youtube'),
-                              leading: Container(
+                              leading: const SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
-                                color: CupertinoColors.systemRed,
+                                child: Icon(
+                                    SimpleIcons.youtube,
+                                    color: SimpleIconColors.youtube
+                                ),
                               ),
                               trailing: const CupertinoListTileChevron(),
                               onTap: () => _launchURLOnBrowser('https://www.youtube.com/@patriciafiona')
