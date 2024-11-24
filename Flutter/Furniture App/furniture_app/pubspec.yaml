@@ -47,6 +47,7 @@ flutter:
   assets:
     - assets/gif/app_logo.gif
     - assets/gif/arrow_right.gif
+    - assets/gif/empty_notif.gif
 
     - assets/image/get_started_banner_01.png
     - assets/image/get_started_banner_02.png
