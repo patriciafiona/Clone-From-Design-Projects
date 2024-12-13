@@ -18,3 +18,4 @@ The list of the projects:
 | Spotify UI | Learn how to connect Firebase tools and create UI in Flutter using Spotify case & designs! | [Link](https://github.com/patriciafiona/Flutter-Projects/tree/main/Flutter/Spotify%20UI) | 
 | Plant App | Learn how to implement inspiration design from dribble to Application designs! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Flutter/Plants%20App) | 
 | NFT Market | Learn how to implement inspiration design from dribble to Application designs with case: NFT Marketplace! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Flutter/NFT%20Marketplace/nft_marketplace) | 
+| Furniture App | Learn how to implement inspiration design from dribble to Application designs with case: Furniture App! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/Furniture-App/Flutter/Furniture%20App) | 
