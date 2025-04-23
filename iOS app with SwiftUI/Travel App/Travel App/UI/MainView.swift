@@ -4,6 +4,8 @@
 //
 //  Created by FIONA Patricia on 23/04/25.
 //
+// Bottom Nav reference: https://faizannaseem96.medium.com/floating-tabbar-in-swiftui-99ada9595259
+
 
 import SwiftUI
 import Collections
