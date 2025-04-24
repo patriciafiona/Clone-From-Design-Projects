@@ -27,7 +27,7 @@ struct CardView: View {
 
     var body: some View {
         Text(model.text)
-            .frame(width: size.width * 0.8, height: size.height * 0.8)
+            .frame(width: size.width * 0.8, height: size.height)
             .background(Color.white)
             .cornerRadius(15)
             .shadow(color: isTopCard ? getShadowColor() : (isSecondCard && dragOffset.width != 0 ? Color.gray.opacity(0.2) : Color.clear), radius: 10, x: 0, y: 3)
