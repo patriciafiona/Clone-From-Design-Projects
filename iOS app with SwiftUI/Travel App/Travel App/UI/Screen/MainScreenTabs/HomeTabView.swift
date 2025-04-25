@@ -99,17 +99,16 @@ struct HomeTabView: View {
             
             GeometryReader { geometry in
                 VStack {
-                    let cards = [
-                        CardView.Model(text: "Card 1"),
-                        CardView.Model(text: "Card 2"),
-                        CardView.Model(text: "Card 3"),
-                        CardView.Model(text: "Card 4")
-                    ]
+                    let cards = TravelDatabase.init().getPlacesByContinent(selectedContinent: selectedContinent)
                     
-                    let model = SwipeableCardsView.Model(cards: cards)
-                    SwipeableCardsView(model: model) { model in
-                        print(model.swipedCards)
-                        model.reset()
+                    if(cards.isEmpty){
+                        
+                    }else{
+                        let model = SwipeableCardsView.Model(cards: cards)
+                        SwipeableCardsView(model: model) { model in
+                            print(model.swipedCards)
+                            model.reset()
+                        }
                     }
                 }
                 .frame(

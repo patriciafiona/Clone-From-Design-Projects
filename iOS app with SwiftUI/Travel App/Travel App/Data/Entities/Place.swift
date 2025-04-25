@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Place {
+struct Place: Identifiable, Equatable {
+    var id = UUID()
     var name: String
     var image: String
     var rating: Double
