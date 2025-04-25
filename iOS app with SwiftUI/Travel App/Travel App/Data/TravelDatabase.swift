@@ -33,6 +33,54 @@ public struct TravelDatabase {
             country: "IDN",
             continent: "Asia"
         ),
+        Place(
+            name: "Cristo Redentor",
+            image: "https://i.content4travel.com/seeplaces/temp/9ecc4378-3201-4070-89e8-de66534c9d9c.jpg",
+            rating: 4.6,
+            decription: "Christ the Redeemer (Portuguese: Cristo Redentor, standard Brazilian Portuguese: [ˈkɾistu ʁedẽˈtoʁ]) is an Art Deco statue of Jesus in Rio de Janeiro, Brazil, created by French-Polish sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa, in collaboration with French engineer Albert Caquot. Romanian sculptor Gheorghe Leonida sculpted the face. Constructed between 1922 and 1931, the statue is 30 metres (98 ft) high, excluding its 8-metre (26 ft) pedestal. The arms stretch 28 metres (92 ft) wide. It is made of reinforced concrete and soapstone. Christ the Redeemer differs considerably from its original design, as the initial plan was a large Christ with a globe in one hand and a cross in the other. Although the project organizers originally accepted the design, it later changed to the statue of today, with the arms spread out wide.\n\nThe statue weighs 635 metric tons (625 long, 700 short tons), and is located at the peak of the 700-metre (2,300 ft) Corcovado mountain in the Tijuca National Park overlooking the city of Rio de Janeiro. This statue is the largest Art Deco–style sculpture in the world. A symbol of Christianity around the world, the statue has also become a cultural icon of both Rio de Janeiro and Brazil and was voted one of the New 7 Wonders of the World.",
+            country: "BRA",
+            continent: "America"
+        ),
+        Place(
+            name: "Statue of Liberty",
+            image: "https://www.usatoday.com/gcdn/authoring/2019/05/16/USAT/9b4d37bc-a331-40c3-8373-c1c94ae706c4-Odaiba_Statue_of_Liberty_Replica_Japan_National_Tourism_Organization.jpg?crop=2000,2667,x1007,y0",
+            rating: 4.4,
+            decription: "The Statue of Liberty (Liberty Enlightening the World; French: La Liberté éclairant le monde) is a colossal neoclassical sculpture on Liberty Island in New York Harbor, within New York City. The copper-clad statue, a gift to the United States from the people of France, was designed by French sculptor Frédéric Auguste Bartholdi and its metal framework was built by Gustave Eiffel. The statue was dedicated on October 28, 1886.",
+            country: "USA",
+            continent: "America"
+        ),
+        Place(
+            name: "Sydney Opera House",
+            image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Australia._%2821339175489%29.jpg",
+            rating: 4.4,
+            decription: "The Sydney Opera House in Sydney, New South Wales, Australia is one of the most distinctive and famous buildings of the 20th century. It is located on Bennelong Point in Sydney Harbour near the Sydney Harbour Bridge and the view of the two buildings has become an icon of Australia.\n\nFor the millions of tourists who visit, the building has an attraction in its shell-like shape. In addition to being a tourist attraction, the building also hosts various theater, ballet and other arts performances. The building is managed by the Opera House Trust and is the headquarters of Opera Australia, the Sydney Theatre Company and the Sydney Symphony Orchestra.\n\nThe design was obtained from a competition won by Jørn Utzon of Denmark in 1955. Utzon himself came to Sydney for supervision in 1957.\n\nThe building was also included in the UNESCO World Heritage Site list in 2007.",
+            country: "AUS",
+            continent: "Australia"
+        ),
+        Place(
+            name: "Great Pyramid of Giza",
+            image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Great_Pyramid_of_Giza_-_Pyramid_of_Khufu.jpg/1200px-Great_Pyramid_of_Giza_-_Pyramid_of_Khufu.jpg",
+            rating: 4.6,
+            decription: "The Great Pyramid of Giza is the largest Egyptian pyramid. It served as the tomb of pharaoh Khufu, who ruled during the Fourth Dynasty of the Old Kingdom. Built c. 2600 BC, over a period of about 26 years, the pyramid is the oldest of the Seven Wonders of the Ancient World, and the only wonder that has remained largely intact. It is the most famous monument of the Giza pyramid complex, which is part of the UNESCO World Heritage Site \"Memphis and its Necropolis\". It is situated at the northeastern end of the line of the three main pyramids at Giza.",
+            country: "EGY",
+            continent: "Africa"
+        ),
+        Place(
+            name: "Great Pyramid of Giza",
+            image: "https://cpanel-blog.smsperkasa.com/wp-content/uploads/2023/09/bagian-dalam-koloseum-1024x682.jpg",
+            rating: 4.7,
+            decription: "The Colosseum (Latin: Colosseum or Colisseum; Italian: Colosseo) is a historical relic in the form of a gladiatorial arena, built by Vespasian. The large elliptical performance venue is called an amphitheater or with its original name Amphitheatrum Flavium, which is included in one of the Sixty-Nine Wonders of the Medieval World. This site is located in the small city of Rome in Italy, which was founded by the Mayor Vespasian during the time of Domitian and completed by his son Titus, and became one of the greatest works of Roman Imperial architecture ever built. The Colosseum was designed to accommodate 50,000 spectators.",
+            country: "ITA",
+            continent: "Europe"
+        ),
+        Place(
+            name: "Eiffel Tower",
+            image: "https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/3:2/w_7950,h_5300,c_limit/GettyImages-955441104.jpg",
+            rating: 4.7,
+            decription: "Named after its designer, Gustave Eiffel, the Eiffel Tower is the tallest building in Paris and one of the world's most recognizable structures. More than 200,000,000 people have visited the tower since its construction in 1889, including 6,719,200 in 2006, making it the world's most visited paid monument. Including its 24 m (79 ft) antenna, the structure has stood 325 m (1,063 ft) tall since 2000, which is the same as a conventional 81-story building.\n\nWhen the tower was completed in 1889, it was the tallest structure in the world—a title it held until 1930 when the Chrysler Building in New York City (319 m — 1,047 ft) was completed. The tower is currently the fifth tallest in France and the tallest in Paris, with the second tallest structure being the Tour Montparnasse (210 m — 689 ft), although it will be surpassed by the Tour AXA (225.11 m — 738.36 ft).",
+            country: "FRA",
+            continent: "Europe"
+        ),
     ]
     
     func getPlacesByContinent(selectedContinent: String)-> [CardView.Model] {
