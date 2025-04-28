@@ -27,21 +27,8 @@ struct CardView: View {
 
     var body: some View {
         ZStack{
-            AsyncImage(url: URL(string: model.place.image)) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: size.width * 0.8, height: size.height)
-                } else if phase.error != nil {
-                    Text("No image available")
-                } else {
-                    ProgressView()
-                      .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                      .scaleEffect(2.0, anchor: .center) // Makes the spinner larger
-                }
-            }
-            .frame(width: size.width * 0.8, height: size.height)
+            CachedAsyncImage(url: URL(string: model.place.image))
+                .frame(width: size.width * 0.8, height: size.height)
         }
         .frame(width: size.width * 0.8, height: size.height)
         .background(Color.white)
