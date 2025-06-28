@@ -12,6 +12,7 @@
 		05F3310C2DB8DCFD004B148D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 05F3310B2DB8DCFD004B148D /* DequeModule */; };
 		05F3310E2DB8DCFD004B148D /* HashTreeCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 05F3310D2DB8DCFD004B148D /* HashTreeCollections */; };
 		05F331102DB8DCFD004B148D /* HeapModule in Frameworks */ = {isa = PBXBuildFile; productRef = 05F3310F2DB8DCFD004B148D /* HeapModule */; };
+		F76F5A392E0FD377000145BC /* SlideButton in Frameworks */ = {isa = PBXBuildFile; productRef = F76F5A382E0FD377000145BC /* SlideButton */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F76F5A392E0FD377000145BC /* SlideButton in Frameworks */,
 				05F3310A2DB8DCFD004B148D /* Collections in Frameworks */,
 				05F331102DB8DCFD004B148D /* HeapModule in Frameworks */,
 				05F331082DB8DCFD004B148D /* BitCollections in Frameworks */,
@@ -91,6 +93,7 @@
 				05F330D32DB88E9E004B148D /* Travel App */,
 				05F330E12DB88EA0004B148D /* Travel AppTests */,
 				05F330EB2DB88EA0004B148D /* Travel AppUITests */,
+				F76F5A372E0FD377000145BC /* Frameworks */,
 				05F330D22DB88E9E004B148D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +106,13 @@
 				05F330E82DB88EA0004B148D /* Travel AppUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F76F5A372E0FD377000145BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,6 +140,7 @@
 				05F3310B2DB8DCFD004B148D /* DequeModule */,
 				05F3310D2DB8DCFD004B148D /* HashTreeCollections */,
 				05F3310F2DB8DCFD004B148D /* HeapModule */,
+				F76F5A382E0FD377000145BC /* SlideButton */,
 			);
 			productName = "Travel App";
 			productReference = 05F330D12DB88E9E004B148D /* Travel App.app */;
@@ -215,6 +226,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				05F331062DB8AEE7004B148D /* XCRemoteSwiftPackageReference "swift-collections" */,
+				F76F5A362E0FD29B000145BC /* XCRemoteSwiftPackageReference "SlideButton" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 05F330D22DB88E9E004B148D /* Products */;
@@ -426,7 +438,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,7 +471,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -599,6 +611,14 @@
 				minimumVersion = 1.1.4;
 			};
 		};
+		F76F5A362E0FD29B000145BC /* XCRemoteSwiftPackageReference "SlideButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/no-comment/SlideButton";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -626,6 +646,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 05F331062DB8AEE7004B148D /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = HeapModule;
+		};
+		F76F5A382E0FD377000145BC /* SlideButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F76F5A362E0FD29B000145BC /* XCRemoteSwiftPackageReference "SlideButton" */;
+			productName = SlideButton;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

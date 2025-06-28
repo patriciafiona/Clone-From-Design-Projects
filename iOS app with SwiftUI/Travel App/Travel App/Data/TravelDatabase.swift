@@ -99,4 +99,12 @@ public struct TravelDatabase {
         
         return cards
     }
+  
+  func getPlacesByUuid(uuid: String) throws -> Place {
+    let filteredData = allTravels.filter {
+      $0.id.uuidString == uuid
+    }.first
+    
+    return filteredData!
+  }
 }

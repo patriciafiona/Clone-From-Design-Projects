@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Travel_AppApp: App {
+    var navBarState = NavBarState()
+  
     var body: some Scene {
         WindowGroup {
             MainView()
+              .environmentObject(navBarState) // Inject here
         }
     }
 }

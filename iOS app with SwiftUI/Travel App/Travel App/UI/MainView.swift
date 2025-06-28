@@ -11,6 +11,8 @@ import SwiftUI
 import Collections
 
 struct MainView: View {
+  @EnvironmentObject var navBarState: NavBarState
+  
     var tabs: OrderedDictionary = [
         "home": "house",
         "list": "list.clipboard",
@@ -35,67 +37,81 @@ struct MainView: View {
     
     //UI section
     var body: some View {
-    ZStack(
-        alignment: Alignment(
-            horizontal: .center,
-            vertical: .bottom
-        )
-    ){
+      ZStack(
+          alignment: Alignment(
+              horizontal: .center,
+              vertical: .bottom
+          )
+      ){
             TabView(selection: $selectedTab) {
                 HomeTabView()
                     .tag(tabsTags[0])
+                    .onAppear(){
+                      navBarState.isShowNavBar = true
+                    }
                 
                 ListTabView()
                     .tag(tabsTags[1])
+                    .onAppear(){
+                      navBarState.isShowNavBar = true
+                    }
                 
                 FavoriteTabView()
                     .tag(tabsTags[2])
+                    .onAppear(){
+                      navBarState.isShowNavBar = true
+                    }
                 
                 MenuTabView()
                     .tag(tabsTags[3])
+                    .onAppear(){
+                      navBarState.isShowNavBar = true
+                    }
             }
             
-            // custom tab bar
-            HStack(
-                alignment: VerticalAlignment.center,
-                spacing: 0
-            ) {
-                ForEach(Array(tabsImages.enumerated()), id: \.offset) { index, image in
-                    GeometryReader { reader in
-                        Button(action: {
-                            withAnimation {
-                                selectedTab = tabsTags[index]
-                                xAxis = reader.frame(in: .global).minX
-                            }
-                        }, label: {
-                            Image(systemName: image)
-                                .resizable()
-                                .renderingMode(.template)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 22.0, height: 22.0)
-                                .foregroundColor(
-                                    selectedTab == tabsTags[index] ? .white : .gray)
-                                .padding(selectedTab == tabsTags[index] ? 15 : 0)
-                                .background(Color.black.opacity(selectedTab == tabsTags[index] ? 1 : 0).clipShape(Circle()))
-                                .matchedGeometryEffect(id: tabsTags[index], in: animation)
-                                .offset(x: selectedTab == tabsTags[index] ? -10 : 0, y: selectedTab == tabsTags[index] ? -50 : 0)
-                        })
-                        .onAppear(perform: {
-                            if image == tabsImages.first {
-                                xAxis = reader.frame(in: .global).minX
-                            }
-                        })
-                    }
-                    .frame(width: 25.0, height: 24.0)
-                    if image != tabsImages.last { Spacer() }
-                }
+        if(navBarState.isShowNavBar){
+          // custom tab bar
+          HStack(
+            alignment: VerticalAlignment.center,
+            spacing: 0
+          ) {
+            ForEach(Array(tabsImages.enumerated()), id: \.offset) { index, image in
+              GeometryReader { reader in
+                Button(action: {
+                  withAnimation {
+                    selectedTab = tabsTags[index]
+                    xAxis = reader.frame(in: .global).minX
+                  }
+                }, label: {
+                  Image(systemName: image)
+                    .resizable()
+                    .renderingMode(.template)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 22.0, height: 22.0)
+                    .foregroundColor(
+                      selectedTab == tabsTags[index] ? .white : .gray)
+                    .padding(selectedTab == tabsTags[index] ? 15 : 0)
+                    .background(Color.black.opacity(selectedTab == tabsTags[index] ? 1 : 0).clipShape(Circle()))
+                    .matchedGeometryEffect(id: tabsTags[index], in: animation)
+                    .offset(x: selectedTab == tabsTags[index] ? -10 : 0, y: selectedTab == tabsTags[index] ? -50 : 0)
+                })
+                .onAppear(perform: {
+                  if image == tabsImages.first {
+                    xAxis = reader.frame(in: .global).minX
+                  }
+                })
+              }
+              .frame(width: 25.0, height: 24.0)
+              if image != tabsImages.last { Spacer() }
             }
-            .padding(.horizontal, 30)
-            .padding(.vertical)
-            .background(Color.black.clipShape(CustomShape(xAxis: xAxis)).cornerRadius(40.0))
-            .padding(.horizontal)
-            // Bottom edge....
-            .padding(.bottom , UIApplication.shared.windows.first?.safeAreaInsets.bottom)
+          }
+          .padding(.horizontal, 30)
+          .padding(.vertical)
+          .background(Color.black.clipShape(CustomShape(xAxis: xAxis)).cornerRadius(40.0))
+          .padding(.horizontal)
+          // Bottom edge....
+          .padding(.bottom , UIApplication.shared.windows.first?.safeAreaInsets.bottom)
+          }
         }
         .ignoresSafeArea(.all, edges: .all)
     }
