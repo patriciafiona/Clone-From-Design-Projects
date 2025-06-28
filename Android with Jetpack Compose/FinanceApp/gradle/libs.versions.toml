@@ -1,7 +1,7 @@
 [versions]
 accompanist-microcontroller = "0.27.0"
 accompanist-pager = "0.29.1-alpha"
-agp = "8.2.0-alpha14"
+agp = "8.2.2"
 kotlin = "1.8.10"
 core-ktx = "1.9.0"
 junit = "4.13.2"
