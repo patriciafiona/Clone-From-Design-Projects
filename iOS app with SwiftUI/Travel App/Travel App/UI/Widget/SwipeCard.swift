@@ -27,6 +27,7 @@ struct CardView: View {
     var isSecondCard: Bool
   
     @State private var goToDetailPage = false
+    @State private var isImageLoading = false
 
 
     var body: some View {
@@ -46,76 +47,81 @@ struct CardView: View {
       )
       
         ZStack{
-            CachedAsyncImage(url: URL(string: model.place.image))
-                .frame(width: size.width * 0.8, height: size.height)
+            CachedAsyncImage(
+                url: URL(string: model.place.image),
+                isImageLoading: $isImageLoading
+            )
+            .frame(width: size.width * 0.8, height: size.height)
           
-          VStack(alignment: .leading){
-            //MARK: Favorite Button
-            HStack{
-              Spacer()
-              
-              Button(action: {}, label: {
-                 Image(systemName: "heart")
-                     .resizable()
-                     .scaledToFit()
-                     .frame(width: 25, height: 25)
-                     .padding(7.5)
-             })
-              .buttonStyle(.borderedProminent)
-              .clipShape(Circle())
-              .tint(.white.opacity(0.2))
-              .foregroundStyle(.white)
+            if !isImageLoading {
+                VStack(alignment: .leading){
+                    //MARK: Favorite Button
+                    HStack{
+                        Spacer()
+                        
+                        Button(action: {}, label: {
+                            Image(systemName: "heart")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
+                                .padding(7.5)
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .clipShape(Circle())
+                        .tint(.white.opacity(0.2))
+                        .foregroundStyle(.white)
+                    }
+                    
+                    Spacer()
+                    
+                    //MARK: Country Initial
+                    Text(model.place.country)
+                        .font(.Inter_Paragraph)
+                        .foregroundColor(.white)
+                    
+                    //MARK: Place Name
+                    Text(model.place.name)
+                        .font(.CalSans_Title02)
+                        .foregroundColor(.white)
+                    
+                    //MARK: Rating & review
+                    HStack{
+                        HStack{
+                            Image(systemName: "star")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                            
+                            Text(String(format: "%.2f", model.place.rating))
+                                .font(.Inter_Paragraph)
+                                .foregroundColor(.white)
+                        }
+                        .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 50)
+                                .stroke(.white, lineWidth: 2)
+                        )
+                        .foregroundStyle(.white)
+                        .buttonBorderShape(.roundedRectangle(radius: 50))
+                        
+                        Text("143 reviews")
+                            .font(.Inter_Paragraph)
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                    }
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
+                    
+                    //MARK: Slide button
+                    SlideButton("See more", styling: styling, action: {
+                        goToDetailPage = true
+                    })
+                    
+                    NavigationLink("Go to next page", destination: DetailScreenView(data: model.place), isActive: $goToDetailPage)
+                        .hidden()
+                }
+                .padding(16)
             }
-            
-            Spacer()
-            
-            //MARK: Country Initial
-            Text(model.place.country)
-              .font(.Inter_Paragraph)
-              .foregroundColor(.white)
-            
-            //MARK: Place Name
-            Text(model.place.name)
-              .font(.CalSans_Title02)
-              .foregroundColor(.white)
-            
-            //MARK: Rating & review
-            HStack{
-              HStack{
-                Image(systemName: "star")
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 16, height: 16)
-                
-                Text(String(format: "%.2f", model.place.rating))
-                  .font(.Inter_Paragraph)
-                  .foregroundColor(.white)
-              }
-              .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
-              .overlay(
-                  RoundedRectangle(cornerRadius: 50)
-                    .stroke(.white, lineWidth: 2)
-              )
-              .foregroundStyle(.white)
-              .buttonBorderShape(.roundedRectangle(radius: 50))
-              
-              Text("143 reviews")
-                .font(.Inter_Paragraph)
-                .foregroundColor(.white)
-              
-              Spacer()
-            }
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
-
-            //MARK: Slide button
-            SlideButton("See more", styling: styling, action: {
-              goToDetailPage = true
-            })
-            
-            NavigationLink("Go to next page", destination: DetailScreenView(data: model.place), isActive: $goToDetailPage)
-              .hidden()
-          }
-          .padding(16)
           
         }
         .frame(width: size.width * 0.8, height: size.height)

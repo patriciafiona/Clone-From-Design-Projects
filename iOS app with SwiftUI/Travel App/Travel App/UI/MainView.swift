@@ -11,7 +11,8 @@ import SwiftUI
 import Collections
 
 struct MainView: View {
-  @EnvironmentObject var navBarState: NavBarState
+    @EnvironmentObject var navBarState: NavBarState
+    @Environment(\.scenePhase) var scenePhase
   
     var tabs: OrderedDictionary = [
         "home": "house",
@@ -43,31 +44,19 @@ struct MainView: View {
               vertical: .bottom
           )
       ){
-            TabView(selection: $selectedTab) {
-                HomeTabView()
-                    .tag(tabsTags[0])
-                    .onAppear(){
-                      navBarState.isShowNavBar = true
-                    }
-                
-                ListTabView()
-                    .tag(tabsTags[1])
-                    .onAppear(){
-                      navBarState.isShowNavBar = true
-                    }
-                
-                FavoriteTabView()
-                    .tag(tabsTags[2])
-                    .onAppear(){
-                      navBarState.isShowNavBar = true
-                    }
-                
-                MenuTabView()
-                    .tag(tabsTags[3])
-                    .onAppear(){
-                      navBarState.isShowNavBar = true
-                    }
-            }
+        TabView(selection: $selectedTab) {
+            HomeTabView()
+                .tag(tabsTags[0])
+            
+            ListTabView()
+                .tag(tabsTags[1])
+            
+            FavoriteTabView()
+                .tag(tabsTags[2])
+            
+            MenuTabView()
+                .tag(tabsTags[3])
+        }
             
         if(navBarState.isShowNavBar){
           // custom tab bar

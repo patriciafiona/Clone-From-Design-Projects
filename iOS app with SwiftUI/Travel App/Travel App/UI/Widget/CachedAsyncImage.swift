@@ -12,10 +12,14 @@ import SwiftUI
 public struct CachedAsyncImage: View {
     private let url: URL?
     @State private var image: Image? = nil
-    @State private var isLoading = false
+    @Binding var isLoading: Bool
 
-    public init(url: URL?) {
+    public init(url: URL?, isImageLoading: Binding<Bool>) {
         self.url = url
+        self._isLoading = isImageLoading
+        
+        //Automatic set to true for loading
+        isLoading = true
     }
 
     public var body: some View {

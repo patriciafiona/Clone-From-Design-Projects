@@ -12,6 +12,7 @@ struct DetailScreenView: View {
     @Environment(\.dismiss) var dismiss
   
     @State private var sheetShown = true
+    @State private var isImageLoading = false
   
     var data: Place
   
@@ -24,7 +25,7 @@ struct DetailScreenView: View {
         ZStack(alignment: .top){
           VStack{
             ZStack(alignment: .bottom) {
-              CachedAsyncImage(url: URL(string: data.image))
+                CachedAsyncImage(url: URL(string: data.image), isImageLoading: $isImageLoading)
                 .frame(width: screenWidth, height: 450)
 
                 // Gradient hitam di bagian bawah
@@ -45,14 +46,15 @@ struct DetailScreenView: View {
           HStack{
             Button(
               action: {
-                dismiss()
+                  navBarState.isShowNavBar = true
+                  dismiss()
               },
               label: {
                Image(systemName: "chevron.left")
                    .resizable()
                    .scaledToFit()
                    .frame(width: 20, height: 20)
-                   .padding(7.5)
+                   .padding(5)
               })
             .buttonStyle(.borderedProminent)
             .clipShape(Circle())
@@ -75,23 +77,36 @@ struct DetailScreenView: View {
           }
           .frame(width: screenWidth, alignment: .top)
           .offset(x: 0, y: 0)
-          .padding(EdgeInsets(top: 60, leading: 36, bottom: 0, trailing: 36))
+          .padding(EdgeInsets(top: 60, leading: 40, bottom: 0, trailing: 40))
         }
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $sheetShown) {
-            NavigationStack {
-              Text(data.name)
-                .font(.CalSans_Title02)
-                .foregroundColor(.black)
-            }
-            .presentationDetents([.medium, .custom(MyCustomDetent.self)])
-            .presentationCornerRadius(36)
+            DetailSheet(data: data)
+                .interactiveDismissDisabled(true) // prevents swipe-down
         }
       }
       .onAppear(){
         navBarState.isShowNavBar = false
       }
+      .onDisappear(){
+          navBarState.isShowNavBar = true
+      }
       .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct DetailSheet: View {
+    var data: Place
+    
+    var body: some View {
+        NavigationStack {
+          Text(data.name)
+            .font(.CalSans_Title02)
+            .foregroundColor(.black)
+        }
+        .presentationDetents([.medium, .custom(MyCustomDetent.self)])
+        .presentationCornerRadius(36)
+        .presentationBackgroundInteraction(.enabled)
     }
 }
 
