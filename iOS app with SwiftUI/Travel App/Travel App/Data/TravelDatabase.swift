@@ -66,7 +66,7 @@ public struct TravelDatabase {
             continent: "Africa"
         ),
         Place(
-            name: "Great Pyramid of Giza",
+            name: "The Colosseum",
             image: "https://cpanel-blog.smsperkasa.com/wp-content/uploads/2023/09/bagian-dalam-koloseum-1024x682.jpg",
             rating: 4.7,
             decription: "The Colosseum (Latin: Colosseum or Colisseum; Italian: Colosseo) is a historical relic in the form of a gladiatorial arena, built by Vespasian. The large elliptical performance venue is called an amphitheater or with its original name Amphitheatrum Flavium, which is included in one of the Sixty-Nine Wonders of the Medieval World. This site is located in the small city of Rome in Italy, which was founded by the Mayor Vespasian during the time of Domitian and completed by his son Titus, and became one of the greatest works of Roman Imperial architecture ever built. The Colosseum was designed to accommodate 50,000 spectators.",
