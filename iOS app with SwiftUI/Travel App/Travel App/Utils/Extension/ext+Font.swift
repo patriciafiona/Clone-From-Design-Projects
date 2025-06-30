@@ -15,6 +15,9 @@ private let title01Size = CGFloat(28)
 private let title02Size = CGFloat(24)
 private let title03Size = CGFloat(20)
 
+private let medium01Size = CGFloat(16)
+private let medium02Size = CGFloat(18)
+
 private let subtitleSize = CGFloat(14)
 
 private let paragraphSize = CGFloat(12)
@@ -28,6 +31,8 @@ extension Font{
     static let Inter_Title01 = Font.custom(interFont,size: title01Size)
     static let Inter_Title02 = Font.custom(interFont,size: title02Size)
     static let Inter_Title03 = Font.custom(interFont,size: title03Size)
+    static let Inter_Medium01 = Font.custom(interFont,size: medium01Size)
+    static let Inter_Medium02 = Font.custom(interFont,size: medium02Size)
     static let Inter_Subtitle = Font.custom(interFont,size: subtitleSize)
     static let Inter_Paragraph = Font.custom(interFont,size: paragraphSize)
 }

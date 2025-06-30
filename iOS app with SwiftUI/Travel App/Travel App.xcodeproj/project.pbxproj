@@ -12,6 +12,8 @@
 		05F3310C2DB8DCFD004B148D /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 05F3310B2DB8DCFD004B148D /* DequeModule */; };
 		05F3310E2DB8DCFD004B148D /* HashTreeCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 05F3310D2DB8DCFD004B148D /* HashTreeCollections */; };
 		05F331102DB8DCFD004B148D /* HeapModule in Frameworks */ = {isa = PBXBuildFile; productRef = 05F3310F2DB8DCFD004B148D /* HeapModule */; };
+		F73C40162E123C78007DC1FC /* FlagsKit in Frameworks */ = {isa = PBXBuildFile; productRef = F73C40152E123C78007DC1FC /* FlagsKit */; };
+		F73C40202E1243F3007DC1FC /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = F73C401F2E1243F3007DC1FC /* ExpandableText */; };
 		F76F5A392E0FD377000145BC /* SlideButton in Frameworks */ = {isa = PBXBuildFile; productRef = F76F5A382E0FD377000145BC /* SlideButton */; };
 /* End PBXBuildFile section */
 
@@ -64,9 +66,11 @@
 				F76F5A392E0FD377000145BC /* SlideButton in Frameworks */,
 				05F3310A2DB8DCFD004B148D /* Collections in Frameworks */,
 				05F331102DB8DCFD004B148D /* HeapModule in Frameworks */,
+				F73C40162E123C78007DC1FC /* FlagsKit in Frameworks */,
 				05F331082DB8DCFD004B148D /* BitCollections in Frameworks */,
 				05F3310E2DB8DCFD004B148D /* HashTreeCollections in Frameworks */,
 				05F3310C2DB8DCFD004B148D /* DequeModule in Frameworks */,
+				F73C40202E1243F3007DC1FC /* ExpandableText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +145,8 @@
 				05F3310D2DB8DCFD004B148D /* HashTreeCollections */,
 				05F3310F2DB8DCFD004B148D /* HeapModule */,
 				F76F5A382E0FD377000145BC /* SlideButton */,
+				F73C40152E123C78007DC1FC /* FlagsKit */,
+				F73C401F2E1243F3007DC1FC /* ExpandableText */,
 			);
 			productName = "Travel App";
 			productReference = 05F330D12DB88E9E004B148D /* Travel App.app */;
@@ -227,6 +233,8 @@
 			packageReferences = (
 				05F331062DB8AEE7004B148D /* XCRemoteSwiftPackageReference "swift-collections" */,
 				F76F5A362E0FD29B000145BC /* XCRemoteSwiftPackageReference "SlideButton" */,
+				F73C40142E123C78007DC1FC /* XCRemoteSwiftPackageReference "FlagsKit" */,
+				F73C401E2E1243F3007DC1FC /* XCRemoteSwiftPackageReference "ExpandableText" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 05F330D22DB88E9E004B148D /* Products */;
@@ -611,6 +619,22 @@
 				minimumVersion = 1.1.4;
 			};
 		};
+		F73C40142E123C78007DC1FC /* XCRemoteSwiftPackageReference "FlagsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pichukov/FlagsKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		F73C401E2E1243F3007DC1FC /* XCRemoteSwiftPackageReference "ExpandableText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/n3d1117/ExpandableText";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		F76F5A362E0FD29B000145BC /* XCRemoteSwiftPackageReference "SlideButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/no-comment/SlideButton";
@@ -646,6 +670,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 05F331062DB8AEE7004B148D /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = HeapModule;
+		};
+		F73C40152E123C78007DC1FC /* FlagsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F73C40142E123C78007DC1FC /* XCRemoteSwiftPackageReference "FlagsKit" */;
+			productName = FlagsKit;
+		};
+		F73C401F2E1243F3007DC1FC /* ExpandableText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F73C401E2E1243F3007DC1FC /* XCRemoteSwiftPackageReference "ExpandableText" */;
+			productName = ExpandableText;
 		};
 		F76F5A382E0FD377000145BC /* SlideButton */ = {
 			isa = XCSwiftPackageProductDependency;

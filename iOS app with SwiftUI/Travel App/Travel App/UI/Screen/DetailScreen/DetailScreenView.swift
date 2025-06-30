@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FlagsKit
+import ExpandableText
 
 struct DetailScreenView: View {
     @EnvironmentObject var navBarState: NavBarState
@@ -82,7 +84,6 @@ struct DetailScreenView: View {
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $sheetShown) {
             DetailSheet(data: data)
-                .interactiveDismissDisabled(true) // prevents swipe-down
         }
       }
       .onAppear(){
@@ -100,13 +101,97 @@ struct DetailSheet: View {
     
     var body: some View {
         NavigationStack {
-          Text(data.name)
-            .font(.CalSans_Title02)
-            .foregroundColor(.black)
+            ScrollView{
+                VStack (alignment: .leading){
+                    //MARK: PLACE NAME & RATING
+                    HStack {
+                        Text(data.name)
+                          .font(.CalSans_Title02)
+                          .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        HStack{
+                            Image(systemName: "star")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 16, height: 16)
+                            
+                            Text(String(format: "%.2f", data.rating))
+                                .font(.Inter_Paragraph)
+                                .foregroundColor(.black)
+                        }
+                        .padding(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 50)
+                                .stroke(.white.opacity(0.3), lineWidth: 2)
+                        )
+                        .foregroundStyle(.black)
+                        .buttonBorderShape(.roundedRectangle(radius: 50))
+                    }
+                    
+                    //MARK: COUNTRY & REVIEW
+                    HStack{
+                        //Get country alpha-2
+                        let locale = Locale.current
+                        let alpha3 = data.country
+                        
+                        let countryName = locale.localizedString(forRegionCode: alpha3) ?? "Unknown"
+                        let alpha2 = Locale.autoupdatingCurrent.alpha2Code(from: alpha3) ?? ""
+                        
+                        FlagView(countryCode: alpha2, style: .circle)
+                            .frame(width: 20, height: 20)
+                            .previewLayout(.sizeThatFits)
+                        
+                        Text(countryName)
+                            .font(.Inter_Medium01)
+                            .bold()
+                        
+                        
+                        Spacer()
+                        
+                        Text("143 reviews")
+                            .font(.Inter_Medium01)
+                            .bold()
+                            .underline()
+                    }
+                    
+                    ExpandableText(data.decription)
+                      .font(.Inter_Paragraph)
+                      .foregroundColor(.black)
+                      .lineLimit(3)
+                      .moreButtonText("Read more")
+                      .moreButtonFont(.headline.bold())
+                      .moreButtonColor(.black)
+                      .enableCollapse(true)
+                      .expandAnimation(.easeInOut(duration: 0.2))
+                      .trimMultipleNewlinesWhenTruncated(true)
+                      .padding(EdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0))
+                    
+                    HStack{
+                        Text("Upcoming tours")
+                            .font(.CalSans_Title02)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        
+                        Button(
+                            action: {}
+                        ){
+                            Text("See all")
+                                .underline()
+                        }
+                        .foregroundColor(.black)
+                    }
+                }
+                .padding(EdgeInsets(top: 36, leading: 24, bottom: 50, trailing: 24))
+            }
         }
+        .interactiveDismissDisabled(true) // prevents swipe-down
         .presentationDetents([.medium, .custom(MyCustomDetent.self)])
         .presentationCornerRadius(36)
         .presentationBackgroundInteraction(.enabled)
+        .presentationBackground(.thinMaterial)
     }
 }
 

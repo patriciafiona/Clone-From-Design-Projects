@@ -1,6 +1,24 @@
 {
-  "originHash" : "18ac5facfa1bc74f7812bbbacef656bf9459956ff18653b773e3b33c24fbfc67",
+  "originHash" : "7ad12d76a793e2b8b343c6a8628c3b7d0ef4e230d19b1b0755312dab02ca4885",
   "pins" : [
+    {
+      "identity" : "expandabletext",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/n3d1117/ExpandableText",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2b0dd2f3d2870fe933ffe5c2ee057d2e9fa647e2"
+      }
+    },
+    {
+      "identity" : "flagskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pichukov/FlagsKit.git",
+      "state" : {
+        "revision" : "fc98238228d15285eb1b89ec3c5c96c83170101d",
+        "version" : "1.0.0"
+      }
+    },
     {
       "identity" : "slidebutton",
       "kind" : "remoteSourceControl",
