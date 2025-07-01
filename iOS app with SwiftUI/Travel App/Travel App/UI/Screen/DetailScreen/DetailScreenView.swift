@@ -147,7 +147,6 @@ struct DetailSheet: View {
                             .font(.Inter_Medium01)
                             .bold()
                         
-                        
                         Spacer()
                         
                         Text("143 reviews")
@@ -168,6 +167,8 @@ struct DetailSheet: View {
                       .trimMultipleNewlinesWhenTruncated(true)
                       .padding(EdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0))
                     
+                    
+                    //MARK: UPCOMINH TOURS
                     HStack{
                         Text("Upcoming tours")
                             .font(.CalSans_Title02)
@@ -182,6 +183,15 @@ struct DetailSheet: View {
                                 .underline()
                         }
                         .foregroundColor(.black)
+                    }
+                    
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack {
+                            ForEach(data.tours, id: \.self) { tour in
+                                TourCardView(tour: tour)
+                            }
+                        }
                     }
                 }
                 .padding(EdgeInsets(top: 36, leading: 24, bottom: 50, trailing: 24))

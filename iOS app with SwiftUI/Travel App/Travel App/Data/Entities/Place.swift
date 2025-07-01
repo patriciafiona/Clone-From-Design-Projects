@@ -15,5 +15,6 @@ struct Place: Identifiable, Equatable {
     var decription: String
     var country: String //ISO 3166, Aplha-3
     var continent: String
+    var tours: [Tour]
 //    var reviews: [Review]
 }
