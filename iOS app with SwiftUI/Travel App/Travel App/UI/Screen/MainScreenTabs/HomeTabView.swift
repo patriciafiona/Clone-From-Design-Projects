@@ -117,7 +117,12 @@ struct HomeTabView: View {
               height: geometry.size.height * 0.75
             )
           }
-        }.padding()
+        }
+        .padding()
+        .ignoresSafeArea(.keyboard)
+        .onTapGesture {
+            hideKeyboard()
+        }
       }
     }
 }
