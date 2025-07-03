@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import FlagsKit
 import ExpandableText
 
@@ -15,15 +16,20 @@ struct DetailScreenView: View {
   
     @State private var sheetShown = true
     @State private var isImageLoading = false
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var favPlace: [FavoritePlaceModel]
   
     var data: Place
   
     var body: some View {
-      let screenSize = UIScreen.main.bounds
-      let screenWidth = screenSize.width
-      let screenHeight = screenSize.height
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        let isInList = favPlace.filter { $0.placeId == data.id }
       
-      NavigationView{
+        NavigationView{
         ZStack(alignment: .top){
           VStack{
             ZStack(alignment: .bottom) {
@@ -65,17 +71,49 @@ struct DetailScreenView: View {
             
             Spacer()
             
-            Button(action: {}, label: {
-               Image(systemName: "heart")
-                   .resizable()
-                   .scaledToFit()
-                   .frame(width: 20, height: 20)
-                   .padding(7.5)
+            Button(
+                action: {
+                    //Check if already fav or not
+                    do{
+                        let currentPlace = FavoritePlaceModel(
+                            placeId: data.id
+                        )
+                        
+                        if(isInList.count == 0){
+                            print("Add to fav place...")
+                            
+                            //Add or remove from the list of favorite
+                            modelContext.insert(currentPlace)
+                        }else{
+                            print("Delete from fav place...")
+                            
+                            //remove from the fav list
+                            modelContext.delete(isInList.first!)
+                            try modelContext.save()
+                        }
+                    }catch{
+                        print("Error on handling update favorite: \(error)")
+                    }
+                },
+                label: {
+                if (isInList.count == 0){
+                    Image(systemName: "heart")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .padding(7.5)
+                }else{
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .padding(7.5)
+                }
            })
             .buttonStyle(.borderedProminent)
             .clipShape(Circle())
-            .tint(.white)
-            .foregroundStyle(.black)
+            .tint(isInList.count == 0 ? .white.opacity(0.2) : .red.opacity(0.2))
+            .foregroundStyle(isInList.count == 0 ? .black : .red)
           }
           .frame(width: screenWidth, alignment: .top)
           .offset(x: 0, y: 0)
@@ -85,14 +123,14 @@ struct DetailScreenView: View {
         .sheet(isPresented: $sheetShown) {
             DetailSheet(data: data)
         }
-      }
-      .onAppear(){
+        }
+        .onAppear(){
         navBarState.isShowNavBar = false
-      }
-      .onDisappear(){
+        }
+        .onDisappear(){
           navBarState.isShowNavBar = true
-      }
-      .navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

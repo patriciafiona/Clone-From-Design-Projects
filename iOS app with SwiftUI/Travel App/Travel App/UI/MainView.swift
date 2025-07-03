@@ -23,8 +23,6 @@ struct MainView: View {
     var tabsTags: [String]
     var tabsImages: [String]
     
-    @State var selectedTab = "home"
-    
     // Location of each curve
     @State var xAxis: CGFloat = 0
     @Namespace var animation
@@ -44,7 +42,7 @@ struct MainView: View {
               vertical: .bottom
           )
       ){
-        TabView(selection: $selectedTab) {
+          TabView(selection: $navBarState.selectedTab) {
             HomeTabView()
                 .tag(tabsTags[0])
             
@@ -68,7 +66,7 @@ struct MainView: View {
               GeometryReader { reader in
                 Button(action: {
                   withAnimation {
-                    selectedTab = tabsTags[index]
+                      navBarState.selectedTab = tabsTags[index]
                     xAxis = reader.frame(in: .global).minX
                   }
                 }, label: {
@@ -78,15 +76,15 @@ struct MainView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 22.0, height: 22.0)
                     .foregroundColor(
-                      selectedTab == tabsTags[index] ? .white : .gray)
-                    .padding(selectedTab == tabsTags[index] ? 15 : 0)
-                    .background(Color.black.opacity(selectedTab == tabsTags[index] ? 1 : 0).clipShape(Circle()))
+                        navBarState.selectedTab == tabsTags[index] ? .white : .gray)
+                    .padding(navBarState.selectedTab == tabsTags[index] ? 15 : 0)
+                    .background(Color.black.opacity(navBarState.selectedTab == tabsTags[index] ? 1 : 0).clipShape(Circle()))
                     .matchedGeometryEffect(id: tabsTags[index], in: animation)
-                    .offset(x: selectedTab == tabsTags[index] ? -10 : 0, y: selectedTab == tabsTags[index] ? -50 : 0)
+                    .offset(x: navBarState.selectedTab == tabsTags[index] ? -10 : 0, y: navBarState.selectedTab == tabsTags[index] ? -50 : 0)
                 })
                 .onAppear(perform: {
                   if image == tabsImages.first {
-                    xAxis = reader.frame(in: .global).minX
+                      xAxis = reader.frame(in: .global).minX
                   }
                 })
               }

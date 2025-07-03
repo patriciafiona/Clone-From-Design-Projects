@@ -8,7 +8,7 @@
 import Foundation
 
 struct Place: Identifiable, Equatable {
-    var id = UUID()
+    var id: String
     var name: String
     var image: String
     var rating: Double

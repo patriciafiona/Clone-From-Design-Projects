@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct Travel_AppApp: App {
@@ -16,5 +17,7 @@ struct Travel_AppApp: App {
             MainView()
               .environmentObject(navBarState) // Inject here
         }
+        // The modelContainer holds the array of each Type of data that we want to read from the container
+        .modelContainer(for: [FavoritePlaceModel.self])
     }
 }

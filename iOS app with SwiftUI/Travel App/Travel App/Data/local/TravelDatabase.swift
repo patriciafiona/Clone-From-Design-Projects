@@ -10,6 +10,7 @@ import Foundation
 public struct TravelDatabase {
     var allTravels: [Place] = [
         Place(
+            id: "PLC_IDN_0001",
             name: "Borobudur Temple",
             image: "https://cdn1-production-images-kly.akamaized.net/qwQsZXIsxNsjJaO6i8XJzrF1st0=/1200x900/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3023951/original/083764400_1579164554-indonesia-1098328_1920.jpg",
             rating: 4.5,
@@ -41,6 +42,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_IDN_0002",
             name: "Nusa Peninda",
             image: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Kelingking_Beach_%28T-Rex_Bay%29_of_Nusa_Penida%2C_Bali_%282025%29_-_img_11.jpg",
             rating: 4.8,
@@ -72,6 +74,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_IDN_0003",
             name: "Komodo National Park",
             image: "https://indonesia.travel/content/dam/indtravelrevamp/en/news-events/news/10-reasons-to-visit-the-magnificent-komodo-national-park/dcd837c723d980d06b0b75b094d316c80bfde1a9-6727f.jpg",
             rating: 4.7,
@@ -103,6 +106,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_BRA_0001",
             name: "Cristo Redentor",
             image: "https://i.content4travel.com/seeplaces/temp/9ecc4378-3201-4070-89e8-de66534c9d9c.jpg",
             rating: 4.6,
@@ -127,6 +131,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_USA_0001",
             name: "Statue of Liberty",
             image: "https://www.usatoday.com/gcdn/authoring/2019/05/16/USAT/9b4d37bc-a331-40c3-8373-c1c94ae706c4-Odaiba_Statue_of_Liberty_Replica_Japan_National_Tourism_Organization.jpg?crop=2000,2667,x1007,y0",
             rating: 4.4,
@@ -151,6 +156,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_AUS_0001",
             name: "Sydney Opera House",
             image: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Australia._%2821339175489%29.jpg",
             rating: 4.4,
@@ -168,6 +174,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_EGY_0001",
             name: "Great Pyramid of Giza",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Great_Pyramid_of_Giza_-_Pyramid_of_Khufu.jpg/1200px-Great_Pyramid_of_Giza_-_Pyramid_of_Khufu.jpg",
             rating: 4.6,
@@ -185,6 +192,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_ITA_0001",
             name: "The Colosseum",
             image: "https://cpanel-blog.smsperkasa.com/wp-content/uploads/2023/09/bagian-dalam-koloseum-1024x682.jpg",
             rating: 4.7,
@@ -202,6 +210,7 @@ public struct TravelDatabase {
             ]
         ),
         Place(
+            id: "PLC_FRA_0001",
             name: "Eiffel Tower",
             image: "https://media.architecturaldigest.com/photos/66a951edce728792a48166e6/3:2/w_7950,h_5300,c_limit/GettyImages-955441104.jpg",
             rating: 4.7,
@@ -237,9 +246,9 @@ public struct TravelDatabase {
         return cards
     }
   
-  func getPlacesByUuid(uuid: String) throws -> Place {
+  func getPlacesById(id: String) throws -> Place {
     let filteredData = allTravels.filter {
-      $0.id.uuidString == uuid
+      $0.id == id
     }.first
     
     return filteredData!

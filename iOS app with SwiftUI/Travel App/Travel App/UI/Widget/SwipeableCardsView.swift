@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwipeActions
 
 struct SwipeableCardsView: View {
     class Model: ObservableObject {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 import SlideButton
 
 struct CardView: View {
@@ -28,11 +29,15 @@ struct CardView: View {
   
     @State private var goToDetailPage = false
     @State private var isImageLoading = false
-
+    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var favPlace: [FavoritePlaceModel]
 
     var body: some View {
-      //Slide button style
-      let styling = SlideButton<Self>.Styling(
+        let isInList = favPlace.filter { $0.placeId == model.place.id }
+        
+        //Slide button style
+        let styling = SlideButton<Self>.Styling(
           indicatorSize: 54,
           indicatorSpacing: 5,
           indicatorColor: .black,
@@ -44,7 +49,7 @@ struct CardView: View {
           textFadesOpacity: true,
           textHiddenBehindIndicator: true,
           textShimmers: false
-      )
+        )
       
         ZStack{
             CachedAsyncImage(
@@ -59,17 +64,47 @@ struct CardView: View {
                     HStack{
                         Spacer()
                         
-                        Button(action: {}, label: {
-                            Image(systemName: "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                                .padding(7.5)
+                        Button(action: {
+                            //Check if already fav or not
+                            do{
+                                let currentPlace = FavoritePlaceModel(
+                                    placeId: model.place.id
+                                )
+                                
+                                if(isInList.count == 0){
+                                    print("Add to fav place...")
+                                    
+                                    //Add or remove from the list of favorite
+                                    modelContext.insert(currentPlace)
+                                }else{
+                                    print("Delete from fav place...")
+                                    
+                                    //remove from the fav list
+                                    modelContext.delete(isInList.first!)
+                                    try modelContext.save()
+                                }
+                            }catch{
+                                print("Error on handling update favorite: \(error)")
+                            }
+                        }, label: {
+                            if (isInList.count == 0){
+                                Image(systemName: "heart")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .padding(7.5)
+                            }else{
+                                Image(systemName: "heart.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .padding(7.5)
+                            }
                         })
                         .buttonStyle(.borderedProminent)
                         .clipShape(Circle())
-                        .tint(.white.opacity(0.2))
-                        .foregroundStyle(.white)
+                        .tint(isInList.count == 0 ? .white.opacity(0.2) : .red.opacity(0.2))
+                        .foregroundStyle(isInList.count == 0 ? .white : .red)
                     }
                     
                     Spacer()

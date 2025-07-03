@@ -9,4 +9,5 @@ import Foundation
 
 class NavBarState: ObservableObject {
   @Published var isShowNavBar: Bool = true
+  @Published var selectedTab: String = "home"
 }
