@@ -18,7 +18,7 @@ struct MainView: View {
         "home": "house",
         "list": "list.clipboard",
         "favorite": "heart",
-        "menu": "square.grid.3x3"
+        "menu": "square.grid.2x2"
     ]
     var tabsTags: [String]
     var tabsImages: [String]
