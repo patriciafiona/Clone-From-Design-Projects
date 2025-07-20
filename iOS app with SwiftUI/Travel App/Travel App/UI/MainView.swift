@@ -24,7 +24,6 @@ struct MainView: View {
     var tabsImages: [String]
     
     // Location of each curve
-    @State var xAxis: CGFloat = 0
     @Namespace var animation
     
     init() {
@@ -67,7 +66,7 @@ struct MainView: View {
                 Button(action: {
                   withAnimation {
                       navBarState.selectedTab = tabsTags[index]
-                    xAxis = reader.frame(in: .global).minX
+                      navBarState.xAxis = reader.frame(in: .global).minX
                   }
                 }, label: {
                   Image(systemName: image)
@@ -83,9 +82,12 @@ struct MainView: View {
                     .offset(x: navBarState.selectedTab == tabsTags[index] ? -10 : 0, y: navBarState.selectedTab == tabsTags[index] ? -50 : 0)
                 })
                 .onAppear(perform: {
-                  if image == tabsImages.first {
-                      xAxis = reader.frame(in: .global).minX
-                  }
+                    if(navBarState.isFirstOpen){
+                        if image == tabsImages.first {
+                            navBarState.xAxis = reader.frame(in: .global).minX
+                            navBarState.isFirstOpen = false
+                        }
+                    }
                 })
               }
               .frame(width: 25.0, height: 24.0)
@@ -94,7 +96,7 @@ struct MainView: View {
           }
           .padding(.horizontal, 30)
           .padding(.vertical)
-          .background(Color.black.clipShape(CustomShape(xAxis: xAxis)).cornerRadius(40.0))
+          .background(Color.black.clipShape(CustomShape(xAxis: navBarState.xAxis)).cornerRadius(40.0))
           .padding(.horizontal)
           // Bottom edge....
           .padding(.bottom , UIApplication.shared.windows.first?.safeAreaInsets.bottom)

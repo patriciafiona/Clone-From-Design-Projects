@@ -8,6 +8,8 @@
 import Foundation
 
 class NavBarState: ObservableObject {
-  @Published var isShowNavBar: Bool = true
-  @Published var selectedTab: String = "home"
+    @Published var isFirstOpen: Bool = true
+    @Published var isShowNavBar: Bool = true
+    @Published var selectedTab: String = "home"
+    @Published var xAxis: CGFloat = 0
 }
