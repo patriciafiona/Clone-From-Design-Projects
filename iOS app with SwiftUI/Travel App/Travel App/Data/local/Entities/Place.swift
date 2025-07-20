@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 struct Place: Identifiable, Equatable {
     var id: String
@@ -16,5 +17,6 @@ struct Place: Identifiable, Equatable {
     var country: String //ISO 3166, Aplha-3
     var continent: String
     var tours: [Tour]
+    var location: Location
 //    var reviews: [Review]
 }

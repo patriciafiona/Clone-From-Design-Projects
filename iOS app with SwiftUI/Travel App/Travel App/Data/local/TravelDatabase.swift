@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 public struct TravelDatabase {
     var allTravels: [Place] = [
@@ -39,7 +40,13 @@ public struct TravelDatabase {
                     price: 432.10,
                     rating: 4.9
                 ),
-            ]
+            ], location: Location(
+                name: "Borobudur",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: -7.6078685,
+                    longitude: 110.2011764
+                )
+            )
         ),
         Place(
             id: "PLC_IDN_0002",
@@ -71,7 +78,13 @@ public struct TravelDatabase {
                     price: 432.10,
                     rating: 4.9
                 ),
-            ]
+            ], location: Location(
+                name: "Nusa Peninda",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: -8.7453944,
+                    longitude: 115.4552391
+                )
+            )
         ),
         Place(
             id: "PLC_IDN_0003",
@@ -103,7 +116,13 @@ public struct TravelDatabase {
                     price: 432.10,
                     rating: 4.9
                 ),
-            ]
+            ], location: Location(
+                name: "Komodo National Park",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: -8.5277107,
+                    longitude:119.4807449
+                )
+            )
         ),
         Place(
             id: "PLC_BRA_0001",
@@ -128,7 +147,13 @@ public struct TravelDatabase {
                     price: 427.18,
                     rating: 4.7
                 )
-            ]
+            ], location: Location(
+                name: "Cristo Redentor",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: -22.951916,
+                    longitude: -43.248596
+                )
+            )
         ),
         Place(
             id: "PLC_USA_0001",
@@ -153,7 +178,13 @@ public struct TravelDatabase {
                     price: 310,
                     rating: 4.8
                 )
-            ]
+            ], location: Location(
+                name: "Statue of Liberty",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 40.6892534,
+                    longitude: -74.0470753
+                )
+            )
         ),
         Place(
             id: "PLC_AUS_0001",
@@ -171,7 +202,13 @@ public struct TravelDatabase {
                     price: 138.13,
                     rating: 4.5
                 )
-            ]
+            ], location: Location(
+                name: "Sydney Opera House",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: -33.8567799,
+                    longitude: 151.2127218
+                )
+            )
         ),
         Place(
             id: "PLC_EGY_0001",
@@ -189,7 +226,13 @@ public struct TravelDatabase {
                     price: 939.99,
                     rating: 4.5
                 )
-            ]
+            ], location: Location(
+                name: "Great Pyramid of Giza",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 29.9775428,
+                    longitude: 31.1312807
+                )
+            )
         ),
         Place(
             id: "PLC_ITA_0001",
@@ -207,7 +250,13 @@ public struct TravelDatabase {
                     price: 727.24,
                     rating: 4.7
                 )
-            ]
+            ], location: Location(
+                name: "The Colosseum",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 41.8902142,
+                    longitude: 12.489656
+                )
+            )
         ),
         Place(
             id: "PLC_FRA_0001",
@@ -225,8 +274,14 @@ public struct TravelDatabase {
                     price: 214.87,
                     rating: 4.6
                 )
-            ]
-        ),
+            ], location: Location(
+                name: "Eiffel Tower",
+                coordinate: CLLocationCoordinate2D(
+                    latitude: 48.8583736,
+                    longitude: 2.2919064
+                )
+            )
+        )
     ]
     
     func getPlacesByContinent(selectedContinent: String)-> [CardView.Model] {

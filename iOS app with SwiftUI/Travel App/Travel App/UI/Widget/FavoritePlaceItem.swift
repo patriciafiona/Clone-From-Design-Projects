@@ -63,7 +63,7 @@ struct FavoritePlaceItem: View {
                             goToDetailPage = true
                         }
                     ){
-                        Text("See detail..")
+                        Text("See detail")
                             .font(.Inter_Paragraph)
                     }
                     .padding(EdgeInsets(top: 8, leading: 0, bottom: 0, trailing: 0))

@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 import FlagsKit
 import ExpandableText
+import MapKit
 
 struct DetailScreenView: View {
     @EnvironmentObject var navBarState: NavBarState
@@ -121,14 +122,18 @@ struct DetailScreenView: View {
         }
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $sheetShown) {
-            DetailSheet(data: data)
+            DetailSheet(
+                data: data,
+                screenWidth: screenWidth,
+                screenHeight: screenHeight
+            )
         }
         }
         .onAppear(){
-        navBarState.isShowNavBar = false
+            navBarState.isShowNavBar = false
         }
         .onDisappear(){
-          navBarState.isShowNavBar = true
+            navBarState.isShowNavBar = true
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -136,6 +141,29 @@ struct DetailScreenView: View {
 
 struct DetailSheet: View {
     var data: Place
+    var screenWidth: CGFloat
+    var screenHeight: CGFloat
+    
+    @State private var region: MKCoordinateRegion
+    
+    init(
+        data: Place,
+        screenWidth: CGFloat,
+        screenHeight: CGFloat,
+        region: MKCoordinateRegion = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: -6.200000, longitude: 106.816666), // Jakarta
+            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        )
+    ) {
+        self.data = data
+        self.screenWidth = screenWidth
+        self.screenHeight = screenHeight
+        self.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: data.location.coordinate.latitude, longitude: data.location.coordinate.longitude),
+            span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        )
+    }
+
     
     var body: some View {
         NavigationStack {
@@ -231,6 +259,22 @@ struct DetailSheet: View {
                             }
                         }
                     }
+                    .padding(EdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0))
+                    
+                    //MARK: LOCATION
+                    Text("Location")
+                        .font(.CalSans_Title02)
+                        .foregroundColor(.black)
+                    
+                    ZStack{
+                        Map(coordinateRegion: $region, annotationItems: [data.location]) { location in
+                            MapMarker(coordinate: location.coordinate, tint: .red)
+                        }
+                    }
+                    .frame(
+                        width: .infinity,
+                        height: 250
+                    )
                 }
                 .padding(EdgeInsets(top: 36, leading: 24, bottom: 50, trailing: 24))
             }
