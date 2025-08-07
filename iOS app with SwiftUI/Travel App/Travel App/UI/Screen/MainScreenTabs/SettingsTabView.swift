@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MenuTabView: View {
+struct SettingsTabView: View {
     // MARK: - PROPERTIES
     
     private let alternateAppIcons: [String] = [
@@ -116,5 +116,5 @@ struct MenuTabView: View {
 }
 
 #Preview {
-    MenuTabView()
+    SettingsTabView()
 }

@@ -162,18 +162,8 @@ struct CardView: View {
         .frame(width: size.width * 0.8, height: size.height)
         .background(Color.white)
         .cornerRadius(15)
-        .shadow(color: isTopCard ? getShadowColor() : (isSecondCard && dragOffset.width != 0 ? Color.gray.opacity(0.2) : Color.clear), radius: 10, x: 0, y: 3)
         .foregroundColor(.black)
         .padding()
     }
     
-    private func getShadowColor() -> Color {
-        if dragOffset.width > 0 {
-            return Color.green.opacity(0.5)
-        } else if dragOffset.width < 0 {
-            return Color.red.opacity(0.5)
-        } else {
-            return Color.gray.opacity(0.2)
-        }
-    }
 }

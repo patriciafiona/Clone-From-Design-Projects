@@ -16,6 +16,7 @@
 		F73C40202E1243F3007DC1FC /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = F73C401F2E1243F3007DC1FC /* ExpandableText */; };
 		F73C40AB2E161399007DC1FC /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = F73C40AA2E161399007DC1FC /* SwipeActions */; };
 		F76F5A392E0FD377000145BC /* SlideButton in Frameworks */ = {isa = PBXBuildFile; productRef = F76F5A382E0FD377000145BC /* SlideButton */; };
+		F7FEC7A82E44EF7200151082 /* Toasts in Frameworks */ = {isa = PBXBuildFile; productRef = F7FEC7A72E44EF7200151082 /* Toasts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7FEC7A82E44EF7200151082 /* Toasts in Frameworks */,
 				F76F5A392E0FD377000145BC /* SlideButton in Frameworks */,
 				05F3310A2DB8DCFD004B148D /* Collections in Frameworks */,
 				05F331102DB8DCFD004B148D /* HeapModule in Frameworks */,
@@ -150,6 +152,7 @@
 				F73C40152E123C78007DC1FC /* FlagsKit */,
 				F73C401F2E1243F3007DC1FC /* ExpandableText */,
 				F73C40AA2E161399007DC1FC /* SwipeActions */,
+				F7FEC7A72E44EF7200151082 /* Toasts */,
 			);
 			productName = "Travel App";
 			productReference = 05F330D12DB88E9E004B148D /* Travel App.app */;
@@ -239,6 +242,7 @@
 				F73C40142E123C78007DC1FC /* XCRemoteSwiftPackageReference "FlagsKit" */,
 				F73C401E2E1243F3007DC1FC /* XCRemoteSwiftPackageReference "ExpandableText" */,
 				F73C40A92E161399007DC1FC /* XCRemoteSwiftPackageReference "SwipeActions" */,
+				F7FEC7A62E44EF7200151082 /* XCRemoteSwiftPackageReference "swiftui-toasts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 05F330D22DB88E9E004B148D /* Products */;
@@ -655,6 +659,14 @@
 				kind = branch;
 			};
 		};
+		F7FEC7A62E44EF7200151082 /* XCRemoteSwiftPackageReference "swiftui-toasts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sunghyun-k/swiftui-toasts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -702,6 +714,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F76F5A362E0FD29B000145BC /* XCRemoteSwiftPackageReference "SlideButton" */;
 			productName = SlideButton;
+		};
+		F7FEC7A72E44EF7200151082 /* Toasts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7FEC7A62E44EF7200151082 /* XCRemoteSwiftPackageReference "swiftui-toasts" */;
+			productName = Toasts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -25,6 +25,7 @@ private let paragraphSize = CGFloat(12)
 extension Font{
     static let CalSans_Title01 = Font.custom(calSansFont,size: title01Size)
     static let CalSans_Title02 = Font.custom(calSansFont,size: title02Size)
+    static let CalSans_Title03 = Font.custom(calSansFont,size: title03Size)
     static let CalSans_Subtitle = Font.custom(calSansFont,size: subtitleSize)
     static let CalSans_Paragraph = Font.custom(calSansFont,size: paragraphSize)
     

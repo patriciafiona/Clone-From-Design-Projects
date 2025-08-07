@@ -16,9 +16,9 @@ struct MainView: View {
   
     var tabs: OrderedDictionary = [
         "home": "house",
-        "list": "list.clipboard",
+        "list": "square.grid.2x2",
         "favorite": "heart",
-        "menu": "square.grid.2x2"
+        "menu": "gear"
     ]
     var tabsTags: [String]
     var tabsImages: [String]
@@ -51,7 +51,7 @@ struct MainView: View {
             FavoriteTabView()
                 .tag(tabsTags[2])
             
-            MenuTabView()
+            SettingsTabView()
                 .tag(tabsTags[3])
         }
             
