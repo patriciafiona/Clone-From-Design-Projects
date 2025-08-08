@@ -1,5 +1,5 @@
 # Travel App
-<p align="center"><img src="https://github.com/user-attachments/assets/a440b280-7dca-49d7-a52d-4104c90c41ef" width="300"/></p>
+<p align="center"><img src="https://github.com/user-attachments/assets/646fbcf0-221d-4418-86aa-7464ccff03af" width="300"/></p>
 <p align="center"><i><b>Figure 1</b> Travel App Home Screen</i></p>
 
 ## Information
@@ -11,7 +11,7 @@
 ```diff
 Type                  : iOS with SwiftUI Projects
 
-Information           : Learn Jetpack Compose with Dribbble case!
+Information           : Learn SwiftUI with Dribbble case!
 
 Platform              : Mobile - [iOS](https://www.apple.com/os/ios/)
 
@@ -34,6 +34,21 @@ Hello everyone! This time I try to learn create UI on SwiftUI by using design fr
 - This design used for study purpose only! Design create by 'Ronas IT' uploaded on Dribbble.
   
 - Places data in this app maybe not 100% correct, just for display only!
+
+## Results video
+![Watch the video](https://github.com/user-attachments/assets/cb0eb9a5-465b-4c58-87c4-0597e2427019)
+<p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link</i></p>
+
+If the link not work, please click [here...](https://youtu.be/pSnqm1sp1Gc)
+
+## Screenshot for App - Smartphone
+| Action      <td colspan=2> <p align="center">Preview</p>
+| -
+| Home tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
+| All places tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
+| Favorie tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
+| Settings tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
+| Detail Place screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
 
 
 ## 💖 Support the Project
