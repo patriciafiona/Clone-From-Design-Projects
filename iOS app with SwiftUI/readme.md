@@ -39,7 +39,7 @@ Hello everyone! This time I try to learn create UI on SwiftUI by using design fr
 ![Watch the video](https://github.com/user-attachments/assets/cb0eb9a5-465b-4c58-87c4-0597e2427019)
 <p align="center"><i><b>Figure 3</b> Youtube Video | Clickable image link</i></p>
 
-If the link not work, please click [here...](https://youtu.be/pSnqm1sp1Gc)
+If the link not work, please click [here...](https://youtu.be/deR40C1yW-g)
 
 ## Screenshot for App - Smartphone
 | Action      <td colspan=2> <p align="center">Preview</p>
