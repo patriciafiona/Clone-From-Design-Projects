@@ -44,11 +44,11 @@ If the link not work, please click [here...](https://youtu.be/pSnqm1sp1Gc)
 ## Screenshot for App - Smartphone
 | Action      <td colspan=2> <p align="center">Preview</p>
 | -
-| Home tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
-| All places tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
-| Favorie tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
-| Settings tab screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
-| Detail Place screen <td colspan=1><p align="center"><img src="" width="300"/></p> |
+| Home tab <td colspan=1><p align="center"><img src="https://github.com/user-attachments/assets/9406bf24-a484-4b0d-88f1-ab9eb2ef7d4a" width="300"/></p> |
+| All places tab <td colspan=1><p align="center"><img src="https://github.com/user-attachments/assets/6a3ab899-ffb4-463f-888d-fa797ec46705" width="300"/></p> |
+| Detail Place <td colspan=1><p align="center"><img src="https://github.com/user-attachments/assets/3a36fc88-747a-4fab-a8da-b8e2b53d1643" width="300"/></p> |
+| Favorie feature <td colspan=1><p align="center"><img src="https://github.com/user-attachments/assets/26883d94-8841-49eb-9177-6671450650e1" width="300"/></p> |
+| Settings tab <td colspan=1><p align="center"><img src="https://github.com/user-attachments/assets/af2e57b0-b492-4d3c-9c08-e717f5944a4f" width="300"/></p> |
 
 
 ## 💖 Support the Project
