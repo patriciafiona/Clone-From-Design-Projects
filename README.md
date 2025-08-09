@@ -10,6 +10,13 @@ The list of the projects:
 | Firewatch Parallax | Learn how to clone Firewatch parallax using Jetpack Compose! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/Android%20with%20Jetpack%20Compose/FirewatchParallax) | 
 | Super Mario World | Learn how to clone super mario official website using Jetpack Compose! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/Mario/Android%20with%20Jetpack%20Compose/MarioWorld) | 
 
+## List of iOS app with SwiftUI
+The list of the projects:
+
+| Name      | Description  | Project Link  |
+| :-: | :-: | :-: | 
+| Travel App | Learn how to clone UI in SwiftUI using dribbble case & designs! | [Link](https://github.com/patriciafiona/Clone-From-Design-Projects/tree/main/iOS%20app%20with%20SwiftUI) | 
+
 ## List of Flutter Apps
 The list of the projects:
 
