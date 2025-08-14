@@ -53,7 +53,7 @@ Hello everyone! This time I try to learn create UI on Flutter by using design fr
 ![Watch the video](https://github.com/user-attachments/assets/c6f996b1-235f-4dbf-9f1d-d1ae8a5cc5fe)
 <p align="center"><i><b>Figure 4</b> Youtube Video | Clickable image link</i></p>
 
-If the link not work, please click [here...](https://youtu.be/deR40C1yW-g)
+If the link not work, please click [here...](https://youtu.be/xwNNbElnALU)
 
 ## Screenshot for App - Smartphone
 | Action      <td colspan=2> <p align="center">Preview</p>
