@@ -34,6 +34,7 @@ fun AddTaskScreen(navController: NavController) {
 
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
+    var categories by remember { mutableStateOf("") }
 
     ImageBackground {
         Scaffold {
@@ -57,11 +58,19 @@ fun AddTaskScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = categories,
+                    onValueChange = { categories = it },
+                    label = { Text("Categories (comma-separated)") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = {
                         val task = Task(
                             title = title,
                             description = description,
+                            categories = categories.split(",").map { it.trim() },
                             dueDate = System.currentTimeMillis()
                         )
                         viewModel.insert(task)

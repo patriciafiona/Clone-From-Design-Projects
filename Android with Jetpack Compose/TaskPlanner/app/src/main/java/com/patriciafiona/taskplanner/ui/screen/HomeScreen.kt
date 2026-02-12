@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -52,8 +53,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
-import com.patriciafiona.taskplanner.data.Task
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
+import com.patriciafiona.taskplanner.ui.widget.TaskListItem
 import com.patriciafiona.taskplanner.ui.widget.customShadow
 import com.patriciafiona.taskplanner.utils.DateTimeHelper.getCurrentDate
 import com.patriciafiona.taskplanner.utils.Greetings.generateGreetings
@@ -138,7 +139,7 @@ fun HomeScreen(navController: NavController) {
                     }
                 }
             }
-        ) {
+        ) { innerPadding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -291,27 +292,14 @@ fun HomeScreen(navController: NavController) {
                     }
                 }
 
-                LazyColumn {
+                LazyColumn(
+                    contentPadding = PaddingValues(bottom = 100.dp),
+                ) {
                     items(tasks) { task ->
                         TaskListItem(task)
                     }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun TaskListItem(task: Task) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF222222))
-    ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = task.title, color = Color.White, fontWeight = FontWeight.Bold)
-            Text(text = task.description, color = Color.Gray, fontSize = 12.sp)
         }
     }
 }

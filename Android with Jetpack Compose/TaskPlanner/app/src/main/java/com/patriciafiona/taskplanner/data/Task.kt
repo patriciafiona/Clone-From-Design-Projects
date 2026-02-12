@@ -10,5 +10,6 @@ data class Task(
     val title: String,
     val description: String,
     val dueDate: Long,
+    val categories: List<String> = emptyList(),
     val isCompleted: Boolean = false
 )
