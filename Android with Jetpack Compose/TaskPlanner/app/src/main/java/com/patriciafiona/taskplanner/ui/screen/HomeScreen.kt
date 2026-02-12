@@ -2,8 +2,10 @@ package com.patriciafiona.taskplanner.ui.screen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -30,6 +33,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
@@ -40,6 +44,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,6 +68,7 @@ import com.patriciafiona.taskplanner.utils.Greetings.generateGreetings
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 import com.patriciafiona.taskplanner.viewmodel.ViewModelFactory
 
+@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -69,6 +77,8 @@ fun HomeScreen(navController: NavController) {
         factory = ViewModelFactory.getInstance(context)
     )
     val tasks by viewModel.allTasks.collectAsState()
+    var selectedCategory by remember { mutableStateOf<String?>(null) }
+    val categories = listOf("All", "Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
 
     ImageBackground {
         Scaffold(
@@ -248,26 +258,28 @@ fun HomeScreen(navController: NavController) {
                 // My Task
                 Text("My Task", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(modifier = Modifier.height(8.dp))
-                Row {
-                    Button(
-                        onClick = { /*TODO*/ },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.White)
-                    ) {
-                        Text("All", color = Color.Black)
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Button(
-                        onClick = { /*TODO*/ },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF222222))
-                    ) {
-                        Text("Today's Task", color = Color.White)
-                    }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Button(
-                        onClick = { /*TODO*/ },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF222222))
-                    ) {
-                        Text("Completed", color = Color.White)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState()),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    categories.forEach { category ->
+                        val isSelected = (selectedCategory == category) || (selectedCategory == null && category == "All")
+                        Button(
+                            onClick = {
+                                selectedCategory = if (category == "All") {
+                                    null
+                                } else if (selectedCategory == category) {
+                                    null
+                                } else {
+                                    category
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = if (isSelected) Color.White else Color(0xFF222222))
+                        ) {
+                            Text(category, color = if (isSelected) Color.Black else Color.White)
+                        }
                     }
                 }
 
@@ -295,7 +307,7 @@ fun HomeScreen(navController: NavController) {
                 LazyColumn(
                     contentPadding = PaddingValues(bottom = 100.dp),
                 ) {
-                    items(tasks) { task ->
+                    items(tasks.filter { selectedCategory == null || it.categories.contains(selectedCategory!!) }) { task ->
                         TaskListItem(task)
                     }
                 }

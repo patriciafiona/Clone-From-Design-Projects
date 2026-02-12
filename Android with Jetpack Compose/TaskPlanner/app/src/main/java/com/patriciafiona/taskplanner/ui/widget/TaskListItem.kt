@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
@@ -76,11 +77,20 @@ fun TaskListItem(task: Task) {
                 // Tags
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     task.categories.forEach {
-                        Text(it, color = Color.White, fontSize = 12.sp, fontFamily = interFamily)
+                        Box(
+                            modifier = Modifier
+                                .background(
+                                    color = Color.Gray.copy(alpha = 0.2f),
+                                    shape = RoundedCornerShape(8.dp)
+                                )
+                                .padding(horizontal = 8.dp, vertical = 4.dp)
+                        ) {
+                            Text(it, color = Color.White, fontSize = 12.sp, fontFamily = interFamily)
+                        }
                     }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
