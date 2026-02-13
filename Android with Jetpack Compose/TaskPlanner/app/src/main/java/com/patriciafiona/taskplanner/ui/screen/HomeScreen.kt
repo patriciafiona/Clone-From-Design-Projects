@@ -60,6 +60,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
+import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.TaskListItem
 import com.patriciafiona.taskplanner.ui.widget.customShadow
@@ -79,6 +80,17 @@ fun HomeScreen(navController: NavController) {
     val tasks by viewModel.allTasks.collectAsState()
     var selectedCategory by remember { mutableStateOf<String?>(null) }
     val categories = listOf("All", "Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
+    var showAddTaskDialog by remember { mutableStateOf(false) }
+
+    if (showAddTaskDialog) {
+        AddTaskDialog(
+            onDismiss = { showAddTaskDialog = false },
+            onAddTask = { task ->
+                viewModel.insert(task)
+                showAddTaskDialog = false
+            }
+        )
+    }
 
     ImageBackground {
         Scaffold(
@@ -115,7 +127,7 @@ fun HomeScreen(navController: NavController) {
                         }
 
                         IconButton(
-                            onClick = { navController.navigate("add_task") },
+                            onClick = { showAddTaskDialog = true },
                             modifier = Modifier
                                 .customShadow(
                                     color = Color(0xFF9bbdeb),
