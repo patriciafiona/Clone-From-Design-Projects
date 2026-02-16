@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
-import com.patriciafiona.taskplanner.navigation.Navigation
+import com.patriciafiona.taskplanner.ui.navigation.RootNavigation
 import com.patriciafiona.taskplanner.ui.theme.TaskPlannerTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         window.navigationBarColor = Color.TRANSPARENT
         setContent {
             TaskPlannerTheme {
-                Navigation()
+                RootNavigation()
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.ui.screen
+package com.patriciafiona.taskplanner.ui.screen.bottomNavScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -22,12 +22,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -64,7 +59,6 @@ import com.patriciafiona.taskplanner.resoureces.offline.data.Task
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.TaskListItem
-import com.patriciafiona.taskplanner.ui.widget.customShadow
 import com.patriciafiona.taskplanner.utils.DateTimeHelper.getCurrentDate
 import com.patriciafiona.taskplanner.utils.Greetings.generateGreetings
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
@@ -103,72 +97,7 @@ fun HomeScreen(navController: NavController) {
     ImageBackground {
         Scaffold(
             containerColor = Color.Transparent,
-            contentWindowInsets = WindowInsets.safeDrawing,
-            bottomBar = {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 24.dp, end = 24.dp, bottom = 24.dp),
-                    shape = CircleShape,
-                    colors = CardDefaults.cardColors(containerColor = Color.Black.copy(alpha = 0.5f))
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 8.dp, vertical = 8.dp),
-                        horizontalArrangement = Arrangement.SpaceAround,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                Icons.Default.Home,
-                                contentDescription = "Home",
-                                tint = Color.White
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                Icons.Default.List,
-                                contentDescription = "Task",
-                                tint = Color.White
-                            )
-                        }
-
-                        IconButton(
-                            onClick = { showAddTaskDialog = true },
-                            modifier = Modifier
-                                .customShadow(
-                                    color = Color(0xFF9bbdeb),
-                                    blurRadius = 20.dp
-                                ).size(56.dp),
-                            colors = IconButtonDefaults.iconButtonColors(
-                                containerColor = Color(0xFF9bbdeb),
-                            )
-                        ) {
-                            Icon(
-                                Icons.Default.Add,
-                                contentDescription = "Add Task",
-                                tint = Color.Black
-                            )
-                        }
-
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                Icons.Default.DateRange,
-                                contentDescription = "Calendar",
-                                tint = Color.White
-                            )
-                        }
-                        IconButton(onClick = { /*TODO*/ }) {
-                            Icon(
-                                Icons.Default.Person,
-                                contentDescription = "Profile",
-                                tint = Color.White
-                            )
-                        }
-                    }
-                }
-            }
+            contentWindowInsets = WindowInsets.safeDrawing
         ) { innerPadding ->
             Column(
                 modifier = Modifier

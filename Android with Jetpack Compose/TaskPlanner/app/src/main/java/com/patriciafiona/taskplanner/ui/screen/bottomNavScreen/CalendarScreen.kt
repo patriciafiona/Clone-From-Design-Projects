@@ -1,7 +1,7 @@
-
-package com.patriciafiona.taskplanner.ui.screen
+package com.patriciafiona.taskplanner.ui.screen.bottomNavScreen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,7 +32,7 @@ fun CalendarScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 36.dp)
         ) {
             // Header
             Row(
@@ -40,9 +40,7 @@ fun CalendarScreen(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
-                }
+                Box(modifier = Modifier.width(30.dp)) //Empty space
                 Text("Calendar", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(Icons.Default.Notifications, contentDescription = "Notifications", tint = Color.White)
