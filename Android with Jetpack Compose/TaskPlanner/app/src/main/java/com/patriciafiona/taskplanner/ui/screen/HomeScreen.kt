@@ -333,7 +333,8 @@ fun HomeScreen(navController: NavController) {
                             onEdit = {
                                 editingTask = task
                                 showAddTaskDialog = true
-                            }
+                            },
+                            onDelete = { viewModel.delete(it) }
                         )
                     }
                 }

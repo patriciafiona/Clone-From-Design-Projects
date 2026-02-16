@@ -1,5 +1,6 @@
 package com.patriciafiona.taskplanner.ui.widget
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -18,18 +20,25 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -41,123 +50,167 @@ import com.patriciafiona.taskplanner.data.Task
 import com.patriciafiona.taskplanner.ui.theme.interFamily
 import com.patriciafiona.taskplanner.ui.theme.poppinsFamily
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskListItem(task: Task, onEdit: (Task) -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF2D2D2D))
-    ) {
-        Box (
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(
-                    min = 180.dp,
-                    max = 210.dp
-                )
-        ){
-            //Background
-            Image(
-                painter = painterResource(id = R.drawable.gradiend_black_bg),
-                contentDescription = "background image",
-                modifier = Modifier
-                    .matchParentSize()
-                    .blur(radius = 10.dp),
-                contentScale = ContentScale.FillBounds
+fun TaskListItem(task: Task, onEdit: (Task) -> Unit, onDelete: (Task) -> Unit) {
+    val dismissState = rememberSwipeToDismissBoxState(
+        confirmValueChange = {
+            if (it == SwipeToDismissBoxValue.EndToStart) {
+                onDelete(task)
+                true
+            } else {
+                false
+            }
+        },
+        positionalThreshold = { it * .25f }
+    )
+
+    SwipeToDismissBox(
+        state = dismissState,
+        modifier = Modifier.padding(vertical = 8.dp),
+        enableDismissFromEndToStart = true,
+        enableDismissFromStartToEnd = false,
+        backgroundContent = {
+            val color = Color.Red.copy(alpha = 0.5f)
+            val alignment = Alignment.CenterEnd
+            val icon = Icons.Default.Delete
+
+            val scale by animateFloatAsState(
+                targetValue = 0.75f + (dismissState.progress * 0.5f),
+                label = "delete icon scale"
             )
-            Box(modifier = Modifier
-                .matchParentSize()
-                .background(Color.Black.copy(alpha = 0.7f)))
 
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(color, shape = RoundedCornerShape(12.dp))
+                    .padding(horizontal = 20.dp),
+                contentAlignment = alignment
             ) {
-                // Tags
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    task.categories.forEach {
-                        Box(
-                            modifier = Modifier
-                                .background(
-                                    color = Color.Gray.copy(alpha = 0.2f),
-                                    shape = RoundedCornerShape(8.dp)
-                                )
-                                .padding(horizontal = 8.dp, vertical = 4.dp)
-                        ) {
-                            Text(it, color = Color.White, fontSize = 12.sp, fontFamily = interFamily)
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Title and Description
-                Text(
-                    text = task.title,
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    fontFamily = poppinsFamily,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                Icon(
+                    icon,
+                    tint = Color.White,
+                    contentDescription = "Delete",
+                    modifier = Modifier.scale(scale)
                 )
-                Text(
-                    text = task.description,
-                    color = Color.Gray,
-                    fontSize = 12.sp,
-                    fontFamily = interFamily,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+            }
+        }
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFF2D2D2D))
+        ) {
+            Box (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(
+                        min = 180.dp,
+                        max = 210.dp
+                    )
+            ){
+                //Background
+                Image(
+                    painter = painterResource(id = R.drawable.gradiend_black_bg),
+                    contentDescription = "background image",
+                    modifier = Modifier
+                        .matchParentSize()
+                        .blur(radius = 10.dp),
+                    contentScale = ContentScale.FillBounds
                 )
+                Box(modifier = Modifier
+                    .matchParentSize()
+                    .background(Color.Black.copy(alpha = 0.7f)))
 
-                Spacer(modifier = Modifier.height(8.dp))
-
-                // Bottom row with assignees and edit button
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp)
                 ) {
-                    // Assignees
-                    Box {
-                        Image(
-                            painter = painterResource(id = R.drawable.user_profile),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(32.dp)
-                                .clip(CircleShape)
-                                .border(BorderStroke(2.dp, Color(0xFF2D2D2D)), CircleShape),
-                            contentScale = ContentScale.Crop,
-                        )
-                        Box(
-                            modifier = Modifier
-                                .padding(start = 24.dp)
-                                .size(32.dp)
-                                .background(Color.White, CircleShape)
-                                .border(BorderStroke(2.dp, Color(0xFF2D2D2D)), CircleShape),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                Icons.Default.Add,
-                                contentDescription = "Add Assignee",
-                                tint = Color.Black,
-                                modifier = Modifier.size(16.dp)
-                            )
-                        }
-                    }
-
-                    // Edit button
-                    IconButton(
-                        onClick = { onEdit(task) },
-                        colors = IconButtonDefaults.iconButtonColors(
-                            containerColor = Color.Gray.copy(alpha = 0.2f),
-                            contentColor = Color.White
-                        )
+                    // Tags
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Icon(Icons.Filled.Edit, contentDescription = "Edit task")
+                        task.categories.forEach {
+                            Box(
+                                modifier = Modifier
+                                    .background(
+                                        color = Color.Gray.copy(alpha = 0.2f),
+                                        shape = RoundedCornerShape(8.dp)
+                                    )
+                                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                            ) {
+                                Text(it, color = Color.White, fontSize = 12.sp, fontFamily = interFamily)
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Title and Description
+                    Text(
+                        text = task.title,
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        fontFamily = poppinsFamily,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        text = task.description,
+                        color = Color.Gray,
+                        fontSize = 12.sp,
+                        fontFamily = interFamily,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    // Bottom row with assignees and edit button
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        // Assignees
+                        Box {
+                            Image(
+                                painter = painterResource(id = R.drawable.user_profile),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(32.dp)
+                                    .clip(CircleShape)
+                                    .border(BorderStroke(2.dp, Color(0xFF2D2D2D)), CircleShape),
+                                contentScale = ContentScale.Crop,
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .padding(start = 24.dp)
+                                    .size(32.dp)
+                                    .background(Color.White, CircleShape)
+                                    .border(BorderStroke(2.dp, Color(0xFF2D2D2D)), CircleShape),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    Icons.Default.Add,
+                                    contentDescription = "Add Assignee",
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+
+                        // Edit button
+                        IconButton(
+                            onClick = { onEdit(task) },
+                            colors = IconButtonDefaults.iconButtonColors(
+                                containerColor = Color.Gray.copy(alpha = 0.2f),
+                                contentColor = Color.White
+                            )
+                        ) {
+                            Icon(Icons.Filled.Edit, contentDescription = "Edit task")
+                        }
                     }
                 }
             }
