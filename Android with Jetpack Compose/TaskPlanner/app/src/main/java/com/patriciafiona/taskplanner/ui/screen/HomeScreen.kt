@@ -60,6 +60,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
+import com.patriciafiona.taskplanner.data.Task
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.TaskListItem
@@ -81,13 +82,20 @@ fun HomeScreen(navController: NavController) {
     var selectedCategory by remember { mutableStateOf<String?>(null) }
     val categories = listOf("All", "Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
     var showAddTaskDialog by remember { mutableStateOf(false) }
+    var editingTask by remember { mutableStateOf<Task?>(null) }
 
     if (showAddTaskDialog) {
         AddTaskDialog(
+            task = editingTask,
             onDismiss = { showAddTaskDialog = false },
-            onAddTask = { task ->
-                viewModel.insert(task)
+            onConfirm = { task ->
+                if (editingTask == null) {
+                    viewModel.insert(task)
+                } else {
+                    viewModel.update(task)
+                }
                 showAddTaskDialog = false
+                editingTask = null
             }
         )
     }
@@ -320,7 +328,13 @@ fun HomeScreen(navController: NavController) {
                     contentPadding = PaddingValues(bottom = 100.dp),
                 ) {
                     items(tasks.filter { selectedCategory == null || it.categories.contains(selectedCategory!!) }) { task ->
-                        TaskListItem(task)
+                        TaskListItem(
+                            task = task,
+                            onEdit = {
+                                editingTask = task
+                                showAddTaskDialog = true
+                            }
+                        )
                     }
                 }
             }

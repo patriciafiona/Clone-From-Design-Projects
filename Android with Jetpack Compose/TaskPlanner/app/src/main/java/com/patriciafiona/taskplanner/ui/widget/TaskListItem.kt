@@ -42,7 +42,7 @@ import com.patriciafiona.taskplanner.ui.theme.interFamily
 import com.patriciafiona.taskplanner.ui.theme.poppinsFamily
 
 @Composable
-fun TaskListItem(task: Task) {
+fun TaskListItem(task: Task, onEdit: (Task) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -151,7 +151,7 @@ fun TaskListItem(task: Task) {
 
                     // Edit button
                     IconButton(
-                        onClick = { /* TODO: Handle edit */ },
+                        onClick = { onEdit(task) },
                         colors = IconButtonDefaults.iconButtonColors(
                             containerColor = Color.Gray.copy(alpha = 0.2f),
                             contentColor = Color.White

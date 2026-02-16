@@ -28,17 +28,19 @@ import com.patriciafiona.taskplanner.data.Task
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskDialog(
+    task: Task? = null,
     onDismiss: () -> Unit,
-    onAddTask: (Task) -> Unit
+    onConfirm: (Task) -> Unit
 ) {
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
+    val isEditMode = task != null
+    var title by remember { mutableStateOf(task?.title ?: "") }
+    var description by remember { mutableStateOf(task?.description ?: "") }
     val categories = listOf("Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
-    val selectedCategories = remember { mutableStateOf(emptyList<String>()) }
+    val selectedCategories = remember { mutableStateOf(task?.categories ?: emptyList()) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Add Task", color = Color.White) },
+        title = { Text(if (isEditMode) "Edit Task" else "Add Task", color = Color.White) },
         text = {
             Column {
                 OutlinedTextField(
@@ -105,17 +107,25 @@ fun AddTaskDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    val task = Task(
-                        title = title,
-                        description = description,
-                        categories = selectedCategories.value,
-                        dueDate = System.currentTimeMillis()
-                    )
-                    onAddTask(task)
+                    val resultTask = if (isEditMode) {
+                        task!!.copy(
+                            title = title,
+                            description = description,
+                            categories = selectedCategories.value
+                        )
+                    } else {
+                        Task(
+                            title = title,
+                            description = description,
+                            categories = selectedCategories.value,
+                            dueDate = System.currentTimeMillis()
+                        )
+                    }
+                    onConfirm(resultTask)
                     onDismiss()
                 }
             ) {
-                Text("Add Task")
+                Text(if (isEditMode) "Update Task" else "Add Task")
             }
         },
         dismissButton = {
