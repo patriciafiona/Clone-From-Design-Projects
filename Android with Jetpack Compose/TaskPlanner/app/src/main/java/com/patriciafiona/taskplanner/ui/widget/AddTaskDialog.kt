@@ -37,6 +37,9 @@ fun AddTaskDialog(
     var description by remember { mutableStateOf(task?.description ?: "") }
     val categories = listOf("Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
     val selectedCategories = remember { mutableStateOf(task?.categories ?: emptyList()) }
+    var isTitleValid by remember { mutableStateOf(true) }
+    var isDescriptionValid by remember { mutableStateOf(true) }
+    var areCategoriesValid by remember { mutableStateOf(true) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -48,6 +51,7 @@ fun AddTaskDialog(
                     onValueChange = { title = it },
                     label = { Text("Title") },
                     modifier = Modifier.fillMaxWidth(),
+                    isError = !isTitleValid,
                     colors = TextFieldDefaults.colors(
                         focusedIndicatorColor = Color.White,
                         unfocusedIndicatorColor = Color.Gray,
@@ -60,12 +64,16 @@ fun AddTaskDialog(
                         focusedContainerColor = Color.Transparent
                     )
                 )
+                if (!isTitleValid) {
+                    Text("Title cannot be empty", color = Color.Red, modifier = Modifier.padding(start = 16.dp, top = 4.dp))
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
                     value = description,
                     onValueChange = { description = it },
                     label = { Text("Description") },
                     modifier = Modifier.fillMaxWidth(),
+                    isError = !isDescriptionValid,
                     colors = TextFieldDefaults.colors(
                         focusedIndicatorColor = Color.White,
                         unfocusedIndicatorColor = Color.Gray,
@@ -78,6 +86,9 @@ fun AddTaskDialog(
                         focusedContainerColor = Color.Transparent
                     )
                 )
+                if (!isDescriptionValid) {
+                    Text("Description cannot be empty", color = Color.Red, modifier = Modifier.padding(start = 16.dp, top = 4.dp))
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("Categories (Max 3)", modifier = Modifier.padding(bottom = 8.dp), color = Color.White)
                 FlowRow(
@@ -102,27 +113,36 @@ fun AddTaskDialog(
                         )
                     }
                 }
+                if (!areCategoriesValid) {
+                    Text("Please select at least one category", color = Color.Red, modifier = Modifier.padding(top = 8.dp))
+                }
             }
         },
         confirmButton = {
             Button(
                 onClick = {
-                    val resultTask = if (isEditMode) {
-                        task!!.copy(
-                            title = title,
-                            description = description,
-                            categories = selectedCategories.value
-                        )
-                    } else {
-                        Task(
-                            title = title,
-                            description = description,
-                            categories = selectedCategories.value,
-                            dueDate = System.currentTimeMillis()
-                        )
+                    isTitleValid = title.isNotBlank()
+                    isDescriptionValid = description.isNotBlank()
+                    areCategoriesValid = selectedCategories.value.isNotEmpty()
+
+                    if (isTitleValid && isDescriptionValid && areCategoriesValid) {
+                        val resultTask = if (isEditMode) {
+                            task!!.copy(
+                                title = title,
+                                description = description,
+                                categories = selectedCategories.value
+                            )
+                        } else {
+                            Task(
+                                title = title,
+                                description = description,
+                                categories = selectedCategories.value,
+                                dueDate = System.currentTimeMillis()
+                            )
+                        }
+                        onConfirm(resultTask)
+                        onDismiss()
                     }
-                    onConfirm(resultTask)
-                    onDismiss()
                 }
             ) {
                 Text(if (isEditMode) "Update Task" else "Add Task")
