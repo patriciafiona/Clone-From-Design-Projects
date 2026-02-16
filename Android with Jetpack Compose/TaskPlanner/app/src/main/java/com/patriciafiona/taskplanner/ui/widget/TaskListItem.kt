@@ -46,7 +46,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.patriciafiona.taskplanner.R
-import com.patriciafiona.taskplanner.data.Task
+import com.patriciafiona.taskplanner.resoureces.offline.data.Task
 import com.patriciafiona.taskplanner.ui.theme.interFamily
 import com.patriciafiona.taskplanner.ui.theme.poppinsFamily
 

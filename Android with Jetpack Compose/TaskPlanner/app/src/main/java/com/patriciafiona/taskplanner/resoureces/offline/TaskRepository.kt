@@ -1,5 +1,7 @@
-package com.patriciafiona.taskplanner.data
+package com.patriciafiona.taskplanner.resoureces.offline
 
+import com.patriciafiona.taskplanner.resoureces.offline.data.Task
+import com.patriciafiona.taskplanner.resoureces.offline.TaskDao
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepository(private val taskDao: TaskDao) {

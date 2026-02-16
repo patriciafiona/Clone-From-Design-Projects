@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.data
+package com.patriciafiona.taskplanner.utils
 
 import androidx.room.TypeConverter
 

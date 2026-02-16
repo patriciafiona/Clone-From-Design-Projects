@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.data
+package com.patriciafiona.taskplanner.resoureces.offline.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

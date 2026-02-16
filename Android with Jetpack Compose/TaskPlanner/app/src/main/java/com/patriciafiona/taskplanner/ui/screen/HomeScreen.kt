@@ -60,7 +60,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
-import com.patriciafiona.taskplanner.data.Task
+import com.patriciafiona.taskplanner.resoureces.offline.data.Task
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.TaskListItem

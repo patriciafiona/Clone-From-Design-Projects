@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.data
+package com.patriciafiona.taskplanner.resoureces.offline
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,11 +6,12 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.patriciafiona.taskplanner.resoureces.offline.data.Task
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(task: Task): Long
 
     @Update

@@ -2,8 +2,8 @@ package com.patriciafiona.taskplanner.di
 
 import android.content.Context
 import androidx.room.Room
-import com.patriciafiona.taskplanner.data.TaskDao
-import com.patriciafiona.taskplanner.data.TaskDatabase
+import com.patriciafiona.taskplanner.resoureces.offline.TaskDao
+import com.patriciafiona.taskplanner.resoureces.offline.db.TaskDatabase
 
 object AppModule {
     private fun provideTaskDatabase(context: Context): TaskDatabase {

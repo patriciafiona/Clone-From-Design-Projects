@@ -2,8 +2,8 @@ package com.patriciafiona.taskplanner.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.patriciafiona.taskplanner.data.Task
-import com.patriciafiona.taskplanner.data.TaskRepository
+import com.patriciafiona.taskplanner.resoureces.offline.data.Task
+import com.patriciafiona.taskplanner.resoureces.offline.TaskRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

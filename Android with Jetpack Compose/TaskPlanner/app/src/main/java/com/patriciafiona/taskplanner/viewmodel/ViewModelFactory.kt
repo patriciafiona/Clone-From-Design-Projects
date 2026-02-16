@@ -3,7 +3,7 @@ package com.patriciafiona.taskplanner.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.patriciafiona.taskplanner.data.TaskRepository
+import com.patriciafiona.taskplanner.resoureces.offline.TaskRepository
 import com.patriciafiona.taskplanner.di.AppModule
 
 class ViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory {
