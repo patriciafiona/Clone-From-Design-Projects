@@ -11,10 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
+import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 
 @Composable
-fun TaskListScreen(){
+fun TaskListScreen(
+    navController: NavController,
+    taskViewModel: TaskViewModel
+){
     ImageBackground {
         Scaffold(
             containerColor = Color.Transparent,

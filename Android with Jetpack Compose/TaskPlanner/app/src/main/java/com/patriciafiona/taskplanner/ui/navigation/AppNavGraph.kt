@@ -9,22 +9,27 @@ import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.CalendarScreen
 import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.HomeScreen
 import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.ProfileScreen
 import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.TaskListScreen
+import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 
 @Composable
-fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun AppNavGraph(
+    navController: NavHostController, 
+    modifier: Modifier = Modifier,
+    taskViewModel: TaskViewModel
+) {
     NavHost(
         navController = navController,
         startDestination = BottomBarScreen.Home.route,
         modifier = modifier
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, taskViewModel = taskViewModel)
         }
         composable(route = BottomBarScreen.TaskList.route) {
-            TaskListScreen()
+            TaskListScreen(navController = navController, taskViewModel = taskViewModel)
         }
         composable(route = BottomBarScreen.Calendar.route) {
-            CalendarScreen(navController = navController)
+            CalendarScreen(navController = navController, taskViewModel = taskViewModel)
         }
         composable(route = BottomBarScreen.Profile.route) {
             ProfileScreen()

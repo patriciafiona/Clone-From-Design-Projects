@@ -6,8 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
-import com.patriciafiona.taskplanner.ui.navigation.RootNavigation
+import androidx.lifecycle.ViewModelProvider
+import com.patriciafiona.taskplanner.ui.screen.MainScreen
 import com.patriciafiona.taskplanner.ui.theme.TaskPlannerTheme
+import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
+import com.patriciafiona.taskplanner.viewmodel.ViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +19,15 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
+
+        val viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(this)
+        )[TaskViewModel::class.java]
+
         setContent {
             TaskPlannerTheme {
-                RootNavigation()
+                MainScreen(viewModel = viewModel)
             }
         }
     }

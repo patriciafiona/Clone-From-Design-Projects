@@ -52,27 +52,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
-import com.patriciafiona.taskplanner.resoureces.offline.data.Task
+import com.patriciafiona.taskplanner.resources.offline.data.Task
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.TaskListItem
 import com.patriciafiona.taskplanner.utils.DateTimeHelper.getCurrentDate
 import com.patriciafiona.taskplanner.utils.Greetings.generateGreetings
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
-import com.patriciafiona.taskplanner.viewmodel.ViewModelFactory
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, taskViewModel: TaskViewModel) {
     val context = LocalContext.current
-    val viewModel: TaskViewModel = viewModel(
-        factory = ViewModelFactory.getInstance(context)
-    )
-    val tasks by viewModel.allTasks.collectAsState()
+//    val viewModel: TaskViewModel = viewModel(
+//        factory = ViewModelFactory.getInstance(context)
+//    )
+    val tasks by taskViewModel.allTasks.collectAsState(initial = emptyList())
     var selectedCategory by remember { mutableStateOf<String?>(null) }
     val categories = listOf("All", "Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
     var showAddTaskDialog by remember { mutableStateOf(false) }
@@ -84,9 +82,9 @@ fun HomeScreen(navController: NavController) {
             onDismiss = { showAddTaskDialog = false },
             onConfirm = { task ->
                 if (editingTask == null) {
-                    viewModel.insert(task)
+                    taskViewModel.insert(task)
                 } else {
-                    viewModel.update(task)
+                    taskViewModel.update(task)
                 }
                 showAddTaskDialog = false
                 editingTask = null
@@ -194,7 +192,7 @@ fun HomeScreen(navController: NavController) {
                         Text("12/20 is Completed", color = Color.Black, fontSize = 14.sp)
                         Spacer(modifier = Modifier.height(8.dp))
                         LinearProgressIndicator(
-                            progress = { 0.65f },
+                            progress = 0.65f,
                             modifier = Modifier.fillMaxWidth(),
                             color = Color.White,
                             trackColor = Color.DarkGray
@@ -263,7 +261,7 @@ fun HomeScreen(navController: NavController) {
                                 editingTask = task
                                 showAddTaskDialog = true
                             },
-                            onDelete = { viewModel.delete(it) }
+                            onDelete = { taskViewModel.delete(it) }
                         )
                     }
                 }

@@ -30,9 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -43,18 +41,13 @@ import com.patriciafiona.taskplanner.ui.navigation.AppNavGraph
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.customShadow
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
-import com.patriciafiona.taskplanner.viewmodel.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: TaskViewModel) {
     val navController = rememberNavController()
     var showAddTaskDialog by remember { mutableStateOf(false) }
-    val context = LocalContext.current
-    val viewModel: TaskViewModel = viewModel(
-        factory = ViewModelFactory.getInstance(context)
-    )
 
     val systemUiController = rememberSystemUiController()
     SideEffect {
@@ -79,7 +72,8 @@ fun MainScreen() {
         bottomBar = { BottomBar(navController = navController, onAddTaskClick = { showAddTaskDialog = true }) }
     ) { 
         AppNavGraph(
-            navController = navController
+            navController = navController,
+            taskViewModel = viewModel
         )
     }
 }

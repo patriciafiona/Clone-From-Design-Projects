@@ -1,8 +1,11 @@
 package com.patriciafiona.taskplanner.ui.widget
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
@@ -20,10 +24,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.patriciafiona.taskplanner.resoureces.offline.data.Task
+import com.patriciafiona.taskplanner.resources.offline.data.Task
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -37,9 +47,95 @@ fun AddTaskDialog(
     var description by remember { mutableStateOf(task?.description ?: "") }
     val categories = listOf("Work", "Personal", "Shopping", "Health", "Study", "Home", "Finance", "Urgent")
     val selectedCategories = remember { mutableStateOf(task?.categories ?: emptyList()) }
+    var isAllDay by remember { mutableStateOf(task?.isAllDay ?: false) }
+    var startDate by remember { mutableStateOf(task?.startDate ?: Date()) }
+    var dueDate by remember { mutableStateOf(task?.dueDate) }
+
     var isTitleValid by remember { mutableStateOf(true) }
     var isDescriptionValid by remember { mutableStateOf(true) }
     var areCategoriesValid by remember { mutableStateOf(true) }
+
+    val context = LocalContext.current
+
+    val dateFormat = SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault())
+    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+    var showStartDatePicker by remember { mutableStateOf(false) }
+    var showStartTimePicker by remember { mutableStateOf(false) }
+    var showDueDatePicker by remember { mutableStateOf(false) }
+    var showDueTimePicker by remember { mutableStateOf(false) }
+
+    if (showStartDatePicker) {
+        val calendar = Calendar.getInstance().apply { time = startDate }
+        DatePickerDialog(
+            context,
+            { _, year, month, dayOfMonth ->
+                val newDate = Calendar.getInstance().apply {
+                    set(year, month, dayOfMonth)
+                }
+                startDate = newDate.time
+                showStartDatePicker = false
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+    if (showStartTimePicker) {
+        val calendar = Calendar.getInstance().apply { time = startDate }
+        TimePickerDialog(
+            context,
+            { _, hour, minute ->
+                val newDate = Calendar.getInstance().apply {
+                    time = startDate
+                    set(Calendar.HOUR_OF_DAY, hour)
+                    set(Calendar.MINUTE, minute)
+                }
+                startDate = newDate.time
+                showStartTimePicker = false
+            },
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+
+    if (showDueDatePicker) {
+        val calendar = Calendar.getInstance().apply { time = dueDate ?: Date() }
+        DatePickerDialog(
+            context,
+            { _, year, month, dayOfMonth ->
+                val newDate = Calendar.getInstance().apply {
+                    set(year, month, dayOfMonth)
+                }
+                dueDate = newDate.time
+                showDueDatePicker = false
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+
+    if (showDueTimePicker) {
+        val calendar = Calendar.getInstance().apply { time = dueDate ?: Date() }
+        TimePickerDialog(
+            context,
+            { _, hour, minute ->
+                val newDate = Calendar.getInstance().apply {
+                    time = dueDate ?: Date()
+                    set(Calendar.HOUR_OF_DAY, hour)
+                    set(Calendar.MINUTE, minute)
+                }
+                dueDate = newDate.time
+                showDueTimePicker = false
+            },
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -90,6 +186,47 @@ fun AddTaskDialog(
                     Text("Description cannot be empty", color = Color.Red, modifier = Modifier.padding(start = 16.dp, top = 4.dp))
                 }
                 Spacer(modifier = Modifier.height(16.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("All-day", color = Color.White)
+                    Spacer(modifier = Modifier.weight(1f))
+                    Switch(
+                        checked = isAllDay,
+                        onCheckedChange = { isAllDay = it }
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                if(isAllDay){
+                    Text("Start Date", color = Color.White)
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        TextButton(onClick = { showStartDatePicker = true }) {
+                            Text(dateFormat.format(startDate), color = Color.White)
+                        }
+                    }
+                }else {
+                    Text("Start Date and Time", color = Color.White)
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        TextButton(onClick = { showStartDatePicker = true }) {
+                            Text(dateFormat.format(startDate), color = Color.White)
+                        }
+                        TextButton(onClick = { showStartTimePicker = true }) {
+                            Text(timeFormat.format(startDate), color = Color.White)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text("Due Date and Time", color = Color.White)
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        TextButton(onClick = { showDueDatePicker = true }) {
+                            Text(if(dueDate != null) dateFormat.format(dueDate!!) else "Select Date", color = Color.White)
+                        }
+                        TextButton(onClick = { showDueTimePicker = true }) {
+                            Text(if(dueDate != null) timeFormat.format(dueDate!!) else "Select Time", color = Color.White)
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(16.dp))
                 Text("Categories (Max 3)", modifier = Modifier.padding(bottom = 8.dp), color = Color.White)
                 FlowRow(
                     modifier = Modifier.fillMaxWidth()
@@ -130,14 +267,20 @@ fun AddTaskDialog(
                             task!!.copy(
                                 title = title,
                                 description = description,
-                                categories = selectedCategories.value
+                                categories = selectedCategories.value,
+                                isAllDay = isAllDay,
+                                startDate = startDate,
+                                dueDate = if (isAllDay) null else dueDate
                             )
                         } else {
                             Task(
                                 title = title,
                                 description = description,
+                                startDate = startDate,
+                                dueDate = if(isAllDay) null else dueDate,
+                                isAllDay = isAllDay,
                                 categories = selectedCategories.value,
-                                dueDate = System.currentTimeMillis()
+                                color = 0xFF000000
                             )
                         }
                         onConfirm(resultTask)

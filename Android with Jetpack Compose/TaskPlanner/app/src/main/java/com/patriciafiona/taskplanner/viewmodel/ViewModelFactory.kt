@@ -3,7 +3,7 @@ package com.patriciafiona.taskplanner.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.patriciafiona.taskplanner.resoureces.offline.TaskRepository
+import com.patriciafiona.taskplanner.resources.offline.TaskRepository
 import com.patriciafiona.taskplanner.di.AppModule
 
 class ViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory {
@@ -22,7 +22,7 @@ class ViewModelFactory(private val repository: TaskRepository) : ViewModelProvid
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
                 instance ?: ViewModelFactory(
-                    TaskRepository(AppModule.provideTaskDao(context))
+                    TaskRepository.getInstance(AppModule.provideTaskDao(context))
                 ).also { instance = it }
             }
     }
