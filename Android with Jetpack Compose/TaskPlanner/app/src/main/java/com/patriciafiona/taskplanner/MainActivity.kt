@@ -7,7 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
-import com.patriciafiona.taskplanner.ui.screen.MainScreen
+import com.patriciafiona.taskplanner.ui.screen.main.MainScreen
 import com.patriciafiona.taskplanner.ui.theme.TaskPlannerTheme
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 import com.patriciafiona.taskplanner.viewmodel.ViewModelFactory

@@ -6,7 +6,6 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.patriciafiona.taskplanner.resources.offline.TaskDao
 import com.patriciafiona.taskplanner.resources.offline.db.TaskDatabase
-import kotlin.jvm.java
 
 object AppModule {
     private val MIGRATION_1_2 = object : Migration(1, 2) {

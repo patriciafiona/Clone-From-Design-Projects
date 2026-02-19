@@ -5,10 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.CalendarScreen
-import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.HomeScreen
-import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.ProfileScreen
-import com.patriciafiona.taskplanner.ui.screen.bottomNavScreen.TaskListScreen
+import com.patriciafiona.taskplanner.ui.screen.main.bottomNavScreen.CalendarScreen
+import com.patriciafiona.taskplanner.ui.screen.main.bottomNavScreen.HomeScreen
+import com.patriciafiona.taskplanner.ui.screen.main.bottomNavScreen.ProfileScreen
+import com.patriciafiona.taskplanner.ui.screen.main.bottomNavScreen.TaskListScreen
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 
 @Composable

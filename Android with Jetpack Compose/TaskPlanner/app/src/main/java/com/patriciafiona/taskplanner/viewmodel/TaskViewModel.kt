@@ -2,8 +2,8 @@ package com.patriciafiona.taskplanner.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.patriciafiona.taskplanner.resources.offline.data.Task
 import com.patriciafiona.taskplanner.resources.offline.TaskRepository
+import com.patriciafiona.taskplanner.resources.offline.data.Task
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 

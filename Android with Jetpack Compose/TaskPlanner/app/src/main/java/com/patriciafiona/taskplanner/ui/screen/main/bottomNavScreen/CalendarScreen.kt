@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.ui.screen.bottomNavScreen
+package com.patriciafiona.taskplanner.ui.screen.main.bottomNavScreen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -50,9 +50,9 @@ import com.patriciafiona.taskplanner.resources.offline.data.Task
 import com.patriciafiona.taskplanner.ui.theme.BluePrimary
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.RealTimeIndicator
-import com.patriciafiona.taskplanner.ui.widget.item.TaskCalendarItem
 import com.patriciafiona.taskplanner.ui.widget.dialog.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.dialog.MonthYearPickerDialog
+import com.patriciafiona.taskplanner.ui.widget.item.TaskCalendarItem
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

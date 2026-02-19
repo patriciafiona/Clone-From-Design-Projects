@@ -3,8 +3,8 @@ package com.patriciafiona.taskplanner.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.patriciafiona.taskplanner.resources.offline.TaskRepository
 import com.patriciafiona.taskplanner.di.AppModule
+import com.patriciafiona.taskplanner.resources.offline.TaskRepository
 
 class ViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

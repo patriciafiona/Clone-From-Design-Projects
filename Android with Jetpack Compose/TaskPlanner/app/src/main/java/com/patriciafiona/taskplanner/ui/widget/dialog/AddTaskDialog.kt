@@ -2,6 +2,7 @@ package com.patriciafiona.taskplanner.ui.widget.dialog
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -20,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,6 +56,7 @@ fun AddTaskDialog(
     var isTitleValid by remember { mutableStateOf(true) }
     var isDescriptionValid by remember { mutableStateOf(true) }
     var areCategoriesValid by remember { mutableStateOf(true) }
+    var isDateValid by remember { mutableStateOf(true) }
 
     val context = LocalContext.current
 
@@ -65,13 +68,22 @@ fun AddTaskDialog(
     var showDueDatePicker by remember { mutableStateOf(false) }
     var showDueTimePicker by remember { mutableStateOf(false) }
 
+    LaunchedEffect(startDate) {
+        if (dueDate != null && dueDate!!.before(startDate)) {
+            dueDate = startDate
+        }
+    }
+
     if (showStartDatePicker) {
         val calendar = Calendar.getInstance().apply { time = startDate }
         DatePickerDialog(
             context,
             { _, year, month, dayOfMonth ->
                 val newDate = Calendar.getInstance().apply {
-                    set(year, month, dayOfMonth)
+                    time = startDate
+                    set(Calendar.YEAR, year)
+                    set(Calendar.MONTH, month)
+                    set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 }
                 startDate = newDate.time
                 showStartDatePicker = false
@@ -102,12 +114,15 @@ fun AddTaskDialog(
     }
 
     if (showDueDatePicker) {
-        val calendar = Calendar.getInstance().apply { time = dueDate ?: Date() }
-        DatePickerDialog(
+        val calendar = Calendar.getInstance().apply { time = dueDate ?: startDate }
+        val datePickerDialog = DatePickerDialog(
             context,
             { _, year, month, dayOfMonth ->
                 val newDate = Calendar.getInstance().apply {
-                    set(year, month, dayOfMonth)
+                    time = dueDate ?: startDate
+                    set(Calendar.YEAR, year)
+                    set(Calendar.MONTH, month)
+                    set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 }
                 dueDate = newDate.time
                 showDueDatePicker = false
@@ -115,20 +130,29 @@ fun AddTaskDialog(
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
-        ).show()
+        )
+        datePickerDialog.datePicker.minDate = startDate.time
+        datePickerDialog.show()
     }
 
     if (showDueTimePicker) {
-        val calendar = Calendar.getInstance().apply { time = dueDate ?: Date() }
+        val calendar = Calendar.getInstance().apply { time = dueDate ?: startDate }
         TimePickerDialog(
             context,
             { _, hour, minute ->
-                val newDate = Calendar.getInstance().apply {
-                    time = dueDate ?: Date()
+                val newDueDate = Calendar.getInstance().apply {
+                    time = dueDate ?: startDate
                     set(Calendar.HOUR_OF_DAY, hour)
                     set(Calendar.MINUTE, minute)
                 }
-                dueDate = newDate.time
+
+                if (newDueDate.time.before(startDate)) {
+                    isDateValid = false
+                    Toast.makeText(context, "Due time cannot be before start time", Toast.LENGTH_SHORT).show()
+                } else {
+                    isDateValid = true
+                    dueDate = newDueDate.time
+                }
                 showDueTimePicker = false
             },
             calendar.get(Calendar.HOUR_OF_DAY),
@@ -225,6 +249,9 @@ fun AddTaskDialog(
                             Text(if(dueDate != null) timeFormat.format(dueDate!!) else "Select Time", color = Color.White)
                         }
                     }
+                    if (!isDateValid) {
+                        Text("Due date cannot be before start date.", color = Color.Red, modifier = Modifier.padding(top = 8.dp))
+                    }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("Categories (Max 3)", modifier = Modifier.padding(bottom = 8.dp), color = Color.White)
@@ -261,8 +288,9 @@ fun AddTaskDialog(
                     isTitleValid = title.isNotBlank()
                     isDescriptionValid = description.isNotBlank()
                     areCategoriesValid = selectedCategories.value.isNotEmpty()
+                    isDateValid = dueDate == null || !dueDate!!.before(startDate)
 
-                    if (isTitleValid && isDescriptionValid && areCategoriesValid) {
+                    if (isTitleValid && isDescriptionValid && areCategoriesValid && isDateValid) {
                         val resultTask = if (isEditMode) {
                             task!!.copy(
                                 title = title,
