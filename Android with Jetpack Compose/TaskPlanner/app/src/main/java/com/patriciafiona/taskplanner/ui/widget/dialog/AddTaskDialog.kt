@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.ui.widget
+package com.patriciafiona.taskplanner.ui.widget.dialog
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog

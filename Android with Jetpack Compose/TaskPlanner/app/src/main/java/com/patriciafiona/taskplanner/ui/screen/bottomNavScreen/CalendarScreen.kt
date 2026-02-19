@@ -48,10 +48,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.resources.offline.data.Task
 import com.patriciafiona.taskplanner.ui.theme.BluePrimary
-import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.RealTimeIndicator
-import com.patriciafiona.taskplanner.ui.widget.TaskCalendarItem
+import com.patriciafiona.taskplanner.ui.widget.item.TaskCalendarItem
+import com.patriciafiona.taskplanner.ui.widget.dialog.AddTaskDialog
+import com.patriciafiona.taskplanner.ui.widget.dialog.MonthYearPickerDialog
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -70,6 +71,7 @@ fun CalendarScreen(
     var displayedMonth by remember { mutableStateOf(Calendar.getInstance()) }
     var showAddTaskDialog by remember { mutableStateOf(false) }
     var editingTask by remember { mutableStateOf<Task?>(null) }
+    var showMonthYearPicker by remember { mutableStateOf(false) }
 
     val filteredTasks = tasks.filter { task ->
         val taskCalendar = Calendar.getInstance().apply { time = task.startDate }
@@ -93,6 +95,17 @@ fun CalendarScreen(
         )
     }
 
+    if (showMonthYearPicker) {
+        MonthYearPickerDialog(
+            initialDate = displayedMonth,
+            onDismiss = { showMonthYearPicker = false },
+            onConfirm = {
+                displayedMonth = it
+                showMonthYearPicker = false
+            }
+        )
+    }
+
     ImageBackground {
         Scaffold(
             containerColor = Color.Transparent
@@ -110,7 +123,7 @@ fun CalendarScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(modifier = Modifier.width(30.dp)) //Empty space
-                    Text("Calendar", color = Color.White, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text("Calendar", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(Icons.Default.Notifications, contentDescription = "Notifications", tint = Color.White)
                     }
@@ -120,11 +133,29 @@ fun CalendarScreen(
 
                 // Calendar controls
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
-                    Text(monthFormat.format(displayedMonth.time), color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                    Icon(Icons.Default.ArrowDropDown, contentDescription = "Dropdown", tint = Color.White)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable {
+                            showMonthYearPicker = true
+                        }
+                    ) {
+                        val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+                        Text(
+                            monthFormat.format(displayedMonth.time),
+                            color = Color.White,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Icon(
+                            Icons.Default.ArrowDropDown,
+                            contentDescription = "Dropdown",
+                            tint = Color.White
+                        )
+                    }
                 }
 
 

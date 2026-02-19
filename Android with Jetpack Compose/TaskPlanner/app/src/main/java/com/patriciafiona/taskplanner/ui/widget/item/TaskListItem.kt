@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.ui.widget
+package com.patriciafiona.taskplanner.ui.widget.item
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke

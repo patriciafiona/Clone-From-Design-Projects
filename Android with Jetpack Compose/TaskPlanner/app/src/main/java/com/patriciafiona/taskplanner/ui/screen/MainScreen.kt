@@ -39,7 +39,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.patriciafiona.taskplanner.ui.navigation.AppNavGraph
 import com.patriciafiona.taskplanner.ui.theme.BluePrimary
-import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
+import com.patriciafiona.taskplanner.ui.widget.dialog.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.customShadow
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
 

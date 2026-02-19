@@ -1,4 +1,4 @@
-package com.patriciafiona.taskplanner.ui.widget
+package com.patriciafiona.taskplanner.ui.widget.item
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -129,7 +129,7 @@ fun TaskCalendarItem(
             ) {
                 Box(
                     modifier = Modifier
-                        .width(3.dp)
+                        .width(2.dp)
                         .background(Color.White.copy(alpha = 0.3f))
                         .fillMaxHeight()
                 )

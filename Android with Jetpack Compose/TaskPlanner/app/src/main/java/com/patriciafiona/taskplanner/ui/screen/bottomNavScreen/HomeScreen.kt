@@ -56,9 +56,9 @@ import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
 import com.patriciafiona.taskplanner.resources.offline.data.Task
 import com.patriciafiona.taskplanner.ui.theme.BluePrimary
-import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
+import com.patriciafiona.taskplanner.ui.widget.dialog.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
-import com.patriciafiona.taskplanner.ui.widget.TaskListItem
+import com.patriciafiona.taskplanner.ui.widget.item.TaskListItem
 import com.patriciafiona.taskplanner.utils.DateTimeHelper.getCurrentDate
 import com.patriciafiona.taskplanner.utils.Greetings.generateGreetings
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
