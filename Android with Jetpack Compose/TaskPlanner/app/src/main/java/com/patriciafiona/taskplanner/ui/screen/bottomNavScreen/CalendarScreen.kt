@@ -249,6 +249,9 @@ fun CalendarScreen(
                             onEdit = {
                                 editingTask = task
                                 showAddTaskDialog = true
+                            },
+                            onDelete = { taskToDelete ->
+                                taskViewModel.delete(taskToDelete)
                             }
                         )
                     }
