@@ -38,6 +38,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.patriciafiona.taskplanner.ui.navigation.AppNavGraph
+import com.patriciafiona.taskplanner.ui.theme.BluePrimary
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.customShadow
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
@@ -118,7 +119,7 @@ fun BottomBar(navController: NavHostController, onAddTaskClick: () -> Unit) {
                 Icon(
                     Icons.Default.Home,
                     contentDescription = "Home",
-                    tint = if (homeSelected) Color(0xFF9bbdeb) else Color.White
+                    tint = if (homeSelected) BluePrimary else Color.White
                 )
             }
             val taskSelected = currentDestination?.hierarchy?.any { it.route == "task_list" } == true
@@ -134,7 +135,7 @@ fun BottomBar(navController: NavHostController, onAddTaskClick: () -> Unit) {
                 Icon(
                     Icons.Default.List,
                     contentDescription = "Task",
-                    tint = if (taskSelected) Color(0xFF9bbdeb) else Color.White
+                    tint = if (taskSelected) BluePrimary else Color.White
                 )
             }
 
@@ -142,12 +143,12 @@ fun BottomBar(navController: NavHostController, onAddTaskClick: () -> Unit) {
                 onClick = onAddTaskClick,
                 modifier = Modifier
                     .customShadow(
-                        color = Color(0xFF9bbdeb),
+                        color = BluePrimary,
                         blurRadius = 20.dp
                     )
                     .size(56.dp),
                 colors = IconButtonDefaults.iconButtonColors(
-                    containerColor = Color(0xFF9bbdeb),
+                    containerColor = BluePrimary,
                 )
             ) {
                 Icon(
@@ -170,7 +171,7 @@ fun BottomBar(navController: NavHostController, onAddTaskClick: () -> Unit) {
                 Icon(
                     Icons.Default.DateRange,
                     contentDescription = "Calendar",
-                    tint = if (calendarSelected) Color(0xFF9bbdeb) else Color.White
+                    tint = if (calendarSelected) BluePrimary else Color.White
                 )
             }
             val profileSelected = currentDestination?.hierarchy?.any { it.route == "profile" } == true
@@ -186,7 +187,7 @@ fun BottomBar(navController: NavHostController, onAddTaskClick: () -> Unit) {
                 Icon(
                     Icons.Default.Person,
                     contentDescription = "Profile",
-                    tint = if (profileSelected) Color(0xFF9bbdeb) else Color.White
+                    tint = if (profileSelected) BluePrimary else Color.White
                 )
             }
         }

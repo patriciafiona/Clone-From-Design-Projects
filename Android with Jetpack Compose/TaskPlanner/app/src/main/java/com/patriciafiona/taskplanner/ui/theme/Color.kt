@@ -12,3 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 val Dark_charcoal = Color(0xFF333333)
 val Raisin_black = Color(0xFF242424)
+
+val BluePrimary = Color(0xFF9bbdeb)

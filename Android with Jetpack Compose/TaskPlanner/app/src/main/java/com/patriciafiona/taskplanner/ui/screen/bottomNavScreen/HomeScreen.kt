@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.R
 import com.patriciafiona.taskplanner.resources.offline.data.Task
+import com.patriciafiona.taskplanner.ui.theme.BluePrimary
 import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
 import com.patriciafiona.taskplanner.ui.widget.TaskListItem
@@ -181,7 +182,7 @@ fun HomeScreen(navController: NavController, taskViewModel: TaskViewModel) {
                 // Priority Task Progress
                 Card(
                     modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF9bbdeb))
+                    colors = CardDefaults.cardColors(containerColor = BluePrimary)
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(

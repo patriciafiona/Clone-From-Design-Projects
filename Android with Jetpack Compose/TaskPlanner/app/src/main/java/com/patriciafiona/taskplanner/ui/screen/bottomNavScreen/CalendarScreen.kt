@@ -1,5 +1,6 @@
 package com.patriciafiona.taskplanner.ui.screen.bottomNavScreen
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,23 +13,17 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -45,24 +40,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Blue
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.patriciafiona.taskplanner.resources.offline.data.Task
+import com.patriciafiona.taskplanner.ui.theme.BluePrimary
+import com.patriciafiona.taskplanner.ui.widget.AddTaskDialog
 import com.patriciafiona.taskplanner.ui.widget.ImageBackground
+import com.patriciafiona.taskplanner.ui.widget.RealTimeIndicator
+import com.patriciafiona.taskplanner.ui.widget.TaskCalendarItem
 import com.patriciafiona.taskplanner.viewmodel.TaskViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+@SuppressLint("DefaultLocale")
 @Composable
 fun CalendarScreen(
     navController: NavController,
@@ -71,11 +68,29 @@ fun CalendarScreen(
     val tasks by taskViewModel.allTasks.collectAsState(initial = emptyList())
     var selectedDate by remember { mutableStateOf(Calendar.getInstance()) }
     var displayedMonth by remember { mutableStateOf(Calendar.getInstance()) }
+    var showAddTaskDialog by remember { mutableStateOf(false) }
+    var editingTask by remember { mutableStateOf<Task?>(null) }
 
     val filteredTasks = tasks.filter { task ->
         val taskCalendar = Calendar.getInstance().apply { time = task.startDate }
         taskCalendar.get(Calendar.YEAR) == selectedDate.get(Calendar.YEAR) &&
                 taskCalendar.get(Calendar.DAY_OF_YEAR) == selectedDate.get(Calendar.DAY_OF_YEAR)
+    }
+
+    if (showAddTaskDialog) {
+        AddTaskDialog(
+            task = editingTask,
+            onDismiss = { showAddTaskDialog = false },
+            onConfirm = { task ->
+                if (editingTask == null) {
+                    taskViewModel.insert(task)
+                } else {
+                    taskViewModel.update(task)
+                }
+                showAddTaskDialog = false
+                editingTask = null
+            }
+        )
     }
 
     ImageBackground {
@@ -86,7 +101,7 @@ fun CalendarScreen(
                 modifier = Modifier
                     .padding(it)
                     .fillMaxSize()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 36.dp)
+                    .padding(16.dp)
             ) {
                 // Header
                 Row(
@@ -197,7 +212,14 @@ fun CalendarScreen(
 
                     // Tasks
                     filteredTasks.forEach { task ->
-                        TaskEntry(task = task, hourHeight = hourHeight, navController = navController)
+                        TaskCalendarItem(
+                            task = task,
+                            hourHeight = hourHeight,
+                            onEdit = {
+                                editingTask = task
+                                showAddTaskDialog = true
+                            }
+                        )
                     }
 
                     //Real-time indicator
@@ -231,24 +253,29 @@ fun DayItem(
     isToday: Boolean,
     onClick: () -> Unit
 ) {
-    val backgroundColor = if (isSelected) Blue else Color.Transparent
+    val backgroundColor = if (isSelected) BluePrimary else Color.Transparent
     val contentColor = if (isSelected || isToday) Color.White else Color.Gray
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .width(70.dp)
+            .padding(horizontal = 8.dp) //Outside padding
             .clip(RoundedCornerShape(10.dp))
             .background(backgroundColor)
             .then(
                 if (isToday && !isSelected) {
-                    Modifier.border(1.dp, Color.White, RoundedCornerShape(10.dp))
+                    Modifier.border(
+                        2.dp,
+                        Color.White.copy(alpha = 0.3f),
+                        RoundedCornerShape(10.dp)
+                    )
                 } else {
                     Modifier
                 }
             )
             .clickable { onClick() }
-            .padding(vertical = 8.dp)
+            .padding(vertical = 8.dp) //Inner padding
     ) {
         Text(dayName, color = contentColor, fontSize = 12.sp)
         Spacer(modifier = Modifier.height(4.dp))
@@ -257,113 +284,6 @@ fun DayItem(
             color = contentColor,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
-        )
-    }
-}
-
-@Composable
-fun TaskEntry(task: Task, hourHeight: Dp, navController: NavController) {
-    val calendarStart = Calendar.getInstance().apply { time = task.startDate }
-    val calendarEnd = if (task.dueDate != null) Calendar.getInstance().apply { time = task.dueDate } else null
-
-    val startHour = calendarStart.get(Calendar.HOUR_OF_DAY) + calendarStart.get(Calendar.MINUTE) / 60f
-    var endHour = calendarEnd?.let { it.get(Calendar.HOUR_OF_DAY) + it.get(Calendar.MINUTE) / 60f } ?: (startHour + 1)
-
-    if (task.isAllDay) {
-        endHour = startHour + 1
-    }
-
-    if (endHour < startHour) { // Handles overnight tasks for the day view
-        endHour = 24f
-    }
-
-    var duration = endHour - startHour
-    if (!task.isAllDay && duration == 0f) {
-        duration = 1f // min 1h duration for non-all-day tasks to be visible
-    }
-
-    if (duration <= 0) return
-
-    val height = hourHeight * duration
-    val topPadding = hourHeight * startHour
-
-    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-    val time = if(task.isAllDay) {
-        "All Day"
-    } else if (task.dueDate != null) {
-        "${timeFormat.format(task.startDate)} - ${timeFormat.format(task.dueDate)}"
-    } else {
-        timeFormat.format(task.startDate)
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height - 4.dp)
-            .padding(start = 58.dp, end = 16.dp)
-            .offset(y = topPadding)
-            .clickable {
-                navController.navigate("add_edit_task/${task.id}")
-            },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(task.color).copy(alpha = 0.8f))
-    ) {
-        Column(
-            modifier = Modifier.padding(12.dp)
-        ) {
-            Text(task.title, color = Color.White, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(task.description, color = Color.LightGray, fontSize = 12.sp)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(time, color = Color.LightGray, fontSize = 12.sp)
-            Spacer(modifier = Modifier.weight(1f))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row {
-                    // Placeholder for avatars
-                }
-                IconButton(onClick = { navController.navigate("add_edit_task/${task.id}") }) {
-                    Icon(Icons.Default.Edit, contentDescription = "Edit Task", tint = Color.White)
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun RealTimeIndicator(hourHeight: Dp) {
-    var calendar by remember { mutableStateOf(Calendar.getInstance()) }
-
-    LaunchedEffect(Unit) {
-        while (true) {
-            calendar = Calendar.getInstance()
-            delay(60000) // Update every minute
-        }
-    }
-
-    val currentHour = calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.MINUTE) / 60f
-    val topOffset = hourHeight * currentHour
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 50.dp)
-            .offset(y = topOffset),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .size(8.dp)
-                .background(Color.Red, CircleShape)
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(1.dp)
-                .background(Color.Red)
         )
     }
 }
