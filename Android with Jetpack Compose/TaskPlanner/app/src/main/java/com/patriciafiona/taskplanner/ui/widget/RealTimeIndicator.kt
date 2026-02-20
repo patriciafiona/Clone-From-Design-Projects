@@ -17,9 +17,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.patriciafiona.taskplanner.ui.theme.BluePrimary
 import kotlinx.coroutines.delay
 import java.util.Calendar
 
@@ -40,20 +40,20 @@ fun RealTimeIndicator(hourHeight: Dp) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 50.dp)
+            .padding(start = 58.dp)
             .offset(y = topOffset),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
             modifier = Modifier
                 .size(8.dp)
-                .background(Color.Red, CircleShape)
+                .background(BluePrimary, CircleShape)
         )
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(1.dp)
-                .background(Color.Red)
+                .background(BluePrimary)
         )
     }
 }

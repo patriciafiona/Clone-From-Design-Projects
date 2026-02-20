@@ -43,6 +43,7 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -61,7 +62,9 @@ fun TaskCalendarItem(
     task: Task,
     hourHeight: Dp,
     onEdit: (Task) -> Unit,
-    onDelete: (Task) -> Unit
+    onDelete: (Task) -> Unit,
+    columnIndex: Int,
+    totalColumns: Int
 ) {
     var showDialog by remember { mutableStateOf(false) }
 
@@ -133,12 +136,17 @@ fun TaskCalendarItem(
         }
     }
 
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val tasksWidth = screenWidth - 58.dp - 16.dp // 58dp for time, 16dp for end padding
+    
+    val itemWidth = if (totalColumns > 1) screenWidth * 0.5f else tasksWidth * 0.92f
+    val itemOffset = 58.dp + (if (totalColumns > 1) screenWidth * 0.5f else 0.dp) * columnIndex
+
     Card(
         modifier = Modifier
-            .fillMaxWidth()
+            .width(itemWidth - 4.dp)
             .height(height - 4.dp)
-            .padding(start = 58.dp, end = 16.dp)
-            .offset(y = topPadding)
+            .offset(y = topPadding, x = itemOffset + 2.dp)
             .clickable { onEdit(task) },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color(task.color).copy(alpha = 0.8f))

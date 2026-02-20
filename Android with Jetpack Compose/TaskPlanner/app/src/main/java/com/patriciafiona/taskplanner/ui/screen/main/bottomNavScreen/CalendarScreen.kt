@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -208,58 +209,93 @@ fun CalendarScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 //Timeline
-                val scrollState = rememberScrollState()
+                val verticalScrollState = rememberScrollState()
+                val horizontalScrollState = rememberScrollState()
                 val hourHeight = 60.dp
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .verticalScroll(scrollState)
-                ) {
-                    // Timeline with hour lines
-                    Column(modifier = Modifier
+
+                val taskColumns = getOverlappingTasks(filteredTasks)
+                val totalColumns = taskColumns.maxOfOrNull { it.totalColumns } ?: 1
+                val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+
+                val contentWidth = if (totalColumns > 1) {
+                    val taskItemWidth = screenWidth * 0.75f
+                    58.dp + (taskItemWidth * totalColumns)
+                } else {
+                    screenWidth
+                }
+
+                Box(
+                    modifier = Modifier
                         .fillMaxWidth()
+                        .horizontalScroll(horizontalScrollState)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .width(contentWidth)
+                            .verticalScroll(verticalScrollState)
                     ) {
-                        for (hour in 0..23) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(60.dp)
-                            ) {
-                                Text(
-                                    text = if (hour > 0) String.format("%02d:00", hour) else "",
-                                    color = Color.Gray,
-                                    fontSize = 12.sp,
-                                    modifier = Modifier
-                                        .width(50.dp)
-                                )
+                        // Timeline with hour lines
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            for (hour in 0..23) {
                                 Box(
                                     modifier = Modifier
-                                        .fillMaxHeight()
-                                        .width(1.dp)
-                                        .background(Color.Gray.copy(alpha = 0.5f))
-                                )
+                                        .fillMaxWidth()
+                                        .height(60.dp)
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                    ) {
+                                        Text(
+                                            text = if (hour > 0) String.format("%02d:00", hour) else "",
+                                            color = Color.Gray,
+                                            fontSize = 12.sp,
+                                            modifier = Modifier.width(50.dp)
+                                        )
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxHeight()
+                                                .width(1.dp)
+                                                .background(Color.Gray.copy(alpha = 0.5f))
+                                        )
+                                    }
+
+                                    // Add horizontal line here
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(start = 50.dp) // start after the time text
+                                            .fillMaxWidth()
+                                            .height(1.dp)
+                                            .background(Color.Gray.copy(alpha = 0.3f))
+                                            .align(Alignment.TopCenter)
+                                    )
+                                }
                             }
                         }
-                    }
 
-                    // Tasks
-                    filteredTasks.forEach { task ->
-                        TaskCalendarItem(
-                            task = task,
-                            hourHeight = hourHeight,
-                            onEdit = {
-                                editingTask = task
-                                showAddTaskDialog = true
-                            },
-                            onDelete = { taskToDelete ->
-                                taskViewModel.delete(taskToDelete)
-                            }
-                        )
-                    }
+                        // Tasks
+                        taskColumns.forEach { (task, columnIndex, totalColumns) ->
+                            TaskCalendarItem(
+                                task = task,
+                                hourHeight = hourHeight,
+                                onEdit = {
+                                    editingTask = task
+                                    showAddTaskDialog = true
+                                },
+                                onDelete = { taskToDelete ->
+                                    taskViewModel.delete(taskToDelete)
+                                },
+                                columnIndex = columnIndex,
+                                totalColumns = totalColumns
+                            )
+                        }
 
-                    //Real-time indicator
-                    if (selectedDate.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                        selectedDate.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) {
-                        RealTimeIndicator(hourHeight = hourHeight)
+                        //Real-time indicator
+                        if (selectedDate.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                            selectedDate.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
+                        ) {
+                            RealTimeIndicator(hourHeight = hourHeight)
+                        }
                     }
                 }
             }
@@ -320,4 +356,57 @@ fun DayItem(
             fontWeight = FontWeight.Bold
         )
     }
+}
+
+data class TaskColumn(val task: Task, val columnIndex: Int, val totalColumns: Int)
+
+fun getOverlappingTasks(tasks: List<Task>): List<TaskColumn> {
+    if (tasks.isEmpty()) return emptyList()
+
+    val sortedTasks = tasks.sortedBy { it.startDate }
+    val taskColumns = mutableListOf<TaskColumn>()
+    val ongoingTasks = mutableListOf<MutableList<Task>>()
+
+    for (task in sortedTasks) {
+        val startTime = task.startDate.time
+        val endTime = task.dueDate?.time ?: (startTime + 3600000) // 1 hour duration if no end time
+
+        var placed = false
+        for (column in ongoingTasks) {
+            val lastTaskInColumn = column.last()
+            val lastTaskEndTime = lastTaskInColumn.dueDate?.time ?: (lastTaskInColumn.startDate.time + 3600000)
+
+            if (startTime >= lastTaskEndTime) {
+                column.add(task)
+                placed = true
+                break
+            }
+        }
+
+        if (!placed) {
+            ongoingTasks.add(mutableListOf(task))
+        }
+    }
+
+    val taskToColumnIndex = mutableMapOf<Task, Int>()
+    val taskToTotalColumns = mutableMapOf<Task, Int>()
+
+    for ((columnIndex, column) in ongoingTasks.withIndex()) {
+        for (task in column) {
+            taskToColumnIndex[task] = columnIndex
+            taskToTotalColumns[task] = ongoingTasks.size
+        }
+    }
+
+    for (task in sortedTasks) {
+        taskColumns.add(
+            TaskColumn(
+                task = task,
+                columnIndex = taskToColumnIndex[task] ?: 0,
+                totalColumns = taskToTotalColumns[task] ?: 1
+            )
+        )
+    }
+
+    return taskColumns
 }
