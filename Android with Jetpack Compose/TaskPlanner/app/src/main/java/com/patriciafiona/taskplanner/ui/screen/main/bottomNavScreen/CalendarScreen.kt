@@ -218,7 +218,7 @@ fun CalendarScreen(
                 val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
                 val contentWidth = if (totalColumns > 1) {
-                    val taskItemWidth = screenWidth * 0.75f
+                    val taskItemWidth = screenWidth * 0.5f
                     58.dp + (taskItemWidth * totalColumns)
                 } else {
                     screenWidth
@@ -363,50 +363,58 @@ data class TaskColumn(val task: Task, val columnIndex: Int, val totalColumns: In
 fun getOverlappingTasks(tasks: List<Task>): List<TaskColumn> {
     if (tasks.isEmpty()) return emptyList()
 
-    val sortedTasks = tasks.sortedBy { it.startDate }
-    val taskColumns = mutableListOf<TaskColumn>()
-    val ongoingTasks = mutableListOf<MutableList<Task>>()
+    val sortedByAllDayAndDuration = tasks.sortedWith(
+        compareByDescending<Task> { it.isAllDay }
+            .thenByDescending { getTaskDuration(it) }
+    )
 
-    for (task in sortedTasks) {
+    val columns = mutableListOf<MutableList<Task>>()
+    val taskColumnMap = mutableMapOf<Task, Int>()
+
+    for (task in sortedByAllDayAndDuration) {
         val startTime = task.startDate.time
-        val endTime = task.dueDate?.time ?: (startTime + 3600000) // 1 hour duration if no end time
-
+        val endTime = task.dueDate?.time ?: (startTime + 3600000)
         var placed = false
-        for (column in ongoingTasks) {
-            val lastTaskInColumn = column.last()
-            val lastTaskEndTime = lastTaskInColumn.dueDate?.time ?: (lastTaskInColumn.startDate.time + 3600000)
-
-            if (startTime >= lastTaskEndTime) {
+        for ((columnIndex, column) in columns.withIndex()) {
+            val overlaps = column.any { existingTask ->
+                if (task.isAllDay || existingTask.isAllDay) {
+                    true
+                } else {
+                    val existingStart = existingTask.startDate.time
+                    val existingEnd = existingTask.dueDate?.time ?: (existingStart + 3600000)
+                    startTime < existingEnd && existingStart < endTime
+                }
+            }
+            if (!overlaps) {
                 column.add(task)
+                taskColumnMap[task] = columnIndex
                 placed = true
                 break
             }
         }
-
         if (!placed) {
-            ongoingTasks.add(mutableListOf(task))
+            columns.add(mutableListOf(task))
+            taskColumnMap[task] = columns.size - 1
         }
     }
 
-    val taskToColumnIndex = mutableMapOf<Task, Int>()
-    val taskToTotalColumns = mutableMapOf<Task, Int>()
+    val totalColumns = columns.size
 
-    for ((columnIndex, column) in ongoingTasks.withIndex()) {
-        for (task in column) {
-            taskToColumnIndex[task] = columnIndex
-            taskToTotalColumns[task] = ongoingTasks.size
-        }
-    }
-
-    for (task in sortedTasks) {
-        taskColumns.add(
-            TaskColumn(
-                task = task,
-                columnIndex = taskToColumnIndex[task] ?: 0,
-                totalColumns = taskToTotalColumns[task] ?: 1
-            )
+    return tasks.map { task ->
+        TaskColumn(
+            task = task,
+            columnIndex = taskColumnMap[task] ?: 0,
+            totalColumns = totalColumns
         )
     }
+}
 
-    return taskColumns
+private fun getTaskDuration(task: Task): Long {
+    val startTime = task.startDate.time
+    return if (task.isAllDay) {
+        Long.MAX_VALUE
+    } else {
+        val endTime = task.dueDate?.time ?: (startTime + 3600000)
+        endTime - startTime
+    }
 }

@@ -71,15 +71,19 @@ fun TaskCalendarItem(
     val calendarStart = Calendar.getInstance().apply { time = task.startDate }
     val calendarEnd = if (task.dueDate != null) Calendar.getInstance().apply { time = task.dueDate } else null
 
-    val startHour = calendarStart.get(Calendar.HOUR_OF_DAY) + calendarStart.get(Calendar.MINUTE) / 60f
-    var endHour = calendarEnd?.let { it.get(Calendar.HOUR_OF_DAY) + it.get(Calendar.MINUTE) / 60f } ?: (startHour + 1)
+    val startHour: Float
+    var endHour: Float
 
     if (task.isAllDay) {
-        endHour = startHour + 1
-    }
-
-    if (endHour < startHour) { // Handles overnight tasks for the day view
+        startHour = 0f
         endHour = 24f
+    } else {
+        startHour = calendarStart.get(Calendar.HOUR_OF_DAY) + calendarStart.get(Calendar.MINUTE) / 60f
+        endHour = calendarEnd?.let { it.get(Calendar.HOUR_OF_DAY) + it.get(Calendar.MINUTE) / 60f } ?: (startHour + 1)
+
+        if (endHour < startHour) { // Handles overnight tasks for the day view
+            endHour = 24f
+        }
     }
 
     var duration = endHour - startHour
